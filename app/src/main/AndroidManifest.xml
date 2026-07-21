@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
+        <activity android:name=".MainActivity" />
+        <activity android:name=".activities.SignUpActivity" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.categories.AddCategoryActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.science.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/science_camera_paths" />
+        </provider>
+
+        <!-- Science module only. These declarations do not alter other app modules. -->
+        <activity
+            android:name=".science.presentation.ScienceActivity"
+            android:screenOrientation="unspecified"
+            android:theme="@style/Theme.AIMentor.Science" />
+        <activity
+            android:name=".science.presentation.ScienceHistoryActivity"
+            android:theme="@style/Theme.AIMentor.Science" />
+        <activity
+            android:name=".science.presentation.ScienceBookmarksActivity"
+            android:theme="@style/Theme.AIMentor.Science" />
+        <activity
+            android:name=".science.presentation.ScienceQuizActivity"
+            android:theme="@style/Theme.AIMentor.Science" />
+        <activity
+            android:name=".science.presentation.PeriodicTableActivity"
+            android:theme="@style/Theme.AIMentor.Science" />
+        <activity
+            android:name=".science.presentation.CircuitDiagramActivity"
+            android:theme="@style/Theme.AIMentor.Science" />
+        <activity
+            android:name=".science.presentation.ScienceProgressActivity"
+            android:theme="@style/Theme.AIMentor.Science" />
+        <activity
+            android:name=".science.presentation.ScienceSettingsActivity"
+            android:theme="@style/Theme.AIMentor.Science" />
+        <activity
+            android:name=".science.presentation.ScienceStudyPlannerActivity"
+            android:theme="@style/Theme.AIMentor.Science" />
+
+        <activity
+            android:name=".activities.MenuActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

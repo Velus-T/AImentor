@@ -1,0 +1,45 @@
+@startuml
+left to right direction
+actor Student
+rectangle "AI Study Mentor — Science Module" {
+  usecase "Select Physics AI tutor" as P
+  usecase "Select Chemistry AI tutor" as C
+  usecase "Select Biology AI tutor" as B
+  usecase "Continue subject-specific chat" as CHAT
+  usecase "Submit text question" as TEXT
+  usecase "Upload/capture image" as IMAGE
+  usecase "Receive level-appropriate explanation" as ANSWER
+  usecase "View formatted chemistry notation" as FORMULA
+  usecase "Search/filter history" as HISTORY
+  usecase "Bookmark answer" as BOOKMARK
+  usecase "Configure/test API key" as API
+  usecase "Generate adaptive quiz" as QUIZ
+  usecase "Record quiz result" as SCORE
+  usecase "Generate study plan from current time" as PLAN
+  usecase "Mark study session complete" as COMPLETE
+  usecase "View circuit diagram" as CIRCUIT
+  usecase "Search periodic table" as TABLE
+  usecase "View Science progress" as PROGRESS
+}
+Student --> P
+Student --> C
+Student --> B
+P .> CHAT : <<include>>
+C .> CHAT : <<include>>
+B .> CHAT : <<include>>
+Student --> TEXT
+Student --> IMAGE
+TEXT .> ANSWER : <<include>>
+IMAGE .> ANSWER : <<include>>
+ANSWER .> FORMULA : <<extend>>
+Student --> HISTORY
+Student --> BOOKMARK
+Student --> API
+Student --> QUIZ
+QUIZ .> SCORE : <<include>>
+Student --> PLAN
+PLAN .> COMPLETE : <<extend>>
+Student --> CIRCUIT
+Student --> TABLE
+Student --> PROGRESS
+@enduml

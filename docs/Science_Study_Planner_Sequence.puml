@@ -1,0 +1,24 @@
+@startuml
+actor Student
+participant ScienceStudyPlannerActivity as UI
+participant GenerateStudyPlanUseCase as UseCase
+participant ScienceStudyPlanGenerator as Generator
+participant StudyPlanRepository as Repository
+
+Student -> UI: Choose subject, level, goal, days, minutes
+Student -> UI: Press Generate
+UI -> UI: capture createdAt = current timestamp
+UI -> UseCase: execute(StudyPlanRequest(createdAt))
+UseCase -> Generator: generate(request)
+alt Gemini content succeeds
+  Generator --> UseCase: AI session titles/activities
+else missing key/network/invalid response
+  Generator --> UseCase: local fallback content
+end
+UseCase -> UseCase: first session = createdAt\nsubsequent sessions = +1 day
+UseCase -> Repository: save encrypted plan
+UseCase --> UI: StudyPlan
+UI --> Student: Show created time and exact first-session time
+Student -> UI: Tick completed session
+UI -> Repository: save updated completion state(best effort)
+@enduml

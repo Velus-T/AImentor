@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/science_background"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnBookmarksBack"
+            style="@style/ScienceSecondaryButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="Back"
+            android:minWidth="48dp"
+            android:padding="0dp"
+            android:text="‹"
+            android:textSize="28sp" />
+
+        <TextView
+            style="@style/ScienceHeaderTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:text="Science bookmarks" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etBookmarkSearch"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/science_field_background"
+        android:hint="Search saved formulas, laws and explanations"
+        android:inputType="text"
+        android:paddingHorizontal="14dp"
+        android:textColor="@color/science_text_primary"
+        android:textColorHint="@color/science_text_secondary" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spBookmarkSubject"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            android:background="@drawable/science_field_background"
+            android:contentDescription="Filter bookmarks by science subject"
+            android:paddingStart="10dp"
+            android:paddingEnd="8dp" />
+
+        <Button
+            android:id="@+id/btnBookmarkSearch"
+            style="@style/SciencePrimaryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_marginStart="8dp"
+            android:minWidth="96dp"
+            android:text="Search" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvBookmarksEmpty"
+        style="@style/ScienceSecondaryText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="No bookmarks found."
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvScienceBookmarks"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp" />
+</LinearLayout>

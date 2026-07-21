@@ -1,0 +1,138 @@
+@startuml
+skinparam packageStyle rectangle
+
+package presentation {
+  class ScienceActivity
+  class ScienceSettingsActivity
+  class ScienceQuizActivity
+  class ScienceStudyPlannerActivity
+  class ScienceHistoryActivity
+  class ScienceBookmarksActivity
+  class PeriodicTableActivity
+  class CircuitDiagramActivity
+  class ScienceProgressActivity
+  class ScienceChatAdapter
+  class ScienceAnimatedBackgroundView
+}
+
+package domain {
+  package usecase {
+    class AskScienceQuestionUseCase
+    class GenerateScienceQuizUseCase
+    class GenerateStudyPlanUseCase
+    class SaveBookmarkUseCase
+    class GetScienceStatsUseCase
+  }
+  package policy {
+    interface AdaptiveQuizPolicy
+  }
+  package service {
+    interface ScienceAnswerService
+    interface ScienceQuizGenerator
+    interface ScienceStudyPlanGenerator
+    interface ScienceTutorPromptStrategy
+    interface SciencePromptFactory
+    interface GenerativeAiClient
+    interface ScienceApiSettings
+    interface ScienceApiConnectionTester
+  }
+  package repository {
+    interface ScienceHistoryRepository
+    interface ScienceBookmarkRepository
+    interface QuizAttemptRepository
+    interface QuizVariationRepository
+    interface StudyPlanRepository
+    interface PeriodicTableRepository
+  }
+}
+
+package data {
+  class GeminiApiClient
+  class GeminiScienceService
+  class LocalScienceService
+  class ResilientScienceService
+  class GeminiScienceStudyPlanGenerator
+  class LocalScienceStudyPlanGenerator
+  class ResilientScienceStudyPlanGenerator
+  class SQLiteScienceHistoryRepository
+  class SQLiteScienceBookmarkRepository
+  class SQLiteQuizAttemptRepository
+  class SharedPreferencesQuizVariationRepository
+  class SharedPreferencesStudyPlanRepository
+  class AssetPeriodicTableRepository
+  class EncryptedScienceApiSettings
+  class AndroidKeystoreTextCipher
+}
+
+package strategy {
+  class PhysicsTutorPromptStrategy
+  class ChemistryTutorPromptStrategy
+  class BiologyTutorPromptStrategy
+  class DefaultSciencePromptFactory
+  class PerformanceBasedQuizPolicy
+}
+
+package di {
+  class ScienceModule
+}
+
+ScienceActivity --> AskScienceQuestionUseCase
+ScienceActivity --> SaveBookmarkUseCase
+ScienceActivity --> ScienceChatAdapter
+ScienceActivity --> ScienceAnimatedBackgroundView
+ScienceSettingsActivity --> ScienceApiSettings
+ScienceSettingsActivity --> ScienceApiConnectionTester
+ScienceQuizActivity --> GenerateScienceQuizUseCase
+ScienceQuizActivity --> QuizAttemptRepository
+ScienceStudyPlannerActivity --> GenerateStudyPlanUseCase
+ScienceStudyPlannerActivity --> StudyPlanRepository
+ScienceHistoryActivity --> ScienceHistoryRepository
+ScienceBookmarksActivity --> ScienceBookmarkRepository
+PeriodicTableActivity --> PeriodicTableRepository
+ScienceProgressActivity --> GetScienceStatsUseCase
+
+AskScienceQuestionUseCase --> ScienceAnswerService
+AskScienceQuestionUseCase --> ScienceHistoryRepository
+GenerateScienceQuizUseCase --> ScienceQuizGenerator
+GenerateScienceQuizUseCase --> AdaptiveQuizPolicy
+GenerateScienceQuizUseCase --> QuizVariationRepository
+GenerateStudyPlanUseCase --> ScienceStudyPlanGenerator
+GenerateStudyPlanUseCase --> StudyPlanRepository
+SaveBookmarkUseCase --> ScienceBookmarkRepository
+
+GeminiApiClient ..|> GenerativeAiClient
+GeminiScienceService ..|> ScienceAnswerService
+GeminiScienceService ..|> ScienceQuizGenerator
+GeminiScienceService ..|> ScienceApiConnectionTester
+GeminiScienceService --> GenerativeAiClient
+LocalScienceService ..|> ScienceAnswerService
+LocalScienceService ..|> ScienceQuizGenerator
+ResilientScienceService ..|> ScienceAnswerService
+ResilientScienceService ..|> ScienceQuizGenerator
+
+GeminiScienceStudyPlanGenerator ..|> ScienceStudyPlanGenerator
+GeminiScienceStudyPlanGenerator --> GenerativeAiClient
+LocalScienceStudyPlanGenerator ..|> ScienceStudyPlanGenerator
+ResilientScienceStudyPlanGenerator ..|> ScienceStudyPlanGenerator
+
+PhysicsTutorPromptStrategy ..|> ScienceTutorPromptStrategy
+ChemistryTutorPromptStrategy ..|> ScienceTutorPromptStrategy
+BiologyTutorPromptStrategy ..|> ScienceTutorPromptStrategy
+DefaultSciencePromptFactory ..|> SciencePromptFactory
+DefaultSciencePromptFactory --> ScienceTutorPromptStrategy
+PerformanceBasedQuizPolicy ..|> AdaptiveQuizPolicy
+
+SQLiteScienceHistoryRepository ..|> ScienceHistoryRepository
+SQLiteScienceBookmarkRepository ..|> ScienceBookmarkRepository
+SQLiteQuizAttemptRepository ..|> QuizAttemptRepository
+SharedPreferencesQuizVariationRepository ..|> QuizVariationRepository
+SharedPreferencesStudyPlanRepository ..|> StudyPlanRepository
+AssetPeriodicTableRepository ..|> PeriodicTableRepository
+EncryptedScienceApiSettings ..|> ScienceApiSettings
+EncryptedScienceApiSettings --> AndroidKeystoreTextCipher
+
+ScienceModule --> AskScienceQuestionUseCase
+ScienceModule --> GenerateScienceQuizUseCase
+ScienceModule --> GenerateStudyPlanUseCase
+ScienceModule --> GeminiApiClient
+@enduml

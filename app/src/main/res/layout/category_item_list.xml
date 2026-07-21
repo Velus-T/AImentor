@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/logo_btec"
+            android:contentDescription="Image of category"
+            android:id="@+id/imgCategory"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CNTT - Lap Trinh Android"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            android:layout_toEndOf="@id/imgCategory"
+            android:layout_marginStart="18dp"
+            android:id="@+id/tvNameCategory"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2026-07-16"
+            android:layout_toEndOf="@id/imgCategory"
+            android:layout_below="@id/tvNameCategory"
+            android:textSize="16sp"
+            android:layout_marginStart="18dp"
+            android:id="@+id/tvTimeCategory"
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
