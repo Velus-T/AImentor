@@ -1,0 +1,24 @@
+<resources>
+    <string name="auth_brand">AI Mentor</string>
+    <string name="auth_tagline">Khơi gợi tò mò. Mở lối khám phá.</string>
+    <string name="auth_login_title">Chào mừng bạn trở lại.</string>
+    <string name="auth_login_subtitle">Đăng nhập để tiếp tục hành trình học tập của bạn.</string>
+    <string name="auth_signup_title">Bắt đầu điều mới mẻ.</string>
+    <string name="auth_signup_subtitle">Tạo tài khoản và khám phá theo nhịp học của riêng bạn.</string>
+    <string name="auth_login_card">Góc học tập đang chờ bạn</string>
+    <string name="auth_signup_card">Một khởi đầu dành riêng cho bạn</string>
+    <string name="auth_username">Tên đăng nhập</string>
+    <string name="auth_password">Mật khẩu</string>
+    <string name="auth_email">Địa chỉ email</string>
+    <string name="auth_phone">Số điện thoại (không bắt buộc)</string>
+    <string name="auth_login">Đăng nhập</string>
+    <string name="auth_signup">Tạo tài khoản</string>
+    <string name="auth_to_signup">Bạn mới đến? Tạo tài khoản</string>
+    <string name="auth_to_login">Đã có tài khoản? Đăng nhập</string>
+    <string name="auth_username_required">Vui lòng nhập tên đăng nhập.</string>
+    <string name="auth_password_required">Vui lòng nhập mật khẩu.</string>
+    <string name="auth_email_required">Vui lòng nhập địa chỉ email.</string>
+    <string name="auth_invalid_account">Tên đăng nhập hoặc mật khẩu chưa đúng.</string>
+    <string name="auth_signup_failed">Chưa thể tạo tài khoản. Vui lòng thử lại.</string>
+    <string name="auth_signup_success">Tạo tài khoản thành công. Bạn có thể đăng nhập ngay.</string>
+</resources>

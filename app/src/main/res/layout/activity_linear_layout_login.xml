@@ -1,17 +1,20 @@
-<?xml version='1.0' encoding='utf-8'?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true" android:background="@color/ui_background" android:clipToPadding="false">
-    <com.example.aimentor.ui.ResponsiveColumn android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="@dimen/page_gutter">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/ui_hero" android:padding="24dp">
-            <TextView style="@style/UiTitle" android:text="AI Mentor" />
-            <TextView style="@style/UiBody" android:text="Learn a little. Discover a lot." />
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true" android:background="@color/ui_background" android:clipToPadding="false">
+    <com.example.aimentor.ui.ResponsiveColumn android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" app:contentMaxWidth="560dp">
+        <include layout="@layout/include_auth_brand" />
+        <TextView style="@style/AuthTitle" android:text="@string/auth_login_title" />
+        <TextView style="@style/UiBody" android:text="@string/auth_login_subtitle" />
+        <LinearLayout style="@style/AuthCard">
+            <TextView style="@style/UiBody" android:text="@string/auth_login_card" android:layout_marginTop="0dp" android:textStyle="bold" android:textColor="@color/ui_text" />
+            <com.google.android.material.textfield.TextInputLayout android:id="@+id/inputUsername" style="@style/AuthInput" android:hint="@string/auth_username">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/edtUsername" style="@style/AuthEditText" android:inputType="text" android:autofillHints="username" android:imeOptions="actionNext" android:nextFocusForward="@id/edtPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:id="@+id/inputPassword" style="@style/AuthInput" android:hint="@string/auth_password" app:endIconMode="password_toggle">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/edtPassword" style="@style/AuthEditText" android:inputType="textPassword" android:autofillHints="password" android:imeOptions="actionDone" android:saveEnabled="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button android:id="@+id/btnSubmit" style="@style/UiButton" android:text="@string/auth_login" android:layout_marginTop="24dp" />
         </LinearLayout>
-        <TextView style="@style/UiTitle" android:text="Welcome back" android:layout_marginTop="28dp" />
-        <TextView style="@style/UiBody" android:text="Continue your learning journey, at your pace." />
-        <TextView style="@style/UiBody" android:text="Username" android:labelFor="@id/edtUsername" />
-        <EditText style="@style/UiField" android:id="@+id/edtUsername" android:inputType="text" android:hint="Username" android:autofillHints="username" android:imeOptions="actionNext" />
-        <TextView style="@style/UiBody" android:text="Password" android:labelFor="@id/edtPassword" />
-        <EditText style="@style/UiField" android:id="@+id/edtPassword" android:inputType="textPassword" android:hint="Password" android:autofillHints="password" android:imeOptions="actionNext" />
-        <Button style="@style/UiButton" android:id="@+id/btnSubmit" android:text="Sign in" />
-        <TextView style="@style/UiLink" android:text="New here? Create an account" android:id="@+id/tvSignUp" />
+        <TextView android:id="@+id/tvSignUp" style="@style/UiLink" android:text="@string/auth_to_signup" android:clickable="true" android:focusable="true" />
     </com.example.aimentor.ui.ResponsiveColumn>
 </androidx.core.widget.NestedScrollView>

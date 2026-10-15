@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="ResponsiveColumn">
+        <attr name="contentMaxWidth" format="dimension" />
+    </declare-styleable>
+</resources>

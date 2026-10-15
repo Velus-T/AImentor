@@ -1,0 +1,24 @@
+<resources>
+    <string name="auth_brand">AI Mentor</string>
+    <string name="auth_tagline">A little curiosity. A new discovery.</string>
+    <string name="auth_login_title">Good to see you again.</string>
+    <string name="auth_login_subtitle">Sign in and pick up your learning journey.</string>
+    <string name="auth_signup_title">Let curiosity lead.</string>
+    <string name="auth_signup_subtitle">Create an account and start learning at your pace.</string>
+    <string name="auth_login_card">Your learning space awaits</string>
+    <string name="auth_signup_card">A fresh start, just for you</string>
+    <string name="auth_username">Username</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_email">Email address</string>
+    <string name="auth_phone">Phone number (optional)</string>
+    <string name="auth_login">Sign in</string>
+    <string name="auth_signup">Create account</string>
+    <string name="auth_to_signup">New here? Create an account</string>
+    <string name="auth_to_login">Already have an account? Sign in</string>
+    <string name="auth_username_required">Enter your username.</string>
+    <string name="auth_password_required">Enter your password.</string>
+    <string name="auth_email_required">Enter your email address.</string>
+    <string name="auth_invalid_account">Username or password is incorrect.</string>
+    <string name="auth_signup_failed">Could not create your account. Please try again.</string>
+    <string name="auth_signup_success">Account created. You can sign in now.</string>
+</resources>

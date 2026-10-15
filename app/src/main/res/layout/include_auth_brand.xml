@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:gravity="center_vertical" android:orientation="horizontal">
+    <ImageView android:layout_width="56dp" android:layout_height="56dp"
+        android:padding="14dp" android:background="@drawable/ui_hero"
+        android:src="@drawable/ic_auth_book" android:importantForAccessibility="no" />
+    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+        android:layout_weight="1" android:layout_marginStart="14dp" android:orientation="vertical">
+        <TextView style="@style/UiTitle" android:text="@string/auth_brand" android:textSize="22sp" />
+        <TextView style="@style/UiBody" android:text="@string/auth_tagline"
+            android:textSize="14sp" android:layout_marginTop="2dp" />
+    </LinearLayout>
+</LinearLayout>
