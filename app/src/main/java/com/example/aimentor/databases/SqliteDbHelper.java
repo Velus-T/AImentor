@@ -36,6 +36,14 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
     }
 
     @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        if (!db.isReadOnly()) {
+            com.example.aimentor.auth.DemoAccounts.seed(db);
+        }
+    }
+
+    @Override
     public void onCreate(SQLiteDatabase db) {
         String usersTable = " CREATE TABLE " + TABLE_USERS + " ( "
                             + ID_USER + " INTEGER PRIMARY KEY AUTOINCREMENT, "

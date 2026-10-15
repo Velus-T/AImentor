@@ -19,10 +19,13 @@ this class and avoid adding another system-bar padding listener.
 - Debug APK, instrumented test APK, unit tests and Android lint are built locally.
 - SystemInsetsTest checks three-button/gesture-sized bottom insets, repeat
   dispatch, keyboard appearance/disappearance and a landscape cutout.
-- Instrumented tests still require a connected device or running emulator.
-- Local Java is 25, which the repository's Gradle 8.13 wrapper cannot run on.
-  Validation uses the installed Gradle 9.4.1 without changing the repository
-  wrapper. Use JDK 17 with the existing wrapper in Android Studio.
+- SystemInsetsTest and DemoAccountsTest pass on the connected Android 37
+  emulator. AuthFlowTest also passes for inline errors, demo login, and signup
+  followed by login. These tests invoke view callbacks directly, since the
+  bundled Espresso 3.5.1 input injector is incompatible with Android 37.
+- Local validation now uses JDK 21 and the repository's Gradle 8.13 wrapper.
+  Debug and release APKs compile, unit tests pass, and debug lint passes with
+  warnings. Android Studio should select JDK 21 rather than Java 25.
 
 ## Device review still needed
 
