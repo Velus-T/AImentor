@@ -28,7 +28,7 @@ import com.example.aimentor.science.util.ScienceUiFactory;
 
 import java.util.List;
 
-public final class ScienceHistoryActivity extends AppCompatActivity {
+public final class ScienceHistoryActivity extends com.example.aimentor.ui.InsetActivity {
     private ScienceHistoryRepository repository;
     private ScienceHistoryAdapter adapter;
     private Spinner subjectSpinner;

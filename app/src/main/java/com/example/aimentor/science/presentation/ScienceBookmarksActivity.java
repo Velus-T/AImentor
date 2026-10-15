@@ -25,7 +25,7 @@ import com.example.aimentor.science.util.ScienceUiFactory;
 
 import java.util.List;
 
-public final class ScienceBookmarksActivity extends AppCompatActivity {
+public final class ScienceBookmarksActivity extends com.example.aimentor.ui.InsetActivity {
     private ScienceBookmarkRepository repository;
     private ScienceBookmarkAdapter adapter;
     private Spinner subjectSpinner;

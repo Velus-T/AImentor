@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-public class DemoIntentActivity extends AppCompatActivity {
+public class DemoIntentActivity extends com.example.aimentor.ui.InsetActivity {
     EditText edtData, edtPhone, edtUrl;
     Button btnActivity, btnCallPhone, btnUrl;
     @Override

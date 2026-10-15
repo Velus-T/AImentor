@@ -14,7 +14,7 @@ import com.example.aimentor.R;
 import com.example.aimentor.science.presentation.view.CircuitDiagramView;
 import com.example.aimentor.science.util.ScienceUiFactory;
 
-public final class CircuitDiagramActivity extends AppCompatActivity {
+public final class CircuitDiagramActivity extends com.example.aimentor.ui.InsetActivity {
     private CircuitDiagramView diagramView;
     private CheckBox switchCheckBox;
     private TextView explanationView;

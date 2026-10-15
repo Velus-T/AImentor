@@ -63,7 +63,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /** ChatGPT-style Science chat with separate Physics, Chemistry and Biology sessions. */
-public final class ScienceActivity extends AppCompatActivity {
+public final class ScienceActivity extends com.example.aimentor.ui.InsetActivity {
     private static final int MAX_CONTEXT_MESSAGES = 8;
     private static final int MAX_CONTEXT_CHARACTERS = 7000;
     private static final String STATE_SUBJECT = "science_chat_subject";

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <style name="UiWindowAnimation">
+        <item name="android:activityOpenEnterAnimation">@anim/ui_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/ui_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/ui_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/ui_exit</item>
+    </style>
+</resources>

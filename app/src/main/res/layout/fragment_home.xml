@@ -1,19 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragments.HomeFragment"
-    android:orientation="vertical"
-    android:gravity="center">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home page"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        />
-
-</LinearLayout>
+<?xml version='1.0' encoding='utf-8'?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true" android:background="@color/ui_background" android:clipToPadding="false">
+    <com.example.aimentor.ui.ResponsiveColumn android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="@dimen/page_gutter">
+        <TextView style="@style/UiTitle" android:text="Make room for curiosity." />
+        <TextView style="@style/UiBody" android:text="One question. A new perspective. Your mentor is ready whenever you are." />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:orientation="vertical" android:background="@drawable/ui_hero" android:padding="24dp">
+            <TextView style="@style/UiTitle" android:text="Your science companion" />
+            <TextView style="@style/UiBody" android:text="Explore physics, chemistry and biology with explanations that make sense." />
+            <Button style="@style/UiButton" android:id="@+id/btnHomeScience" android:text="Ask your AI mentor" />
+        </LinearLayout>
+        <TextView style="@style/UiTitle" android:text="Keep your momentum" android:layout_marginTop="28dp" />
+        <Button style="@style/UiButton" android:id="@+id/btnHomeQuiz" android:text="Practice with a quiz" />
+        <Button style="@style/UiButton" android:id="@+id/btnHomePlanner" android:text="Plan your study time" />
+        <Button style="@style/UiButton" android:id="@+id/btnHomeProgress" android:text="Review your progress" />
+    </com.example.aimentor.ui.ResponsiveColumn>
+</androidx.core.widget.NestedScrollView>

@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class DemoEventActivity extends AppCompatActivity {
+public class DemoEventActivity extends com.example.aimentor.ui.InsetActivity {
     EditText edtText;
     CheckBox cbAgree;
     Button btnSubmit, btnAnswer;

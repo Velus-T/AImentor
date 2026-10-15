@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class TestLifeCycleActivity extends AppCompatActivity {
+public class TestLifeCycleActivity extends com.example.aimentor.ui.InsetActivity {
     private final String LogActivity = "LOG_ACTIVITY";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

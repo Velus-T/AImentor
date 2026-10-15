@@ -15,7 +15,7 @@ import com.example.aimentor.R;
 import com.example.aimentor.activities.MenuActivity;
 import com.example.aimentor.repository.CategoryRepository;
 
-public class AddCategoryActivity extends AppCompatActivity {
+public class AddCategoryActivity extends com.example.aimentor.ui.InsetActivity {
     EditText edtCategoryName, edtDescription;
     Button btnSave, btnBack;
     CategoryRepository categoryRepository;

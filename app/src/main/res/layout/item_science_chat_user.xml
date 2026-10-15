@@ -1,36 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingStart="56dp"
-    android:paddingTop="7dp"
-    android:paddingEnd="4dp"
-    android:paddingBottom="7dp">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:background="@drawable/science_chat_user_bubble"
-        android:orientation="vertical"
-        android:padding="12dp">
-
-        <ImageView
-            android:id="@+id/ivChatUserImage"
-            android:layout_width="220dp"
-            android:layout_height="160dp"
-            android:layout_marginBottom="8dp"
-            android:contentDescription="Attached science question image"
-            android:scaleType="centerCrop"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/tvChatUserMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxWidth="300dp"
-            android:textColor="@color/science_text_primary"
-            android:textIsSelectable="true"
-            android:textSize="16sp" />
+<?xml version='1.0' encoding='utf-8'?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="56dp" android:paddingTop="7dp" android:paddingEnd="4dp" android:paddingBottom="7dp">
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="end" android:background="@drawable/science_chat_user_bubble" android:orientation="vertical" android:padding="12dp">
+        <ImageView android:id="@+id/ivChatUserImage" android:layout_width="match_parent" android:layout_height="160dp" android:layout_marginBottom="8dp" android:contentDescription="Attached science question image" android:scaleType="centerCrop" android:visibility="gone" android:maxWidth="220dp" android:adjustViewBounds="true" />
+        <TextView android:id="@+id/tvChatUserMessage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxWidth="300dp" android:textColor="@color/science_text_primary" android:textIsSelectable="true" android:textSize="16sp" />
     </LinearLayout>
 </FrameLayout>

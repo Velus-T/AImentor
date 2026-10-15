@@ -22,7 +22,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends com.example.aimentor.ui.InsetActivity {
     EditText edtUsername, edtPassword;
     Button btnLogin;
     UserRepository userRepository;

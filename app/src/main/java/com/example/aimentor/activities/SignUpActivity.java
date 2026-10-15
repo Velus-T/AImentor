@@ -19,7 +19,7 @@ import com.example.aimentor.repository.UserRepository;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends com.example.aimentor.ui.InsetActivity {
     EditText edtUsername, edtPassword, edtEmail, edtPhone;
     Button btnSignup;
     TextView tvLogin;

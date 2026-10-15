@@ -23,7 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MenuActivity extends com.example.aimentor.ui.InsetActivity implements NavigationView.OnNavigationItemSelectedListener {
     BottomNavigationView bottomNavigationView;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -78,7 +78,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         userId  = sharedPrf.getInt("ID_USER", 0);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("AI Mentor");
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();

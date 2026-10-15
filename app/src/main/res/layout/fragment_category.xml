@@ -1,36 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragments.CategoryFragment"
-    android:orientation="vertical"
-    android:padding="10dp">
-
-    <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#03A9F4"
-        android:text="Create a new Category"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:id="@+id/btnCreateCategory"/>
-
-    <Button
-        android:id="@+id/btnOpenScience"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#4CAF50"
-        android:text="Science AI Tutor"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="?actionBarSize"
-        android:id="@+id/rvCategory"/>
+<?xml version='1.0' encoding='utf-8'?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="@dimen/page_gutter" android:background="@color/ui_background">
+    <TextView style="@style/UiTitle" android:text="Your learning library" />
+    <Button style="@style/UiButton" android:id="@+id/btnCreateCategory" android:text="Create a category" />
+    <Button style="@style/UiButton" android:id="@+id/btnOpenScience" android:text="Explore Science AI" />
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvCategory" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:layout_marginTop="16dp" android:clipToPadding="false" android:paddingBottom="16dp" />
 </LinearLayout>

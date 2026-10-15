@@ -1,51 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" Add new a Category"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:background="#9BE5EF"
-        android:hint="Enter name's category"
-        android:paddingStart="10dp"
-        android:inputType="text"
-        android:autofillHints="false"
-        android:id="@+id/edtCategoryName"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:background="#9BE5EF"
-        android:inputType="textMultiLine"
-        android:hint="Enter Description"
-        android:paddingStart="10dp"
-        android:autofillHints="false"
-        android:id="@+id/edtDescription"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#2196F3"
-        android:text="Save Data"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:id="@+id/btnSaveCategory"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#C2C9CA"
-        android:layout_marginTop="10dp"
-        android:text="Back"
-        android:textStyle="bold"
-        android:id="@+id/btnBackCategory"/>
-</LinearLayout>
+<?xml version='1.0' encoding='utf-8'?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true" android:background="@color/ui_background" android:clipToPadding="false">
+    <com.example.aimentor.ui.ResponsiveColumn android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="@dimen/page_gutter">
+        <TextView style="@style/UiTitle" android:text="New category" />
+        <TextView style="@style/UiBody" android:text="Give your learning a place to grow." />
+        <TextView style="@style/UiBody" android:text="Category name" android:labelFor="@id/edtCategoryName" />
+        <EditText style="@style/UiField" android:id="@+id/edtCategoryName" android:inputType="text" android:hint="Category name" android:autofillHints="" android:imeOptions="actionNext" />
+        <TextView style="@style/UiBody" android:text="Description" android:labelFor="@id/edtDescription" />
+        <EditText style="@style/UiField" android:id="@+id/edtDescription" android:inputType="textCapSentences|textMultiLine" android:hint="Description" android:autofillHints="" android:imeOptions="actionNext" />
+        <Button style="@style/UiButton" android:id="@+id/btnSaveCategory" android:text="Save category" />
+        <Button style="@style/UiButton" android:id="@+id/btnBackCategory" android:text="Back" />
+    </com.example.aimentor.ui.ResponsiveColumn>
+</androidx.core.widget.NestedScrollView>

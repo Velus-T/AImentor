@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Locale;
 
 /** Generates and tracks a Science schedule beginning at the generation moment. */
-public final class ScienceStudyPlannerActivity extends AppCompatActivity {
+public final class ScienceStudyPlannerActivity extends com.example.aimentor.ui.InsetActivity {
     private static final int[] DAY_VALUES = {3, 7, 14, 21, 30};
     private static final int[] MINUTE_VALUES = {30, 45, 60, 90, 120};
 

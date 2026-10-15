@@ -23,7 +23,7 @@ import com.example.aimentor.science.domain.service.ScienceApiSettings;
 import com.example.aimentor.science.util.SciencePreferenceStore;
 
 /** In-app Science API and display settings; no source-code editing is required. */
-public final class ScienceSettingsActivity extends AppCompatActivity {
+public final class ScienceSettingsActivity extends com.example.aimentor.ui.InsetActivity {
     private EditText apiKeyInput;
     private EditText modelInput;
     private CheckBox showKeyCheckBox;

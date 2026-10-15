@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <color name="ui_primary">#6554B3</color>
+    <color name="ui_on_primary">#FFFFFF</color>
+    <color name="ui_background">#F7F8FC</color>
+    <color name="ui_surface">#FFFFFF</color>
+    <color name="ui_container">#ECE8FA</color>
+    <color name="ui_text">#24243C</color>
+    <color name="ui_muted">#62647B</color>
+    <color name="ui_border">#DADCE8</color>
+</resources>

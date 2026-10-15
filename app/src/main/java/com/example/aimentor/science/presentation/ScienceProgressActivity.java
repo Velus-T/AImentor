@@ -13,7 +13,7 @@ import com.example.aimentor.science.util.ScienceUserSession;
 
 import java.util.Locale;
 
-public final class ScienceProgressActivity extends AppCompatActivity {
+public final class ScienceProgressActivity extends com.example.aimentor.ui.InsetActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

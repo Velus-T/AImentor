@@ -61,6 +61,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        view.findViewById(R.id.btnHomeScience).setOnClickListener(v -> startActivity(new android.content.Intent(requireContext(), com.example.aimentor.science.presentation.ScienceActivity.class)));
+        view.findViewById(R.id.btnHomeQuiz).setOnClickListener(v -> startActivity(new android.content.Intent(requireContext(), com.example.aimentor.science.presentation.ScienceQuizActivity.class)));
+        view.findViewById(R.id.btnHomePlanner).setOnClickListener(v -> startActivity(new android.content.Intent(requireContext(), com.example.aimentor.science.presentation.ScienceStudyPlannerActivity.class)));
+        view.findViewById(R.id.btnHomeProgress).setOnClickListener(v -> startActivity(new android.content.Intent(requireContext(), com.example.aimentor.science.presentation.ScienceProgressActivity.class)));
+        return view;
     }
 }

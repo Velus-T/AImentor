@@ -19,7 +19,7 @@ import com.example.aimentor.science.presentation.adapter.PeriodicElementAdapter;
 
 import java.util.List;
 
-public final class PeriodicTableActivity extends AppCompatActivity {
+public final class PeriodicTableActivity extends com.example.aimentor.ui.InsetActivity {
     private PeriodicTableRepository repository;
     private PeriodicElementAdapter adapter;
     private EditText searchInput;

@@ -1,19 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragments.SettingsFragment"
-    android:orientation="vertical"
-    android:gravity="center">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Settings page"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        />
-
-</LinearLayout>
+<?xml version='1.0' encoding='utf-8'?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true" android:background="@color/ui_background" android:clipToPadding="false">
+    <com.example.aimentor.ui.ResponsiveColumn android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="@dimen/page_gutter">
+        <TextView style="@style/UiTitle" android:text="Make it yours." />
+        <TextView style="@style/UiBody" android:text="Manage your science tutor, connection and animation preferences." />
+        <Button style="@style/UiButton" android:id="@+id/btnQuickAction" android:text="Open tutor settings" />
+    </com.example.aimentor.ui.ResponsiveColumn>
+</androidx.core.widget.NestedScrollView>

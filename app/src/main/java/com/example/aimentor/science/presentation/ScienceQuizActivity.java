@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public final class ScienceQuizActivity extends AppCompatActivity {
+public final class ScienceQuizActivity extends com.example.aimentor.ui.InsetActivity {
     private Spinner subjectSpinner;
     private Spinner levelSpinner;
     private Spinner countSpinner;
