@@ -17,14 +17,17 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText edtUser, edtPass, edtConfirm, edtEmail, edtPhone;
     private TextView tvMsg;
-    private DatabaseHelper dbHelper;
+    private com.example.asm_final.accounts.UserRegistration accounts;
+    private com.example.asm_final.utils.AsyncActionRunner actions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        dbHelper = new DatabaseHelper(this);
+        com.example.asm_final.AppServices services = ((com.example.asm_final.AiMentorApplication) getApplication()).services();
+        accounts = services.registration();
+        actions = new com.example.asm_final.utils.AsyncActionRunner(services.io(), this::runOnUiThread);
 
         edtUser = findViewById(R.id.edtRegisterUsername);
         edtEmail = findViewById(R.id.edtRegisterEmail);
@@ -49,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             // Email validation
-            if (!e.toLowerCase().endsWith("@gmail.com")) {
+            if (!e.toLowerCase(java.util.Locale.ROOT).endsWith("@gmail.com")) {
                 tvMsg.setText(R.string.reg_msg_invalid_email);
                 return;
             }
@@ -65,7 +68,10 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
-            long result = dbHelper.addUser(u, p, e, ph);
+            btnRegister.setEnabled(false);
+            tvMsg.setText(R.string.auth_processing);
+            actions.submit(() -> accounts.register(u,p,e,ph), result -> {
+            btnRegister.setEnabled(true);
             if (result != -1) {
                 tvMsg.setText("");
                 Toast.makeText(this, R.string.reg_msg_success, Toast.LENGTH_SHORT).show();
@@ -73,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
             } else {
                 tvMsg.setText(R.string.reg_msg_exists);
             }
+            }, error -> { btnRegister.setEnabled(true); tvMsg.setText(R.string.auth_storage_error); });
         });
 
         tvLogin.setOnClickListener(v -> finish());
@@ -82,16 +89,9 @@ public class RegisterActivity extends AppCompatActivity {
      * Responsibility: Validates the conditions or rules handled by `is valid password` and returns the result to the caller.
      * Purpose: A dedicated validation method keeps rules consistent and easier to test.
      */
-    private boolean isValidPassword(String password) {
-        if (password.length() < 8) return false;
-        boolean hasUppercase = false;
-        boolean hasDigit = false;
-
-        for (char ch : password.toCharArray()) {
-            if (Character.isUpperCase(ch)) hasUppercase = true;
-            if (Character.isDigit(ch)) hasDigit = true;
-            if (hasUppercase && hasDigit) return true;
-        }
-        return false;
+    private boolean isValidPassword(String password) { return com.example.asm_final.accounts.PasswordPolicy.isValid(password); }
+    @Override protected void onDestroy() {
+        if (actions != null) actions.close();
+        super.onDestroy();
     }
 }

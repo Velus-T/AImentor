@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText edtUsername, edtPassword;
     private Button btnLogin;
     private TextView tvMessage, tvGoToRegister;
-    private DatabaseHelper dbHelper;
+    private com.example.asm_final.accounts.UserAuthenticator accounts;
+    private com.example.asm_final.utils.AsyncActionRunner actions;
 
     /*
      * Responsibility: Initializes the Android component, inflates and binds the layout, and prepares initial data and listeners.
@@ -32,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbHelper = new DatabaseHelper(this);
+        com.example.asm_final.AppServices services = ((com.example.asm_final.AiMentorApplication) getApplication()).services();
+        accounts = services.authenticator();
+        actions = new com.example.asm_final.utils.AsyncActionRunner(services.io(), this::runOnUiThread);
 
         edtUsername = findViewById(R.id.edtLoginUsername);
         edtPassword = findViewById(R.id.edtLoginPassword);
@@ -50,7 +53,14 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            if (dbHelper.checkLogin(username, password)) {
+            btnLogin.setEnabled(false);
+            tvGoToRegister.setEnabled(false);
+            tvMessage.setText(R.string.auth_processing);
+            actions.submit(() -> accounts.authenticate(username,password), authenticated -> {
+            btnLogin.setEnabled(true);
+            tvGoToRegister.setEnabled(true);
+            if (!getLifecycle().getCurrentState().isAtLeast(androidx.lifecycle.Lifecycle.State.STARTED)) return;
+            if (authenticated) {
                 Toast.makeText(this, R.string.login_msg_success, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("USERNAME", username);
@@ -59,10 +69,15 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 tvMessage.setText(R.string.login_msg_fail);
             }
+            }, error -> { btnLogin.setEnabled(true); tvGoToRegister.setEnabled(true); tvMessage.setText(R.string.auth_storage_error); });
         });
 
         tvGoToRegister.setOnClickListener(v -> {
             startActivity(new Intent(this, RegisterActivity.class));
         });
+    }
+    @Override protected void onDestroy() {
+        if (actions != null) actions.close();
+        super.onDestroy();
     }
 }

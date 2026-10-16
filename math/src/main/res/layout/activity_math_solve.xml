@@ -22,7 +22,7 @@
             </androidx.cardview.widget.CardView>
 
             
-            <com.example.asm_final.utils.AdaptiveCardRow android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="16dp" android:weightSum="2">
+            <com.example.mentor.ui.AdaptiveCardRow android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="16dp" android:weightSum="2">
 
                 
                 <androidx.cardview.widget.CardView android:id="@+id/btn_scan_math" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="8dp" app:cardCornerRadius="20dp" app:cardElevation="2dp">
@@ -41,7 +41,7 @@
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/math_action_type_desc" android:textSize="12sp" android:gravity="center" android:layout_marginTop="4dp" android:textColor="@color/math_text_secondary" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-            </com.example.asm_final.utils.AdaptiveCardRow>
+            </com.example.mentor.ui.AdaptiveCardRow>
 
         </LinearLayout>
     </ScrollView>

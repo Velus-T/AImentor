@@ -1,0 +1,1 @@
+<resources><string name="auth_processing">Working…</string><string name="auth_storage_error">Unable to access data. Please try again.</string><string name="dashboard_partial">Some progress could not be loaded. Tap to retry.</string></resources>

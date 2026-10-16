@@ -62,6 +62,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":ui-core"))
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)

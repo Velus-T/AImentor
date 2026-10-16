@@ -82,6 +82,7 @@ public class QuizFragment extends Fragment {
     private boolean isLoading = false;
     // Tính/đọc và lưu giá trị `isFinishingQuiz` (is finishing quiz) để sử dụng ở các bước phía sau.
     private boolean isFinishingQuiz = false;
+    private int viewGeneration;
 
     // Helper `dbHelper` chịu trách nhiệm đọc/ghi SQLite `ProgrammingMentor.db`.
     private ProgrammingDbHelper dbHelper;
@@ -118,6 +119,7 @@ public class QuizFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         // Inflate layout XML thành cây View để Fragment/Adapter có thể thao tác.
+        viewGeneration++;
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
         // Cập nhật ID của người dùng hiện tại theo trạng thái/kết quả vừa tính được.
         userId = ((MainActivity) requireActivity()).getCurrentUserId();
@@ -182,6 +184,7 @@ public class QuizFragment extends Fragment {
      * Tạo QuizRequest rồi chạy ProgrammingQuizGenerator ở background thread.
      */
     private void initQuiz() {
+        final int generation = viewGeneration;
         // Đọc Bundle tham số đã truyền vào Fragment.
         String subject = getArguments() != null ? getArguments().getString(ARG_SUBJECT, "Lập trình") : "Lập trình";
         // Đọc Bundle tham số đã truyền vào Fragment.
@@ -220,9 +223,10 @@ public class QuizFragment extends Fragment {
                 // Generator gọi Gemini và parse JSON thành List<QuizQuestion>.
                 QuizResult result = quizGenerator.generateQuiz(request, userId);
                 // Cập nhật danh sách câu hỏi quiz theo trạng thái/kết quả vừa tính được.
-                questions = result.getQuestions();
+
 
                 new Handler(Looper.getMainLooper()).post(() -> {
+                    if (!isAdded() || getView() == null || generation != viewGeneration) return;
                     // Cập nhật giá trị `isLoading` (is loading) theo trạng thái/kết quả vừa tính được.
                     isLoading = false;
                     // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
@@ -231,6 +235,7 @@ public class QuizFragment extends Fragment {
                         progressDialog.dismiss();
                     }
                     // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
+                    questions = result.getQuestions();
                     if (!questions.isEmpty()) {
                         // Gọi hàm `showQuestion()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
                         showQuestion(0);
@@ -248,6 +253,7 @@ public class QuizFragment extends Fragment {
                 // Gọi `printStackTrace()` trên `e` để thực hiện thao tác tương ứng.
                 e.printStackTrace();
                 new Handler(Looper.getMainLooper()).post(() -> {
+                    if (!isAdded() || getView() == null || generation != viewGeneration) return;
                     // Cập nhật giá trị `isLoading` (is loading) theo trạng thái/kết quả vừa tính được.
                     isLoading = false;
                     // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
@@ -530,6 +536,12 @@ public class QuizFragment extends Fragment {
                 })
                 .setCancelable(false)
                 .show();
+    }
+
+    @Override public void onDestroyView() {
+        viewGeneration++;
+        if (progressDialog != null) { progressDialog.dismiss(); progressDialog = null; }
+        super.onDestroyView();
     }
 
     @Override

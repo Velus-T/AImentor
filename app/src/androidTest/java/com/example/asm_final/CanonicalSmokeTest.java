@@ -126,10 +126,15 @@ public class CanonicalSmokeTest {
         });
         capture("settings");
         main(() -> {
-            ((AppCompatActivity) resumed()).getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new com.example.asm_final.activities.fragments.ProfileFragment()).commitNow();
+            resumed().findViewById(R.id.setting_edit_profile).performClick();
+            ((AppCompatActivity) resumed()).getSupportFragmentManager().executePendingTransactions();
+            assertEquals("hocvien01", ((AppCompatActivity) resumed()).getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment_container).getArguments().getString("USERNAME"));
         });
         capture("profile");
+        main(() -> { ((AppCompatActivity) resumed()).getOnBackPressedDispatcher().onBackPressed();
+            ((AppCompatActivity) resumed()).getSupportFragmentManager().executePendingTransactions();
+            assertNotNull(resumed().findViewById(R.id.setting_edit_profile)); });
         main(() -> {
             ((BottomNavigationView) resumed().findViewById(R.id.bottom_navigation)).setSelectedItemId(R.id.nav_category);
             ((AppCompatActivity) resumed()).getSupportFragmentManager().executePendingTransactions();
@@ -174,7 +179,9 @@ public class CanonicalSmokeTest {
             main(() -> resumed().finish());
         }
         awaitActivity(HomeActivity.class.getName());
-        main(() -> resumed().finish());
+        main(() -> ((HomeActivity) resumed()).logout());
+        awaitActivity(MainActivity.class.getName());
+        main(() -> { assertNotNull(resumed().findViewById(R.id.edtLoginUsername)); resumed().finish(); });
     }
 
     @Test public void systemInsetsDoNotAccumulateOrDoubleCountKeyboard() {
@@ -192,5 +199,83 @@ public class CanonicalSmokeTest {
                 assertEquals(320,content.getPaddingBottom());
             });
         } finally { main(() -> resumed().finish()); }
+    }
+    @Test public void mathReadsAreScopedToExplicitAccount() {
+        try (com.example.mathmodule.databases.SqliteDbHelper db = new com.example.mathmodule.databases.SqliteDbHelper(instrumentation.getTargetContext())) {
+            int first=180000001,second=180000002;
+            long legacy=db.insertHistoryForUser(0,"unowned-legacy","answer");
+            try {
+                assertTrue(db.insertHistoryForUser(first,"first-account-only","answer")>0);
+                assertTrue(db.insertHistoryForUser(second,"second-account-only","answer")>0);
+                assertEquals(1,db.getAllHistory(first).size());
+                assertEquals("first-account-only",db.getAllHistory(first).get(0).getQuestion());
+                assertEquals("second-account-only",db.getAllHistory(second).get(0).getQuestion());
+                assertTrue(db.getAllHistory(0).stream().anyMatch(row -> row.getId()==legacy));
+            } finally { db.deleteUserHistory(first);db.deleteUserHistory(second);
+                db.getWritableDatabase().delete("math_history","id=?",new String[]{String.valueOf(legacy)}); }
+
+        }
+    }
+    @Test public void unsupportedScienceDowngradePreservesData() {
+        try (android.database.sqlite.SQLiteDatabase memory=android.database.sqlite.SQLiteDatabase.create(null);
+             com.brightpath.science.data.local.ScienceDbHelper helper=new com.brightpath.science.data.local.ScienceDbHelper(instrumentation.getTargetContext())) {
+            memory.execSQL("CREATE TABLE sentinel(value TEXT)");memory.execSQL("INSERT INTO sentinel VALUES('keep')");
+            try { helper.onDowngrade(memory,999,1);fail("Downgrade must be rejected"); }
+            catch(android.database.sqlite.SQLiteException expected) { }
+            try(android.database.Cursor cursor=memory.rawQuery("SELECT value FROM sentinel",null)) { assertTrue(cursor.moveToFirst());assertEquals("keep",cursor.getString(0)); }
+        }
+    }
+    private void awaitEnabled(int id) {
+        long limit=android.os.SystemClock.uptimeMillis()+10000;
+        while(android.os.SystemClock.uptimeMillis()<limit) {
+            final boolean[] ready={false};
+            main(() -> { View view=resumed().findViewById(id);ready[0]=view!=null&&view.isEnabled(); });
+            if(ready[0]) return;
+            android.os.SystemClock.sleep(50);
+        }
+        fail("Control not ready: "+id);
+    }
+    @Test public void registerLoginUpdatePasswordAndLogout() {
+        String username="solid_"+System.nanoTime();
+        try {
+            start(MainActivity.class);
+            main(() -> resumed().findViewById(R.id.tvGoToRegister).performClick());
+            awaitActivity("com.example.asm_final.activities.RegisterActivity");
+            main(() -> {
+                ((EditText)resumed().findViewById(R.id.edtRegisterUsername)).setText(username);
+                ((EditText)resumed().findViewById(R.id.edtRegisterEmail)).setText(username+"@gmail.com");
+                ((EditText)resumed().findViewById(R.id.edtRegisterPhone)).setText("0901234567");
+                ((EditText)resumed().findViewById(R.id.edtRegisterPassword)).setText("Solid01!2026");
+                ((EditText)resumed().findViewById(R.id.edtRegisterConfirmPassword)).setText("Solid01!2026");
+                resumed().findViewById(R.id.btnRegister).performClick();
+            });
+            awaitActivity(MainActivity.class.getName());
+            main(() -> {
+                ((EditText)resumed().findViewById(R.id.edtLoginUsername)).setText(username);
+                ((EditText)resumed().findViewById(R.id.edtLoginPassword)).setText("Solid01!2026");
+                resumed().findViewById(R.id.btnLogin).performClick();
+            });
+            awaitActivity(HomeActivity.class.getName());
+            main(() -> { ((HomeActivity)resumed()).navigateTo(R.id.nav_profile,false);
+                ((AppCompatActivity)resumed()).getSupportFragmentManager().executePendingTransactions(); });
+            awaitEnabled(R.id.btnUpdateProfile);
+            main(() -> {
+                ((EditText)resumed().findViewById(R.id.edtProfileFullName)).setText("SOLID regression");
+                ((EditText)resumed().findViewById(R.id.edtProfilePassword)).setText("Solid02!2026");
+                resumed().findViewById(R.id.btnUpdateProfile).performClick();
+            });
+            awaitEnabled(R.id.btnUpdateProfile);
+            com.example.asm_final.accounts.LocalAccountRepository accounts=new com.example.asm_final.accounts.LocalAccountRepository(instrumentation.getTargetContext());
+            assertTrue(accounts.authenticate(username,"Solid02!2026"));
+            assertFalse(accounts.authenticate(username,"Solid01!2026"));
+            assertEquals("SOLID regression",new com.example.asm_final.accounts.LocalUserProfileRepository(instrumentation.getTargetContext()).load(username).fullName);
+            main(() -> ((HomeActivity)resumed()).logout());
+            awaitActivity(MainActivity.class.getName());
+            main(() -> resumed().finish());
+        } finally {
+            try(com.example.asm_final.activities.database.DatabaseHelper db=new com.example.asm_final.activities.database.DatabaseHelper(instrumentation.getTargetContext())) {
+                db.getWritableDatabase().delete("users","username=?",new String[]{username});
+            }
+        }
     }
 }

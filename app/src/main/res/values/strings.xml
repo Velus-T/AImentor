@@ -1,4 +1,3 @@
-<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">AI Mentor</string>
     <string name="navigation_drawer_open">Mở menu</string>
@@ -72,7 +71,7 @@
     <string name="home_exp_remaining">Còn %1$d EXP để lên cấp</string>
     <string name="home_completion_ratio">Tỉ lệ hoàn thành</string>
     <string name="home_based_on_exp">Dựa trên EXP</string>
-    <string name="home_learning_time">Thời gian học</string>
+    <string name="home_learning_time">Thời gian học (ước tính)</string>
     <string name="home_subject_progress">Tiến độ môn học</string>
     <string name="home_recent_activity">Hoạt động gần đây</string>
     <string name="home_level_1">Tân thủ</string>

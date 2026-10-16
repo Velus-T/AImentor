@@ -6,6 +6,7 @@ replacing the earlier science-only repository snapshot. Existing Git history is 
 ## Modules
 
 - `app`: login, registration, home, course categories, profile and settings.
+- `ui-core`: host-independent reusable card layouts and transition resources.
 - `math`: mathematics dashboard, chat, solving, formulas, quizzes and study history.
 - `science`: physics, chemistry, biology, quizzes and science tools.
 - `history`: history chat, quizzes, notes and saved conversations.
@@ -81,3 +82,10 @@ was added. Existing module functionality remains available.
 
 Final UI smoke checks also passed at 320dp width, font scale 1.3, dark mode
 and three-button system navigation. There are 49 passing existing module unit tests.
+
+## Correctness audit and architecture
+
+See [AUDIT_SOLID.md](AUDIT_SOLID.md) for fixed findings, SOLID boundaries,
+regression coverage and remaining integration work. Shared UI infrastructure now
+lives in `ui-core`; account/profile and dashboard persistence are accessed through
+focused interfaces. Both debug and release builds are checked.

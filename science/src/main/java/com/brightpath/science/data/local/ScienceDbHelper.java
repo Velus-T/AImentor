@@ -86,12 +86,8 @@ public ScienceDbHelper(Context context) {
  */
 @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop all tables and recreate them if downgraded.
-        db.execSQL("DROP TABLE IF EXISTS " + ScienceDbContract.History.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + ScienceDbContract.Bookmark.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + ScienceDbContract.QuizAttempt.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + ScienceDbContract.Note.TABLE);
-        onCreate(db);
+        // Refuse an unsupported downgrade rather than silently deleting a user's learning data.
+        throw new android.database.sqlite.SQLiteException("Unsupported Science database downgrade: " + oldVersion + " -> " + newVersion);
     }
 
     // endregion

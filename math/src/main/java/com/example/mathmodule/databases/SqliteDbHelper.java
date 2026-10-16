@@ -280,10 +280,10 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
      * Responsibility: Reads or loads data for `get all history` from the appropriate data source.
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
-    public List<MathHistoryItem> getAllHistory() {
-        int userId = currentUserId();
+    public List<MathHistoryItem> getAllHistory() { return getAllHistory(currentUserId()); }
+
+    public List<MathHistoryItem> getAllHistory(int userId) {
         SQLiteDatabase db = getWritableDatabase();
-        claimLegacyRowsForUser(db, userId);
 
         List<MathHistoryItem> historyList = new ArrayList<>();
         try (Cursor cursor = db.query(
@@ -383,7 +383,6 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
     public List<MathNoteItem> getAllNotes() {
         int userId = currentUserId();
         SQLiteDatabase db = getWritableDatabase();
-        claimLegacyRowsForUser(db, userId);
 
         List<MathNoteItem> noteList = new ArrayList<>();
         try (Cursor cursor = db.query(
@@ -437,22 +436,8 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
         return Math.max(0, MathUserSession.getUserId(appContext));
     }
 
-    /**
-     * Versions before v8 stored Math history and notes without an owner. The first
-     * signed-in Math user opening the migrated database receives those legacy rows,
-     * after which all new reads and writes are isolated by user_id.
-     */
-    /*
-     * Responsibility: Performs the `claim legacy rows for user` responsibility of `SqliteDbHelper` and returns or updates the result for the caller.
-     * Purpose: A focused method improves readability, reuse, and step-by-step explanation.
-     */
-    private void claimLegacyRowsForUser(SQLiteDatabase db, int userId) {
-        if (userId <= 0) return;
-        ContentValues owner = new ContentValues();
-        owner.put(COLUMN_USER_ID, userId);
-        db.update(TABLE_HISTORY, owner, COLUMN_USER_ID + "=0", null);
-        db.update(TABLE_NOTES, owner, COLUMN_USER_ID + "=0", null);
-    }
+    // Legacy ownerless rows stay stored with user_id=0. Reading another account must
+    // never silently claim them; an explicit, verified migration can handle them later.
 
     /*
      * Responsibility: Reads or loads data for `get quiz sets by category` from the appropriate data source.
@@ -590,8 +575,9 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
      * Responsibility: Reads or loads data for `get user exp` from the appropriate data source.
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
-    public int getUserExp() {
-        int userId = MathUserSession.getUserId(appContext);
+    public int getUserExp() { return getUserExp(MathUserSession.getUserId(appContext)); }
+
+    public int getUserExp(int userId) {
         SQLiteDatabase db = getWritableDatabase();
         ensureUserProfile(db, userId);
         try (Cursor cursor = db.query(

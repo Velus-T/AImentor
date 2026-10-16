@@ -1,4 +1,3 @@
-<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">AI Mentor</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -72,7 +71,7 @@
     <string name="home_exp_remaining">%1$d EXP remaining to level up</string>
     <string name="home_completion_ratio">Completion Ratio</string>
     <string name="home_based_on_exp">Based on EXP</string>
-    <string name="home_learning_time">Learning Time</string>
+    <string name="home_learning_time">Study time (estimated)</string>
     <string name="home_subject_progress">Subject Progress</string>
     <string name="home_recent_activity">Recent Activity</string>
     <string name="home_level_1">Novice</string>

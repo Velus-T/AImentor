@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
     
     private String username;
     private int userId;
+    private int loadVersion;
 
     /*
      * Responsibility: Initializes the Android component, inflates and binds the layout, and prepares initial data and listeners.
@@ -85,7 +86,6 @@ public class HomeFragment extends Fragment {
         rvRecent = view.findViewById(R.id.rv_recent_activity);
         rvRecent.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        setupData();
         return view;
     }
 
@@ -93,6 +93,8 @@ public class HomeFragment extends Fragment {
      * Responsibility: Configures `setup data` with the required Views, listeners, or dependencies.
      * Purpose: Separating configuration from the main flow keeps initialization concise and easier to verify.
      */
+    @Override public void onResume() { super.onResume(); setupData(); }
+
     private void setupData() {
         if (username == null || username.isEmpty()) {
             txtUsername.setText(R.string.home_default_user);
@@ -100,31 +102,32 @@ public class HomeFragment extends Fragment {
         }
 
         txtUsername.setText(username);
-        DatabaseHelper dbHelper = new DatabaseHelper(requireContext());
-        userId = dbHelper.getUserId(username);
-        MathUserSession.setUserId(requireContext(), userId);
+        final int version = ++loadVersion;
+        final View owner = getView();
+        final android.content.Context context = requireContext().getApplicationContext();
+        com.example.asm_final.AppServices services = ((com.example.asm_final.AiMentorApplication) context).services();
+        services.io().execute(() -> {
+            com.example.asm_final.dashboard.DashboardSnapshot loaded;
+            try {
+                int id = services.accountLookup().userId(username);
+                loaded = services.dashboard().load(id);
+            } catch (RuntimeException error) {
+                loaded = new com.example.asm_final.dashboard.DashboardSnapshot(
+                    new java.util.EnumMap<>(RecentActivity.Subject.class), java.util.Collections.emptyList(),
+                    java.util.EnumSet.allOf(RecentActivity.Subject.class));
+            }
+            final com.example.asm_final.dashboard.DashboardSnapshot snapshot = loaded;
+            new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
+                if (isAdded() && getView() == owner && loadVersion == version) render(snapshot);
+            });
+        });
+    }
 
-        // --- FETCH EXP ---
-        int mathExp = 0;
-        try (com.example.mathmodule.databases.SqliteDbHelper db = new com.example.mathmodule.databases.SqliteDbHelper(requireContext())) {
-            mathExp = db.getUserExp();
-        } catch (Exception ignored) {}
-
-        int historyExp = 0;
-        try (com.example.historymodule.databases.SqliteDbHelper db = new com.example.historymodule.databases.SqliteDbHelper(requireContext())) {
-            historyExp = db.getTotalQuizExp(userId);
-        } catch (Exception ignored) {}
-
-        int programmingExp = 0;
-        try (com.example.modulelaptrinh.database.ProgrammingDbHelper db = new com.example.modulelaptrinh.database.ProgrammingDbHelper(requireContext())) {
-            programmingExp = db.getTotalExpAllSubjects(userId);
-        } catch (Exception ignored) {}
-
-        int scienceExp = 0;
-        try (com.brightpath.science.data.local.ScienceDbHelper db = new com.brightpath.science.data.local.ScienceDbHelper(requireContext())) {
-            scienceExp = db.getTotalExp(userId);
-        } catch (Exception ignored) {}
-
+    private void render(com.example.asm_final.dashboard.DashboardSnapshot snapshot) {
+        int mathExp = snapshot.progress(RecentActivity.Subject.MATH).experience;
+        int scienceExp = snapshot.progress(RecentActivity.Subject.SCIENCE).experience;
+        int historyExp = snapshot.progress(RecentActivity.Subject.HISTORY).experience;
+        int programmingExp = snapshot.progress(RecentActivity.Subject.PROGRAMMING).experience;
         int totalExp = mathExp + historyExp + programmingExp + scienceExp;
         
         // --- UPDATE UI TOTAL ---
@@ -148,37 +151,20 @@ public class HomeFragment extends Fragment {
         slices.add(new SimplePieChartView.Slice(programmingExp, ContextCompat.getColor(requireContext(), R.color.cat_it_text)));
         pieChart.setData(slices);
 
-        // --- UPDATE LEARNING TIME (ESTIMATED) ---
-        int scienceSeconds = 0;
-        try (com.brightpath.science.data.local.ScienceDbHelper db = new com.brightpath.science.data.local.ScienceDbHelper(requireContext())) {
-             SQLiteDatabase sdb = db.getReadableDatabase();
-             try (Cursor c = sdb.rawQuery("SELECT SUM(review_seconds) FROM science_history WHERE user_id=?", new String[]{String.valueOf(userId)})) {
-                 if (c.moveToFirst()) scienceSeconds = c.getInt(0);
-             }
-        } catch (Exception ignored) {}
-        
-        int mathSec = mathExp * 10;
-        int histSec = historyExp * 10;
-        int progSec = programmingExp * 10;
-        int scienceTotalSec = scienceSeconds + (scienceExp * 5);
+        long mathSec = snapshot.progress(RecentActivity.Subject.MATH).estimatedSeconds;
+        long histSec = snapshot.progress(RecentActivity.Subject.HISTORY).estimatedSeconds;
+        long progSec = snapshot.progress(RecentActivity.Subject.PROGRAMMING).estimatedSeconds;
+        long scienceSec = snapshot.progress(RecentActivity.Subject.SCIENCE).estimatedSeconds;
+        long maximum = Math.max(1, Math.max(mathSec, Math.max(histSec, Math.max(progSec, scienceSec))));
+        pbTimeMath.setProgress((int)(mathSec * 100 / maximum));
+        pbTimeScience.setProgress((int)(scienceSec * 100 / maximum));
+        pbTimeHistory.setProgress((int)(histSec * 100 / maximum));
+        pbTimeProg.setProgress((int)(progSec * 100 / maximum));
+        rvRecent.setAdapter(new RecentActivityAdapter(snapshot.activities));
+        TextView status = getView().findViewById(R.id.tv_dashboard_status);
+        status.setVisibility(snapshot.unavailable.isEmpty() ? View.GONE : View.VISIBLE);
+        status.setOnClickListener(v -> setupData());
 
-        int maxSec = Math.max(1, Math.max(mathSec, Math.max(histSec, Math.max(progSec, scienceTotalSec))));
-        pbTimeMath.setProgress(mathSec * 100 / maxSec);
-        pbTimeScience.setProgress(scienceTotalSec * 100 / maxSec);
-        pbTimeHistory.setProgress(histSec * 100 / maxSec);
-        pbTimeProg.setProgress(progSec * 100 / maxSec);
-
-        // --- FETCH RECENT ACTIVITY ---
-        List<RecentActivity> activities = new ArrayList<>();
-        fetchMathActivities(activities);
-        fetchScienceActivities(activities);
-        fetchHistoryActivities(activities);
-        fetchProgrammingActivities(activities);
-        
-        activities.sort((a, b) -> Long.compare(b.getTimestamp(), a.getTimestamp()));
-        if (activities.size() > 10) activities = activities.subList(0, 10);
-        
-        rvRecent.setAdapter(new RecentActivityAdapter(activities));
     }
 
     /*
@@ -192,69 +178,4 @@ public class HomeFragment extends Fragment {
         ((ProgressBar)root.findViewById(R.id.pb_mini_stat)).setProgress((exp % 200) * 100 / 200);
     }
 
-    /*
-     * Responsibility: Reads or loads data for `fetch math activities` from the appropriate data source.
-     * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
-     */
-    private void fetchMathActivities(List<RecentActivity> list) {
-        try (com.example.mathmodule.databases.SqliteDbHelper db = new com.example.mathmodule.databases.SqliteDbHelper(requireContext())) {
-            List<com.example.mathmodule.databases.MathHistoryItem> history = db.getAllHistory();
-            for (int i = 0; i < Math.min(3, history.size()); i++) {
-                com.example.mathmodule.databases.MathHistoryItem item = history.get(i);
-                list.add(new RecentActivity(RecentActivity.Subject.MATH, RecentActivity.Type.CHAT, 
-                    getString(R.string.activity_solve_math), item.getQuestion(), System.currentTimeMillis() - (i * 3600000L)));
-            }
-        } catch (Exception ignored) {}
-    }
-
-    /*
-     * Responsibility: Reads or loads data for `fetch science activities` from the appropriate data source.
-     * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
-     */
-    private void fetchScienceActivities(List<RecentActivity> list) {
-        try (com.brightpath.science.data.local.ScienceDbHelper db = new com.brightpath.science.data.local.ScienceDbHelper(requireContext())) {
-            SQLiteDatabase sdb = db.getReadableDatabase();
-            try (Cursor c = sdb.query("science_history", new String[]{"question", "created_at"}, "user_id=?", new String[]{String.valueOf(userId)}, null, null, "created_at DESC", "3")) {
-                while (c.moveToNext()) {
-                    list.add(new RecentActivity(RecentActivity.Subject.SCIENCE, RecentActivity.Type.CHAT, getString(R.string.activity_ask_science), c.getString(0), c.getLong(1)));
-                }
-            }
-            try (Cursor c = sdb.query("science_quiz_attempts", new String[]{"topic", "created_at"}, "user_id=?", new String[]{String.valueOf(userId)}, null, null, "created_at DESC", "2")) {
-                while (c.moveToNext()) {
-                    list.add(new RecentActivity(RecentActivity.Subject.SCIENCE, RecentActivity.Type.QUIZ, getString(R.string.activity_quiz_science), c.getString(0), c.getLong(1)));
-                }
-            }
-        } catch (Exception ignored) {}
-    }
-
-    /*
-     * Responsibility: Reads or loads data for `fetch history activities` from the appropriate data source.
-     * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
-     */
-    private void fetchHistoryActivities(List<RecentActivity> list) {
-        try (com.example.historymodule.databases.SqliteDbHelper db = new com.example.historymodule.databases.SqliteDbHelper(requireContext())) {
-            List<com.example.historymodule.databases.HistoryHistoryItem> quizes = db.loadQuizAttempts(userId, 3);
-            for (com.example.historymodule.databases.HistoryHistoryItem q : quizes) {
-                list.add(new RecentActivity(RecentActivity.Subject.HISTORY, RecentActivity.Type.QUIZ, getString(R.string.activity_quiz_history), q.getTitle(), Long.parseLong(q.getTimestamp())));
-            }
-            List<com.example.historymodule.databases.HistoryHistoryItem> chats = db.loadConversationSummaries(userId, 0, 0, 3);
-            for (com.example.historymodule.databases.HistoryHistoryItem c : chats) {
-                list.add(new RecentActivity(RecentActivity.Subject.HISTORY, RecentActivity.Type.CHAT, getString(R.string.activity_chat_history), c.getTitle(), Long.parseLong(c.getTimestamp())));
-            }
-        } catch (Exception ignored) {}
-    }
-
-    /*
-     * Responsibility: Reads or loads data for `fetch programming activities` from the appropriate data source.
-     * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
-     */
-    private void fetchProgrammingActivities(List<RecentActivity> list) {
-        try (com.example.modulelaptrinh.database.ProgrammingDbHelper db = new com.example.modulelaptrinh.database.ProgrammingDbHelper(requireContext())) {
-            List<com.example.modulelaptrinh.database.SessionItem> sessions = db.getAllSessions(userId);
-            for (int i = 0; i < Math.min(3, sessions.size()); i++) {
-                com.example.modulelaptrinh.database.SessionItem s = sessions.get(i);
-                list.add(new RecentActivity(RecentActivity.Subject.PROGRAMMING, RecentActivity.Type.CHAT, getString(R.string.activity_chat_prog), s.getName(), System.currentTimeMillis() - (i * 1800000L)));
-            }
-        } catch (Exception ignored) {}
-    }
 }

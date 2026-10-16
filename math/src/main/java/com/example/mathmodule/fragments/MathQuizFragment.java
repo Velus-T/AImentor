@@ -334,9 +334,11 @@ public class MathQuizFragment extends Fragment {
      * Purpose: A focused method improves readability, reuse, and step-by-step explanation.
      */
     private void runOnUiThread(Runnable action) {
-        if (!isAdded()) return;
-        requireActivity().runOnUiThread(() -> {
-            if (isAdded()) action.run();
+        android.app.Activity activity = getActivity();
+        android.view.View owner = getView();
+        if (activity == null || owner == null) return;
+        activity.runOnUiThread(() -> {
+            if (isAdded() && getView() == owner) action.run();
         });
     }
 

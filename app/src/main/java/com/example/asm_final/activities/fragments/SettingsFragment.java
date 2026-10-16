@@ -55,15 +55,7 @@ public class SettingsFragment extends Fragment {
     private void setupEditProfile(View view) {
         LinearLayout layoutEditProfile = view.findViewById(R.id.setting_edit_profile);
         layoutEditProfile.setOnClickListener(v -> {
-            ProfileFragment profileFragment = new ProfileFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("USERNAME", username);
-            profileFragment.setArguments(bundle);
-
-            getParentFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, profileFragment)
-                    .addToBackStack(null)
-                    .commit();
+            ((com.example.asm_final.activities.HomeActivity) requireActivity()).navigateTo(R.id.nav_profile, true);
         });
     }
 
@@ -190,7 +182,7 @@ public class SettingsFragment extends Fragment {
     private void setupLogout(View view) {
         Button btnLogout = view.findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener(v -> {
-            requireActivity().finish();
+            ((com.example.asm_final.activities.HomeActivity) requireActivity()).logout();
             Toast.makeText(requireContext(), R.string.menu_logout, Toast.LENGTH_SHORT).show();
         });
     }
