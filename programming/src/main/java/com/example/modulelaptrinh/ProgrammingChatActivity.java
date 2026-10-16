@@ -231,6 +231,7 @@ public class ProgrammingChatActivity extends AppCompatActivity {
         edtQuestion = findViewById(R.id.et_chat_input);
         // Ánh xạ View trong XML sang biến Java để có thể đọc/ghi dữ liệu hoặc gắn sự kiện.
         btnSend = findViewById(R.id.iv_send);
+        com.example.mentor.ui.AiAvailabilityNotice.bind(findViewById(android.R.id.content), geminiClient.isConfigured());
         // Ánh xạ View trong XML sang biến Java để có thể đọc/ghi dữ liệu hoặc gắn sự kiện.
         btnUploadImage = findViewById(R.id.iv_attach);
         // Ánh xạ View trong XML sang biến Java để có thể đọc/ghi dữ liệu hoặc gắn sự kiện.
@@ -451,6 +452,7 @@ public class ProgrammingChatActivity extends AppCompatActivity {
             return;
         }
 
+        if (!com.example.mentor.ui.AiAvailabilityNotice.canSend(findViewById(android.R.id.content), geminiClient.isConfigured())) return;
         // Khởi tạo giá trị `imageBytesList` (image bytes list) phục vụ cho bước xử lý tiếp theo.
         List<byte[]> imageBytesList = new ArrayList<>();
         // Khởi tạo giá trị `imageMimeTypes` (image mime types) phục vụ cho bước xử lý tiếp theo.

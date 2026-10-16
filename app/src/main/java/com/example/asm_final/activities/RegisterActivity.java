@@ -39,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         tvMsg = findViewById(R.id.tvRegisterMessage);
         TextView tvLogin = findViewById(R.id.tvGoToLogin);
 
+        com.example.asm_final.utils.FormFeedback.bind(edtUser, edtEmail, edtPhone, edtPass, edtConfirm);
         btnRegister.setOnClickListener(v -> {
             String u = edtUser.getText().toString().trim();
             String e = edtEmail.getText().toString().trim();
@@ -46,25 +47,41 @@ public class RegisterActivity extends AppCompatActivity {
             String p = edtPass.getText().toString().trim();
             String c = edtConfirm.getText().toString().trim();
 
-            if (u.isEmpty() || e.isEmpty() || ph.isEmpty() || p.isEmpty() || c.isEmpty()) {
+            EditText[] fields = {edtUser, edtEmail, edtPhone, edtPass, edtConfirm};
+            String[] values = {u, e, ph, p, c};
+            int[] messages = {R.string.ux_required_username, R.string.ux_required_email, R.string.ux_required_phone, R.string.ux_required_password, R.string.ux_required_confirm};
+            com.example.asm_final.utils.FormFeedback.clear(fields);
+            EditText firstMissing = null;
+            for (int i = 0; i < fields.length; i++) if (values[i].isEmpty()) {
+                com.example.asm_final.utils.FormFeedback.error(fields[i], messages[i]);
+                if (firstMissing == null) firstMissing = fields[i];
+            }
+            if (firstMissing != null) {
                 tvMsg.setText(R.string.reg_msg_empty);
+                com.example.asm_final.utils.FormFeedback.focus(firstMissing);
                 return;
             }
 
             // Email validation
             if (!e.toLowerCase(java.util.Locale.ROOT).endsWith("@gmail.com")) {
                 tvMsg.setText(R.string.reg_msg_invalid_email);
+                com.example.asm_final.utils.FormFeedback.error(edtEmail, R.string.reg_msg_invalid_email);
+                com.example.asm_final.utils.FormFeedback.focus(edtEmail);
                 return;
             }
 
             // Password validation
             if (!isValidPassword(p)) {
                 tvMsg.setText(R.string.reg_msg_weak_pass);
+                com.example.asm_final.utils.FormFeedback.error(edtPass, R.string.reg_msg_weak_pass);
+                com.example.asm_final.utils.FormFeedback.focus(edtPass);
                 return;
             }
 
             if (!p.equals(c)) {
                 tvMsg.setText(R.string.reg_msg_mismatch);
+                com.example.asm_final.utils.FormFeedback.error(edtConfirm, R.string.reg_msg_mismatch);
+                com.example.asm_final.utils.FormFeedback.focus(edtConfirm);
                 return;
             }
 
@@ -78,6 +95,8 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             } else {
                 tvMsg.setText(R.string.reg_msg_exists);
+                com.example.asm_final.utils.FormFeedback.error(edtUser, R.string.reg_msg_exists);
+                com.example.asm_final.utils.FormFeedback.focus(edtUser);
             }
             }, error -> { btnRegister.setEnabled(true); tvMsg.setText(R.string.auth_storage_error); });
         });

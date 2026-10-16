@@ -45,6 +45,8 @@ public class HomeFragment extends Fragment {
     private String username;
     private int userId;
     private int loadVersion;
+    private boolean statsExpanded;
+    private RecentActivity.Subject recentSubject;
 
     /*
      * Responsibility: Initializes the Android component, inflates and binds the layout, and prepares initial data and listeners.
@@ -53,6 +55,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) statsExpanded = savedInstanceState.getBoolean("stats_expanded");
         if (getArguments() != null) {
             username = getArguments().getString("USERNAME");
         }
@@ -86,7 +89,27 @@ public class HomeFragment extends Fragment {
         rvRecent = view.findViewById(R.id.rv_recent_activity);
         rvRecent.setLayoutManager(new LinearLayoutManager(requireContext()));
 
+        view.findViewById(R.id.button_start_learning).setOnClickListener(v -> {
+            if (recentSubject != null && userId > 0) {
+                com.example.asm_final.utils.SubjectNavigator.open(requireContext(), recentSubject, userId);
+            } else ((com.example.asm_final.activities.HomeActivity) requireActivity()).navigateTo(R.id.nav_category, false);
+        });
+        view.findViewById(R.id.button_stats_toggle).setOnClickListener(v -> {
+            statsExpanded = !statsExpanded;
+            updateStatsVisibility(view);
+        });
+        updateStatsVisibility(view);
         return view;
+    }
+
+    private void updateStatsVisibility(View view) {
+        view.findViewById(R.id.layout_detailed_stats).setVisibility(statsExpanded ? View.VISIBLE : View.GONE);
+        ((TextView) view.findViewById(R.id.button_stats_toggle)).setText(statsExpanded ? R.string.ux_hide_stats : R.string.ux_show_stats);
+    }
+
+    @Override public void onSaveInstanceState(Bundle out) {
+        out.putBoolean("stats_expanded", statsExpanded);
+        super.onSaveInstanceState(out);
     }
 
     /*
@@ -108,17 +131,22 @@ public class HomeFragment extends Fragment {
         com.example.asm_final.AppServices services = ((com.example.asm_final.AiMentorApplication) context).services();
         services.io().execute(() -> {
             com.example.asm_final.dashboard.DashboardSnapshot loaded;
+            int resolvedId = 0;
             try {
-                int id = services.accountLookup().userId(username);
-                loaded = services.dashboard().load(id);
+                resolvedId = services.accountLookup().userId(username);
+                loaded = services.dashboard().load(resolvedId);
             } catch (RuntimeException error) {
                 loaded = new com.example.asm_final.dashboard.DashboardSnapshot(
                     new java.util.EnumMap<>(RecentActivity.Subject.class), java.util.Collections.emptyList(),
                     java.util.EnumSet.allOf(RecentActivity.Subject.class));
             }
+            final int loadedUserId = resolvedId;
             final com.example.asm_final.dashboard.DashboardSnapshot snapshot = loaded;
             new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
-                if (isAdded() && getView() == owner && loadVersion == version) render(snapshot);
+                if (isAdded() && getView() == owner && loadVersion == version) {
+                    userId = loadedUserId;
+                    render(snapshot);
+                }
             });
         });
     }
@@ -157,6 +185,30 @@ public class HomeFragment extends Fragment {
         pbExpHistory.setProgress((int)(historyExp * 100L / maximum));
         pbExpProg.setProgress((int)(programmingExp * 100L / maximum));
         rvRecent.setAdapter(new RecentActivityAdapter(snapshot.activities));
+        View view = getView();
+        view.findViewById(R.id.text_recent_empty).setVisibility(snapshot.activities.isEmpty() && snapshot.unavailable.isEmpty() ? View.VISIBLE : View.GONE);
+        ((TextView)view.findViewById(R.id.tv_chart_summary)).setText(totalExp == 0 ? R.string.ux_no_exp : R.string.home_based_on_exp);
+        RecentActivity latest = null;
+        for (RecentActivity activity : snapshot.activities) {
+            if (activity.getTimestamp() > 0 && (latest == null || activity.getTimestamp() > latest.getTimestamp())) latest = activity;
+        }
+        recentSubject = latest == null ? null : latest.getSubject();
+        TextView start = view.findViewById(R.id.button_start_learning);
+        TextView hint = view.findViewById(R.id.text_learning_hint);
+        if (recentSubject != null && userId > 0) {
+            int label;
+            switch (recentSubject) {
+                case MATH: label = R.string.cat_math; break;
+                case SCIENCE: label = R.string.cat_science; break;
+                case HISTORY: label = R.string.cat_history; break;
+                default: label = R.string.cat_it;
+            }
+            start.setText(getString(R.string.ux_reopen_subject, getString(label)));
+            hint.setText(getString(R.string.ux_last_activity, com.example.mentor.ui.TimeLabels.dateTime(requireContext(), Long.toString(latest.getTimestamp()))));
+        } else {
+            start.setText(R.string.ux_choose_subject);
+            hint.setText(R.string.ux_start_hint);
+        }
         TextView status = getView().findViewById(R.id.tv_dashboard_status);
         status.setVisibility(snapshot.unavailable.isEmpty() ? View.GONE : View.VISIBLE);
         status.setOnClickListener(v -> setupData());

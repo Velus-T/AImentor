@@ -782,7 +782,7 @@ public class ProgrammingDbHelper extends ModuleDatabaseHelper {
     }
 
     /** Update title/content của note đúng user. */
-    public void updateNote(int userId, int id, String title, String content) {
+    public boolean updateNote(int userId, int id, String title, String content) {
         // Mở SQLite ở chế độ ghi; SQLiteOpenHelper sẽ tạo/mở database nếu cần.
         SQLiteDatabase db = this.getWritableDatabase();
         // Tạo ContentValues để đóng gói dữ liệu theo dạng tên-cột → giá-trị trước khi INSERT/UPDATE.
@@ -792,11 +792,12 @@ public class ProgrammingDbHelper extends ModuleDatabaseHelper {
         // Gán dữ liệu cho COLUMN_CONTENT trong ContentValues.
         values.put(COLUMN_CONTENT, content);
         // Thực hiện UPDATE để thay đổi record đã tồn tại trong SQLite theo điều kiện chỉ định.
-        db.update(TABLE_NOTES, values,
+        int updated = db.update(TABLE_NOTES, values,
                 COLUMN_ID + "=? AND " + COLUMN_NOTE_USER_ID + "=?",
                 new String[]{String.valueOf(id), String.valueOf(Math.max(0, userId))});
         // Đóng handle database của thao tác hiện tại sau khi xử lý xong.
         db.close();
+        return updated > 0;
     }
 
     // ===== CÁC HÀM XỬ LÝ QUIZ VÀ EXP =====

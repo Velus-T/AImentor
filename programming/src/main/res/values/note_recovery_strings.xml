@@ -1,0 +1,7 @@
+<resources>
+    <string name="note_write_failed">Chưa lưu được ghi chú. Nội dung vẫn ở đây; hãy thử Lưu lại.</string>
+    <string name="note_unsaved_title">Ghi chú chưa được lưu</string>
+    <string name="note_unsaved_message">Bạn có thể tiếp tục sửa và thử lưu lại. Nếu bỏ thay đổi, phần vừa nhập sẽ mất.</string>
+    <string name="note_keep_editing">Tiếp tục sửa</string>
+    <string name="note_discard_changes">Bỏ thay đổi</string>
+</resources>

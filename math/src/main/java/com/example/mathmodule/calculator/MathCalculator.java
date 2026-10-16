@@ -152,7 +152,8 @@ public final class MathCalculator implements Application.ActivityLifecycleCallba
     display.setEllipsize(android.text.TextUtils.TruncateAt.START);
     StringBuilder expression = new StringBuilder(prefs(a).getString("expression", ""));
     display.setText(expression.length() == 0 ? "0" : expression.toString());
-    body.addView(display, new LinearLayout.LayoutParams(-1, -2));
+    display.setTag("mentor_calculator_display");
+    display.setPadding(dp(a, 16), dp(a, 4), dp(a, 16), dp(a, 4));
     final boolean[] justCalculated = {prefs(a).getBoolean("result", false)};
     String[] keys = {
       "C", "(", ")", "⌫", "7", "8", "9", "÷", "4", "5", "6", "×", "1", "2", "3", "−", "±", "0", ".",
@@ -250,10 +251,15 @@ public final class MathCalculator implements Application.ActivityLifecycleCallba
     body.addView(hint);
     ScrollView scroll = new ScrollView(a);
     scroll.addView(body);
+    scroll.setTag("mentor_calculator_keypad");
+    LinearLayout panel = new LinearLayout(a);
+    panel.setOrientation(LinearLayout.VERTICAL);
+    panel.addView(display, new LinearLayout.LayoutParams(-1, -2));
+    panel.addView(scroll, new LinearLayout.LayoutParams(-1, -2));
     androidx.appcompat.app.AlertDialog dialog =
         new androidx.appcompat.app.AlertDialog.Builder(a)
             .setTitle(R.string.math_calculator_title)
-            .setView(scroll)
+            .setView(panel)
             .setNegativeButton(R.string.math_calculator_collapse, null)
             .setNeutralButton(R.string.math_calculator_hide, (d, w) -> hide(a))
             .create();
@@ -266,10 +272,10 @@ public final class MathCalculator implements Application.ActivityLifecycleCallba
           Math.min(dp(a, 360), a.getResources().getDisplayMetrics().widthPixels - dp(a, 24));
       window.setLayout(width, -2);
       window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-      int available = a.getResources().getDisplayMetrics().heightPixels - dp(a, 250);
+      int available = a.getResources().getDisplayMetrics().heightPixels - dp(a, 310);
       scroll.setLayoutParams(
-          new android.widget.FrameLayout.LayoutParams(
-              -1, Math.min(dp(a, 440), Math.max(dp(a, 72), available))));
+          new LinearLayout.LayoutParams(
+              -1, Math.min(dp(a, 376), Math.max(dp(a, 72), available))));
     }
   }
 

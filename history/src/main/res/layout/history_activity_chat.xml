@@ -1,30 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/history_background">
-
     <RelativeLayout android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/history_toolbar_bg" android:elevation="4dp" android:padding="8dp" android:minHeight="64dp" android:paddingTop="8dp" android:paddingBottom="8dp">
-
         <ImageButton android:id="@+id/btn_back" android:layout_width="48dp" android:layout_height="48dp" android:layout_centerVertical="true" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="@string/history_back_description" android:src="@android:drawable/ic_menu_revert" app:tint="@color/history_title" />
-
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_centerInParent="true" android:text="@string/history_chat_title" android:textColor="@color/history_title" android:textSize="18sp" android:textStyle="bold" android:layout_marginStart="56dp" android:layout_marginEnd="56dp" android:gravity="center" android:maxLines="2" android:ellipsize="end" />
-
         <ImageButton android:id="@+id/btn_new_chat" android:layout_width="48dp" android:layout_height="48dp" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="@string/history_chat_new" android:src="@android:drawable/ic_menu_add" app:tint="@color/history_title" />
     </RelativeLayout>
-
     <androidx.recyclerview.widget.RecyclerView android:id="@+id/recycler_view" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_above="@id/bottom_layout" android:layout_below="@id/toolbar" android:clipToPadding="false" android:padding="8dp" />
-
     <LinearLayout android:id="@+id/bottom_layout" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:background="@color/history_surface" android:elevation="8dp" android:orientation="vertical" android:padding="8dp">
-
+        <TextView android:id="@id/mentor_ai_availability" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/mentor_ai_unavailable" android:textColor="@color/history_text_secondary" android:textSize="13sp" android:paddingHorizontal="12dp" android:paddingVertical="8dp" android:accessibilityLiveRegion="polite" />
         <ImageView android:id="@+id/image_preview" android:layout_width="108dp" android:layout_height="108dp" android:layout_marginBottom="8dp" android:contentDescription="@string/history_chat_image_preview_desc" android:scaleType="centerCrop" android:visibility="gone" />
-
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
-
             <ImageButton android:id="@+id/btn_camera" android:layout_width="48dp" android:layout_height="48dp" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="@string/history_chat_camera" android:src="@android:drawable/ic_menu_camera" app:tint="@color/history_accent_blue" />
-
             <ImageButton android:id="@+id/btn_attach" android:layout_width="48dp" android:layout_height="48dp" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="@string/history_chat_attach" android:src="@android:drawable/ic_input_add" app:tint="@color/history_accent_blue" />
-
             <EditText android:id="@+id/message_edit_text" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:layout_weight="1" android:autofillHints="none" android:background="@android:color/transparent" android:hint="@string/history_chat_hint" android:textColor="@color/history_text_primary" android:textColorHint="@color/history_text_hint" android:inputType="textCapSentences|textMultiLine" android:maxLines="5" android:minHeight="48dp" android:padding="10dp" />
-
             <ImageButton android:id="@+id/send_btn" android:layout_width="48dp" android:layout_height="48dp" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="@string/history_chat_send" android:src="@android:drawable/ic_menu_send" app:tint="@color/history_accent_blue" />
         </LinearLayout>
     </LinearLayout>
-
 </RelativeLayout>

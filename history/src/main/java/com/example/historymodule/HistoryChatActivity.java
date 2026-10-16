@@ -97,6 +97,7 @@ public final class HistoryChatActivity extends AppCompatActivity {
         conversationId = resolveConversationId();
 
         bindViews();
+        com.example.mentor.ui.AiAvailabilityNotice.bind(findViewById(android.R.id.content), aiService.isConfigured());
         setupRecyclerView();
         setupActions();
         restoreConversation();
@@ -238,6 +239,7 @@ public final class HistoryChatActivity extends AppCompatActivity {
             return;
         }
 
+        if (!com.example.mentor.ui.AiAvailabilityNotice.canSend(findViewById(android.R.id.content), aiService.isConfigured())) return;
         String question = typedText.isEmpty()
                 ? getString(R.string.history_chat_ai_prompt_photo)
                 : typedText;

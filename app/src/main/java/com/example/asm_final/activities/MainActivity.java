@@ -44,11 +44,16 @@ public class MainActivity extends AppCompatActivity {
         tvGoToRegister = findViewById(R.id.tvGoToRegister);
         com.example.asm_final.utils.AuthKeyboard.bind(edtPassword, btnLogin);
 
+        com.example.asm_final.utils.FormFeedback.bind(edtUsername, edtPassword);
         btnLogin.setOnClickListener(v -> {
             String username = edtUsername.getText().toString().trim();
             String password = edtPassword.getText().toString().trim();
 
+            com.example.asm_final.utils.FormFeedback.clear(edtUsername, edtPassword);
             if (username.isEmpty() || password.isEmpty()) {
+                if (username.isEmpty()) com.example.asm_final.utils.FormFeedback.error(edtUsername, R.string.ux_required_username);
+                if (password.isEmpty()) com.example.asm_final.utils.FormFeedback.error(edtPassword, R.string.ux_required_password);
+                com.example.asm_final.utils.FormFeedback.focus(username.isEmpty() ? edtUsername : edtPassword);
                 tvMessage.setText(R.string.login_msg_empty);
                 return;
             }

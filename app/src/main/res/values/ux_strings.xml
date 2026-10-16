@@ -1,0 +1,17 @@
+<resources>
+    <string name="ux_start_title">Hôm nay mình học gì?</string>
+    <string name="ux_start_hint">Chọn một môn, rồi nhập câu hỏi hoặc chụp đề bài.</string>
+    <string name="ux_choose_subject">Chọn môn để học</string>
+    <string name="ux_reopen_subject">Mở lại %1$s</string>
+    <string name="ux_last_activity">Hoạt động gần nhất: %1$s</string>
+    <string name="ux_show_stats">Xem thống kê chi tiết</string>
+    <string name="ux_hide_stats">Thu gọn thống kê</string>
+    <string name="ux_no_activity">Chưa có hoạt động học. Bắt đầu bằng cách chọn một môn ở phía trên.</string>
+    <string name="ux_no_exp">Chưa có EXP. Hoàn thành quiz để bắt đầu theo dõi tiến độ.</string>
+    <string name="ux_required_username">Nhập tên đăng nhập.</string>
+    <string name="ux_required_password">Nhập mật khẩu.</string>
+    <string name="ux_required_email">Nhập địa chỉ Gmail.</string>
+    <string name="ux_required_phone">Nhập số điện thoại.</string>
+    <string name="ux_required_confirm">Nhập lại mật khẩu.</string>
+    <string name="ux_gmail_hint">Hiện ứng dụng hỗ trợ địa chỉ @gmail.com.</string>
+</resources>

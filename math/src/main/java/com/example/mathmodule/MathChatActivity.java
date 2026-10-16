@@ -110,10 +110,11 @@ public class MathChatActivity extends AppCompatActivity {
             imagePickerLauncher.launch(intent);
         });
 
-        if ("OPEN_IMAGE".equals(actionType)) {
+        if (savedInstanceState == null && "OPEN_IMAGE".equals(actionType)) {
             btnUploadImage.performClick();
         }
 
+        com.example.mentor.ui.AiAvailabilityNotice.bind(findViewById(android.R.id.content), aiClient.isConfigured());
         btnSend.setOnClickListener(v -> sendQuestion());
     }
 
@@ -127,6 +128,7 @@ public class MathChatActivity extends AppCompatActivity {
             return;
         }
 
+        if (!com.example.mentor.ui.AiAvailabilityNotice.canSend(findViewById(android.R.id.content), aiClient.isConfigured())) return;
         String finalQuestion = typedQuestion.isEmpty()
                 ? getString(R.string.math_chat_default_image_query)
                 : typedQuestion;

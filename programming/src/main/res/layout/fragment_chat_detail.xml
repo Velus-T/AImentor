@@ -1,125 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/bg_primary">
-
-    <!-- Toolbar -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/bg_header_custom"
-        android:elevation="4dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="12dp"
-                android:src="@drawable/ic_back_dark"
-                app:tint="@color/text_header_light"
-                android:contentDescription="@string/back"
-                android:clickable="true"
-                android:focusable="true"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/ai_mentor"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_header_light"
-                android:fontFamily="sans-serif-medium"
-                android:paddingStart="8dp"/>
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/bg_primary">
+    <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="?attr/actionBarSize" android:background="@color/bg_header_custom" android:elevation="4dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="horizontal" android:gravity="center_vertical">
+            <ImageView android:id="@+id/iv_back" android:layout_width="48dp" android:layout_height="48dp" android:padding="12dp" android:src="@drawable/ic_back_dark" app:tint="@color/text_header_light" android:contentDescription="@string/back" android:clickable="true" android:focusable="true" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/ai_mentor" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_header_light" android:fontFamily="sans-serif-medium" android:paddingStart="8dp" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
-
-    <!-- Chat Messages -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_chat_detail"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="8dp"
-        android:clipToPadding="false"/>
-
-    <!-- Pending Images -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_pending_images"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:visibility="gone"/>
-
-    <!-- Loading -->
-    <ProgressBar
-        android:id="@+id/pb_chat_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"/>
-
-    <!-- Input Area -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="@color/bg_secondary"
-        android:padding="8dp"
-        android:elevation="4dp">
-
-        <ImageView
-            android:id="@+id/iv_attach"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:padding="12dp"
-            android:src="@drawable/ic_attach"
-            app:tint="@color/text_secondary"
-            android:contentDescription="@string/upload_image"
-            android:clickable="true"
-            android:focusable="true"/>
-
-        <EditText
-            android:id="@+id/et_chat_input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/chat_hint"
-            android:background="@android:color/transparent"
-            android:padding="12dp"
-            android:textSize="15sp"
-            android:textColor="@color/text_primary"
-            android:textColorHint="@color/text_tertiary"
-            android:fontFamily="sans-serif"
-            android:imeOptions="actionSend"
-            android:inputType="textMultiLine"
-            android:maxLines="4"
-            android:autofillHints="no"/>
-
-        <ImageView
-            android:id="@+id/iv_send"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:padding="12dp"
-            android:src="@drawable/ic_send"
-            app:tint="@color/primary"
-            android:contentDescription="@string/send"
-            android:clickable="true"
-            android:focusable="true"/>
-
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rv_chat_detail" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:padding="8dp" android:clipToPadding="false" />
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rv_pending_images" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="8dp" android:visibility="gone" />
+    <ProgressBar android:id="@+id/pb_chat_loading" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:visibility="gone" />
+    <TextView android:id="@id/mentor_ai_availability" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/mentor_ai_unavailable" android:textColor="@color/text_secondary" android:textSize="13sp" android:paddingHorizontal="12dp" android:paddingVertical="8dp" android:accessibilityLiveRegion="polite" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:background="@color/bg_secondary" android:padding="8dp" android:elevation="4dp">
+        <ImageView android:id="@+id/iv_attach" android:layout_width="48dp" android:layout_height="48dp" android:padding="12dp" android:src="@drawable/ic_attach" app:tint="@color/text_secondary" android:contentDescription="@string/upload_image" android:clickable="true" android:focusable="true" />
+        <EditText android:id="@+id/et_chat_input" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:hint="@string/chat_hint" android:background="@android:color/transparent" android:padding="12dp" android:textSize="15sp" android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary" android:fontFamily="sans-serif" android:imeOptions="actionSend" android:inputType="textMultiLine" android:maxLines="4" android:autofillHints="no" />
+        <ImageView android:id="@+id/iv_send" android:layout_width="48dp" android:layout_height="48dp" android:padding="12dp" android:src="@drawable/ic_send" app:tint="@color/primary" android:contentDescription="@string/send" android:clickable="true" android:focusable="true" />
     </LinearLayout>
-
 </LinearLayout>

@@ -14,7 +14,7 @@
             <com.google.android.material.textfield.TextInputLayout style="@style/AuthInput" android:hint="@string/reg_hint_user">
                 <com.google.android.material.textfield.TextInputEditText style="@style/AuthEdit" android:id="@+id/edtRegisterUsername" android:inputType="text" android:autofillHints="username" android:imeOptions="actionNext" android:nextFocusForward="@id/edtRegisterEmail" />
             </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout style="@style/AuthInput" android:hint="@string/reg_hint_email">
+            <com.google.android.material.textfield.TextInputLayout style="@style/AuthInput" android:hint="@string/reg_hint_email" app:helperText="@string/ux_gmail_hint">
                 <com.google.android.material.textfield.TextInputEditText style="@style/AuthEdit" android:id="@+id/edtRegisterEmail" android:inputType="textEmailAddress" android:autofillHints="emailAddress" android:imeOptions="actionNext" android:nextFocusForward="@id/edtRegisterPhone" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout style="@style/AuthInput" android:hint="@string/reg_hint_phone">

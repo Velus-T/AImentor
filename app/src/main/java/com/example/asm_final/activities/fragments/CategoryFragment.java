@@ -44,7 +44,7 @@ public class CategoryFragment extends Fragment {
      */
     private void openMathModule() {
         Context context = requireContext();
-        MathFeature.open(context, resolveCurrentUserId(context));
+        com.example.asm_final.utils.SubjectNavigator.open(context, com.example.asm_final.utils.RecentActivity.Subject.MATH, resolveCurrentUserId(context));
     }
 
     /*
@@ -53,7 +53,7 @@ public class CategoryFragment extends Fragment {
      */
     private void openScienceModule() {
         Context context = requireContext();
-        ScienceFeature.open(context, resolveCurrentUserId(context));
+        com.example.asm_final.utils.SubjectNavigator.open(context, com.example.asm_final.utils.RecentActivity.Subject.SCIENCE, resolveCurrentUserId(context));
     }
 
     /*
@@ -62,7 +62,7 @@ public class CategoryFragment extends Fragment {
      */
     private void openHistoryModule() {
         Context context = requireContext();
-        HistoryFeature.open(context, resolveCurrentUserId(context));
+        com.example.asm_final.utils.SubjectNavigator.open(context, com.example.asm_final.utils.RecentActivity.Subject.HISTORY, resolveCurrentUserId(context));
     }
 
     /*
@@ -71,7 +71,7 @@ public class CategoryFragment extends Fragment {
      */
     private void openProgrammingModule() {
         Context context = requireContext();
-        ProgrammingFeature.open(context, resolveCurrentUserId(context));
+        com.example.asm_final.utils.SubjectNavigator.open(context, com.example.asm_final.utils.RecentActivity.Subject.PROGRAMMING, resolveCurrentUserId(context));
     }
 
     /*

@@ -1,0 +1,7 @@
+<resources>
+    <string name="note_write_failed">Unable to save. Your text is still here; try Save again.</string>
+    <string name="note_unsaved_title">Note not saved</string>
+    <string name="note_unsaved_message">Keep editing and try saving again. Discarding changes removes the text you just entered.</string>
+    <string name="note_keep_editing">Keep editing</string>
+    <string name="note_discard_changes">Discard changes</string>
+</resources>

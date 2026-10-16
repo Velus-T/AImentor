@@ -1,0 +1,17 @@
+<resources>
+    <string name="ux_start_title">What will you learn today?</string>
+    <string name="ux_start_hint">Choose a subject, then type a question or take a photo.</string>
+    <string name="ux_choose_subject">Choose a subject</string>
+    <string name="ux_reopen_subject">Reopen %1$s</string>
+    <string name="ux_last_activity">Last activity: %1$s</string>
+    <string name="ux_show_stats">Show detailed statistics</string>
+    <string name="ux_hide_stats">Hide detailed statistics</string>
+    <string name="ux_no_activity">No learning activity yet. Start by choosing a subject above.</string>
+    <string name="ux_no_exp">No EXP yet. Complete a quiz to start tracking progress.</string>
+    <string name="ux_required_username">Enter your username.</string>
+    <string name="ux_required_password">Enter your password.</string>
+    <string name="ux_required_email">Enter your Gmail address.</string>
+    <string name="ux_required_phone">Enter your phone number.</string>
+    <string name="ux_required_confirm">Re-enter your password.</string>
+    <string name="ux_gmail_hint">The app currently supports @gmail.com addresses.</string>
+</resources>
