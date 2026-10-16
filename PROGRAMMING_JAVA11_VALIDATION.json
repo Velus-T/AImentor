@@ -1,0 +1,18 @@
+{
+  "module": "programming",
+  "requested_language_level": "Java 11",
+  "java_source_files": 47,
+  "kotlin_source_files": 0,
+  "source_compatibility_java_11": true,
+  "target_compatibility_java_11": true,
+  "java_17_compatibility_remaining": false,
+  "text_blocks_remaining": false,
+  "record_declarations_remaining": false,
+  "sealed_declarations_remaining": false,
+  "switch_expressions_remaining": false,
+  "pattern_matching_instanceof_remaining": false,
+  "prompt_content_comparison": "matched original V8 exactly for SYSTEM_PROMPT, IMAGE_ANALYSIS_PROMPT, QUIZ_PROMPT_TEMPLATE",
+  "api_key_configuration_changed": false,
+  "other_modules_changed": false,
+  "full_android_gradle_build": "not executed; Gradle distribution/dependencies unavailable offline"
+}

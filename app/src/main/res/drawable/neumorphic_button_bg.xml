@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape>
+            <corners android:radius="25dp" />
+            <solid android:color="@color/primaryDarkColor" />
+        </shape>
+    </item>
+    <item>
+        <layer-list>
+            <!-- Soft Shadow -->
+            <item android:top="2dp" android:left="2dp">
+                <shape>
+                    <corners android:radius="25dp" />
+                    <solid android:color="@color/buttonShadowColor" />
+                </shape>
+            </item>
+            <!-- Main button color: Gentle Blue -->
+            <item android:bottom="2dp" android:right="2dp">
+                <shape>
+                    <corners android:radius="25dp" />
+                    <solid android:color="@color/primaryColor" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

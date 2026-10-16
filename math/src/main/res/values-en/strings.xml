@@ -1,0 +1,96 @@
+<resources>
+    <string name="math_module_name">Mathematics</string>
+    <string name="math_solve_title">AI Math Solver</string>
+    <string name="math_back_description">Back to main page</string>
+    <string name="math_nav_home">Solve</string>
+    <string name="math_nav_history">History</string>
+    <string name="math_nav_notes">Notes</string>
+    <string name="math_nav_quiz">Quiz</string>
+
+    <string name="math_banner_title">Solve Math with Smart AI</string>
+    <string name="math_banner_desc">Scan or enter your problem, AI will help you solve and explain step by step.</string>
+
+    <string name="math_action_scan">Scan Problem</string>
+    <string name="math_action_scan_desc">Use camera to scan problems</string>
+    <string name="math_action_type">Enter Problem</string>
+    <string name="math_action_type_desc">Type manually or paste content</string>
+
+    
+    <string name="math_chat_welcome">Hello! I am your Math AI Mentor. Do you have any problems to solve?</string>
+    <string name="math_chat_hint">Type a math problem (e.g., Solve x^2 - 4 = 0)...</string>
+    <string name="math_chat_hint_attached">Image attached. Type your question...</string>
+    <string name="math_chat_hint_default">Type your problem...</string>
+    <string name="math_chat_upload">Upload image</string>
+    <string name="math_chat_send">Send question</string>
+    <string name="math_chat_attached_toast">Image attached. Type your question or press Send.</string>
+    <string name="math_chat_error_image">Could not process selected image.</string>
+    <string name="math_chat_sent_image_label">[1 image sent]\n</string>
+    <string name="math_chat_default_image_query">Solve the math problem in this image in detail step by step.</string>
+    <string name="math_chat_ai_prefix">You are a Math AI Mentor.\nSTRICT RULE: Analyze the question carefully. If the question is not related to Mathematics, only reply: \'I am a Math AI Mentor, I can only help you with Math-related problems!\'.\nIf it is a math question, solve it step by step clearly, verify the result, and use LaTeX for formulas. Wrap formulas with $ or $$.\nUser question: </string>
+    <string name="math_chat_error_api">Could not receive answer from Gemini.</string>
+
+    
+    <string name="math_history_banner_title">Review Solved Problems</string>
+    <string name="math_history_banner_desc">Review and keep learning more effectively every day.</string>
+    <string name="math_history_filter_all">All</string>
+    <string name="math_history_filter_today">Today</string>
+    <string name="math_history_filter_7days">Last 7 days</string>
+    <string name="math_history_section_title">Solve History</string>
+
+    
+    <string name="math_formula_banner_title">Save and Manage Common Formulas</string>
+    <string name="math_formula_banner_desc">Create your own formula list for faster learning.</string>
+    <string name="math_formula_filter_algebra">Algebra</string>
+    <string name="math_formula_filter_geometry">Geometry</string>
+    <string name="math_formula_title_hint">Formula Name (e.g., Quadratic Equation)</string>
+    <string name="math_formula_select_category">Select Category:</string>
+    <string name="math_formula_empty">No notes found in this category.</string>
+    <string name="math_formula_add_title">Add New Note</string>
+    <string name="math_formula_edit_title">Edit Note</string>
+    <string name="math_formula_btn_save">Save</string>
+    <string name="math_formula_error_save">Could not save note.</string>
+    <string name="math_formula_success_update">Note updated</string>
+    <string name="math_formula_success_add">Note added</string>
+    <string name="math_formula_delete_title">Delete Note</string>
+    <string name="math_formula_delete_msg">Delete note “%1$s”? This action cannot be undone.</string>
+    <string name="math_formula_delete_confirm">Delete</string>
+    <string name="math_formula_delete_success">Note deleted</string>
+    <string name="math_formula_delete_error">Could not delete note</string>
+    <string name="math_formula_hint_title">Please enter a title</string>
+    <string name="math_formula_hint_content">Please enter content or formula</string>
+
+    
+    <string name="math_quiz_banner_title">Practice</string>
+    <string name="math_quiz_banner_desc">Create AI quiz or practice existing sets.</string>
+    <string name="math_quiz_ai_button">Create AI quiz</string>
+    <string name="math_quiz_filter_ai">AI Generated</string>
+    <string name="math_quiz_list_title">Quiz Sets</string>
+    <string name="math_quiz_exp_label">Experience: %1$d EXP</string>
+    <string name="math_quiz_level_format">Level %1$d • %2$s\nTotal EXP: %3$d • %4$s</string>
+    <string name="math_quiz_level_max">Max level reached</string>
+    <string name="math_quiz_level_detail">%1$d/%2$d EXP • %3$d EXP remaining</string>
+    <string name="math_quiz_ai_progress">AI is creating %1$s quiz, please wait...</string>
+    <string name="math_quiz_ai_success">Created %1$d questions • %2$s</string>
+    <string name="math_quiz_error_json">Gemini returned invalid Quiz data: %1$s</string>
+    <string name="math_quiz_error_api">Could not create Quiz with Gemini.</string>
+
+    <string name="math_quiz_config_title">Create AI Quiz</string>
+    <string name="math_quiz_config_topic">Quiz Topic:</string>
+    <string name="math_quiz_config_topic_hint">e.g., Quadratic Equations, Grade 9 Geometry...</string>
+    <string name="math_quiz_config_level">Education Level:</string>
+    <string name="math_quiz_config_count">Number of Questions:</string>
+    <string name="math_quiz_config_btn">Start Generating</string>
+    <string name="math_quiz_config_error_topic">Please enter a topic</string>
+    <string name="math_quiz_count_5">5 questions</string>
+    <string name="math_quiz_count_10">10 questions</string>
+    <string name="math_quiz_count_15">15 questions</string>
+    <string name="math_quiz_count_20">20 questions</string>
+
+    
+    <string name="math_level_1">Novice</string>
+    <string name="math_level_2">Math Student</string>
+    <string name="math_level_3">Solver</string>
+    <string name="math_level_4">Thinker</string>
+    <string name="math_level_5">Math Expert</string>
+    <string name="math_level_6">Math Master</string>
+</resources>

@@ -1,0 +1,9 @@
+<resources>
+    
+    <style name="Base.Theme.HistoryModule" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    <item name="colorPrimary">@color/history_accent_blue</item><item name="colorSurface">@color/history_surface</item><item name="colorOnSurface">@color/history_text_primary</item><item name="android:windowBackground">@color/history_background</item><item name="android:statusBarColor">@color/history_background</item><item name="android:navigationBarColor">@color/history_surface</item><item name="android:fontFamily">sans-serif</item><item name="android:textColorPrimary">@color/history_text_primary</item><item name="android:textColorSecondary">@color/history_text_secondary</item><item name="materialButtonStyle">@style/MentorHistoryButton</item><item name="textInputStyle">@style/MentorHistoryInput</item><item name="android:windowAnimationStyle">@style/MentorWindowAnimation</item></style>
+
+    <style name="Theme.HistoryModule" parent="Base.Theme.HistoryModule" />
+</resources>

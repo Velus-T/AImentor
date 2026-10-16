@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/img_quiz_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/quiz"
+            android:background="#F3E5F5"
+            android:padding="8dp"
+            app:tint="#6A1B9A" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/img_quiz_icon"
+            android:layout_marginStart="12dp"
+            android:paddingEnd="76dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_set_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bộ đề Đại số 01"
+                android:textStyle="bold"
+                android:textColor="#263238"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_set_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đại số"
+                android:textSize="12sp"
+                android:textColor="#78909C" />
+
+            <TextView
+                android:id="@+id/txt_set_education_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Cấp học: Middle School"
+                android:textSize="12sp"
+                android:textColor="#455A64" />
+
+            <TextView
+                android:id="@+id/txt_set_difficulty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Độ khó: Trung bình"
+                android:textSize="12sp"
+                android:textColor="#6A1B9A"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="Bắt đầu >"
+            android:textSize="12sp"
+            android:textColor="#6A1B9A"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

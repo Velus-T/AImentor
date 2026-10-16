@@ -1,0 +1,58 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/scroll_view" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/bg_primary" android:fillViewport="true" android:paddingHorizontal="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingVertical="20dp" android:paddingBottom="32dp">
+
+        
+        <TextView android:id="@+id/tv_quiz_progress" android:layout_width="0dp" android:layout_height="wrap_content" android:text="@string/quiz_question_count_format" android:textSize="15sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:gravity="center" app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar android:id="@+id/pb_quiz" style="?android:attr/progressBarStyleHorizontal" android:layout_width="0dp" android:layout_height="6dp" android:progressTint="@color/primary" android:backgroundTint="@color/surface_light" app:layout_constraintTop_toBottomOf="@id/tv_quiz_progress" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="12dp" android:progress="0" />
+
+        <TextView android:id="@+id/tv_question_difficulty" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:background="@drawable/bg_chat_input_dark" android:paddingHorizontal="12dp" android:paddingVertical="7dp" android:text="@string/quiz_difficulty_format" android:textColor="@color/primary" android:textSize="13sp" android:textStyle="bold" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/pb_quiz" />
+
+        
+        <androidx.cardview.widget.CardView android:id="@+id/card_question" android:layout_width="0dp" android:layout_height="wrap_content" app:cardCornerRadius="20dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/bg_secondary" app:layout_constraintTop_toBottomOf="@id/tv_question_difficulty" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="12dp" android:padding="20dp">
+
+        <TextView android:id="@+id/tv_question" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/quiz_placeholder" android:textSize="18sp" android:textColor="@color/text_primary" android:fontFamily="sans-serif" android:lineSpacingExtra="6dp" />
+
+        </androidx.cardview.widget.CardView>
+
+        
+        <LinearLayout android:id="@+id/ll_options" android:layout_width="0dp" android:layout_height="wrap_content" android:orientation="vertical" app:layout_constraintTop_toBottomOf="@id/card_question" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp">
+
+            <androidx.cardview.widget.CardView android:id="@+id/cv_option_a" android:layout_width="match_parent" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/bg_secondary" android:layout_marginBottom="12dp" android:foreground="?android:attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+
+                <TextView android:id="@+id/tv_option_a" android:layout_width="match_parent" android:layout_height="match_parent" android:paddingHorizontal="16dp" android:gravity="center_vertical" android:text="A. Lựa chọn A" android:textSize="15sp" android:textColor="@color/text_primary" android:fontFamily="sans-serif" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView android:id="@+id/cv_option_b" android:layout_width="match_parent" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/bg_secondary" android:layout_marginBottom="12dp" android:foreground="?android:attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+
+                <TextView android:id="@+id/tv_option_b" android:layout_width="match_parent" android:layout_height="match_parent" android:paddingHorizontal="16dp" android:gravity="center_vertical" android:text="B. Lựa chọn B" android:textSize="15sp" android:textColor="@color/text_primary" android:fontFamily="sans-serif" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView android:id="@+id/cv_option_c" android:layout_width="match_parent" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/bg_secondary" android:layout_marginBottom="12dp" android:foreground="?android:attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+
+                <TextView android:id="@+id/tv_option_c" android:layout_width="match_parent" android:layout_height="match_parent" android:paddingHorizontal="16dp" android:gravity="center_vertical" android:text="C. Lựa chọn C" android:textSize="15sp" android:textColor="@color/text_primary" android:fontFamily="sans-serif" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView android:id="@+id/cv_option_d" android:layout_width="match_parent" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/bg_secondary" android:foreground="?android:attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+
+                <TextView android:id="@+id/tv_option_d" android:layout_width="match_parent" android:layout_height="match_parent" android:paddingHorizontal="16dp" android:gravity="center_vertical" android:text="D. Lựa chọn D" android:textSize="15sp" android:textColor="@color/text_primary" android:fontFamily="sans-serif" />
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        
+        <androidx.cardview.widget.CardView android:id="@+id/card_explanation" android:layout_width="0dp" android:layout_height="wrap_content" app:cardCornerRadius="20dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/bg_secondary" app:layout_constraintTop_toBottomOf="@id/ll_options" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp" android:visibility="gone">
+
+            <TextView android:id="@+id/tv_explanation" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:text="" android:textSize="14sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:lineSpacingExtra="4dp" />
+
+        </androidx.cardview.widget.CardView>
+
+        
+        <Button android:id="@+id/btn_next_quiz" android:layout_width="0dp" android:layout_height="wrap_content" android:text="@string/quiz_next" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/programming_white" android:background="@drawable/bg_send_dark" android:fontFamily="sans-serif-medium" app:cornerRadius="14dp" app:layout_constraintTop_toBottomOf="@id/card_explanation" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="20dp" android:minHeight="56dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

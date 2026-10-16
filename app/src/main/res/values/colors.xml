@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <!-- Main shell palette: light mode -->
+    <color name="neumorphic_background">#EEF2FA</color>
+    <color name="neumorphic_shadow_light">#FFFFFF</color>
+    <color name="neumorphic_shadow_dark">#D1D9E6</color>
+    <color name="neumorphic_accent">#1D4ED8</color>
+
+    <color name="primaryColor">#1D4ED8</color>
+    <color name="primaryDarkColor">#163FA7</color>
+    <color name="primaryContainerColor">#DCE7FF</color>
+    <color name="accentColor">#087F72</color>
+    <color name="backgroundColor">#EEF2FA</color>
+    <color name="surfaceColor">#FFFFFF</color>
+    <color name="surfaceVariantColor">#E2E9F5</color>
+
+    <color name="textColorPrimary">#14213D</color>
+    <color name="textColorSecondary">#4D5E78</color>
+    <color name="dividerColor">#E2E8F0</color>
+    <color name="arrowTintColor">#AAB6C5</color>
+    <color name="buttonShadowColor">#B0C4DE</color>
+    <color name="progressTrackColor">#E0E6ED</color>
+    <color name="navHeaderColor">#163FA7</color>
+    <color name="reminderAccentColor">#F5A623</color>
+    <color name="themeAccentColor">#087F72</color>
+
     <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="errorColor">#D63031</color>
+
+    <!-- Category colors -->
+    <color name="cat_math_bg">#DCE7FF</color>
+    <color name="cat_science_bg">#CCEEE6</color>
+    <color name="cat_history_bg">#FFE5BF</color>
+    <color name="cat_it_bg">#E6DBFF</color>
+    <color name="cat_math_text">#173FA6</color>
+    <color name="cat_science_text">#075F55</color>
+    <color name="cat_history_text">#8A430D</color>
+    <color name="cat_it_text">#5931AA</color>
 </resources>

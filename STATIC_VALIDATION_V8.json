@@ -1,0 +1,24 @@
+{
+  "xml_files": 266,
+  "xml_parse_errors": [],
+  "java_files": 218,
+  "kotlin_files": 0,
+  "java_balance_errors": [],
+  "duplicate_fqcn": [],
+  "missing_internal_imports": [],
+  "activity_classes": 22,
+  "missing_activity_declarations": [],
+  "targeted": {
+    "science_provider_authority_fixed": true,
+    "legacy_storage_permissions_removed": true,
+    "backup_disabled": true,
+    "password_update_hashes": true,
+    "legacy_plaintext_login_migrates": true,
+    "math_db_version_8": true,
+    "math_history_user_scoped": true,
+    "math_notes_user_scoped": true,
+    "programming_entry_declared": true,
+    "no_kotlin_source": true
+  },
+  "overall_static_pass": true
+}

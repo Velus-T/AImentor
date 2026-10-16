@@ -1,0 +1,1 @@
+<resources><style name="MentorWindowAnimation"><item name="android:activityOpenEnterAnimation">@anim/mentor_enter</item><item name="android:activityOpenExitAnimation">@anim/mentor_exit</item><item name="android:activityCloseEnterAnimation">@anim/mentor_enter</item><item name="android:activityCloseExitAnimation">@anim/mentor_exit</item></style></resources>

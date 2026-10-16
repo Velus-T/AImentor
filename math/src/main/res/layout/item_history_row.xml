@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <!-- Thanh chia nhóm theo ngày (Sẽ ẩn/hiện bằng Code) -->
+    <TextView
+        android:id="@+id/txt_date_group_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F0F4F8"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="6dp"
+        android:text="Ngày 22/07/2026"
+        android:textColor="#1976D2"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:visibility="gone" /> <!-- Mặc định ẩn -->
+
+    <!-- Khung chứa chi tiết lịch sử giải toán (Code cũ của oni-chan) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="#E3F2FD">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/history"
+                    app:tint="#2196F3" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_item_question"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="1 + 1"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Ẩn dòng thời gian riêng lẻ nếu muốn ưu tiên nhìn Header Nhóm -->
+                <TextView
+                    android:id="@+id/txt_item_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="14:30 ▼"
+                    android:textColor="#888888"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_item_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="#F9F9F9"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:visibility="gone">
+
+            <WebView
+                android:id="@+id/webview_item_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00000000" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:background="@color/math_background">
+
+    <!-- 1. VÙNG TRỐNG ĐỂ TREO FRAGMENT (Treo bức tranh) -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation" />
+
+    <!-- 2. THANH ĐIỀU HƯỚNG DƯỚI CÙNG (Bottom Navigation) -->
+    <LinearLayout
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/math_surface"
+        android:elevation="16dp"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <!-- Nút 1: Giải Toán (Home) -->
+        <LinearLayout
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+            <ImageView
+                android:id="@+id/icon_nav_home"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/caculator"
+                app:tint="@color/math_primary"/> <!-- Màu xanh dương báo hiệu đang chọn -->
+            <TextView
+                android:id="@+id/text_nav_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/math_nav_home"
+                android:textColor="@color/math_primary"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Nút 2: Lịch sử -->
+        <LinearLayout
+            android:id="@+id/nav_history"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+            <ImageView
+                android:id="@+id/icon_nav_history"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/history"
+                app:tint="@color/math_inactive"/> <!-- Màu xám khi chưa chọn -->
+            <TextView
+                android:id="@+id/text_nav_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/math_nav_history"
+                android:textColor="@color/math_inactive"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Nút 3: Công thức -->
+        <LinearLayout
+            android:id="@+id/nav_formula"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+            <ImageView
+                android:id="@+id/icon_nav_formula"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/bookmark"
+                app:tint="@color/math_inactive"/>
+            <TextView
+                android:id="@+id/text_nav_formula"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/math_nav_notes"
+                android:textColor="@color/math_inactive"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Nút 4: Quiz -->
+        <LinearLayout
+            android:id="@+id/nav_quiz"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+            <ImageView
+                android:id="@+id/icon_nav_quiz"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/quiz"
+                app:tint="@color/math_inactive"/>
+            <TextView
+                android:id="@+id/text_nav_quiz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/math_nav_quiz"
+                android:textColor="@color/math_inactive"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

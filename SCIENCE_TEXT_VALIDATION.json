@@ -1,0 +1,29 @@
+{
+  "project": "ASM-final-All-Modules-v11-Science-Readable-Text",
+  "java_files": 219,
+  "kotlin_source_files": 0,
+  "xml_files": 267,
+  "xml_errors": [],
+  "duplicate_java_fqcns": [],
+  "missing_internal_imports": [],
+  "science_text_sizes_below_13sp": [
+    {
+      "file": "science/src/main/res/layout/item_science_chemical_element.xml",
+      "size_sp": 12.0,
+      "allowed_reason": "Periodic-table cells have constrained width"
+    },
+    {
+      "file": "science/src/main/res/layout/item_science_chemical_element.xml",
+      "size_sp": 12.0,
+      "allowed_reason": "Periodic-table cells have constrained width"
+    }
+  ],
+  "programming_java11_forbidden_constructs": {
+    "text_blocks": false,
+    "record_declaration": false,
+    "sealed_declaration": false,
+    "switch_arrow": false,
+    "instanceof_pattern": false
+  },
+  "scope": "Science typography and supporting fixed heights only; API configuration unchanged"
+}

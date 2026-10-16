@@ -13,3 +13,13 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Generated local build and IDE files
+**/build/
+.idea/
+.kotlin/
+.gradle/
+/local.properties
+
+# Local validation output
+/*-verification.log

@@ -1,0 +1,361 @@
+{
+  "quiz_sets": [
+    {
+      "set_id": 1,
+      "set_title": "Bộ đề Đại số 01",
+      "category": "Đại số",
+      "questions": [
+        {
+          "id": 1,
+          "question_text": "Nghiệm của phương trình 2x - 4 = 0 là:",
+          "option_a": "x = -2",
+          "option_b": "x = 2",
+          "option_c": "x = 4",
+          "option_d": "x = 0",
+          "correct_answer": "B",
+          "explanation": "Ta có 2x = 4 suy ra x = 4 / 2 = 2.",
+          "difficulty": "EASY"
+        },
+        {
+          "id": 2,
+          "question_text": "Biệt thức Delta (Δ) của phương trình bậc hai ax² + bx + c = 0 được tính bằng công thức:",
+          "option_a": "Δ = b² + 4ac",
+          "option_b": "Δ = b - 4ac",
+          "option_c": "Δ = b² - 4ac",
+          "option_d": "Δ = 2b - 4ac",
+          "correct_answer": "C",
+          "explanation": "Công thức biệt thức Delta là Δ = b² - 4ac.",
+          "difficulty": "EASY"
+        },
+        {
+          "id": 3,
+          "question_text": "Cho hàm số y = 2x + 3. Hệ số góc a của hàm số là:",
+          "option_a": "3",
+          "option_b": "-3",
+          "option_c": "2",
+          "option_d": "-2",
+          "correct_answer": "C",
+          "explanation": "Hàm số bậc nhất có dạng y = ax + b, ở đây a = 2.",
+          "difficulty": "EASY"
+        },
+        {
+          "id": 4,
+          "question_text": "Tọa độ giao điểm của đồ thị hàm số y = 2x - 4 với trục hoành Ox là:",
+          "option_a": "(2; 0)",
+          "option_b": "(0; -4)",
+          "option_c": "(-2; 0)",
+          "option_d": "(0; 2)",
+          "correct_answer": "A",
+          "explanation": "Cho y = 0 suy ra 2x - 4 = 0 <=> x = 2. Vậy giao điểm là (2; 0).",
+          "difficulty": "MEDIUM"
+        },
+        {
+          "id": 5,
+          "question_text": "Rút gọn biểu thức √16 ta được kết quả là:",
+          "option_a": "4",
+          "option_b": "-4",
+          "option_c": "8",
+          "option_d": "±4",
+          "correct_answer": "A",
+          "explanation": "Căn bậc hai số học của 16 là 4 (vì 4 > 0 và 4² = 16).",
+          "difficulty": "MEDIUM"
+        },
+        {
+          "id": 6,
+          "question_text": "Nghiệm của hệ phương trình { x + y = 3 và x - y = 1 là:",
+          "option_a": "x = 1, y = 2",
+          "option_b": "x = 2, y = 1",
+          "option_c": "x = 3, y = 0",
+          "option_d": "x = 0, y = 3",
+          "correct_answer": "B",
+          "explanation": "Cộng vế với vế ta được 2x = 4 <=> x = 2, suy ra y = 3 - 2 = 1.",
+          "difficulty": "MEDIUM"
+        },
+        {
+          "id": 7,
+          "question_text": "Điều kiện xác định của biểu thức 1 / √(x - 1) là:",
+          "option_a": "x ≥ 1",
+          "option_b": "x > 1",
+          "option_c": "x < 1",
+          "option_d": "x ≠ 1",
+          "correct_answer": "B",
+          "explanation": "Biểu thức dưới mẫu và trong căn phải thỏa mãn x - 1 > 0 <=> x > 1.",
+          "difficulty": "MEDIUM"
+        },
+        {
+          "id": 8,
+          "question_text": "Phương trình x² - 5x + 6 = 0 có tổng hai nghiệm bằng:",
+          "option_a": "-5",
+          "option_b": "6",
+          "option_c": "5",
+          "option_d": "-6",
+          "correct_answer": "C",
+          "explanation": "Theo định lý Vi-ét, tổng hai nghiệm S = -b/a = -(-5)/1 = 5.",
+          "difficulty": "HARD"
+        },
+        {
+          "id": 9,
+          "question_text": "Đồ thị hàm số y = ax² (a ≠ 0) là một đường cong gọi là:",
+          "option_a": "Đường thẳng",
+          "option_b": "Parabol",
+          "option_c": "Hypebol",
+          "option_d": "Đường tròn",
+          "correct_answer": "B",
+          "explanation": "Đồ thị hàm số y = ax² là một Parabol đỉnh gốc tọa độ.",
+          "difficulty": "HARD"
+        },
+        {
+          "id": 10,
+          "question_text": "Kết quả của phép tính √(3 - 2)² là:",
+          "option_a": "3 - 2",
+          "option_b": "2 - 3",
+          "option_c": "|3 - 2|",
+          "option_d": "-1",
+          "correct_answer": "C",
+          "explanation": "Công thức tổng quát là √A² = |A|, do đó kết quả là |3 - 2| = 1.",
+          "difficulty": "HARD"
+        }
+      ],
+      "difficulty": "Hỗn hợp",
+      "education_level": "Middle School"
+    },
+    {
+      "set_id": 2,
+      "set_title": "Bộ đề Hình học 01",
+      "category": "Hình học",
+      "questions": [
+        {
+          "id": 11,
+          "question_text": "Cho tam giác ABC vuông tại A, có AB = 3cm, AC = 4cm. Độ dài cạnh huyền BC là:",
+          "option_a": "5cm",
+          "option_b": "7cm",
+          "option_c": "6cm",
+          "option_d": "25cm",
+          "correct_answer": "A",
+          "explanation": "Theo định lý Pitago: BC = √(AB² + AC²) = √(3² + 4²) = √25 = 5cm.",
+          "difficulty": "EASY"
+        },
+        {
+          "id": 12,
+          "question_text": "Tổng các góc trong một tam giác bằng:",
+          "option_a": "90°",
+          "option_b": "180°",
+          "option_c": "270°",
+          "option_d": "360°",
+          "correct_answer": "B",
+          "explanation": "Định lý tổng ba góc trong một tam giác luôn bằng 180°.",
+          "difficulty": "EASY"
+        },
+        {
+          "id": 13,
+          "question_text": "Trong một đường tròn, góc nội tiếp chắn nửa đường tròn có số đo bằng:",
+          "option_a": "45°",
+          "option_b": "60°",
+          "option_c": "90°",
+          "option_d": "180°",
+          "correct_answer": "C",
+          "explanation": "Góc nội tiếp chắn nửa đường tròn là góc vuông (90°).",
+          "difficulty": "EASY"
+        },
+        {
+          "id": 14,
+          "question_text": "Thể tích của hình lập phương có cạnh bằng a là:",
+          "option_a": "V = a³",
+          "option_b": "V = 6a²",
+          "option_c": "V = a²",
+          "option_d": "V = 3a³",
+          "correct_answer": "A",
+          "explanation": "Thể tích hình lập phương tính bằng cạnh nhân cạnh nhân cạnh (a³).",
+          "difficulty": "MEDIUM"
+        },
+        {
+          "id": 15,
+          "question_text": "Cho tam giác ABC vuông tại A có đường cao AH. Hệ thức nào sau đây đúng?",
+          "option_a": "AH² = AB . AC",
+          "option_b": "AH² = HB . HC",
+          "option_c": "1 / AH² = AB² + AC²",
+          "option_d": "AB² = BH . BC",
+          "correct_answer": "B",
+          "explanation": "Theo hệ thức lượng trong tam giác vuông, bình phương đường cao ứng với cạnh huyền bằng tích hai hình chiếu của hai cạnh góc vuông trên cạnh huyền.",
+          "difficulty": "MEDIUM"
+        },
+        {
+          "id": 16,
+          "question_text": "Diện tích xung quanh của hình trụ có bán kính đáy R và chiều cao h là:",
+          "option_a": "S = πR²h",
+          "option_b": "S = 2πRh",
+          "option_c": "S = πRh",
+          "option_d": "S = 2πR²",
+          "correct_answer": "B",
+          "explanation": "Công thức diện tích xung quanh hình trụ là S = 2πRh.",
+          "difficulty": "MEDIUM"
+        },
+        {
+          "id": 17,
+          "question_text": "Số tâm đối xứng của một đường tròn là:",
+          "option_a": "1",
+          "option_b": "2",
+          "option_c": "Vô số",
+          "option_d": "0",
+          "correct_answer": "A",
+          "explanation": "Đường tròn chỉ có duy nhất 1 tâm đối xứng chính là tâm của đường tròn đó.",
+          "difficulty": "MEDIUM"
+        },
+        {
+          "id": 18,
+          "question_text": "Cho tam giác MNP đồng dạng với tam giác DEF theo tỉ số k = 2. Tỉ số diện tích của hai tam giác đó (S_MNP / S_DEF) là:",
+          "option_a": "2",
+          "option_b": "4",
+          "option_c": "1/2",
+          "option_d": "√2",
+          "correct_answer": "B",
+          "explanation": "Tỉ số diện tích của hai tam giác đồng dạng bằng bình phương tỉ số đồng dạng, tức là k² = 2² = 4.",
+          "difficulty": "HARD"
+        },
+        {
+          "id": 19,
+          "question_text": "Sin của góc nhọn α được tính bằng tỉ số giữa:",
+          "option_a": "Cạnh kề và cạnh huyền",
+          "option_b": "Cạnh đối và cạnh kề",
+          "option_c": "Cạnh đối và cạnh huyền",
+          "option_d": "Cạnh huyền và cạnh đối",
+          "correct_answer": "C",
+          "explanation": "Theo định nghĩa tỉ số lượng giác, sin = đối / huyền.",
+          "difficulty": "HARD"
+        },
+        {
+          "id": 20,
+          "question_text": "Thể tích của hình nón có bán kính đáy r và chiều cao h là:",
+          "option_a": "V = πr²h",
+          "option_b": "V = (1/3)πr²h",
+          "option_c": "V = (4/3)πr³",
+          "option_d": "V = 2πr²h",
+          "correct_answer": "B",
+          "explanation": "Thể tích hình nón bằng một phần ba diện tích đáy nhân với chiều cao: V = (1/3)πr²h.",
+          "difficulty": "HARD"
+        }
+      ],
+      "difficulty": "Hỗn hợp",
+      "education_level": "Middle School"
+    },
+    {
+      "set_id": 3,
+      "set_title": "Bộ đề Tổng hợp Demo",
+      "category": "Tổng hợp",
+      "questions": [
+        {
+          "id": 21,
+          "question_text": "Nghiệm của phương trình 2x - 4 = 0 là:",
+          "option_a": "x = -2",
+          "option_b": "x = 2",
+          "option_c": "x = 4",
+          "option_d": "x = 0",
+          "correct_answer": "B",
+          "explanation": "Ta có 2x = 4 suy ra x = 4 / 2 = 2.",
+          "difficulty": "EASY"
+        },
+        {
+          "id": 22,
+          "question_text": "Cho tam giác ABC vuông tại A, có AB = 3cm, AC = 4cm. Độ dài cạnh huyền BC là:",
+          "option_a": "5cm",
+          "option_b": "7cm",
+          "option_c": "6cm",
+          "option_d": "25cm",
+          "correct_answer": "A",
+          "explanation": "Theo định lý Pitago: BC = √(AB² + AC²) = √(3² + 4²) = √25 = 5cm.",
+          "difficulty": "EASY"
+        },
+        {
+          "id": 23,
+          "question_text": "Biệt thức Delta (Δ) của phương trình bậc hai ax² + bx + c = 0 được tính bằng công thức:",
+          "option_a": "Δ = b² + 4ac",
+          "option_b": "Δ = b - 4ac",
+          "option_c": "Δ = b² - 4ac",
+          "option_d": "Δ = 2b - 4ac",
+          "correct_answer": "C",
+          "explanation": "Công thức biệt thức Delta là Δ = b² - 4ac.",
+          "difficulty": "EASY"
+        },
+        {
+          "id": 24,
+          "question_text": "Tổng các góc trong một tam giác bằng:",
+          "option_a": "90°",
+          "option_b": "180°",
+          "option_c": "270°",
+          "option_d": "360°",
+          "correct_answer": "B",
+          "explanation": "Định lý tổng ba góc trong một tam giác luôn bằng 180°.",
+          "difficulty": "MEDIUM"
+        },
+        {
+          "id": 25,
+          "question_text": "Cho hàm số y = 2x + 3. Hệ số góc a của hàm số là:",
+          "option_a": "3",
+          "option_b": "-3",
+          "option_c": "2",
+          "option_d": "-2",
+          "correct_answer": "C",
+          "explanation": "Hàm số bậc nhất có dạng y = ax + b, ở đây a = 2.",
+          "difficulty": "MEDIUM"
+        },
+        {
+          "id": 26,
+          "question_text": "Thể tích của hình lập phương có cạnh bằng a là:",
+          "option_a": "V = a³",
+          "option_b": "V = 6a²",
+          "option_c": "V = a²",
+          "option_d": "V = 3a³",
+          "correct_answer": "A",
+          "explanation": "Thể tích hình lập phương tính bằng cạnh nhân cạnh nhân cạnh (a³).",
+          "difficulty": "MEDIUM"
+        },
+        {
+          "id": 27,
+          "question_text": "Rút gọn biểu thức √16 ta được kết quả là:",
+          "option_a": "4",
+          "option_b": "-4",
+          "option_c": "8",
+          "option_d": "±4",
+          "correct_answer": "A",
+          "explanation": "Căn bậc hai số học của 16 là 4 (vì 4 > 0 và 4² = 16).",
+          "difficulty": "MEDIUM"
+        },
+        {
+          "id": 28,
+          "question_text": "Diện tích xung quanh của hình trụ có bán kính đáy R và chiều cao h là:",
+          "option_a": "S = πR²h",
+          "option_b": "S = 2πRh",
+          "option_c": "S = πRh",
+          "option_d": "S = 2πR²",
+          "correct_answer": "B",
+          "explanation": "Công thức diện tích xung quanh hình trụ là S = 2πRh.",
+          "difficulty": "HARD"
+        },
+        {
+          "id": 29,
+          "question_text": "Phương trình x² - 5x + 6 = 0 có tổng hai nghiệm bằng:",
+          "option_a": "-5",
+          "option_b": "6",
+          "option_c": "5",
+          "option_d": "-6",
+          "correct_answer": "C",
+          "explanation": "Theo định lý Vi-ét, tổng hai nghiệm S = -b/a = -(-5)/1 = 5.",
+          "difficulty": "HARD"
+        },
+        {
+          "id": 30,
+          "question_text": "Thể tích của hình nón có bán kính đáy r và chiều cao h là:",
+          "option_a": "V = πr²h",
+          "option_b": "V = (1/3)πr²h",
+          "option_c": "V = (4/3)πr³",
+          "option_d": "V = 2πr²h",
+          "correct_answer": "B",
+          "explanation": "Thể tích hình nón bằng một phần ba diện tích đáy nhân với chiều cao: V = (1/3)πr²h.",
+          "difficulty": "HARD"
+        }
+      ],
+      "difficulty": "Hỗn hợp",
+      "education_level": "Middle School"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+<resources>
+    
+    <style name="Base.Theme.MathModule" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    <item name="colorPrimary">@color/math_primary</item><item name="colorSurface">@color/math_surface</item><item name="colorOnSurface">@color/math_text_primary</item><item name="android:windowBackground">@color/math_background</item><item name="android:statusBarColor">@color/math_background</item><item name="android:navigationBarColor">@color/math_surface</item><item name="android:fontFamily">sans-serif</item><item name="android:textColorPrimary">@color/math_text_primary</item><item name="android:textColorSecondary">@color/math_text_secondary</item><item name="materialButtonStyle">@style/MentorMathButton</item><item name="textInputStyle">@style/MentorMathInput</item><item name="android:windowAnimationStyle">@style/MentorWindowAnimation</item></style>
+</resources>

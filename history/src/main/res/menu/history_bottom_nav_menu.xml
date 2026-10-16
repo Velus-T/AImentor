@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_solver"
+        android:icon="@drawable/history_ic_search"
+        android:title="@string/history_nav_home" />
+    <item
+        android:id="@+id/nav_history"
+        android:icon="@drawable/history_ic_history"
+        android:title="@string/history_nav_history" />
+    <item
+        android:id="@+id/nav_events"
+        android:icon="@drawable/history_ic_book"
+        android:title="@string/history_nav_notes" />
+    <item
+        android:id="@+id/nav_quiz"
+        android:icon="@drawable/history_ic_quiz"
+        android:title="@string/history_nav_quiz" />
+</menu>

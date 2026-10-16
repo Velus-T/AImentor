@@ -1,0 +1,17 @@
+<resources>
+    <string-array name="subjects">
+        <item>Lập trình</item>
+        <item>Java</item>
+        <item>Python</item>
+        <item>JavaScript</item>
+        <item>C++</item>
+        <item>Kotlin</item>
+    </string-array>
+
+    <string-array name="levels">
+        <item>Cơ bản</item>
+        <item>Trung bình</item>
+        <item>Nâng cao</item>
+        <item>Chuyên gia</item>
+    </string-array>
+</resources>

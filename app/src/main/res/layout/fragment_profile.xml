@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prof_title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="60dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:id="@+id/imgProfileAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher_round"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/prof_choose_avatar" />
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnChooseAvatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prof_choose_avatar"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/edtProfileFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prof_hint_fullname"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="12dp"
+            android:importantForAutofill="no"/>
+
+        <EditText
+            android:id="@+id/edtProfileAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prof_hint_address"
+            android:inputType="textPostalAddress"
+            android:layout_marginBottom="12dp"
+            android:importantForAutofill="no"/>
+
+        <EditText
+            android:id="@+id/edtProfilePhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prof_hint_phone"
+            android:inputType="phone"
+            android:layout_marginBottom="12dp"
+            android:importantForAutofill="no"/>
+
+        <EditText
+            android:id="@+id/edtProfileEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prof_hint_email"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="12dp"
+            android:importantForAutofill="no"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prof_change_pass"
+            android:layout_marginTop="12dp"
+            android:textStyle="italic"/>
+
+        <EditText
+            android:id="@+id/edtProfilePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prof_hint_new_pass"
+            android:inputType="textPassword"
+            android:layout_marginBottom="24dp"
+            android:importantForAutofill="no"/>
+
+        <Button
+            android:id="@+id/btnUpdateProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/prof_btn_update" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,168 @@
+<resources>
+    <string name="programming_app_name">Lập trình</string>
+
+    <!-- Home Fragment -->
+    <string name="greeting">Chào buổi sáng!</string>
+    <string name="sub_greeting">Học lập trình mỗi ngày</string>
+    <string name="programming_languages">Ngôn ngữ lập trình</string>
+    <string name="quick_chat">Hỏi nhanh</string>
+    <string name="hint_question">Nhập câu hỏi của bạn...</string>
+    <string name="hint_hint">Gõ câu hỏi hoặc chọn ngôn ngữ để bắt đầu</string>
+
+    <!-- Chat Detail -->
+    <string name="ai_mentor">AI Mentor</string>
+    <string name="chat_hint">Nhập câu hỏi của bạn...</string>
+    <string name="back">Quay lại</string>
+    <string name="upload_image">Tải ảnh lên</string>
+    <string name="send">Gửi</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_history">Lịch sử</string>
+    <string name="nav_notes">Ghi chú</string>
+    <string name="nav_quiz">Quiz</string>
+
+    <!-- Language names -->
+    <string name="lang_python">Python</string>
+    <string name="lang_java">Java</string>
+    <string name="lang_kotlin">Kotlin</string>
+    <string name="lang_javascript">JS</string>
+    <string name="lang_cpp">C++</string>
+    <string name="lang_csharp">C#</string>
+    <string name="lang_php">PHP</string>
+    <string name="lang_swift">Swift</string>
+    <string name="lang_go">Go</string>
+    <string name="lang_rust">Rust</string>
+    <string name="lang_typescript">TS</string>
+    <string name="lang_ruby">Ruby</string>
+
+    <!-- Content descriptions -->
+    <string name="desc_arrow_right">Mũi tên phải</string>
+    <string name="desc_python">Biểu tượng Python</string>
+    <string name="desc_java">Biểu tượng Java</string>
+    <string name="desc_kotlin">Biểu tượng Kotlin</string>
+    <string name="desc_javascript">Biểu tượng JavaScript</string>
+    <string name="desc_cpp">Biểu tượng C++</string>
+    <string name="desc_csharp">Biểu tượng C#</string>
+    <string name="desc_php">Biểu tượng PHP</string>
+    <string name="desc_swift">Biểu tượng Swift</string>
+    <string name="desc_go">Biểu tượng Go</string>
+    <string name="desc_rust">Biểu tượng Rust</string>
+    <string name="desc_typescript">Biểu tượng TypeScript</string>
+    <string name="desc_ruby">Biểu tượng Ruby</string>
+    <string name="desc_send">Gửi tin nhắn</string>
+
+    <!-- Expand/Collapse -->
+    <string name="see_more">Xem thêm</string>
+    <string name="collapse">Thu gọn</string>
+    <string name="expand_more">...</string>
+    <string name="collapse_minus">−</string>
+
+    <!-- Progress Detail -->
+    <string name="progress_title">📊 Tiến độ Lập trình</string>
+    <string name="progress_stats_label">Thống kê</string>
+    <string name="progress_tip">Hoàn thành Quiz để nhận EXP và tăng cấp!</string>
+    <string name="progress_learning_title">Tiến độ học tập</string>
+
+    <string name="prog_level_format">Cấp %1$d</string>
+    <string name="prog_exp_format">%1$d EXP</string>
+    <string name="prog_exp_detail_format">%1$d / %2$d EXP</string>
+    <string name="prog_percent_format">%1$d%%</string>
+    <string name="prog_quiz_label">Bài quiz</string>
+    <string name="prog_accuracy_label">Độ chính xác</string>
+    <string name="prog_total_exp_label">Tổng EXP</string>
+    <string name="prog_lang_count_format">%1$d/%2$d</string>
+
+    <string name="prog_tab_home">AI Mentor Lập trình</string>
+    <string name="prog_tab_history">Lịch sử chat</string>
+    <string name="prog_tab_notes">Ghi chú</string>
+    <string name="prog_tab_quiz">Quiz Lập trình</string>
+
+    <string name="prog_welcome_ai">Chào anh! Em là AI Mentor Lập trình. Anh cần giúp gì về code không?</string>
+    <string name="prog_chat_new_ready">Cuộc trò chuyện mới đã sẵn sàng. Anh muốn thảo luận về ngôn ngữ hay thuật toán nào?</string>
+    <string name="prog_chat_input_empty">Vui lòng nhập nội dung tin nhắn.</string>
+
+    <!-- Levels -->
+    <string name="prog_level_1">Người mới học lập trình</string>
+    <string name="prog_level_2">Học viên Code</string>
+    <string name="prog_level_3">Lập trình viên</string>
+    <string name="prog_level_4">Chuyên gia Code</string>
+    <string name="prog_level_5">Bậc thầy Lập trình</string>
+
+    <!-- Notes -->
+    <string name="note_edit_title">Sửa ghi chú</string>
+    <string name="note_new_title">Ghi chú mới</string>
+    <string name="note_save">Lưu</string>
+    <string name="note_cancel">Hủy</string>
+    <string name="note_search_hint">Tìm kiếm</string>
+    <string name="note_empty_warning">Vui lòng nhập tiêu đề hoặc nội dung</string>
+    <string name="note_updated">Đã cập nhật ghi chú</string>
+    <string name="note_saved">Đã lưu ghi chú</string>
+    <string name="note_placeholder_title">Tiêu đề ghi chú</string>
+    <string name="note_placeholder_content">Nội dung ghi chú...</string>
+    <string name="note_today">Hôm nay</string>
+    <string name="note_hint_title">Tiêu đề</string>
+    <string name="note_hint_content">Nội dung</string>
+    <string name="note_share_empty">Chưa có ghi chú để xuất</string>
+    <string name="note_share_header">GHI CHÚ LẬP TRÌNH</string>
+    <string name="note_share_default_title">Ghi chú</string>
+    <string name="note_share_subject">Ghi chú Lập trình</string>
+    <string name="note_share_chooser_title">Xuất ghi chú qua</string>
+
+    <string name="prog_chat_ai_prefix">Bạn là AI Mentor chuyên về lập trình và công nghệ.\n\nPHẠM VI:\n- Chỉ hỗ trợ lập trình, phát triển phần mềm, cơ sở dữ liệu, hệ điều hành,\n  mạng máy tính, thuật toán, cấu trúc dữ liệu, kiểm thử và công nghệ liên quan.\n- Nếu câu hỏi không thuộc phạm vi này, trả lời lịch sự rằng bạn chỉ hỗ trợ\n  lập trình và công nghệ.\n\nCÁCH TRẢ LỜI:\n1. Hiểu các câu hỏi nối tiếp dựa trên ngữ cảnh hội thoại gần nhất.\n2. Không tự đổi ngôn ngữ lập trình, framework hoặc lỗi đang được thảo luận.\n3. Khi sửa lỗi, nêu nguyên nhân, vị trí cần sửa và đưa code hoàn chỉnh.\n4. Khi đưa code, dùng markdown code block với đúng ngôn ngữ.\n5. Không bịa API, class, method, package hoặc thông báo lỗi.\n6. Nếu thiếu dữ liệu quan trọng, nói rõ giả định đang dùng.\n7. Ưu tiên lời giải phù hợp với trình độ sinh viên, rõ ràng và có thể chạy được.</string>
+    <string name="prog_chat_image_prompt">Hãy phân tích toàn bộ ảnh đã gửi:\n- Xác định ngôn ngữ, framework, IDE hoặc loại sơ đồ nếu có.\n- Đọc chính xác code và thông báo lỗi nhìn thấy được.\n- Giải thích nguyên nhân và chỉ rõ phần cần sửa.\n- Đưa code sửa hoàn chỉnh khi đủ thông tin.\n- Nếu ảnh mờ hoặc thiếu nội dung, nói rõ phần nào chưa đọc được; không tự đoán.</string>
+    <string name="prog_chat_sent_images">Phân tích %1$d ảnh code/lỗi đã gửi</string>
+    <string name="prog_chat_error_api">Lỗi AI Lập trình (%1$d): %2$s</string>
+    <string name="prog_chat_error_blocked">AI không thể xử lý nội dung này do giới hạn an toàn.</string>
+    <string name="prog_chat_error_connect">Không thể kết nối AI Lập trình. Kiểm tra Internet rồi thử lại.</string>
+    <string name="prog_chat_error_generic">Đã xảy ra lỗi khi gọi AI Lập trình. Vui lòng thử lại.</string>
+    <string name="prog_chat_limit_images">Đã đạt giới hạn 5 ảnh</string>
+    <string name="prog_chat_added_images">Chỉ thêm %1$d ảnh đầu tiên</string>
+    <string name="prog_chat_image_count_format">%1$d ảnh</string>
+    <string name="prog_chat_error_db">Lỗi khởi tạo database</string>
+    <string name="prog_chat_error_open_db">Không thể mở dữ liệu chat</string>
+    <string name="prog_chat_error_session_owner">Phiên chat không thuộc tài khoản hiện tại</string>
+    <string name="prog_chat_error_create_session">Không thể tạo phiên chat</string>
+    <string name="prog_chat_error_load_history">Không thể tải lịch sử chat</string>
+    <string name="prog_chat_error_read_image">Không thể đọc ảnh đã chọn</string>
+    <string name="prog_chat_error_save_msg">Không thể lưu câu hỏi</string>
+    <string name="prog_chat_error_large_image">Ảnh quá lớn, vui lòng chọn ảnh nhỏ hơn</string>
+    <string name="prog_chat_ai_no_text">AI không trả về nội dung. Vui lòng thử lại.</string>
+    <string name="prog_chat_truncated">Câu trả lời vẫn còn dài và đã đạt giới hạn tiếp tục.</string>
+    <string name="prog_chat_welcome_format">Xin chào! Tôi là AI Mentor %1$s. Hãy gửi câu hỏi, code hoặc ảnh lỗi cần phân tích.</string>
+    <string name="prog_chat_new_conv">Cuộc trò chuyện mới</string>
+
+    <!-- Chat History -->
+    <string name="chat_history_title">Lịch sử chat</string>
+    <string name="chat_history_empty">Chưa có lịch sử chat</string>
+    <string name="chat_history_hint_q">Câu hỏi...</string>
+    <string name="chat_history_hint_a">Câu trả lời...</string>
+
+    <string name="prog_quiz_progress_title">Tiến độ học tập</string>
+    <string name="prog_level_label">Cấp học:</string>
+
+    <!-- Quiz -->
+    <string name="quiz_question_count_format">%1$d / %2$d</string>
+    <string name="quiz_difficulty_format">%1$s • +%2$d EXP nếu đúng</string>
+    <string name="quiz_placeholder">Câu hỏi sẽ hiển thị ở đây...</string>
+    <string name="quiz_next">Tiếp theo</string>
+    <string name="quiz_ai_gen_title">Tạo bài kiểm tra bằng AI</string>
+    <string name="quiz_ai_gen_desc">Nhập chủ đề để AI sinh câu hỏi cho bạn</string>
+    <string name="quiz_topic_label">Chủ đề</string>
+    <string name="quiz_count_label">Số câu hỏi</string>
+    <string name="quiz_count_desc">Chọn số lượng câu hỏi cho bài kiểm tra</string>
+    <string name="quiz_start">Bắt đầu kiểm tra</string>
+    <string name="quiz_title_format">Quiz: %1$s</string>
+    <string name="quiz_topic_empty">Vui lòng nhập chủ đề kiểm tra</string>
+    <string name="quiz_option_placeholder">Lựa chọn %1$s</string>
+    <string name="quiz_diff_easy">Dễ</string>
+    <string name="quiz_diff_medium">Trung bình</string>
+    <string name="quiz_diff_hard">Khó</string>
+    <string name="quiz_result_correct">Đúng: %1$d / %2$d</string>
+    <string name="quiz_result_accuracy">Độ chính xác: %1$.0f%%</string>
+    <string name="quiz_result_exp">EXP nhận được: +%1$d</string>
+    <string name="quiz_result_total_exp">Tổng EXP Lập trình: %1$d</string>
+    <string name="quiz_result_level">Cấp %1$d • %2$s</string>
+    <string name="quiz_result_dialog_title">Hoàn thành Quiz</string>
+    <string name="quiz_result_back">Quay lại</string>
+</resources>

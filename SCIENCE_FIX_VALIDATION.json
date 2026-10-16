@@ -1,0 +1,149 @@
+{
+  "counts": {
+    "java": 219,
+    "kotlin": 0,
+    "xml": 267
+  },
+  "xml_errors": [],
+  "missing_internal_imports": [],
+  "java_structure_errors": [],
+  "programming_java11_red_flags": {
+    "text_blocks": false,
+    "record_declarations": false,
+    "sealed_types": false,
+    "switch_arrows": false
+  },
+  "functional_checks": {
+    "science_history_item_opens_selected_chat": true,
+    "recent_history_item_opens_selected_chat": true,
+    "history_intent_passes_record_id": true,
+    "history_lookup_is_user_scoped": true,
+    "conversation_rows_load_in_order": true,
+    "full_conversation_restored_to_chat": true,
+    "new_messages_keep_conversation_id": true,
+    "new_chat_generates_new_id": true,
+    "history_list_groups_by_conversation": true,
+    "database_migration_to_conversation_id": true,
+    "history_preferences_restored": true,
+    "bottom_navigation_handles_system_inset": true,
+    "quiz_has_dark_icon_container": true,
+    "checklist_has_visible_white_strokes": true
+  },
+  "api_configuration_files_checked": [
+    {
+      "file": "HISTORY_GEMINI_SETUP.md",
+      "unchanged": true
+    },
+    {
+      "file": "CHANGES_V7_HISTORY_GEMINI.md",
+      "unchanged": true
+    },
+    {
+      "file": "gradle.properties",
+      "unchanged": true
+    },
+    {
+      "file": "HISTORY_INTEGRATION_NOTES.md",
+      "unchanged": true
+    },
+    {
+      "file": "history/build.gradle.kts",
+      "unchanged": true
+    },
+    {
+      "file": "math/build.gradle.kts",
+      "unchanged": true
+    },
+    {
+      "file": ".artifacts/12d83158-6979-4159-97db-5089150c8875/walkthrough.artifact.md",
+      "unchanged": true
+    },
+    {
+      "file": "math/src/main/java/com/example/mathmodule/api/MathGeminiApiClient.java",
+      "unchanged": true
+    },
+    {
+      "file": "programming/src/main/java/com/example/modulelaptrinh/utils/Constants.java",
+      "unchanged": true
+    },
+    {
+      "file": "history/src/main/java/com/example/historymodule/api/HistoryAiService.java",
+      "unchanged": true
+    },
+    {
+      "file": "history/src/main/java/com/example/historymodule/api/HistoryGeminiApiClient.java",
+      "unchanged": true
+    }
+  ],
+  "api_configuration_untouched": true,
+  "modified_files": [
+    {
+      "file": "science/src/main/java/com/brightpath/science/data/local/ScienceDbContract.java",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/main/java/com/brightpath/science/data/local/ScienceDbHelper.java",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/main/java/com/brightpath/science/data/repository/SQLiteScienceHistoryRepository.java",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/main/java/com/brightpath/science/domain/model/ScienceHistory.java",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/main/java/com/brightpath/science/domain/model/ScienceQuestion.java",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/main/java/com/brightpath/science/domain/repository/ScienceHistoryRepository.java",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/main/java/com/brightpath/science/domain/usecase/AskScienceQuestionUseCase.java",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/main/java/com/brightpath/science/presentation/ScienceActivity.java",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/main/java/com/brightpath/science/presentation/ScienceMainActivity.java",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/main/java/com/brightpath/science/presentation/fragment/ScienceHistoryFragment.java",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/main/java/com/brightpath/science/presentation/fragment/ScienceSolveFragment.java",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/main/res/drawable/ic_science_checklist.xml",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/main/res/drawable/science_quiz_hero_icon_background.xml",
+      "change": "added"
+    },
+    {
+      "file": "science/src/main/res/layout/fragment_science_quiz.xml",
+      "change": "modified"
+    },
+    {
+      "file": "science/src/test/java/com/brightpath/science/ScienceConversationHistoryTest.java",
+      "change": "added"
+    }
+  ],
+  "executed_checks": {
+    "pure_java_release_11_compile": "passed",
+    "science_conversation_unit_smoke": "passed",
+    "repository_compile_with_android_stubs": "passed",
+    "database_helper_compile_with_android_stubs": "passed",
+    "sqlite_v4_to_v5_migration_simulation": "passed",
+    "gradle_android_test": "not_run_gradle_9_5_download_unavailable"
+  }
+}

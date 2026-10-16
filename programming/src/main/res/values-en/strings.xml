@@ -1,0 +1,168 @@
+<resources>
+    <string name="programming_app_name">Programming</string>
+
+    <!-- Home Fragment -->
+    <string name="greeting">Good Morning!</string>
+    <string name="sub_greeting">Learn programming daily</string>
+    <string name="programming_languages">Programming Languages</string>
+    <string name="quick_chat">Quick Ask</string>
+    <string name="hint_question">Type your question...</string>
+    <string name="hint_hint">Type a question or select a language to start</string>
+
+    <!-- Chat Detail -->
+    <string name="ai_mentor">AI Mentor</string>
+    <string name="chat_hint">Type your question...</string>
+    <string name="back">Back</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="send">Send</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_history">History</string>
+    <string name="nav_notes">Notes</string>
+    <string name="nav_quiz">Quiz</string>
+
+    <!-- Language names -->
+    <string name="lang_python">Python</string>
+    <string name="lang_java">Java</string>
+    <string name="lang_kotlin">Kotlin</string>
+    <string name="lang_javascript">JS</string>
+    <string name="lang_cpp">C++</string>
+    <string name="lang_csharp">C#</string>
+    <string name="lang_php">PHP</string>
+    <string name="lang_swift">Swift</string>
+    <string name="lang_go">Go</string>
+    <string name="lang_rust">Rust</string>
+    <string name="lang_typescript">TS</string>
+    <string name="lang_ruby">Ruby</string>
+
+    <!-- Content descriptions -->
+    <string name="desc_arrow_right">Right Arrow</string>
+    <string name="desc_python">Python Icon</string>
+    <string name="desc_java">Java Icon</string>
+    <string name="desc_kotlin">Kotlin Icon</string>
+    <string name="desc_javascript">JavaScript Icon</string>
+    <string name="desc_cpp">C++ Icon</string>
+    <string name="desc_csharp">C# Icon</string>
+    <string name="desc_php">PHP Icon</string>
+    <string name="desc_swift">Swift Icon</string>
+    <string name="desc_go">Go Icon</string>
+    <string name="desc_rust">Rust Icon</string>
+    <string name="desc_typescript">TypeScript Icon</string>
+    <string name="desc_ruby">Ruby Icon</string>
+    <string name="desc_send">Send message</string>
+
+    <!-- Expand/Collapse -->
+    <string name="see_more">See more</string>
+    <string name="collapse">Collapse</string>
+    <string name="expand_more">...</string>
+    <string name="collapse_minus">−</string>
+
+    <!-- Progress Detail -->
+    <string name="progress_title">📊 Programming Progress</string>
+    <string name="progress_stats_label">Statistics</string>
+    <string name="progress_tip">Complete quizzes to earn EXP and level up!</string>
+    <string name="progress_learning_title">Learning Progress</string>
+
+    <string name="prog_level_format">Level %1$d</string>
+    <string name="prog_exp_format">%1$d EXP</string>
+    <string name="prog_exp_detail_format">%1$d / %2$d EXP</string>
+    <string name="prog_percent_format">%1$d%%</string>
+    <string name="prog_quiz_label">Quizzes</string>
+    <string name="prog_accuracy_label">Accuracy</string>
+    <string name="prog_total_exp_label">Total EXP</string>
+    <string name="prog_lang_count_format">%1$d/%2$d</string>
+
+    <string name="prog_tab_home">Programming AI Mentor</string>
+    <string name="prog_tab_history">Chat History</string>
+    <string name="prog_tab_notes">Notes</string>
+    <string name="prog_tab_quiz">Programming Quiz</string>
+
+    <string name="prog_welcome_ai">Hello! I am your Programming AI Mentor. Do you need any help with coding?</string>
+    <string name="prog_chat_new_ready">New conversation ready. Which language or algorithm would you like to discuss?</string>
+    <string name="prog_chat_input_empty">Please enter a message.</string>
+
+    <!-- Levels -->
+    <string name="prog_level_1">Programming Beginner</string>
+    <string name="prog_level_2">Coding Student</string>
+    <string name="prog_level_3">Developer</string>
+    <string name="prog_level_4">Coding Expert</string>
+    <string name="prog_level_5">Programming Master</string>
+
+    <!-- Notes -->
+    <string name="note_edit_title">Edit Note</string>
+    <string name="note_new_title">New Note</string>
+    <string name="note_save">Save</string>
+    <string name="note_cancel">Cancel</string>
+    <string name="note_search_hint">Search</string>
+    <string name="note_empty_warning">Please enter a title or content</string>
+    <string name="note_updated">Note updated</string>
+    <string name="note_saved">Note saved</string>
+    <string name="note_placeholder_title">Note Title</string>
+    <string name="note_placeholder_content">Note content...</string>
+    <string name="note_today">Today</string>
+    <string name="note_hint_title">Title</string>
+    <string name="note_hint_content">Content</string>
+    <string name="note_share_empty">No notes to export</string>
+    <string name="note_share_header">PROGRAMMING NOTES</string>
+    <string name="note_share_default_title">Note</string>
+    <string name="note_share_subject">Programming Notes</string>
+    <string name="note_share_chooser_title">Export notes via</string>
+
+    <string name="prog_chat_ai_prefix">You are a Programming and Technology AI Mentor.\n\nSCOPE:\n- Only support programming, software development, databases, operating systems, networking, algorithms, data structures, testing, and related technologies.\n- If the question is outside this scope, politely reply that you only support programming and technology.\n\nRESPONSE GUIDELINES:\n1. Understand follow-up questions based on recent conversation context.\n2. Do not change programming languages, frameworks, or errors being discussed unless requested.\n3. When fixing bugs, state the cause, location, and provide complete code.\n4. Use markdown code blocks with the correct language identifier.\n5. Do not hallucinate APIs, classes, methods, packages, or error messages.\n6. If key data is missing, clearly state the assumptions being made.\n7. Prioritize solutions suitable for students, clear, and runnable.</string>
+    <string name="prog_chat_image_prompt">Analyze the sent images:\n- Identify language, framework, IDE, or diagram types if applicable.\n- Read code and error messages precisely.\n- Explain causes and indicate parts needing correction.\n- Provide full corrected code when sufficient information is available.\n- If images are blurry, state what is unreadable; do not guess.</string>
+    <string name="prog_chat_sent_images">Analyzing %1$d sent code/error images</string>
+    <string name="prog_chat_error_api">Programming AI Error (%1$d): %2$s</string>
+    <string name="prog_chat_error_blocked">AI cannot process this content due to safety limits.</string>
+    <string name="prog_chat_error_connect">Could not connect to Programming AI. Check your internet and try again.</string>
+    <string name="prog_chat_error_generic">An error occurred while calling Programming AI. Please try again.</string>
+    <string name="prog_chat_limit_images">Limit of 5 images reached</string>
+    <string name="prog_chat_added_images">Only added the first %1$d images</string>
+    <string name="prog_chat_image_count_format">%1$d images</string>
+    <string name="prog_chat_error_db">Database initialization error</string>
+    <string name="prog_chat_error_open_db">Could not open chat data</string>
+    <string name="prog_chat_error_session_owner">Chat session does not belong to the current account</string>
+    <string name="prog_chat_error_create_session">Could not create chat session</string>
+    <string name="prog_chat_error_load_history">Could not load chat history</string>
+    <string name="prog_chat_error_read_image">Could not read selected image</string>
+    <string name="prog_chat_error_save_msg">Could not save question</string>
+    <string name="prog_chat_error_large_image">Image too large, please select a smaller one</string>
+    <string name="prog_chat_ai_no_text">AI returned no content. Please try again.</string>
+    <string name="prog_chat_truncated">Response was too long and reached continuation limit.</string>
+    <string name="prog_chat_welcome_format">Hello! I am your %1$s AI Mentor. Please send your questions, code, or error images for analysis.</string>
+    <string name="prog_chat_new_conv">New conversation</string>
+
+    <!-- Chat History -->
+    <string name="chat_history_title">Chat History</string>
+    <string name="chat_history_empty">No chat history</string>
+    <string name="chat_history_hint_q">Question...</string>
+    <string name="chat_history_hint_a">Answer...</string>
+
+    <string name="prog_quiz_progress_title">Learning Progress</string>
+    <string name="prog_level_label">Level:</string>
+
+    <!-- Quiz -->
+    <string name="quiz_question_count_format">%1$d / %2$d</string>
+    <string name="quiz_difficulty_format">%1$s • +%2$d EXP if correct</string>
+    <string name="quiz_placeholder">Questions will appear here...</string>
+    <string name="quiz_next">Next</string>
+    <string name="quiz_ai_gen_title">AI Quiz Generator</string>
+    <string name="quiz_ai_gen_desc">Enter a topic and AI will generate questions for you</string>
+    <string name="quiz_topic_label">Topic</string>
+    <string name="quiz_count_label">Number of questions</string>
+    <string name="quiz_count_desc">Choose the number of questions for the quiz</string>
+    <string name="quiz_start">Start Quiz</string>
+    <string name="quiz_title_format">Quiz: %1$s</string>
+    <string name="quiz_topic_empty">Please enter a quiz topic</string>
+    <string name="quiz_option_placeholder">Option %1$s</string>
+    <string name="quiz_diff_easy">Easy</string>
+    <string name="quiz_diff_medium">Medium</string>
+    <string name="quiz_diff_hard">Hard</string>
+    <string name="quiz_result_correct">Correct: %1$d / %2$d</string>
+    <string name="quiz_result_accuracy">Accuracy: %1$.0f%%</string>
+    <string name="quiz_result_exp">EXP Earned: +%1$d</string>
+    <string name="quiz_result_total_exp">Total Programming EXP: %1$d</string>
+    <string name="quiz_result_level">Level %1$d • %2$s</string>
+    <string name="quiz_result_dialog_title">Quiz Completed</string>
+    <string name="quiz_result_back">Back</string>
+</resources>

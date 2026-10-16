@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/txt_note_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/math_formula_add_title"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/math_formula_icon"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/edt_note_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/math_formula_title_hint"
+        android:backgroundTint="@color/math_formula_icon"
+        android:textColor="@color/math_text_primary"
+        android:textColorHint="@color/math_inactive"
+        android:inputType="text"
+        android:layout_marginBottom="12dp"/>
+
+    <EditText
+        android:id="@+id/edt_note_formula"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/math_formula_hint_content"
+        android:backgroundTint="@color/math_formula_icon"
+        android:textColor="@color/math_text_primary"
+        android:textColorHint="@color/math_inactive"
+        android:minLines="3"
+        android:gravity="top|start"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/txt_category_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/math_formula_select_category"
+        android:textStyle="bold"
+        android:textColor="@color/math_text_primary"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Vùng chọn Đại số hoặc Hình học -->
+    <RadioGroup
+        android:id="@+id/rg_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_algebra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/math_formula_filter_algebra"
+            android:textColor="@color/math_text_primary"
+            android:checked="true"
+            android:buttonTint="@color/math_formula_icon"
+            android:layout_marginEnd="20dp"/>
+
+        <RadioButton
+            android:id="@+id/rb_geometry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/math_formula_filter_geometry"
+            android:textColor="@color/math_text_primary"
+            android:buttonTint="@color/math_formula_icon"/>
+    </RadioGroup>
+
+</LinearLayout>

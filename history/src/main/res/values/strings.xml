@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="history_module_name">Lịch sử</string>
+    <string name="history_dashboard_title">Tìm hiểu Lịch sử</string>
+    <string name="history_back_description">Quay về trang chính</string>
+
+    <!-- Solver Fragment -->
+    <string name="history_solver_intro_title">Khám phá lịch sử cùng AI</string>
+    <string name="history_solver_intro_desc">Hỏi theo ngữ cảnh, gửi ảnh tài liệu, bản đồ hoặc đề bài để AI phân tích.</string>
+    <string name="history_solver_btn_camera">Chụp tài liệu</string>
+    <string name="history_solver_btn_input">Nhập câu hỏi</string>
+    <string name="history_solver_recent_title">Hội thoại gần đây</string>
+    <string name="history_solver_recent_empty">Chưa có cuộc trò chuyện nào.</string>
+
+    <!-- Conversations Fragment -->
+    <string name="history_conv_instruction">Chạm để mở lại đầy đủ đoạn chat. Nhấn giữ để xóa cuộc trò chuyện.</string>
+    <string name="history_conv_empty">Chưa có hội thoại trong khoảng thời gian này.</string>
+
+    <!-- Notes Fragment -->
+    <string name="history_notes_instruction">Lưu mốc thời gian, nhân vật, nguyên nhân – kết quả hoặc nội dung cần ôn tập. Ghi chú được ghim sẽ nằm ở đầu danh sách.</string>
+    <string name="history_notes_hint_title">Tiêu đề ghi chú</string>
+    <string name="history_notes_hint_content">Nội dung ghi chú</string>
+    <string name="history_notes_empty">Chưa có ghi chú. Nhấn + để tạo ghi chú đầu tiên.</string>
+    <string name="history_notes_add_desc">Thêm ghi chú</string>
+
+    <!-- Quiz Fragment -->
+    <string name="history_quiz_level_format">Cấp %1$d • %2$s</string>
+    <string name="history_quiz_exp_total">Tổng EXP Lịch sử: %1$d</string>
+    <string name="history_quiz_exp_detail">%1$d/%2$d EXP • Còn %3$d EXP</string>
+    <string name="history_quiz_topic_title">Chọn phạm vi kiến thức</string>
+    <string name="history_quiz_topic_vn">🇻🇳  Lịch sử Việt Nam</string>
+    <string name="history_quiz_topic_foreign">🌍  Lịch sử nước ngoài</string>
+    <string name="history_quiz_topic_mixed">🧭  Tổng hợp Việt Nam và nước ngoài</string>
+    <string name="history_quiz_instruction">Sau khi chọn phạm vi, anh chọn cấp học: Trung học cơ sở, Trung học phổ thông hoặc Đại học. Mỗi câu đúng nhận 5/10/20 EXP theo độ khó Dễ/Trung bình/Khó.</string>
+    <string name="history_quiz_recent_title">Lượt Quiz gần đây</string>
+    <string name="history_quiz_empty">Chưa có kết quả Quiz.</string>
+
+    <!-- Chat Activity -->
+    <string name="history_chat_title">AI Lịch sử</string>
+    <string name="history_chat_new">Cuộc trò chuyện mới</string>
+    <string name="history_chat_hint">Hỏi về nhân vật, sự kiện, niên đại...</string>
+    <string name="history_chat_send">Gửi câu hỏi</string>
+    <string name="history_chat_camera">Chụp tài liệu</string>
+    <string name="history_chat_attach">Chọn ảnh</string>
+    <string name="history_chat_image_preview_desc">Ảnh tài liệu đã chọn; chạm để xóa</string>
+
+    <!-- Dashboard Tabs -->
+    <string name="history_tab_solver">Tìm hiểu Lịch sử</string>
+    <string name="history_tab_history">Lịch sử hội thoại</string>
+    <string name="history_tab_notes">Ghi chú Lịch sử</string>
+    <string name="history_tab_quiz">Quiz Lịch sử</string>
+
+    <string name="history_nav_home">Tìm hiểu</string>
+    <string name="history_nav_history">Lịch sử</string>
+    <string name="history_nav_notes">Ghi chú</string>
+    <string name="history_nav_quiz">Quiz</string>
+
+    <!-- Quiz Activity Extras -->
+    <string name="history_quiz_education_label">Cấp học: %1$s</string>
+    <string name="history_quiz_exit_title">Rời bài Quiz?</string>
+    <string name="history_quiz_exit_msg">Kết quả và EXP của bài chưa hoàn thành sẽ không được lưu.</string>
+    <string name="history_quiz_exit_confirm">Rời bài</string>
+    <string name="history_quiz_exit_continue">Tiếp tục</string>
+    <string name="history_quiz_ai_generating">AI đang tạo Quiz %1$s cho %2$s...</string>
+    <string name="history_quiz_retry">Thử tạo lại</string>
+    <string name="history_quiz_counter_format">Câu %1$d/%2$d</string>
+    <string name="history_quiz_difficulty_reward">%1$s • +%2$d EXP nếu đúng</string>
+    <string name="history_quiz_current_earned">EXP nhận được trong bài: %1$d</string>
+    <string name="history_quiz_check_answer">Kiểm tra đáp án</string>
+    <string name="history_quiz_next_question">Câu tiếp theo</string>
+    <string name="history_quiz_view_result">Xem kết quả</string>
+    <string name="history_quiz_select_option">Hãy chọn một đáp án.</string>
+    <string name="history_quiz_correct_msg">✓ Chính xác. +%1$d EXP.</string>
+    <string name="history_quiz_wrong_msg">✗ Chưa đúng. Đáp án đúng là %1$s.</string>
+    <string name="history_quiz_finish_title">Hoàn thành Quiz Lịch sử</string>
+    <string name="history_quiz_finish_scope">Phạm vi: %1$s</string>
+    <string name="history_quiz_finish_level">Cấp học: %1$s</string>
+    <string name="history_quiz_finish_result">Kết quả: %1$d/%2$d</string>
+    <string name="history_quiz_finish_accuracy">Độ chính xác: %1$d%%</string>
+    <string name="history_quiz_finish_earned">EXP nhận được: +%1$d</string>
+    <string name="history_quiz_finish_total">Tổng EXP Lịch sử: %1$d</string>
+    <string name="history_quiz_level_max">Đã đạt cấp tối đa</string>
+    <string name="history_quiz_finish_level_label">Cấp %1$d • %2$s</string>
+    <string name="history_quiz_finish_error">Không thể lưu kết quả nên EXP chưa được cộng.</string>
+    <string name="history_quiz_finish_levelup">⭐ Anh đã lên cấp!</string>
+    <string name="history_quiz_btn_new">Làm bộ mới</string>
+    <string name="history_quiz_btn_close">Đóng</string>
+
+    <string name="history_quiz_edu_title">Chọn cấp học</string>
+    <string name="history_quiz_edu_ms">Trung học cơ sở</string>
+    <string name="history_quiz_edu_hs">Trung học phổ thông</string>
+    <string name="history_quiz_edu_uni">Đại học</string>
+    <string name="history_quiz_edu_other">Khác</string>
+
+    <!-- Chat Activity Extras -->
+    <string name="history_chat_wait_ai">Hãy chờ AI trả lời xong.</string>
+    <string name="history_chat_confirm_new_title">Bắt đầu cuộc trò chuyện mới?</string>
+    <string name="history_chat_confirm_new_msg">Cuộc trò chuyện hiện tại vẫn được lưu trong cơ sở dữ liệu lịch sử.</string>
+    <string name="history_chat_btn_new_chat">Chat mới</string>
+    <string name="history_chat_input_required">Hãy nhập câu hỏi hoặc đính kèm ảnh.</string>
+    <string name="history_chat_ai_prompt_photo">Hãy đọc và phân tích nội dung lịch sử trong ảnh này. Nêu phần nhìn rõ, bối cảnh, mốc thời gian và ý nghĩa; không đoán phần bị mờ.</string>
+    <string name="history_chat_visible_text_photo">Phân tích ảnh tài liệu lịch sử</string>
+    <string name="history_chat_attached_label">\n[Đã gửi kèm ảnh]</string>
+    <string name="history_chat_error_read_image">Không thể đọc ảnh đã chọn.</string>
+    <string name="history_chat_ai_error">AI chưa thể trả lời. Hãy thử lại.</string>
+    <string name="history_chat_welcome_msg">Chào anh! Em là AI gia sư Lịch sử. Anh có thể hỏi về một nhân vật, sự kiện, niên đại, nguyên nhân – kết quả hoặc gửi ảnh tài liệu để phân tích.</string>
+    <string name="history_chat_new_ready">Cuộc trò chuyện mới đã sẵn sàng. Anh muốn tìm hiểu giai đoạn hoặc sự kiện lịch sử nào?</string>
+    <string name="history_chat_device_no_camera">Thiết bị không có ứng dụng camera.</string>
+    <string name="history_chat_no_camera_image">Không nhận được ảnh từ camera.</string>
+    <string name="history_chat_error_camera_process">Không thể xử lý ảnh camera.</string>
+    <string name="history_chat_permission_camera">Cần quyền camera để chụp tài liệu.</string>
+    <string name="history_solver_delete_title">Xóa cuộc trò chuyện?</string>
+    <string name="history_solver_delete_msg">Toàn bộ tin nhắn trong cuộc trò chuyện này sẽ bị xóa.</string>
+
+    <string name="history_filter_all">Tất cả</string>
+    <string name="history_filter_today">Hôm nay</string>
+    <string name="history_filter_7days">7 ngày qua</string>
+    <string name="history_filter_last_month">Tháng trước</string>
+    <string name="history_delete_conv_title">Xóa cuộc trò chuyện?</string>
+    <string name="history_delete_conv_msg">Hành động này không thể hoàn tác.</string>
+
+    <string name="history_notes_add_title">Thêm ghi chú</string>
+    <string name="history_notes_edit_title">Sửa ghi chú</string>
+    <string name="history_notes_save">Lưu</string>
+    <string name="history_notes_error_title">Hãy nhập tiêu đề.</string>
+    <string name="history_notes_error_content">Hãy nhập nội dung.</string>
+    <string name="history_notes_error_save">Không thể lưu ghi chú.</string>
+    <string name="history_notes_delete_title">Xóa ghi chú?</string>
+    <string name="history_notes_delete_msg">Ghi chú “%1$s” sẽ bị xóa.</string>
+
+    <!-- Level Titles (History) -->
+    <string name="history_level_1">Người khám phá</string>
+    <string name="history_level_2">Học viên Lịch sử</string>
+    <string name="history_level_3">Người kể chuyện</string>
+    <string name="history_level_4">Nhà nghiên cứu</string>
+    <string name="history_level_5">Chuyên gia Lịch sử</string>
+    <string name="history_level_6">Bậc thầy Lịch sử</string>
+</resources>

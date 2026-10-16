@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Màu nền (Dark Mode) -->
+    <color name="bg_primary">#101A2C</color>
+    <color name="bg_secondary">#1B2940</color>
+    <color name="surface_light">#1E1E3A</color>
+
+    <!-- Màu chữ -->
+    <color name="text_primary">#F3F6FF</color>
+    <color name="text_secondary">#B8C6DD</color>
+    <color name="text_tertiary">#B8C6DD</color>
+
+    <color name="card_bg">#1B2940</color>
+    <color name="card_border">#2A2A4E</color>
+    <color name="primary">#C4ABFF</color>
+    <color name="primary_dark">#A987F5</color>
+    <color name="accent">#73DDC6</color>
+</resources>

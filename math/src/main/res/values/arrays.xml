@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="quiz_counts">
+        <item>@string/math_quiz_count_5</item>
+        <item>@string/math_quiz_count_10</item>
+        <item>@string/math_quiz_count_15</item>
+        <item>@string/math_quiz_count_20</item>
+    </string-array>
+    <string-array name="math_education_levels">
+        <item>Middle School</item>
+        <item>High School</item>
+        <item>University</item>
+    </string-array>
+</resources>

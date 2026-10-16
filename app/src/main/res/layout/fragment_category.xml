@@ -1,36 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragments.CategoryFragment"
-    android:orientation="vertical"
-    android:padding="10dp">
-
-    <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#03A9F4"
-        android:text="Create a new Category"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:id="@+id/btnCreateCategory"/>
-
-    <Button
-        android:id="@+id/btnOpenScience"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#4CAF50"
-        android:text="Science AI Tutor"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="?actionBarSize"
-        android:id="@+id/rvCategory"/>
-</LinearLayout>
+<?xml version='1.0' encoding='utf-8'?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true" android:background="@color/backgroundColor">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp" android:background="@color/backgroundColor">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cat_title" android:textSize="24sp" android:textStyle="bold" android:layout_gravity="center" android:layout_marginBottom="24dp" android:textColor="@color/textColorPrimary" />
+        <com.example.asm_final.utils.AdaptiveSubjectGrid android:layout_width="match_parent" android:layout_height="wrap_content" android:columnCount="2" android:rowCount="2" android:alignmentMode="alignMargins" android:columnOrderPreserved="false">
+            <androidx.cardview.widget.CardView android:id="@+id/cardMath" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="8dp" app:cardCornerRadius="20dp" app:cardElevation="2dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:orientation="vertical" android:background="@color/cat_math_bg" android:minHeight="128dp" android:padding="16dp">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp" android:src="@drawable/ic_cat_math" app:tint="@color/cat_math_text" android:contentDescription="@null" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cat_math" android:textStyle="bold" android:textSize="18sp" android:layout_marginTop="8dp" android:textColor="@color/cat_math_text" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView android:id="@+id/cardScience" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="8dp" app:cardCornerRadius="20dp" app:cardElevation="2dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:orientation="vertical" android:background="@color/cat_science_bg" android:minHeight="128dp" android:padding="16dp">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp" android:src="@drawable/ic_cat_science" app:tint="@color/cat_science_text" android:contentDescription="@null" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cat_science" android:textStyle="bold" android:textSize="18sp" android:layout_marginTop="8dp" android:textColor="@color/cat_science_text" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView android:id="@+id/cardHistory" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="8dp" app:cardCornerRadius="20dp" app:cardElevation="2dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:orientation="vertical" android:background="@color/cat_history_bg" android:minHeight="128dp" android:padding="16dp">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp" android:src="@drawable/ic_cat_history" app:tint="@color/cat_history_text" android:contentDescription="@null" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cat_history" android:textStyle="bold" android:textSize="18sp" android:layout_marginTop="8dp" android:textColor="@color/cat_history_text" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView android:id="@+id/cardIT" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="8dp" app:cardCornerRadius="20dp" app:cardElevation="2dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:orientation="vertical" android:background="@color/cat_it_bg" android:minHeight="128dp" android:padding="16dp">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp" android:src="@drawable/ic_cat_programming" app:tint="@color/cat_it_text" android:contentDescription="@null" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cat_it" android:textStyle="bold" android:textSize="18sp" android:layout_marginTop="8dp" android:textColor="@color/cat_it_text" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </com.example.asm_final.utils.AdaptiveSubjectGrid>
+    </LinearLayout>
+</ScrollView>

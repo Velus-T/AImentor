@@ -1,0 +1,12 @@
+<resources>
+<color name="mentor_programming_button">#6537C5</color>
+    <style name="MentorProgrammingButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/mentor_programming_button</item><item name="android:textColor">#FFFFFF</item><item name="cornerRadius">16dp</item><item name="android:minHeight">52dp</item>
+        <item name="android:textAllCaps">false</item><item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+    <style name="MentorProgrammingInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">16dp</item><item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item><item name="boxCornerRadiusBottomEnd">16dp</item>
+    </style>
+<style name="MentorProgrammingNavLabel"><item name="android:textSize">12sp</item><item name="android:fontFamily">sans-serif-medium</item></style></resources>

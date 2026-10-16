@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="math_background">#101A2C</color>
+    <color name="math_surface">#1B2940</color>
+    <color name="math_primary">#90CAF9</color>
+    <color name="math_inactive">#B8C6DD</color>
+    <color name="math_banner_bg">#1A237E</color>
+    <color name="math_banner_title">#E3F2FD</color>
+    <color name="math_banner_desc">#BBDEFB</color>
+    <color name="math_text_secondary">#B8C6DD</color>
+
+    <color name="math_nav_solve">#90CAF9</color>
+    <color name="math_nav_history">#81C784</color>
+    <color name="math_nav_notes">#FFB74D</color>
+    <color name="math_nav_quiz">#BA68C8</color>
+
+    <!-- Chat -->
+    <color name="math_chat_bg">#101A2C</color>
+    <color name="math_chat_input_bg">#1B2940</color>
+    <color name="math_chat_text">#F3F6FF</color>
+
+    <!-- Banner & Accents -->
+    <color name="math_history_banner">#193A31</color>
+    <color name="math_history_accent">#E8F5E9</color>
+    <color name="math_history_primary">#8FE1C5</color>
+    <color name="math_history_icon">#A5D6A7</color>
+
+    <color name="math_formula_banner">#3B2919</color>
+    <color name="math_formula_accent">#FFE6C2</color>
+    <color name="math_formula_primary">#F7C58A</color>
+    <color name="math_formula_icon">#FFE0B2</color>
+
+    <color name="math_quiz_banner">#302246</color>
+    <color name="math_quiz_accent">#F3E5F5</color>
+    <color name="math_quiz_primary">#D8BCFF</color>
+    <color name="math_quiz_icon">#E1BEE7</color>
+    <color name="math_quiz_text">#ECEFF1</color>
+
+    <color name="math_text_primary">#F3F6FF</color>
+    <color name="math_button_inactive_bg">#1B2940</color>
+    <color name="math_button_inactive_text">#B0BEC5</color>
+<color name="math_active_text">#14213D</color></resources>

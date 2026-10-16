@@ -1,0 +1,43 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/history_background" android:fillViewport="true">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+
+        <androidx.cardview.widget.CardView android:id="@+id/card_ai_intro" android:layout_width="match_parent" android:layout_height="wrap_content" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackground" app:cardCornerRadius="20dp" app:cardElevation="2dp">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/history_banner_blue_bg" android:gravity="center_vertical" android:orientation="horizontal" android:padding="18dp">
+
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/history_solver_intro_title" android:textColor="@color/history_banner_blue_text" android:textSize="17sp" android:textStyle="bold" />
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/history_solver_intro_desc" android:textColor="@color/history_banner_blue_subtext" android:textSize="13sp" />
+                </LinearLayout>
+
+                <ImageView android:layout_width="64dp" android:layout_height="64dp" android:contentDescription="@string/history_chat_title" android:src="@android:drawable/ic_menu_info_details" app:tint="@color/history_banner_blue_text" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <com.example.asm_final.utils.AdaptiveCardRow android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="18dp" android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView android:id="@+id/btn_camera_card" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginEnd="6dp" android:layout_weight="1" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackground" app:cardCornerRadius="20dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:orientation="vertical" android:padding="16dp" android:background="@color/history_surface">
+                    <ImageView android:layout_width="38dp" android:layout_height="38dp" android:contentDescription="@string/history_solver_btn_camera" android:src="@android:drawable/ic_menu_camera" app:tint="@color/history_accent_blue" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/history_solver_btn_camera" android:textColor="@color/history_text_primary" android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView android:id="@+id/btn_input_card" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="6dp" android:layout_weight="1" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackground" app:cardCornerRadius="20dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:orientation="vertical" android:padding="16dp" android:background="@color/history_surface">
+                    <ImageView android:layout_width="38dp" android:layout_height="38dp" android:contentDescription="@string/history_solver_btn_input" android:src="@android:drawable/ic_menu_edit" app:tint="@color/history_accent_blue" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/history_solver_btn_input" android:textColor="@color/history_text_primary" android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </com.example.asm_final.utils.AdaptiveCardRow>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:text="@string/history_solver_recent_title" android:textColor="@color/history_title" android:textSize="16sp" android:textStyle="bold" />
+
+        <TextView android:id="@+id/tvRecentEmpty" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:gravity="center" android:text="@string/history_solver_recent_empty" android:textColor="@color/history_text_hint" android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView android:id="@+id/recycler_recent_solver" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:nestedScrollingEnabled="false" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Cấu hình đường dẫn cho phép chia sẻ file bộ nhớ trong -->
+    <cache-path name="shared_images" path="." />
+    <external-files-path name="external_images" path="." />
+</paths>

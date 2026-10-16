@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="history_background">#101A2C</color>
+    <color name="history_surface">#1B2940</color>
+    <color name="history_toolbar_bg">#3B2919</color>
+    <color name="history_title">#F7C58A</color>
+    <color name="history_text_primary">#F3F6FF</color>
+    <color name="history_text_secondary">#B8C6DD</color>
+    <color name="history_text_hint">#888888</color>
+
+    <color name="history_banner_blue_bg">#1A237E</color>
+    <color name="history_banner_blue_text">#E8F0FF</color>
+    <color name="history_banner_blue_subtext">#C5CAE9</color>
+
+    <color name="history_banner_purple_bg">#311B92</color>
+    <color name="history_banner_purple_text">#EDE7F6</color>
+    <color name="history_banner_purple_subtext">#D1C4E9</color>
+
+    <color name="history_banner_green_bg">#1B5E20</color>
+    <color name="history_banner_green_text">#E8F5E9</color>
+
+    <color name="history_banner_orange_bg">#3B2919</color>
+    <color name="history_banner_orange_text">#F7C58A</color>
+
+    <color name="history_quiz_primary">#BA68C8</color>
+    <color name="history_quiz_accent">#F3E5F5</color>
+
+    <color name="history_fab_bg">#FF8F00</color>
+    <color name="history_accent_blue">#90CAF9</color>
+    <color name="history_divider">#333333</color>
+</resources>

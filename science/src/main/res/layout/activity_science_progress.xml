@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/science_background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/science_bg_header_custom"
+            android:padding="12dp">
+
+            <Button
+                android:id="@+id/btnProgressBack"
+                style="@style/ScienceSquareIconButton"
+                android:contentDescription="@string/science_back"
+                android:text="‹"
+                android:textColor="@color/science_text_header_light"
+                android:textSize="28sp" />
+
+            <TextView
+                style="@style/ScienceHeaderTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:text="@string/science_progress"
+                android:textColor="@color/science_text_header_light" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/science_hero_purple"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:id="@+id/tvScienceLevelTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/science_level_1"
+                android:textColor="@color/science_quiz_color"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvScienceLevelTotalExp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/science_total_exp_format"
+                android:textColor="@color/science_text_secondary"
+                android:textSize="14sp" />
+
+            <ProgressBar
+                android:id="@+id/progressScienceLevel"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="9dp"
+                android:layout_marginTop="14dp"
+                android:max="100"
+                android:progress="0"
+                android:progressBackgroundTint="@color/science_progress_track"
+                android:progressTint="@color/science_quiz_color" />
+
+            <TextView
+                android:id="@+id/tvScienceLevelProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text=""
+                android:textColor="@color/science_text_secondary"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvTotalQuestions"
+            style="@style/ScienceStatCard"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/tvMostStudied"
+            style="@style/ScienceStatCard" />
+
+        <TextView
+            android:id="@+id/tvBookmarkCount"
+            style="@style/ScienceStatCard" />
+
+        <TextView
+            android:id="@+id/tvQuizAccuracy"
+            style="@style/ScienceStatCard" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/science_panel"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/science_quiz_stats_title"
+                android:textColor="@color/science_text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/science_quiz_stats_desc"
+                android:textColor="@color/science_text_secondary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvQuizAccuracyPhysics"
+                style="@style/ScienceBodyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:id="@+id/tvQuizAccuracyChemistry"
+                style="@style/ScienceBodyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/tvQuizAccuracyBiology"
+                style="@style/ScienceBodyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvScienceExp"
+            style="@style/ScienceStatCard"
+            android:textColor="@color/science_quiz_color"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvReviewTime"
+            style="@style/ScienceStatCard" />
+
+        <TextView
+            android:id="@+id/tvProgressInsight"
+            style="@style/ScienceBodyText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/science_panel"
+            android:lineSpacingExtra="4dp"
+            android:padding="16dp" />
+    </LinearLayout>
+</ScrollView>

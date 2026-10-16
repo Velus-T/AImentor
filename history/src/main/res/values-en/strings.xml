@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="history_module_name">History</string>
+    <string name="history_dashboard_title">Explore History</string>
+    <string name="history_back_description">Back to main page</string>
+
+    <!-- Solver Fragment -->
+    <string name="history_solver_intro_title">Explore History with AI</string>
+    <string name="history_solver_intro_desc">Ask contextually, send photos of documents, maps, or problems for AI analysis.</string>
+    <string name="history_solver_btn_camera">Scan Document</string>
+    <string name="history_solver_btn_input">Enter Question</string>
+    <string name="history_solver_recent_title">Recent Conversations</string>
+    <string name="history_solver_recent_empty">No conversations yet.</string>
+
+    <!-- Conversations Fragment -->
+    <string name="history_conv_instruction">Tap to reopen the full chat. Long press to delete conversation.</string>
+    <string name="history_conv_empty">No conversations in this period.</string>
+
+    <!-- Notes Fragment -->
+    <string name="history_notes_instruction">Save milestones, characters, cause-effect, or content for review. Pinned notes will appear at the top.</string>
+    <string name="history_notes_hint_title">Note Title</string>
+    <string name="history_notes_hint_content">Note Content</string>
+    <string name="history_notes_empty">No notes yet. Press + to create your first note.</string>
+    <string name="history_notes_add_desc">Add Note</string>
+
+    <!-- Quiz Fragment -->
+    <string name="history_quiz_level_format">Level %1$d • %2$s</string>
+    <string name="history_quiz_exp_total">Total History EXP: %1$d</string>
+    <string name="history_quiz_exp_detail">%1$d/%2$d EXP • %3$d EXP remaining</string>
+    <string name="history_quiz_topic_title">Choose Knowledge Scope</string>
+    <string name="history_quiz_topic_vn">🇻🇳  Vietnamese History</string>
+    <string name="history_quiz_topic_foreign">🌍  Foreign History</string>
+    <string name="history_quiz_topic_mixed">🧭  Vietnam &amp; Foreign Combined</string>
+    <string name="history_quiz_instruction">After choosing the scope, select your level: Middle School, High School, or University. Each correct answer earns 5/10/20 EXP based on Easy/Medium/Hard difficulty.</string>
+    <string name="history_quiz_recent_title">Recent Quiz Attempts</string>
+    <string name="history_quiz_empty">No Quiz results yet.</string>
+
+    <!-- Chat Activity -->
+    <string name="history_chat_title">History AI</string>
+    <string name="history_chat_new">New Conversation</string>
+    <string name="history_chat_hint">Ask about characters, events, dates...</string>
+    <string name="history_chat_send">Send question</string>
+    <string name="history_chat_camera">Scan Document</string>
+    <string name="history_chat_attach">Attach Photo</string>
+    <string name="history_chat_image_preview_desc">Selected document photo; tap to remove</string>
+
+    <!-- Dashboard Tabs -->
+    <string name="history_tab_solver">Explore History</string>
+    <string name="history_tab_history">Chat History</string>
+    <string name="history_tab_notes">History Notes</string>
+    <string name="history_tab_quiz">History Quiz</string>
+
+    <string name="history_nav_home">Explore</string>
+    <string name="history_nav_history">History</string>
+    <string name="history_nav_notes">Notes</string>
+    <string name="history_nav_quiz">Quiz</string>
+
+    <!-- Quiz Activity Extras -->
+    <string name="history_quiz_education_label">Education Level: %1$s</string>
+    <string name="history_quiz_exit_title">Leave Quiz?</string>
+    <string name="history_quiz_exit_msg">Results and EXP from unfinished quiz will not be saved.</string>
+    <string name="history_quiz_exit_confirm">Leave</string>
+    <string name="history_quiz_exit_continue">Continue</string>
+    <string name="history_quiz_ai_generating">AI is creating %1$s quiz for %2$s...</string>
+    <string name="history_quiz_retry">Retry</string>
+    <string name="history_quiz_counter_format">Question %1$d/%2$d</string>
+    <string name="history_quiz_difficulty_reward">%1$s • +%2$d EXP if correct</string>
+    <string name="history_quiz_current_earned">EXP earned in this session: %1$d</string>
+    <string name="history_quiz_check_answer">Check Answer</string>
+    <string name="history_quiz_next_question">Next Question</string>
+    <string name="history_quiz_view_result">View Results</string>
+    <string name="history_quiz_select_option">Please select an answer.</string>
+    <string name="history_quiz_correct_msg">✓ Correct. +%1$d EXP.</string>
+    <string name="history_quiz_wrong_msg">✗ Incorrect. The correct answer is %1$s.</string>
+    <string name="history_quiz_finish_title">History Quiz Completed</string>
+    <string name="history_quiz_finish_scope">Scope: %1$s</string>
+    <string name="history_quiz_finish_level">Education Level: %1$s</string>
+    <string name="history_quiz_finish_result">Result: %1$d/%2$d</string>
+    <string name="history_quiz_finish_accuracy">Accuracy: %1$d%%</string>
+    <string name="history_quiz_finish_earned">EXP Gained: +%1$d</string>
+    <string name="history_quiz_finish_total">Total History EXP: %1$d</string>
+    <string name="history_quiz_level_max">Max level reached</string>
+    <string name="history_quiz_finish_level_label">Level %1$d • %2$s</string>
+    <string name="history_quiz_finish_error">Could not save result, EXP not added.</string>
+    <string name="history_quiz_finish_levelup">⭐ You leveled up!</string>
+    <string name="history_quiz_btn_new">New Set</string>
+    <string name="history_quiz_btn_close">Close</string>
+
+    <string name="history_quiz_edu_title">Choose Education Level</string>
+    <string name="history_quiz_edu_ms">Middle School</string>
+    <string name="history_quiz_edu_hs">High School</string>
+    <string name="history_quiz_edu_uni">University</string>
+    <string name="history_quiz_edu_other">Other</string>
+
+    <!-- Chat Activity Extras -->
+    <string name="history_chat_wait_ai">Please wait for the AI to finish responding.</string>
+    <string name="history_chat_confirm_new_title">Start New Conversation?</string>
+    <string name="history_chat_confirm_new_msg">The current conversation is still saved in the history database.</string>
+    <string name="history_chat_btn_new_chat">New Chat</string>
+    <string name="history_chat_input_required">Please enter a question or attach an image.</string>
+    <string name="history_chat_ai_prompt_photo">Read and analyze the historical content in this image. Describe clearly visible parts, context, dates, and significance; do not guess blurry parts.</string>
+    <string name="history_chat_visible_text_photo">Analyze historical document photo</string>
+    <string name="history_chat_attached_label">\n[Image attached]</string>
+    <string name="history_chat_error_read_image">Could not read the selected image.</string>
+    <string name="history_chat_ai_error">AI could not respond. Please try again.</string>
+    <string name="history_chat_welcome_msg">Hello! I am your History AI Tutor. You can ask about characters, events, dates, cause-effect, or send document photos for analysis.</string>
+    <string name="history_chat_new_ready">New conversation ready. Which historical period or event would you like to explore?</string>
+    <string name="history_chat_device_no_camera">Device has no camera app.</string>
+    <string name="history_chat_no_camera_image">No image received from camera.</string>
+    <string name="history_chat_error_camera_process">Could not process camera image.</string>
+    <string name="history_chat_permission_camera">Camera permission needed to scan documents.</string>
+    <string name="history_solver_delete_title">Delete conversation?</string>
+    <string name="history_solver_delete_msg">All messages in this conversation will be deleted.</string>
+
+    <string name="history_filter_all">All</string>
+    <string name="history_filter_today">Today</string>
+    <string name="history_filter_7days">Last 7 days</string>
+    <string name="history_filter_last_month">Last month</string>
+    <string name="history_delete_conv_title">Delete conversation?</string>
+    <string name="history_delete_conv_msg">This action cannot be undone.</string>
+
+    <string name="history_notes_add_title">Add Note</string>
+    <string name="history_notes_edit_title">Edit Note</string>
+    <string name="history_notes_save">Save</string>
+    <string name="history_notes_error_title">Please enter a title.</string>
+    <string name="history_notes_error_content">Please enter content.</string>
+    <string name="history_notes_error_save">Could not save note.</string>
+    <string name="history_notes_delete_title">Delete Note?</string>
+    <string name="history_notes_delete_msg">Note “%1$s” will be deleted.</string>
+
+    <!-- Level Titles (History) -->
+    <string name="history_level_1">Explorer</string>
+    <string name="history_level_2">History Student</string>
+    <string name="history_level_3">Storyteller</string>
+    <string name="history_level_4">Researcher</string>
+    <string name="history_level_5">History Expert</string>
+    <string name="history_level_6">History Master</string>
+</resources>

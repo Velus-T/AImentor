@@ -1,0 +1,13 @@
+<resources>
+    <style name="Theme.ScienceFeature" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/science_primary</item>
+        <item name="colorOnPrimary">@color/science_on_primary</item>
+        <item name="colorPrimaryContainer">@color/science_primary_container</item>
+        <item name="colorSurface">@color/science_surface</item>
+        <item name="colorOnSurface">@color/science_text_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/science_surface</item>
+        <item name="android:statusBarColor">@color/science_background</item>
+        <item name="android:fontFamily">sans-serif</item>
+    <item name="android:windowBackground">@color/science_background</item><item name="android:textColorPrimary">@color/science_text_primary</item><item name="android:textColorSecondary">@color/science_text_secondary</item><item name="materialButtonStyle">@style/MentorScienceButton</item><item name="textInputStyle">@style/MentorScienceInput</item><item name="android:windowAnimationStyle">@style/MentorWindowAnimation</item></style>
+</resources>

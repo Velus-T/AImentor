@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/math_background">
+
+    
+    <RelativeLayout android:id="@+id/toolbar_quiz" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingHorizontal="16dp" android:minHeight="64dp" android:paddingTop="8dp" android:paddingBottom="8dp">
+        <ImageButton android:id="@+id/btn_math_module_back" android:layout_width="48dp" android:layout_height="48dp" android:layout_centerVertical="true" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="@string/math_back_description" android:padding="8dp" android:src="@android:drawable/ic_menu_revert" app:tint="@color/math_quiz_primary" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_centerInParent="true" android:text="@string/math_quiz_banner_title" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/math_quiz_primary" android:layout_marginStart="56dp" android:layout_marginEnd="56dp" android:gravity="center" android:maxLines="2" android:ellipsize="end" />
+    </RelativeLayout>
+
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:layout_below="@id/toolbar_quiz" android:scrollbars="none">
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+
+            
+            <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" app:cardCornerRadius="20dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/math_quiz_banner">
+                <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="20dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+
+                        <TextView android:id="@+id/txt_banner_quiz" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/math_quiz_banner_title" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/math_quiz_accent" android:visibility="gone" />
+
+                        <TextView android:id="@+id/txt_user_exp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/math_quiz_exp_label" android:textStyle="bold" android:textColor="@color/math_quiz_primary" />
+
+                        <ProgressBar android:id="@+id/progress_user_exp" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="8dp" android:layout_marginTop="4dp" android:progress="0" android:progressTint="@color/math_quiz_icon" />
+
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/math_quiz_banner_desc" android:textSize="12sp" android:textColor="@color/math_quiz_primary" />
+                    </LinearLayout>
+
+                    </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button android:id="@+id/btn_ai_generate_entry" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/math_quiz_ai_button" android:textAllCaps="false" android:backgroundTint="@color/math_quiz_primary" android:textColor="@color/math_active_text" app:cornerRadius="12dp" android:minHeight="56dp" />
+
+            
+            <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:scrollbars="none">
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+                    <Button android:id="@+id/btn_filter_all" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/math_history_filter_all" android:backgroundTint="@color/math_quiz_primary" android:textColor="@color/math_active_text" android:textAllCaps="false" app:cornerRadius="20dp" android:minHeight="48dp" />
+                    <Button android:id="@+id/btn_filter_algebra" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:text="@string/math_formula_filter_algebra" android:backgroundTint="@color/math_button_inactive_bg" android:textColor="@color/math_button_inactive_text" android:textAllCaps="false" app:cornerRadius="20dp" android:minHeight="48dp" />
+                    <Button android:id="@+id/btn_filter_geometry" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:text="@string/math_formula_filter_geometry" android:backgroundTint="@color/math_button_inactive_bg" android:textColor="@color/math_button_inactive_text" android:textAllCaps="false" app:cornerRadius="20dp" android:minHeight="48dp" />
+                    <Button android:id="@+id/btn_filter_ai" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:text="@string/math_quiz_filter_ai" android:backgroundTint="@color/math_button_inactive_bg" android:textColor="@color/math_button_inactive_text" android:textAllCaps="false" app:cornerRadius="20dp" android:minHeight="48dp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:layout_marginBottom="12dp">
+                <TextView android:id="@+id/txt_list_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/math_quiz_list_title" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/math_quiz_text" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView android:id="@+id/recycler_quiz_sets" android:layout_width="match_parent" android:layout_height="wrap_content" android:nestedScrollingEnabled="false" />
+
+            <View android:layout_width="match_parent" android:layout_height="80dp" /> 
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

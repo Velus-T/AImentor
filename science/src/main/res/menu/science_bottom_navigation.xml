@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/navScienceHome" android:icon="@drawable/ic_science_home" android:title="@string/science_nav_home" />
+    <item android:id="@+id/navScienceSolve" android:icon="@drawable/ic_science_chat" android:title="@string/science_nav_solve" />
+    <item android:id="@+id/navScienceHistory" android:icon="@drawable/ic_science_history" android:title="@string/science_nav_history" />
+    <item android:id="@+id/navScienceFormula" android:icon="@drawable/ic_science_formula" android:title="@string/science_nav_formula" />
+    <item android:id="@+id/navScienceQuiz" android:icon="@drawable/ic_science_quiz" android:title="@string/science_nav_quiz" />
+</menu>

@@ -1,0 +1,25 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginHorizontal="4dp" android:layout_marginBottom="12dp" app:cardBackgroundColor="#FFFFFF" app:cardCornerRadius="20dp" app:cardElevation="2dp">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+
+            <TextView android:id="@+id/txt_note_title" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Công thức nghiệm phương trình bậc 2" android:textColor="#333333" android:textSize="16sp" android:textStyle="bold" />
+
+            <ImageView android:id="@+id/img_star" android:layout_width="48dp" android:layout_height="48dp" android:background="?attr/selectableItemBackgroundBorderless" android:clickable="true" android:contentDescription="Ghim ghi chú" android:focusable="true" android:padding="8dp" android:src="@android:drawable/btn_star_big_off" app:tint="#424242" />
+        </LinearLayout>
+
+        <TextView android:id="@+id/txt_note_formula" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="x = (-b ± √(b² - 4ac)) / 2a" android:textColor="#555555" android:textIsSelectable="true" android:textSize="15sp" />
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:gravity="center_vertical" android:orientation="horizontal">
+
+            <TextView android:id="@+id/txt_note_category" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="#FFF3E0" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:text="Đại số" android:textColor="#FF9800" android:textSize="12sp" />
+
+            <Space android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" />
+
+            <Button android:id="@+id/btn_edit_note" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="0dp" android:paddingHorizontal="14dp" android:text="Sửa" android:textAllCaps="false" android:textColor="#E65100" android:backgroundTint="#FFF3E0" android:minHeight="48dp" />
+
+            <Button android:id="@+id/btn_delete_note" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:minWidth="0dp" android:paddingHorizontal="14dp" android:text="Xóa" android:textAllCaps="false" android:textColor="#B71C1C" android:backgroundTint="#FFEBEE" android:minHeight="48dp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

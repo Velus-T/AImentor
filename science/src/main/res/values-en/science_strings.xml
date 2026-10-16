@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="science_nav_home">Home</string>
+    <string name="science_nav_solve">Ask AI</string>
+    <string name="science_nav_history">History</string>
+    <string name="science_nav_formula">Formulas</string>
+    <string name="science_nav_quiz">Quiz</string>
+
+    <string name="science_back">Back</string>
+    <string name="science_search">Search</string>
+    <string name="science_filter">Filter</string>
+    <string name="science_view_all">View All ›</string>
+    <string name="science_more_options">More options</string>
+    <string name="science_add_formula">Add formula</string>
+
+    <string name="science_home_title">Science AI</string>
+    <string name="science_home_hero_title">Discover the Science World</string>
+    <string name="science_home_hero_description">Learn Physics, Chemistry and Biology with smart AI assistant.</string>
+    <string name="science_subjects">Choose Subject</string>
+    <string name="science_quick_tools">Learning Tools</string>
+    <string name="science_physics">Physics</string>
+    <string name="science_physics_description">Motion, force and energy</string>
+    <string name="science_chemistry">Chemistry</string>
+    <string name="science_chemistry_description">Elements and chemical reactions</string>
+    <string name="science_biology">Biology</string>
+    <string name="science_biology_description">Cells, genetics and ecology</string>
+    <string name="science_periodic_table">Periodic Table</string>
+    <string name="science_circuit">Electric Circuits</string>
+    <string name="science_progress">Learning Progress</string>
+
+    <string name="science_solve_title">Ask Science AI</string>
+    <string name="science_solve_hero_title">Solve Science Problems\nwith Smart AI</string>
+    <string name="science_solve_hero_description">Take a photo or enter a question. AI will analyze and explain step by step.</string>
+    <string name="science_take_photo">Scan Question</string>
+    <string name="science_take_photo_description">Use camera to scan science problems</string>
+    <string name="science_enter_question">Enter Question</string>
+    <string name="science_enter_question_description">Type using keyboard or paste content</string>
+    <string name="science_recent_questions">Recent Questions</string>
+
+    <string name="science_history_title">History</string>
+    <string name="science_history_hero_title">Review Solved\nQuestions</string>
+    <string name="science_history_hero_description">Review and continue learning more effectively every day.</string>
+    <string name="science_all">All</string>
+    <string name="science_today">Today</string>
+    <string name="science_last_seven_days">Last 7 days</string>
+    <string name="science_this_month">This month</string>
+    <string name="science_yesterday">Yesterday</string>
+
+    <string name="science_formula_title">Science Formulas</string>
+    <string name="science_formula_hero_title">Save and Manage\nImportant Formulas</string>
+    <string name="science_formula_hero_description">Create your own formula list for faster learning.</string>
+    <string name="science_formula_all">All</string>
+    <string name="science_formula_physics">Physics</string>
+    <string name="science_formula_chemistry">Chemistry</string>
+    <string name="science_formula_biology">Biology</string>
+
+    <string name="science_quiz_title">Quiz Practice</string>
+    <string name="science_quiz_hero_title">Practice Science\nwith Quizzes</string>
+    <string name="science_quiz_hero_description">Test your knowledge and improve your skills daily.</string>
+    <string name="science_select_topic">Practice and Accuracy by Subject</string>
+    <string name="science_recent_quiz">Quiz Summary</string>
+    <string name="science_quiz_accuracy_explanation">Accuracy %% = correct answers / total questions done for each subject.</string>
+    <string name="science_questions_count">%1$d questions</string>
+    <string name="science_score_format">%1$d/%2$d</string>
+    <string name="science_percent_format">%1$d%%</string>
+    <string name="science_edit">Edit</string>
+    <string name="science_delete">Delete</string>
+
+    <!-- Levels -->
+    <string name="science_level_format">Level %1$d</string>
+    <string name="science_level_exp_format">%1$d / %2$d EXP</string>
+    <string name="science_level_remaining_format">%1$d EXP remaining to level up</string>
+    <string name="science_total_exp_format">Total Science EXP: %1$d</string>
+    <string name="science_quiz_rewards">Correct: Easy +5 • Medium +10 • Hard +20 EXP</string>
+
+    <string name="science_level_1">Explorer</string>
+    <string name="science_level_2">Science Student</string>
+    <string name="science_level_3">Experimenter</string>
+    <string name="science_level_4">Researcher</string>
+    <string name="science_level_5">Science Expert</string>
+    <string name="science_level_6">Science Master</string>
+
+    <!-- Quiz Selection -->
+    <string name="science_quiz_adaptive_title">Adaptive Science Quiz</string>
+    <string name="science_quiz_subject_label">Subject</string>
+    <string name="science_quiz_edu_level_label">Education Level</string>
+    <string name="science_quiz_topic_label">Topic</string>
+    <string name="science_quiz_topic_hint">Example: energy, acids and bases, cells</string>
+    <string name="science_quiz_count_label">Number of questions</string>
+    <string name="science_quiz_adaptive_desc">Quiz will adapt based on your level and recent results.</string>
+    <string name="science_quiz_btn_new">Create New Quiz</string>
+    <string name="science_quiz_btn_submit">Submit Quiz</string>
+    <string name="science_quiz_stats_title">Quiz Accuracy by Subject</string>
+    <string name="science_quiz_stats_desc">% = correct answers / total questions done for each subject.</string>
+    <string name="science_quiz_not_started">No quiz yet</string>
+    <string name="science_quiz_summary_title">Science Quiz Summary</string>
+    <string name="science_quiz_summary_empty">No quiz attempts yet</string>
+    <string name="science_quiz_overall_accuracy">Overall Accuracy</string>
+    <string name="science_quiz_attempts_format">%1$d attempts • %2$d questions done</string>
+    <string name="science_quiz_score_format_alt">%1$d/%2$d correct</string>
+    <string name="science_quiz_accuracy_format">%1$d%% accuracy</string>
+    <string name="science_quiz_desc_accuracy">%1$s, Quiz accuracy %2$d percent</string>
+    <string name="science_quiz_desc_no_data">%1$s, no Quiz data yet</string>
+
+    <string name="science_my_notes">My Notes</string>
+    <string name="science_notes_empty">No notes yet. Press + to add.</string>
+    <string name="science_ref_formulas">Reference Formulas</string>
+    <string name="science_add_note">Add Note</string>
+    <string name="science_note_title_hint">Note Title</string>
+    <string name="science_note_content_hint">Note content</string>
+    <string name="science_cancel">CANCEL</string>
+    <string name="science_save">SAVE</string>
+    <string name="science_note_added">Note added</string>
+    <string name="science_note_updated">Note updated</string>
+    <string name="science_note_save_error">Could not save note</string>
+    <string name="science_note_error_title">Enter title</string>
+    <string name="science_note_error_content">Enter content</string>
+    <string name="science_note_updated_at">Updated %1$s</string>
+    <string name="science_note_delete_title">Delete Note</string>
+    <string name="science_note_delete_msg">Delete “%1$s”? This action cannot be undone.</string>
+    <string name="science_note_delete_success">Note deleted</string>
+    <string name="science_quiz_count_format_alt">%1$d questions</string>
+    <string name="science_stat_questions">Questions asked: %1$d</string>
+    <string name="science_stat_most_studied">Most studied: %1$s</string>
+    <string name="science_stat_no_data">Insufficient data</string>
+    <string name="science_stat_bookmarks">Saved answers: %1$d</string>
+    <string name="science_stat_accuracy">Overall Quiz accuracy: %1$.0f%% over %2$d attempts</string>
+    <string name="science_level_max">Max level reached</string>
+    <string name="science_quiz_result_format">Result: %1$d/%2$d (%3$.0f%%)\n%4$s\n%5$s\n%6$s</string>
+    <string name="science_quiz_exp_saved">+%1$d EXP • Total Science EXP: %2$d</string>
+    <string name="science_quiz_exp_not_saved">+%1$d EXP not saved</string>
+    <string name="science_quiz_level_line">%1$s • %2$s • %3$s</string>
+    <string name="science_levelup_title">Level Up! ⭐</string>
+    <string name="science_levelup_msg">You reached Level %1$d – %2$s.\n\nTotal Science EXP: %3$d</string>
+    <string name="science_levelup_jumped">You jumped %1$d levels!\n</string>
+    <string name="science_continue">Continue</string>
+
+    <!-- Formulas -->
+    <string name="science_formula_newton">Newton\'s Second Law</string>
+    <string name="science_formula_kinetic">Kinetic Energy</string>
+    <string name="science_formula_electric">Electric Energy</string>
+    <string name="science_formula_moles">Amount of Substance (moles)</string>
+    <string name="science_formula_concentration">Molar Concentration</string>
+    <string name="science_formula_photosynthesis">Photosynthesis</string>
+
+    <!-- Study Planner -->
+    <string name="science_planner_title">AI Science Study Plan</string>
+    <string name="science_planner_info">The first study session starts at the exact moment you press Generate. Later sessions continue daily at the same clock time.</string>
+    <string name="science_planner_subject">Subject</string>
+    <string name="science_planner_edu_level">Education Level</string>
+    <string name="science_planner_goal">Learning Goal</string>
+    <string name="science_planner_goal_hint">Example: prepare for the final exam on electricity</string>
+    <string name="science_planner_length">Plan Length</string>
+    <string name="science_planner_daily_time">Daily Time</string>
+    <string name="science_planner_btn_generate">Generate Plan From Now</string>
+    <string name="science_planner_empty">No study plan has been generated yet.</string>
+    <string name="science_planner_btn_clear">Clear Saved Study Plan</string>
+    <string name="science_planner_days_format">%1$d days</string>
+    <string name="science_planner_minutes_format">%1$d min/day</string>
+    <string name="science_planner_day_label">Day %1$d</string>
+    <string name="science_planner_goal_label">Goal: %1$s</string>
+    <string name="science_planner_created_label">%1$s · created %2$s</string>
+    <string name="science_planner_first_session">First session: %1$s</string>
+    <string name="science_planner_session_item">%1$s · %2$s</string>
+    <string name="science_planner_clear_title">Clear Plan?</string>
+    <string name="science_planner_clear_msg">This will delete your entire current study plan.</string>
+    <string name="science_planner_clear_confirm">Clear</string>
+    <string name="science_planner_session_title">Session %1$d: %2$s</string>
+    <string name="science_planner_generating">AI is creating plan for %1$s...</string>
+    <string name="science_planner_source_ai">AI-personalized plan</string>
+    <string name="science_planner_source_local">Reliable local fallback plan</string>
+
+    <!-- Periodic Table -->
+    <string name="science_periodic_search_hint">Search by name, symbol, number or category</string>
+    <string name="science_periodic_btn_search">Search elements</string>
+    <string name="science_periodic_count_format">Found %1$d elements</string>
+
+    <!-- Circuit Diagram -->
+    <string name="science_circuit_title">Physics Circuit Diagram</string>
+    <string name="science_circuit_type_label">Circuit Type</string>
+    <string name="science_circuit_switch_closed">Switch closed (current can flow)</string>
+    <string name="science_circuit_switch_open">Switch open (circuit broken)</string>
+    <string name="science_circuit_series">Series Circuit</string>
+    <string name="science_circuit_parallel">Parallel Circuit</string>
+    <string name="science_circuit_series_desc">In a series circuit, all components share one current path. The same current passes through the resistor and lamp, while the supply voltage is shared.</string>
+    <string name="science_circuit_parallel_desc">In a parallel circuit, each branch has the same potential difference. Current can split between branches, so one lamp may continue working if another branch is opened.</string>
+    <string name="science_circuit_switch_closed_desc"> The closed switch completes the circuit, so conventional current can flow.</string>
+    <string name="science_circuit_switch_open_desc"> The open switch breaks the circuit, so current cannot flow.</string>
+    <string name="science_circuit_disclaimer_desc"> Use this diagram as a learning aid; real circuits must use suitable voltage and adult supervision.</string>
+
+    <!-- Chat Suggestions -->
+    <string name="science_ai_mentor">Science AI Mentor</string>
+    <string name="science_chat_ready">AI is ready</string>
+    <string name="science_chat_welcome_title">What part do you need help with?</string>
+    <string name="science_chat_welcome_desc">Enter a question or send a photo. AI will identify data, formulas, steps and check results.</string>
+    <string name="science_suggestion_step_by_step">Solve this step-by-step and check units</string>
+    <string name="science_suggestion_equations">Balance equations and explain mole ratios</string>
+    <string name="science_suggestion_phenomenon">Explain phenomenon with real-world examples</string>
+    <string name="science_chat_disclaimer">Re-check formulas, units and safety guidelines before applying.</string>
+    <string name="science_chat_new">New Chat</string>
+    <string name="science_chat_explanation_title">Explanation Style</string>
+    <string name="science_chat_config_desc">Choose subject, level and style suitable for your lesson.</string>
+
+    <!-- Tool Labels -->
+    <string name="science_tool_history">History</string>
+    <string name="science_tool_bookmarks">Saved</string>
+    <string name="science_tool_quiz">Quiz</string>
+    <string name="science_tool_planner">Study Plan</string>
+    <string name="science_tool_periodic">Periodic Table</string>
+    <string name="science_tool_circuit">Circuit Diagram</string>
+    <string name="science_tool_progress">Progress</string>
+    <string name="science_tool_settings">Display</string>
+
+    <!-- Education Levels -->
+    <string name="science_edu_middle">Middle school</string>
+    <string name="science_edu_high">High school</string>
+    <string name="science_edu_uni">University</string>
+
+    <!-- Subjects -->
+    <string name="science_subj_physics">Physics</string>
+    <string name="science_subj_chemistry">Chemistry</string>
+    <string name="science_subj_biology">Biology</string>
+    <string name="science_subj_others">Others</string>
+    <string name="science_edit_note">Edit Note</string>
+    <!-- Explanation Styles -->
+    <string name="science_style_short">Short</string>
+    <string name="science_style_detailed">Detailed</string>
+    <string name="science_style_step_by_step">Step-by-step</string>
+    <!-- Quiz Difficulty -->
+    <string name="science_quiz_diff_easy">Easy</string>
+    <string name="science_quiz_diff_medium">Medium</string>
+    <string name="science_quiz_diff_hard">Hard</string>
+    <string name="science_quiz_difficulty_format">%1$s • +%2$d EXP if correct</string>
+    <string name="science_quiz_correct_feedback">✓ Correct. +%1$d EXP.</string>
+    <string name="science_quiz_wrong_feedback">✗ Incorrect. The answer is: %1$s</string>
+</resources>

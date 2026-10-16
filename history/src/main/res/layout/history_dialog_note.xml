@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/note_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/history_notes_hint_title"
+        android:textColor="@color/history_text_primary"
+        android:textColorHint="@color/history_text_hint"
+        android:inputType="textCapSentences"
+        android:maxLines="2" />
+
+    <EditText
+        android:id="@+id/note_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="top|start"
+        android:hint="@string/history_notes_hint_content"
+        android:textColor="@color/history_text_primary"
+        android:textColorHint="@color/history_text_hint"
+        android:inputType="textCapSentences|textMultiLine"
+        android:minLines="5" />
+</LinearLayout>

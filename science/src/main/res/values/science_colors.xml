@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Existing Science palette -->
+    <color name="science_primary">#087F72</color>
+    <color name="science_primary_dark">#075F55</color>
+    <color name="science_primary_container">#CCEEE6</color>
+    <color name="science_on_primary">#FFFFFF</color>
+    <color name="science_accent">#4F46E5</color>
+    <color name="science_background">#EEF2FA</color>
+    <color name="science_surface">#FFFFFF</color>
+    <color name="science_surface_variant">#E2E9F5</color>
+    <color name="science_border">#D6DEED</color>
+    <color name="science_text_primary">#14213D</color>
+    <color name="science_text_secondary">#4D5E78</color>
+    <color name="science_text_disabled">#5D6C85</color>
+    <color name="science_success">#169B62</color>
+    <color name="science_error">#C62828</color>
+    <color name="science_warning">#E98B12</color>
+    <color name="science_focus">#2478D4</color>
+    <color name="science_user_bubble">#DFF7F3</color>
+    <color name="science_assistant_bubble">#FFFFFF</color>
+    <color name="science_scrim">#660F172A</color>
+    <color name="science_white">#FFFFFF</color>
+
+    <!-- Tab theme colors -->
+    <color name="science_home_color">#087F72</color>
+    <color name="science_solve_color">#1D4ED8</color>
+    <color name="science_history_color">#087F72</color>
+    <color name="science_formula_color">#A6510B</color>
+    <color name="science_quiz_color">#6537C5</color>
+
+    <!-- Hero gradients -->
+    <color name="science_home_hero_start">#C2EADD</color>
+    <color name="science_home_hero_end">#A8DECF</color>
+    <color name="science_blue_hero_start">#DCE7FF</color>
+    <color name="science_blue_hero_end">#C3D5FF</color>
+    <color name="science_green_hero_start">#CCEEE6</color>
+    <color name="science_green_hero_end">#B0E1D4</color>
+    <color name="science_orange_hero_start">#FFE5BF</color>
+    <color name="science_orange_hero_end">#FFD59A</color>
+    <color name="science_purple_hero_start">#E6DBFF</color>
+    <color name="science_purple_hero_end">#D2BFFA</color>
+
+    <!-- Pastel icon backgrounds -->
+    <color name="science_icon_blue_background">#EAF4FF</color>
+    <color name="science_icon_green_background">#E5F9ED</color>
+    <color name="science_icon_orange_background">#FFF1DE</color>
+    <color name="science_icon_purple_background">#F0E8FF</color>
+    <color name="science_icon_mint_background">#E4F8F3</color>
+
+    <!-- Navigation and progress -->
+    <color name="science_nav_unselected">#5D6C85</color>
+    <color name="science_nav_divider">#E8EDF2</color>
+    <color name="science_progress_track">#E6EAF0</color>
+    <color name="science_card_shadow">#16000000</color>
+    <color name="science_nav_selected">#087F72</color>
+
+    <!-- Header Custom Colors -->
+    <color name="science_bg_header_custom">#075F55</color>
+    <color name="science_text_header_light">#FFFFFF</color>
+</resources>

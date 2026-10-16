@@ -1,0 +1,61 @@
+plugins {
+    id 'com.android.library'
+}
+
+def programmingApiProperties = new Properties()
+def programmingApiFile = rootProject.file('api.properties')
+if (programmingApiFile.exists()) {
+    programmingApiFile.withInputStream { programmingApiProperties.load(it) }
+}
+
+android {
+    namespace 'com.example.modulelaptrinh'
+    buildFeatures { buildConfig true }
+    compileSdk 36
+
+    defaultConfig {
+        (1..3).each { index ->
+            def name = "PROGRAMMING_GEMINI_API_KEY_${index}"
+            def value = programmingApiProperties.getProperty(name, '')
+            buildConfigField 'String', name, groovy.json.JsonOutput.toJson(value)
+        }
+        buildConfigField 'String', 'PROGRAMMING_GEMINI_MODEL', groovy.json.JsonOutput.toJson(programmingApiProperties.getProperty('PROGRAMMING_GEMINI_MODEL', 'gemini-flash-latest'))
+        minSdk 24
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'com.google.android.material:material:1.14.0'
+    implementation 'androidx.activity:activity:1.13.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
+    implementation 'androidx.fragment:fragment:1.8.5'
+    implementation 'androidx.recyclerview:recyclerview:1.4.0'
+    // Programming hiện dùng SQLiteOpenHelper trực tiếp và HttpURLConnection.
+    // Các dependency Room/Retrofit/OkHttp cũ đã được bỏ vì không còn file nào sử dụng.
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+    implementation 'io.noties.markwon:core:4.6.2'
+    implementation 'io.noties.markwon:ext-strikethrough:4.6.2'
+    implementation 'io.noties.markwon:ext-tables:4.6.2'
+    implementation 'io.noties.markwon:html:4.6.2'
+    implementation 'io.noties.markwon:image-glide:4.6.2'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
+}

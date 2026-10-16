@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#F7F4FA" android:orientation="vertical">
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="#E8EAF6" android:elevation="4dp" android:padding="8dp" android:minHeight="64dp" android:paddingTop="8dp" android:paddingBottom="8dp">
+
+        <ImageButton android:id="@+id/btnHistoryQuizBack" android:layout_width="48dp" android:layout_height="48dp" android:layout_centerVertical="true" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Quay lại" android:src="@android:drawable/ic_menu_revert" />
+
+        <TextView android:id="@+id/tvHistoryQuizTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_centerInParent="true" android:ellipsize="end" android:maxWidth="270dp" android:maxLines="2" android:text="Quiz Lịch sử" android:textColor="#1A237E" android:textSize="17sp" android:textStyle="bold" android:layout_marginStart="56dp" android:layout_marginEnd="56dp" android:gravity="center" />
+    </RelativeLayout>
+
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+
+            <TextView android:id="@+id/tvHistoryQuizEducationLevel" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:text="Trung học cơ sở" android:textColor="#6A1B9A" android:textStyle="bold" />
+
+            <ProgressBar android:id="@+id/pbHistoryQuizLoading" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_horizontal" android:layout_marginTop="32dp" />
+
+            <TextView android:id="@+id/tvHistoryQuizStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:gravity="center" android:text="AI đang tạo câu hỏi..." android:textColor="#5C6BC0" android:textSize="15sp" />
+
+            <LinearLayout android:id="@+id/historyQuizContent" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:visibility="gone">
+
+                <TextView android:id="@+id/tvHistoryQuizExpStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="#F3E5F5" android:padding="10dp" android:text="EXP nhận được: 0" android:textColor="#6A1B9A" android:textStyle="bold" />
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:gravity="center_vertical" android:orientation="horizontal">
+
+                    <TextView android:id="@+id/tvHistoryQuizCounter" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Câu 1/5" android:textColor="#1A237E" android:textStyle="bold" />
+
+                    <TextView android:id="@+id/tvHistoryQuizDifficulty" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="#E1BEE7" android:paddingStart="10dp" android:paddingTop="5dp" android:paddingEnd="10dp" android:paddingBottom="5dp" android:text="Trung bình • +10 EXP" android:textColor="#6A1B9A" android:textSize="12sp" android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView android:id="@+id/tvHistoryQuizQuestion" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:text="Câu hỏi" android:textColor="#222222" android:textSize="19sp" android:textStyle="bold" />
+
+                <RadioGroup android:id="@+id/rgHistoryQuizOptions" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:orientation="vertical">
+
+                    <RadioButton android:id="@+id/rbHistoryOptionA" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="52dp" android:padding="8dp" android:text="A" />
+                    <RadioButton android:id="@+id/rbHistoryOptionB" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="52dp" android:padding="8dp" android:text="B" />
+                    <RadioButton android:id="@+id/rbHistoryOptionC" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="52dp" android:padding="8dp" android:text="C" />
+                    <RadioButton android:id="@+id/rbHistoryOptionD" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="52dp" android:padding="8dp" android:text="D" />
+                </RadioGroup>
+
+                <TextView android:id="@+id/tvHistoryQuizExplanation" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:background="#E8EAF6" android:padding="14dp" android:textColor="#303F9F" android:textSize="14sp" android:visibility="gone" />
+            </LinearLayout>
+
+            <Button android:id="@+id/btnHistoryQuizAction" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:text="Kiểm tra đáp án" android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

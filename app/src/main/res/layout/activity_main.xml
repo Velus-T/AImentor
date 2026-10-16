@@ -1,21 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello SE08102!"
-        android:textSize="30sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+<?xml version='1.0' encoding='utf-8'?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true" android:background="@color/backgroundColor">
+    <com.example.asm_final.utils.AuthColumn android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+            <ImageView android:layout_width="56dp" android:layout_height="56dp" android:src="@drawable/logoapp" android:contentDescription="@null" android:importantForAccessibility="no" />
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="14dp" android:orientation="vertical">
+                <TextView style="@style/AuthHeading" android:text="AI Mentor" android:textSize="22sp" />
+                <TextView style="@style/AuthBody" android:text="@string/auth_tagline" android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView style="@style/AuthHeading" android:text="@string/login_title" android:layout_marginTop="28dp" />
+        <TextView style="@style/AuthBody" android:text="@string/auth_login_intro" android:layout_marginTop="8dp" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:background="@drawable/auth_card" android:orientation="vertical" android:padding="20dp">
+            <com.google.android.material.textfield.TextInputLayout style="@style/AuthInput" android:hint="@string/login_hint_user">
+                <com.google.android.material.textfield.TextInputEditText style="@style/AuthEdit" android:id="@+id/edtLoginUsername" android:inputType="text" android:autofillHints="username" android:imeOptions="actionNext" android:nextFocusForward="@id/edtLoginPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout style="@style/AuthInput" android:hint="@string/login_hint_pass" app:endIconMode="password_toggle">
+                <com.google.android.material.textfield.TextInputEditText style="@style/AuthEdit" android:id="@+id/edtLoginPassword" android:inputType="textPassword" android:autofillHints="password" android:imeOptions="actionDone" android:saveEnabled="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView style="@style/AuthBody" android:id="@+id/tvLoginMessage" android:textColor="@color/errorColor" android:layout_marginTop="12dp" android:accessibilityLiveRegion="polite" />
+            <Button style="@style/AuthButton" android:id="@+id/btnLogin" android:text="@string/login_btn" />
+        </LinearLayout>
+        <TextView style="@style/AuthBody" android:id="@+id/tvGoToRegister" android:text="@string/login_go_to_reg" android:minHeight="48dp" android:padding="12dp" android:layout_marginTop="12dp" android:gravity="center" android:textStyle="bold" android:textColor="@color/primaryColor" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" />
+    </com.example.asm_final.utils.AuthColumn>
+</ScrollView>

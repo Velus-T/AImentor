@@ -1,0 +1,96 @@
+<resources>
+    <string name="math_module_name">Toán học</string>
+    <string name="math_solve_title">Giải Toán AI</string>
+    <string name="math_back_description">Quay về trang chính</string>
+    <string name="math_nav_home">Giải Toán</string>
+    <string name="math_nav_history">Lịch sử</string>
+    <string name="math_nav_notes">Ghi Chú</string>
+    <string name="math_nav_quiz">Quiz</string>
+
+    <string name="math_banner_title">Giải bài tập Toán với AI thông minh</string>
+    <string name="math_banner_desc">Chụp bài hoặc nhập đề bài, AI sẽ giúp bạn giải và giải thích chi tiết từng bước.</string>
+
+    <string name="math_action_scan">Chụp đề bài</string>
+    <string name="math_action_scan_desc">Dùng camera để chụp bài tập</string>
+    <string name="math_action_type">Nhập đề bài</string>
+    <string name="math_action_type_desc">Nhập đề bài bằng tay hoặc dán</string>
+
+    
+    <string name="math_chat_welcome">Xin chào! Tôi là AI Mentor Toán học. Bạn có bài toán nào cần giải không?</string>
+    <string name="math_chat_hint">Nhập bài toán (VD: Giải x^2 - 4 = 0)...</string>
+    <string name="math_chat_hint_attached">Ảnh đã đính kèm. Nhập câu hỏi...</string>
+    <string name="math_chat_hint_default">Nhập bài toán...</string>
+    <string name="math_chat_upload">Tải ảnh lên</string>
+    <string name="math_chat_send">Gửi câu hỏi</string>
+    <string name="math_chat_attached_toast">Đã đính kèm ảnh. Hãy nhập câu hỏi hoặc bấm Gửi.</string>
+    <string name="math_chat_error_image">Không thể xử lý ảnh đã chọn.</string>
+    <string name="math_chat_sent_image_label">[Đã gửi 1 ảnh]\n</string>
+    <string name="math_chat_default_image_query">Giải bài toán trong ảnh này chi tiết từng bước.</string>
+    <string name="math_chat_ai_prefix">Bạn là một AI Mentor chuyên về Toán học.\nQUY TẮC NGHIÊM NGẶT: Phân tích kỹ câu hỏi. Nếu câu hỏi không liên quan đến Toán học, chỉ trả lời: \'Tôi là AI Mentor Toán học, tôi chỉ có thể giúp bạn giải quyết các vấn đề về Toán học thôi nhé!\'.\nNếu là câu hỏi toán, hãy giải từng bước rõ ràng, kiểm tra lại kết quả và sử dụng LaTeX cho công thức. Bọc công thức bằng $ hoặc $$.\nCâu hỏi của người dùng: </string>
+    <string name="math_chat_error_api">Không thể nhận câu trả lời từ Gemini.</string>
+
+    
+    <string name="math_history_banner_title">Xem lại các bài toán đã giải</string>
+    <string name="math_history_banner_desc">Ôn tập và tiếp tục học tập hiệu quả hơn mỗi ngày.</string>
+    <string name="math_history_filter_all">Tất cả</string>
+    <string name="math_history_filter_today">Hôm nay</string>
+    <string name="math_history_filter_7days">7 ngày qua</string>
+    <string name="math_history_section_title">Lịch sử giải toán</string>
+
+    
+    <string name="math_formula_banner_title">Lưu và quản lý các công thức bạn hay dùng</string>
+    <string name="math_formula_banner_desc">Tạo danh sách công thức riêng để học tập nhanh chóng hơn.</string>
+    <string name="math_formula_filter_algebra">Đại số</string>
+    <string name="math_formula_filter_geometry">Hình học</string>
+    <string name="math_formula_title_hint">Tên công thức (VD: Phương trình bậc 2)</string>
+    <string name="math_formula_select_category">Chọn danh mục:</string>
+    <string name="math_formula_empty">Chưa có ghi chú trong danh mục này.</string>
+    <string name="math_formula_add_title">Thêm ghi chú mới</string>
+    <string name="math_formula_edit_title">Sửa ghi chú</string>
+    <string name="math_formula_btn_save">Lưu</string>
+    <string name="math_formula_error_save">Không thể lưu ghi chú.</string>
+    <string name="math_formula_success_update">Đã cập nhật ghi chú</string>
+    <string name="math_formula_success_add">Đã thêm ghi chú</string>
+    <string name="math_formula_delete_title">Xóa ghi chú</string>
+    <string name="math_formula_delete_msg">Xóa ghi chú “%1$s”? Hành động này không thể hoàn tác.</string>
+    <string name="math_formula_delete_confirm">Xóa</string>
+    <string name="math_formula_delete_success">Đã xóa ghi chú</string>
+    <string name="math_formula_delete_error">Không thể xóa ghi chú</string>
+    <string name="math_formula_hint_title">Vui lòng nhập tiêu đề</string>
+    <string name="math_formula_hint_content">Vui lòng nhập nội dung hoặc công thức</string>
+
+    
+    <string name="math_quiz_banner_title">Luyện tập</string>
+    <string name="math_quiz_banner_desc">Tạo đề thi bằng AI hoặc luyện tập các bộ đề có sẵn.</string>
+    <string name="math_quiz_ai_button">Tạo quiz AI</string>
+    <string name="math_quiz_filter_ai">AI tạo</string>
+    <string name="math_quiz_list_title">Danh sách bộ đề</string>
+    <string name="math_quiz_exp_label">Kinh nghiệm: %1$d EXP</string>
+    <string name="math_quiz_level_format">Cấp %1$d • %2$s\nTổng EXP: %3$d • %4$s</string>
+    <string name="math_quiz_level_max">Đã đạt cấp tối đa</string>
+    <string name="math_quiz_level_detail">%1$d/%2$d EXP • Còn %3$d EXP</string>
+    <string name="math_quiz_ai_progress">AI đang tạo đề %1$s, vui lòng đợi...</string>
+    <string name="math_quiz_ai_success">Đã tạo %1$d câu • %2$s</string>
+    <string name="math_quiz_error_json">Gemini trả về dữ liệu Quiz không đúng định dạng: %1$s</string>
+    <string name="math_quiz_error_api">Không thể tạo Quiz bằng Gemini.</string>
+
+    <string name="math_quiz_config_title">Tạo đề bằng AI</string>
+    <string name="math_quiz_config_topic">Chủ đề bài tập:</string>
+    <string name="math_quiz_config_topic_hint">Ví dụ: Phương trình bậc hai, Hình học lớp 9...</string>
+    <string name="math_quiz_config_level">Cấp học:</string>
+    <string name="math_quiz_config_count">Số câu hỏi:</string>
+    <string name="math_quiz_config_btn">Bắt đầu tạo đề</string>
+    <string name="math_quiz_config_error_topic">Vui lòng nhập chủ đề</string>
+    <string name="math_quiz_count_5">5 câu</string>
+    <string name="math_quiz_count_10">10 câu</string>
+    <string name="math_quiz_count_15">15 câu</string>
+    <string name="math_quiz_count_20">20 câu</string>
+
+    
+    <string name="math_level_1">Người làm quen</string>
+    <string name="math_level_2">Học viên Toán</string>
+    <string name="math_level_3">Người giải bài</string>
+    <string name="math_level_4">Nhà tư duy</string>
+    <string name="math_level_5">Chuyên gia Toán</string>
+    <string name="math_level_6">Bậc thầy Toán học</string>
+</resources>

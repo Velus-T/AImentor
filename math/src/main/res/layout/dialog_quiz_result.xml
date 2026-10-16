@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/quiz"
+        app:tint="#FFC107" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Kết quả luyện tập"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#263238" />
+
+    <TextView
+        android:id="@+id/txt_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="8/10"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:textColor="#6A1B9A" />
+
+    <TextView
+        android:id="@+id/txt_result_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Rất tốt! Bạn đã nắm vững kiến thức."
+        android:textColor="#546E7A"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/txt_exp_earned"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="+0 EXP • Tổng 0 EXP • Cấp 1"
+        android:textColor="#6A1B9A"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_view_explanations"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Xem lời giải"
+            android:textAllCaps="false"
+            android:backgroundTint="#F3E5F5"
+            android:textColor="#6A1B9A"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btn_finish_quiz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hoàn tất"
+            android:textAllCaps="false"
+            android:backgroundTint="#6A1B9A"
+            android:textColor="@color/math_active_text" />
+
+    </LinearLayout>
+
+</LinearLayout>

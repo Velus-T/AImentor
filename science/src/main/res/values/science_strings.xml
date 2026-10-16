@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="science_nav_home">Trang chủ</string>
+    <string name="science_nav_solve">Hỏi AI</string>
+    <string name="science_nav_history">Lịch sử</string>
+    <string name="science_nav_formula">Công thức</string>
+    <string name="science_nav_quiz">Quiz</string>
+
+    <string name="science_back">Quay lại</string>
+    <string name="science_search">Tìm kiếm</string>
+    <string name="science_filter">Bộ lọc</string>
+    <string name="science_view_all">Xem tất cả ›</string>
+    <string name="science_more_options">Tùy chọn khác</string>
+    <string name="science_add_formula">Thêm công thức</string>
+
+    <string name="science_home_title">Khoa học AI</string>
+    <string name="science_home_hero_title">Khám phá thế giới khoa học</string>
+    <string name="science_home_hero_description">Học Vật lý, Hóa học và Sinh học với trợ lý AI thông minh.</string>
+    <string name="science_subjects">Chọn môn học</string>
+    <string name="science_quick_tools">Công cụ học tập</string>
+    <string name="science_physics">Vật lý</string>
+    <string name="science_physics_description">Chuyển động, lực và năng lượng</string>
+    <string name="science_chemistry">Hóa học</string>
+    <string name="science_chemistry_description">Nguyên tố và phản ứng hóa học</string>
+    <string name="science_biology">Sinh học</string>
+    <string name="science_biology_description">Tế bào, di truyền và sinh thái</string>
+    <string name="science_periodic_table">Bảng tuần hoàn</string>
+    <string name="science_circuit">Mạch điện</string>
+    <string name="science_progress">Tiến độ học tập</string>
+
+    <string name="science_solve_title">Hỏi Science AI</string>
+    <string name="science_solve_hero_title">Giải bài tập khoa học\nvới AI thông minh</string>
+    <string name="science_solve_hero_description">Chụp ảnh hoặc nhập câu hỏi. AI sẽ phân tích và giải thích chi tiết từng bước.</string>
+    <string name="science_take_photo">Chụp câu hỏi</string>
+    <string name="science_take_photo_description">Dùng camera để chụp bài tập khoa học</string>
+    <string name="science_enter_question">Nhập câu hỏi</string>
+    <string name="science_enter_question_description">Nhập bằng bàn phím hoặc dán nội dung</string>
+    <string name="science_recent_questions">Câu hỏi gần đây</string>
+
+    <string name="science_history_title">Lịch sử</string>
+    <string name="science_history_hero_title">Xem lại các câu hỏi\nđã giải</string>
+    <string name="science_history_hero_description">Ôn tập và tiếp tục học tập hiệu quả hơn mỗi ngày.</string>
+    <string name="science_all">Tất cả</string>
+    <string name="science_today">Hôm nay</string>
+    <string name="science_last_seven_days">7 ngày qua</string>
+    <string name="science_this_month">Tháng này</string>
+    <string name="science_yesterday">Hôm qua</string>
+
+    <string name="science_formula_title">Công thức Khoa học</string>
+    <string name="science_formula_hero_title">Lưu và quản lý các\ncông thức quan trọng</string>
+    <string name="science_formula_hero_description">Tạo danh sách công thức riêng để học tập nhanh chóng hơn.</string>
+    <string name="science_formula_all">Tất cả</string>
+    <string name="science_formula_physics">Vật lý</string>
+    <string name="science_formula_chemistry">Hóa học</string>
+    <string name="science_formula_biology">Sinh học</string>
+
+    <string name="science_quiz_title">Luyện tập Quiz</string>
+    <string name="science_quiz_hero_title">Luyện tập khoa học\nvới quiz trắc nghiệm</string>
+    <string name="science_quiz_hero_description">Kiểm tra kiến thức và nâng cao kỹ năng mỗi ngày.</string>
+    <string name="science_select_topic">Luyện tập và độ chính xác theo môn</string>
+    <string name="science_recent_quiz">Tổng kết Quiz</string>
+    <string name="science_quiz_accuracy_explanation">% độ chính xác = số câu trả lời đúng / tổng số câu đã làm của riêng từng môn.</string>
+    <string name="science_questions_count">%1$d câu hỏi</string>
+    <string name="science_score_format">%1$d/%2$d</string>
+    <string name="science_percent_format">%1$d%%</string>
+    <string name="science_edit">Sửa</string>
+    <string name="science_delete">Xóa</string>
+
+    <!-- Levels -->
+    <string name="science_level_format">Cấp %1$d</string>
+    <string name="science_level_exp_format">%1$d / %2$d EXP</string>
+    <string name="science_level_remaining_format">Còn %1$d EXP để lên cấp</string>
+    <string name="science_total_exp_format">Tổng EXP Khoa học: %1$d</string>
+    <string name="science_quiz_rewards">Đúng: Dễ +5 • Trung bình +10 • Khó +20 EXP</string>
+
+    <string name="science_level_1">Người khám phá</string>
+    <string name="science_level_2">Học viên Khoa học</string>
+    <string name="science_level_3">Nhà thực nghiệm</string>
+    <string name="science_level_4">Nhà nghiên cứu</string>
+    <string name="science_level_5">Chuyên gia Khoa học</string>
+    <string name="science_level_6">Bậc thầy Khoa học</string>
+
+    <!-- Quiz Selection -->
+    <string name="science_quiz_adaptive_title">Quiz Khoa học thích ứng</string>
+    <string name="science_quiz_subject_label">Môn học</string>
+    <string name="science_quiz_edu_level_label">Cấp độ học tập</string>
+    <string name="science_quiz_topic_label">Chủ đề</string>
+    <string name="science_quiz_topic_hint">Ví dụ: năng lượng, axit và bazơ, tế bào</string>
+    <string name="science_quiz_count_label">Số câu hỏi</string>
+    <string name="science_quiz_adaptive_desc">Quiz sẽ thích ứng theo cấp độ học và kết quả gần đây.</string>
+    <string name="science_quiz_btn_new">Tạo Quiz mới</string>
+    <string name="science_quiz_btn_submit">Nộp Quiz</string>
+    <string name="science_quiz_stats_title">Độ chính xác Quiz theo từng môn</string>
+    <string name="science_quiz_stats_desc">% = số câu đúng / tổng số câu đã làm của riêng môn đó.</string>
+    <string name="science_quiz_not_started">Chưa làm Quiz</string>
+    <string name="science_quiz_summary_title">Tổng kết Quiz Khoa học</string>
+    <string name="science_quiz_summary_empty">Chưa có lượt Quiz nào</string>
+    <string name="science_quiz_overall_accuracy">Độ chính xác chung</string>
+    <string name="science_quiz_attempts_format">%1$d lượt Quiz • %2$d câu đã làm</string>
+    <string name="science_quiz_score_format_alt">%1$d/%2$d đúng</string>
+    <string name="science_quiz_accuracy_format">%1$d%% chính xác</string>
+    <string name="science_quiz_desc_accuracy">%1$s, độ chính xác Quiz %2$d phần trăm</string>
+    <string name="science_quiz_desc_no_data">%1$s, chưa có dữ liệu Quiz</string>
+
+    <string name="science_my_notes">Ghi chú của tôi</string>
+    <string name="science_notes_empty">Chưa có ghi chú. Nhấn nút + để thêm.</string>
+    <string name="science_ref_formulas">Công thức tham khảo</string>
+    <string name="science_add_note">Thêm ghi chú</string>
+    <string name="science_note_title_hint">Tiêu đề ghi chú</string>
+    <string name="science_note_content_hint">Nội dung ghi chú</string>
+    <string name="science_cancel">HỦY</string>
+    <string name="science_save">LƯU</string>
+    <string name="science_note_added">Đã thêm ghi chú</string>
+    <string name="science_note_updated">Đã cập nhật ghi chú</string>
+    <string name="science_note_save_error">Không thể lưu ghi chú</string>
+    <string name="science_note_error_title">Nhập tiêu đề</string>
+    <string name="science_note_error_content">Nhập nội dung</string>
+    <string name="science_note_updated_at">Cập nhật %1$s</string>
+    <string name="science_note_delete_title">Xóa ghi chú</string>
+    <string name="science_note_delete_msg">Xóa “%1$s”? Thao tác này không thể hoàn tác.</string>
+    <string name="science_note_delete_success">Đã xóa ghi chú</string>
+    <string name="science_quiz_count_format_alt">%1$d câu hỏi</string>
+    <string name="science_stat_questions">Câu hỏi đã hỏi: %1$d</string>
+    <string name="science_stat_most_studied">Môn học nhiều nhất: %1$s</string>
+    <string name="science_stat_no_data">Chưa đủ dữ liệu</string>
+    <string name="science_stat_bookmarks">Câu trả lời đã lưu: %1$d</string>
+    <string name="science_stat_accuracy">Độ chính xác Quiz toàn module: %1$.0f%% qua %2$d lượt</string>
+    <string name="science_level_max">Đã đạt cấp tối đa</string>
+    <string name="science_quiz_result_format">Kết quả: %1$d/%2$d (%3$.0f%%)\n%4$s\n%5$s\n%6$s</string>
+    <string name="science_quiz_exp_saved">+%1$d EXP • Tổng EXP Khoa học: %2$d</string>
+    <string name="science_quiz_exp_not_saved">+%1$d EXP chưa được lưu</string>
+    <string name="science_quiz_level_line">%1$s • %2$s • %3$s</string>
+    <string name="science_levelup_title">Lên cấp! ⭐</string>
+    <string name="science_levelup_msg">Bạn đã đạt Cấp %1$d – %2$s.\n\nTổng EXP Khoa học: %3$d</string>
+    <string name="science_levelup_jumped">Bạn đã tăng %1$d cấp!\n</string>
+    <string name="science_continue">Tiếp tục</string>
+
+    <!-- Formulas -->
+    <string name="science_formula_newton">Định luật II Newton</string>
+    <string name="science_formula_kinetic">Động năng</string>
+    <string name="science_formula_electric">Điện năng</string>
+    <string name="science_formula_moles">Số mol</string>
+    <string name="science_formula_concentration">Nồng độ mol</string>
+    <string name="science_formula_photosynthesis">Quang hợp</string>
+
+    <!-- Study Planner -->
+    <string name="science_planner_title">Lập kế hoạch học tập AI</string>
+    <string name="science_planner_info">Buổi học đầu tiên bắt đầu ngay khi bạn nhấn Tạo. Các buổi tiếp theo diễn ra hàng ngày vào cùng khung giờ.</string>
+    <string name="science_planner_subject">Môn học</string>
+    <string name="science_planner_edu_level">Cấp độ học tập</string>
+    <string name="science_planner_goal">Mục tiêu học tập</string>
+    <string name="science_planner_goal_hint">Ví dụ: chuẩn bị cho bài kiểm tra cuối kỳ về điện học</string>
+    <string name="science_planner_length">Độ dài kế hoạch</string>
+    <string name="science_planner_daily_time">Thời gian mỗi ngày</string>
+    <string name="science_planner_btn_generate">Tạo kế hoạch từ bây giờ</string>
+    <string name="science_planner_empty">Chưa có kế hoạch học tập nào được tạo.</string>
+    <string name="science_planner_btn_clear">Xóa kế hoạch đã lưu</string>
+    <string name="science_planner_days_format">%1$d ngày</string>
+    <string name="science_planner_minutes_format">%1$d phút/ngày</string>
+    <string name="science_planner_day_label">Ngày %1$d</string>
+    <string name="science_planner_goal_label">Mục tiêu: %1$s</string>
+    <string name="science_planner_created_label">%1$s · tạo lúc %2$s</string>
+    <string name="science_planner_first_session">Buổi đầu tiên: %1$s</string>
+    <string name="science_planner_session_item">%1$s · %2$s</string>
+    <string name="science_planner_clear_title">Xóa kế hoạch?</string>
+    <string name="science_planner_clear_msg">Hành động này sẽ xóa toàn bộ lộ trình hiện tại.</string>
+    <string name="science_planner_clear_confirm">Xóa</string>
+    <string name="science_planner_session_title">Buổi %1$d: %2$s</string>
+    <string name="science_planner_generating">AI đang tạo kế hoạch cho %1$s...</string>
+    <string name="science_planner_source_ai">Lộ trình cá nhân hóa bởi AI</string>
+    <string name="science_planner_source_local">Lộ trình ngoại tuyến tin cậy</string>
+
+    <!-- Periodic Table -->
+    <string name="science_periodic_search_hint">Tìm theo tên, ký hiệu, số hiệu hoặc nhóm</string>
+    <string name="science_periodic_btn_search">Tìm kiếm nguyên tố</string>
+    <string name="science_periodic_count_format">Đã tìm thấy %1$d nguyên tố</string>
+
+    <!-- Circuit Diagram -->
+    <string name="science_circuit_title">Sơ đồ mạch điện Vật lý</string>
+    <string name="science_circuit_type_label">Loại mạch</string>
+    <string name="science_circuit_switch_closed">Công tắc đóng (dòng điện chạy qua)</string>
+    <string name="science_circuit_switch_open">Công tắc mở (mạch ngắt)</string>
+    <string name="science_circuit_series">Mạch nối tiếp</string>
+    <string name="science_circuit_parallel">Mạch song song</string>
+    <string name="science_circuit_series_desc">Trong mạch nối tiếp, tất cả các linh kiện dùng chung một đường dẫn dòng điện. Cùng một dòng điện đi qua điện trở và bóng đèn, trong khi điện áp nguồn được chia sẻ.</string>
+    <string name="science_circuit_parallel_desc">Trong mạch song song, mỗi nhánh có cùng hiệu điện thế. Dòng điện có thể chia giữa các nhánh, nên một bóng đèn có thể tiếp tục hoạt động nếu một nhánh khác bị ngắt.</string>
+    <string name="science_circuit_switch_closed_desc"> Công tắc đóng làm kín mạch, nên dòng điện quy ước có thể chạy qua.</string>
+    <string name="science_circuit_switch_open_desc"> Công tắc mở làm ngắt mạch, nên dòng điện không thể chạy qua.</string>
+    <string name="science_circuit_disclaimer_desc"> Sử dụng sơ đồ này như một công cụ hỗ trợ học tập; các mạch điện thực tế phải sử dụng điện áp phù hợp và có sự giám sát của người lớn.</string>
+
+    <!-- Chat Suggestions -->
+    <string name="science_ai_mentor">AI Mentor Khoa học</string>
+    <string name="science_chat_ready">AI đang sẵn sàng</string>
+    <string name="science_chat_welcome_title">Anh đang cần giải phần nào?</string>
+    <string name="science_chat_welcome_desc">Nhập câu hỏi hoặc gửi ảnh đề. AI sẽ xác định dữ kiện, công thức, các bước giải và kiểm tra kết quả.</string>
+    <string name="science_suggestion_step_by_step">Giải bài này từng bước và kiểm tra đơn vị</string>
+    <string name="science_suggestion_equations">Cân bằng phương trình và giải thích tỉ lệ mol</string>
+    <string name="science_suggestion_phenomenon">Giải thích hiện tượng bằng ví dụ thực tế</string>
+    <string name="science_chat_disclaimer">Kiểm tra lại công thức, đơn vị và hướng dẫn an toàn trước khi áp dụng.</string>
+    <string name="science_chat_new">Chat mới</string>
+    <string name="science_chat_explanation_title">Cách giải thích</string>
+    <string name="science_chat_config_desc">Chọn môn, trình độ và cách giải thích phù hợp với bài đang học.</string>
+
+    <!-- Tool Labels -->
+    <string name="science_tool_history">Lịch sử</string>
+    <string name="science_tool_bookmarks">Đã lưu</string>
+    <string name="science_tool_quiz">Quiz</string>
+    <string name="science_tool_planner">Kế hoạch học tập</string>
+    <string name="science_tool_periodic">Bảng tuần hoàn</string>
+    <string name="science_tool_circuit">Mạch điện</string>
+    <string name="science_tool_progress">Tiến độ</string>
+    <string name="science_tool_settings">Hiển thị</string>
+
+    <!-- Education Levels -->
+    <string name="science_edu_middle">Trung học cơ sở</string>
+    <string name="science_edu_high">Trung học phổ thông</string>
+    <string name="science_edu_uni">Đại học</string>
+
+    <!-- Subjects -->
+    <string name="science_subj_physics">Vật lý</string>
+    <string name="science_subj_chemistry">Hóa học</string>
+    <string name="science_subj_biology">Sinh học</string>
+    <string name="science_subj_others">Khác</string>
+    <string name="science_edit_note">Sửa ghi chú</string>
+    <!-- Explanation Styles -->
+    <string name="science_style_short">Ngắn gọn</string>
+    <string name="science_style_detailed">Chi tiết</string>
+    <string name="science_style_step_by_step">Từng bước</string>
+    <!-- Quiz Difficulty -->
+    <string name="science_quiz_diff_easy">Dễ</string>
+    <string name="science_quiz_diff_medium">Trung bình</string>
+    <string name="science_quiz_diff_hard">Khó</string>
+    <string name="science_quiz_difficulty_format">%1$s • +%2$d EXP nếu đúng</string>
+    <string name="science_quiz_correct_feedback">✓ Chính xác. +%1$d EXP.</string>
+    <string name="science_quiz_wrong_feedback">✗ Chưa đúng. Đáp án là: %1$s</string>
+</resources>
