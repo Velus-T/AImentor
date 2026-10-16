@@ -1242,18 +1242,11 @@ private void restoreViewState(@Nullable Bundle state) {
  * Purpose: Keeps the component synchronized with the latest learner, UI, or domain state.
  */
 private void updateModelInfo(ScienceAnswer latestAnswer) {
-        String model = aiClient.getModelName();
-        String status = aiClient.getStatus();
-        int total = latestAnswer != null ? latestAnswer.getTotalTokens() : 0;
-        
-        String info = String.format(java.util.Locale.US, "Model: %s • Status: %s • Tokens: %d", model, status, total);
-        modelInfoText.setText(info);
-        
-        // Visual indicator for status
-        int color = 0xFF4CAF50; // Green (GOOD)
-        if ("MEDIUM".equals(status)) color = 0xFFFF9800; // Orange
-        if ("BUSY".equals(status)) color = 0xFFF44336; // Red
-        modelInfoText.setTextColor(color);
+        int label = latestAnswer != null && latestAnswer.isFromCache() ? R.string.science_source_saved
+                : (latestAnswer != null && latestAnswer.isLocal()) || !aiClient.isConfigured() ? R.string.science_source_local : R.string.science_source_remote;
+        modelInfoText.setText(label);
+        modelInfoText.setTextColor(androidx.core.content.ContextCompat.getColor(this,R.color.science_text_secondary));
+
     }
 
         /*
@@ -1265,7 +1258,7 @@ private void showModelSelectionMenu() {
         popup.getMenu().add("gemini-flash-latest (Auto)");
         popup.getMenu().add("gemini-3.5-flash (Frontier)");
         popup.getMenu().add("gemini-3.1-flash-lite (Stable)");
-        
+
         popup.setOnMenuItemClickListener(item -> {
             CharSequence title = item.getTitle();
             if (title == null) return false;
@@ -1277,7 +1270,7 @@ private void showModelSelectionMenu() {
         });
         popup.show();
     }
-    
+
         /*
  * Responsibility: Refreshes the current state/data when the component returns to the foreground.
  * Purpose: Ensures the UI reflects changes made on other Science screens.

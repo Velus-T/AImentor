@@ -11,7 +11,7 @@ public class DashboardRegressionTest {
             public Subject subject() { return subject; }
             public SubjectProgress load(int id) {
                 assertEquals(42,id);
-                return new SubjectProgress(exp,10,Arrays.asList(new RecentActivity(subject,RecentActivity.Type.CHAT,"","",time)));
+                return new SubjectProgress(exp,Arrays.asList(new RecentActivity(subject,RecentActivity.Type.CHAT,"","",time)));
             }
         };
     }

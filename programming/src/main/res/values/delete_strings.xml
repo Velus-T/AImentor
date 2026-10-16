@@ -1,0 +1,9 @@
+<resources>
+    <string name="program_delete_title">Xác nhận xóa</string>
+    <string name="program_delete_action">Xóa</string>
+    <string name="program_delete_done">Đã xóa.</string>
+    <string name="program_delete_failed">Chưa xóa được dữ liệu. Vui lòng tải lại và thử lại.</string>
+    <string name="program_delete_note">Xóa ghi chú này? Không thể hoàn tác.</string>
+    <string name="program_delete_chat">Xóa cuộc hội thoại và toàn bộ tin nhắn trong đó? Không thể hoàn tác.</string>
+    <string name="program_delete_all_chats">Xóa toàn bộ lịch sử trò chuyện của tài khoản này? Không thể hoàn tác.</string>
+</resources>

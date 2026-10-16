@@ -1,158 +1,116 @@
 package com.brightpath.science.presentation.view;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.RectF;
+import android.graphics.*;
 import android.util.AttributeSet;
 import android.view.View;
+import androidx.core.content.ContextCompat;
+import com.brightpath.science.R;
 
-import androidx.annotation.Nullable;
-
+/** Topology-aware schematic: wires terminate at components instead of bypassing them. */
 public final class CircuitDiagramView extends View {
-    private final Paint wirePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Paint lampPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private boolean parallel;
-    private boolean switchClosed = true;
+  private final Paint wire = new Paint(3), label = new Paint(3), lamp = new Paint(3);
+  private boolean parallel, closed = true, energized = true;
 
-        /*
- * Responsibility: Initializes CircuitDiagramView and receives or prepares the dependencies/state required by this custom Android View.
- * Purpose: Keeps object creation explicit so the component is ready before its main operations are used.
- */
-public CircuitDiagramView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        wirePaint.setColor(Color.rgb(25, 70, 110));
-        wirePaint.setStrokeWidth(dp(3));
-        wirePaint.setStyle(Paint.Style.STROKE);
-        textPaint.setColor(Color.DKGRAY);
-        textPaint.setTextSize(dp(14));
-        lampPaint.setColor(Color.rgb(255, 193, 7));
-        lampPaint.setStyle(Paint.Style.FILL);
+  public CircuitDiagramView(Context c, AttributeSet attrs) {
+    super(c, attrs);
+    wire.setColor(ContextCompat.getColor(c, R.color.science_text_primary));
+    wire.setStrokeWidth(2.5f);
+    wire.setStyle(Paint.Style.STROKE);
+    label.setColor(ContextCompat.getColor(c, R.color.science_text_primary));
+    label.setTextSize(16);
+    label.setTextAlign(Paint.Align.CENTER);
+  }
+
+  public void setParallel(boolean value) {
+    parallel = value;
+    invalidate();
+  }
+
+  public void setSwitchClosed(boolean value) {
+    closed = value;
+    invalidate();
+  }
+
+  public void setEnergized(boolean value) {
+    energized = value;
+    invalidate();
+  }
+
+  private void line(Canvas c, float x1, float y1, float x2, float y2) {
+    c.drawLine(x1, y1, x2, y2, wire);
+  }
+
+  @Override
+  protected void onDraw(Canvas canvas) {
+    super.onDraw(canvas);
+    float scale = Math.min(getWidth() / 360f, getHeight() / 300f);
+    if (scale <= 0) return;
+    canvas.save();
+    canvas.translate((getWidth() - 360 * scale) / 2, (getHeight() - 300 * scale) / 2);
+    canvas.scale(scale, scale);
+    line(canvas, 42, 50, 156, 50);
+    line(canvas, 204, 50, 318, 50);
+    canvas.drawCircle(156, 50, 3, wire);
+    canvas.drawCircle(204, 50, 3, wire);
+    line(canvas, 159, 50, closed ? 201 : 195, closed ? 50 : 28);
+    canvas.drawText(
+        getResources()
+            .getString(
+                closed
+                    ? R.string.science_circuit_closed_short
+                    : R.string.science_circuit_open_short),
+        180,
+        20,
+        label);
+    line(canvas, 42, 50, 42, 140);
+    line(canvas, 42, 160, 42, 250);
+    line(canvas, 22, 140, 62, 140);
+    line(canvas, 30, 160, 54, 160);
+    canvas.drawText("+", 16, 136, label);
+    canvas.drawText("−", 16, 174, label);
+    canvas.drawText("U", 78, 155, label);
+    if (parallel) {
+      line(canvas, 318, 50, 318, 220);
+      line(canvas, 42, 250, 112, 250);
+      line(canvas, 112, 130, 112, 250);
+      line(canvas, 112, 130, 183, 130);
+      resistor(canvas, 215, 130);
+      line(canvas, 247, 130, 318, 130);
+      line(canvas, 112, 220, 197, 220);
+      lamp(canvas, 215, 220);
+      line(canvas, 233, 220, 318, 220);
+      canvas.drawText("R1", 215, 105, label);
+      canvas.drawText("R2", 215, 258, label);
+      for (float y : new float[] {130, 220}) {
+        canvas.drawCircle(112, y, 3, wire);
+        canvas.drawCircle(318, y, 3, wire);
+      }
+    } else {
+      line(canvas, 318, 50, 318, 250);
+      line(canvas, 42, 250, 98, 250);
+      resistor(canvas, 130, 250);
+      line(canvas, 162, 250, 232, 250);
+      lamp(canvas, 250, 250);
+      line(canvas, 268, 250, 318, 250);
+      canvas.drawText("R1", 130, 282, label);
+      canvas.drawText("R2", 250, 282, label);
     }
+    canvas.restore();
+  }
 
-        /*
- * Responsibility: Updates the state or value handled by `setParallel` for CircuitDiagramView.
- * Purpose: Keeps the component synchronized with the latest learner, UI, or domain state.
- */
-public void setParallel(boolean parallel) {
-        this.parallel = parallel;
-        invalidate();
-    }
+  private void resistor(Canvas c, float x, float y) {
+    c.drawRect(x - 32, y - 10, x + 32, y + 10, wire);
+  }
 
-        /*
- * Responsibility: Updates the state or value handled by `setSwitchClosed` for CircuitDiagramView.
- * Purpose: Keeps the component synchronized with the latest learner, UI, or domain state.
- */
-public void setSwitchClosed(boolean switchClosed) {
-        this.switchClosed = switchClosed;
-        invalidate();
-    }
-
-        /*
- * Responsibility: Performs the `onDraw` operation for CircuitDiagramView within the Science Module.
- * Purpose: Encapsulates this responsibility inside the custom Android View so the code is easier to read, test, maintain, and locate during the review.
- */
-@Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        float left = dp(35);
-        float right = getWidth() - dp(35);
-        float top = dp(55);
-        float bottom = getHeight() - dp(55);
-
-        drawBattery(canvas, left, (top + bottom) / 2);
-        drawSwitch(canvas, (left + right) / 2, top);
-        canvas.drawLine(left, top, (left + right) / 2 - dp(35), top, wirePaint);
-        canvas.drawLine((left + right) / 2 + dp(35), top, right, top, wirePaint);
-        canvas.drawLine(left, top, left, (top + bottom) / 2 - dp(26), wirePaint);
-        canvas.drawLine(left, (top + bottom) / 2 + dp(26), left, bottom, wirePaint);
-        canvas.drawLine(left, bottom, right, bottom, wirePaint);
-        canvas.drawLine(right, top, right, bottom, wirePaint);
-
-        if (parallel) drawParallelComponents(canvas, left, right, top, bottom);
-        else drawSeriesComponents(canvas, left, right, bottom);
-
-        canvas.drawText("Battery", left + dp(12), (top + bottom) / 2 + dp(5), textPaint);
-        canvas.drawText(switchClosed ? "Closed switch" : "Open switch",
-                (left + right) / 2 - dp(42), top - dp(16), textPaint);
-    }
-
-        /*
- * Responsibility: Performs the `drawSeriesComponents` operation for CircuitDiagramView within the Science Module.
- * Purpose: Encapsulates this responsibility inside the custom Android View so the code is easier to read, test, maintain, and locate during the review.
- */
-private void drawSeriesComponents(Canvas canvas, float left, float right, float bottom) {
-        float mid = (left + right) / 2;
-        drawResistor(canvas, mid - dp(75), bottom);
-        drawLamp(canvas, mid + dp(70), bottom);
-        canvas.drawText("Resistor", mid - dp(105), bottom - dp(22), textPaint);
-        canvas.drawText("Lamp", mid + dp(48), bottom - dp(22), textPaint);
-    }
-
-        /*
- * Responsibility: Performs the `drawParallelComponents` operation for CircuitDiagramView within the Science Module.
- * Purpose: Encapsulates this responsibility inside the custom Android View so the code is easier to read, test, maintain, and locate during the review.
- */
-private void drawParallelComponents(Canvas canvas, float left, float right, float top, float bottom) {
-        float branchTop = top + dp(95);
-        float branchBottom = bottom - dp(85);
-        canvas.drawLine(left + dp(65), branchTop, right - dp(65), branchTop, wirePaint);
-        canvas.drawLine(left + dp(65), branchBottom, right - dp(65), branchBottom, wirePaint);
-        canvas.drawLine(left + dp(65), top, left + dp(65), bottom, wirePaint);
-        canvas.drawLine(right - dp(65), top, right - dp(65), bottom, wirePaint);
-        drawResistor(canvas, (left + right) / 2, branchTop);
-        drawLamp(canvas, (left + right) / 2, branchBottom);
-        canvas.drawText("Branch 1: resistor", left + dp(85), branchTop - dp(18), textPaint);
-        canvas.drawText("Branch 2: lamp", left + dp(85), branchBottom - dp(18), textPaint);
-    }
-
-        /*
- * Responsibility: Performs the `drawBattery` operation for CircuitDiagramView within the Science Module.
- * Purpose: Encapsulates this responsibility inside the custom Android View so the code is easier to read, test, maintain, and locate during the review.
- */
-private void drawBattery(Canvas canvas, float x, float y) {
-        canvas.drawLine(x - dp(12), y - dp(25), x - dp(12), y + dp(25), wirePaint);
-        canvas.drawLine(x + dp(10), y - dp(16), x + dp(10), y + dp(16), wirePaint);
-    }
-
-        /*
- * Responsibility: Performs the `drawSwitch` operation for CircuitDiagramView within the Science Module.
- * Purpose: Encapsulates this responsibility inside the custom Android View so the code is easier to read, test, maintain, and locate during the review.
- */
-private void drawSwitch(Canvas canvas, float x, float y) {
-        canvas.drawCircle(x - dp(28), y, dp(4), wirePaint);
-        canvas.drawCircle(x + dp(28), y, dp(4), wirePaint);
-        if (switchClosed) canvas.drawLine(x - dp(24), y, x + dp(24), y, wirePaint);
-        else canvas.drawLine(x - dp(24), y, x + dp(18), y - dp(25), wirePaint);
-    }
-
-        /*
- * Responsibility: Performs the `drawResistor` operation for CircuitDiagramView within the Science Module.
- * Purpose: Encapsulates this responsibility inside the custom Android View so the code is easier to read, test, maintain, and locate during the review.
- */
-private void drawResistor(Canvas canvas, float x, float y) {
-        RectF rect = new RectF(x - dp(45), y - dp(12), x + dp(45), y + dp(12));
-        canvas.drawRect(rect, wirePaint);
-    }
-
-        /*
- * Responsibility: Performs the `drawLamp` operation for CircuitDiagramView within the Science Module.
- * Purpose: Encapsulates this responsibility inside the custom Android View so the code is easier to read, test, maintain, and locate during the review.
- */
-private void drawLamp(Canvas canvas, float x, float y) {
-        canvas.drawCircle(x, y, dp(20), lampPaint);
-        canvas.drawCircle(x, y, dp(20), wirePaint);
-        canvas.drawLine(x - dp(13), y - dp(13), x + dp(13), y + dp(13), wirePaint);
-        canvas.drawLine(x + dp(13), y - dp(13), x - dp(13), y + dp(13), wirePaint);
-    }
-
-        /*
- * Responsibility: Performs the `dp` operation for CircuitDiagramView within the Science Module.
- * Purpose: Encapsulates this responsibility inside the custom Android View so the code is easier to read, test, maintain, and locate during the review.
- */
-private float dp(float value) {
-        return value * getResources().getDisplayMetrics().density;
-    }
+  private void lamp(Canvas c, float x, float y) {
+    lamp.setColor(
+        ContextCompat.getColor(
+            getContext(),
+            closed && energized ? R.color.science_warning : R.color.science_surface_variant));
+    c.drawCircle(x, y, 18, lamp);
+    c.drawCircle(x, y, 18, wire);
+    line(c, x - 11, y - 11, x + 11, y + 11);
+    line(c, x + 11, y - 11, x - 11, y + 11);
+  }
 }

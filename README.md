@@ -6,7 +6,8 @@ replacing the earlier science-only repository snapshot. Existing Git history is 
 ## Modules
 
 - `app`: login, registration, home, course categories, profile and settings.
-- `ui-core`: host-independent reusable card layouts and transition resources.
+- `ui-core`: host-independent card layouts, motion resources and localized time labels.
+- `data-core`: shared SQLite storage, schema migration, active account and timestamp conversion.
 - `math`: mathematics dashboard, chat, solving, formulas, quizzes and study history.
 - `science`: physics, chemistry, biology, quizzes and science tools.
 - `history`: history chat, quizzes, notes and saved conversations.
@@ -81,7 +82,7 @@ API integration boundary and proposed next work. No new backend business logic
 was added. Existing module functionality remains available.
 
 Final UI smoke checks also passed at 320dp width, font scale 1.3, dark mode
-and three-button system navigation. There are 49 passing existing module unit tests.
+and three-button system navigation. There are 74 passing unit tests, including calculator arithmetic and circuit laws.
 
 ## Correctness audit and architecture
 
@@ -89,3 +90,16 @@ See [AUDIT_SOLID.md](AUDIT_SOLID.md) for fixed findings, SOLID boundaries,
 regression coverage and remaining integration work. Shared UI infrastructure now
 lives in `ui-core`; account/profile and dashboard persistence are accessed through
 focused interfaces. Both debug and release builds are checked.
+
+## Comprehensive reform
+
+See [REFORM_REPORT.md](REFORM_REPORT.md) for the detailed change list and validation.
+The shell now uses Home / Subjects / Profile navigation. Existing settings remain in
+Profile. Math has an in-app draggable calculator bubble, with hide/reopen controls;
+other subjects never show it. Science circuits support editable voltage/resistances,
+series/parallel wiring and an interactive switch with ideal DC calculations.
+
+All account and subject helpers now use `AImentor.db`, with namespaced tables and
+separate module schema versions. Existing module files are imported transactionally
+and retained unchanged. Failed verification rolls back the import. These migrations
+are local storage changes; cloud synchronization and new backend services are not added.

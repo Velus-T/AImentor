@@ -81,12 +81,8 @@ public class ChatHistoryFragment extends Fragment {
         ivDeleteAll.setOnClickListener(v -> {
             // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
             if (dbHelper != null) {
-                // Gọi `deleteAllSessions()` trên `dbHelper` để thực hiện thao tác tương ứng.
-                dbHelper.deleteAllSessions(userId);
-                // Gọi hàm `loadHistory()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-                loadHistory();
-                // Hiển thị thông báo ngắn cho người dùng về kết quả hoặc lỗi thao tác.
-                Toast.makeText(getContext(), "Đã xóa tất cả lịch sử", Toast.LENGTH_SHORT).show();
+                com.example.modulelaptrinh.util.ConfirmDeletion.show(requireContext(), R.string.program_delete_all_chats,
+                        () -> dbHelper.deleteAllSessions(userId), this::loadHistory);
             }
         });
 
@@ -102,12 +98,8 @@ public class ChatHistoryFragment extends Fragment {
             public void onDeleteClick(int position, SessionItem session) {
                 // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
                 if (dbHelper != null && session != null) {
-                    // Gọi `deleteSession()` trên `dbHelper` để thực hiện thao tác tương ứng.
-                    dbHelper.deleteSession(session.getId(), userId);
-                    // Gọi hàm `loadHistory()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-                    loadHistory();
-                    // Hiển thị thông báo ngắn cho người dùng về kết quả hoặc lỗi thao tác.
-                    Toast.makeText(getContext(), "Đã xóa cuộc hội thoại", Toast.LENGTH_SHORT).show();
+                    com.example.modulelaptrinh.util.ConfirmDeletion.show(requireContext(), R.string.program_delete_chat,
+                            () -> dbHelper.deleteSession(session.getId(), userId), ChatHistoryFragment.this::loadHistory);
                 }
             }
 

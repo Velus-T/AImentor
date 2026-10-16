@@ -23,6 +23,7 @@ public class AiMentorApplication extends Application {
         ThemeHelper.applySavedTheme(this);
         LocaleHelper.applySavedLocale(this);
         com.example.asm_final.utils.SystemSafeArea.install(this);
+        com.example.mathmodule.calculator.MathCalculator.install(this);
         com.example.asm_final.utils.DebugAccounts.initialize(this);
     }
 }

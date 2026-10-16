@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@color/math_surface">
 
     <!-- Thanh chia nhóm theo ngày (Sẽ ẩn/hiện bằng Code) -->
     <TextView
         android:id="@+id/txt_date_group_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F0F4F8"
+        android:background="@color/math_background"
         android:paddingHorizontal="16dp"
         android:paddingVertical="6dp"
         android:text="Ngày 22/07/2026"
@@ -61,7 +61,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="1 + 1"
-                    android:textColor="#333333"
+                    android:textColor="@color/math_text_primary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="14:30 ▼"
-                    android:textColor="#888888"
+                    android:textColor="@color/math_text_secondary"
                     android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
@@ -80,9 +80,9 @@
         <LinearLayout
             android:id="@+id/layout_item_answer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="240dp"
             android:layout_marginTop="12dp"
-            android:background="#F9F9F9"
+            android:background="@color/math_background"
             android:orientation="vertical"
             android:padding="12dp"
             android:visibility="gone">
@@ -90,7 +90,7 @@
             <WebView
                 android:id="@+id/webview_item_answer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#00000000" />
         </LinearLayout>
     </LinearLayout>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="science_settings_saved">Science display settings saved.</string>
+    <string name="science_provider_configured">Configured • %1$s\nTap Test connection to verify.</string>
+    <string name="science_provider_unconfigured">Online AI is not configured. Local reference content is still available.</string>
+    <string name="science_provider_testing">Testing connection…</string>
+    <string name="science_provider_success">Connection successful • %1$s\nResponse: %2$s</string>
+    <string name="science_provider_failed">Connection failed.</string>
+</resources>

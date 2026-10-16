@@ -1,0 +1,8 @@
+<resources>
+    <string name="science_settings_saved">Đã lưu cài đặt hiển thị Khoa học.</string>
+    <string name="science_provider_configured">Đã cấu hình • %1$s\nBấm kiểm tra kết nối để xác minh.</string>
+    <string name="science_provider_unconfigured">Chưa cấu hình AI trực tuyến. Nội dung tham khảo trên máy vẫn dùng được.</string>
+    <string name="science_provider_testing">Đang kiểm tra kết nối…</string>
+    <string name="science_provider_success">Kết nối thành công • %1$s\nPhản hồi: %2$s</string>
+    <string name="science_provider_failed">Kết nối thất bại.</string>
+</resources>

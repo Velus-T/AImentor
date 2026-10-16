@@ -52,8 +52,8 @@ public class MathHistoryAdapter extends RecyclerView.Adapter<MathHistoryAdapter.
 
         // 1. Tách chuỗi thời gian
         String fullDateTime = item.getTimestamp();
-        String dateOnly = fullDateTime.contains(" ") ? fullDateTime.split(" ")[0] : fullDateTime;
-        String timeOnly = fullDateTime.contains(" ") ? fullDateTime.split(" ")[1] : "";
+        String dateOnly = com.example.mentor.ui.TimeLabels.date(holder.itemView.getContext(),fullDateTime);
+        String timeOnly = com.example.mentor.ui.TimeLabels.time(holder.itemView.getContext(),fullDateTime);
 
         // 2. Logic "Chia theo ngày"
         boolean showHeader = false;
@@ -61,7 +61,7 @@ public class MathHistoryAdapter extends RecyclerView.Adapter<MathHistoryAdapter.
             showHeader = true;
         } else {
             MathHistoryItem previousItem = historyList.get(position - 1);
-            String previousDate = previousItem.getTimestamp().contains(" ") ? previousItem.getTimestamp().split(" ")[0] : previousItem.getTimestamp();
+            String previousDate = com.example.mentor.ui.TimeLabels.date(holder.itemView.getContext(),previousItem.getTimestamp());
             if (!dateOnly.equals(previousDate)) {
                 showHeader = true;
             }
@@ -69,7 +69,7 @@ public class MathHistoryAdapter extends RecyclerView.Adapter<MathHistoryAdapter.
 
         if (showHeader) {
             holder.txtDateHeader.setVisibility(View.VISIBLE);
-            holder.txtDateHeader.setText("Ngày " + dateOnly);
+            holder.txtDateHeader.setText(dateOnly);
         } else {
             holder.txtDateHeader.setVisibility(View.GONE);
         }
@@ -77,20 +77,33 @@ public class MathHistoryAdapter extends RecyclerView.Adapter<MathHistoryAdapter.
         // 3. Đổ dữ liệu Câu hỏi và Thời gian
         holder.txtQuestion.setText(item.getQuestion());
         holder.txtTime.setText(timeOnly + " ▼");
+        holder.layoutAnswer.setVisibility(View.GONE);
+        holder.txtQuestion.setMaxLines(1);
 
         // --- XỬ LÝ RENDER TOÁN HỌC VỚI WEBVIEW ---
         holder.webviewAnswer.getSettings().setJavaScriptEnabled(true);
-        holder.webviewAnswer.setVerticalScrollBarEnabled(false);
+        holder.webviewAnswer.setVerticalScrollBarEnabled(true);
+        // Keep long solutions scrollable without expanding a recycled row indefinitely.
+        android.util.DisplayMetrics metrics = holder.itemView.getResources().getDisplayMetrics();
+        ViewGroup.LayoutParams answerParams = holder.layoutAnswer.getLayoutParams();
+        answerParams.height = Math.min(Math.round(280 * metrics.density), Math.round(metrics.heightPixels * .45f));
+        holder.layoutAnswer.setLayoutParams(answerParams);
+        holder.webviewAnswer.setOnTouchListener((view, event) -> {
+            int action = event.getActionMasked();
+            boolean touching = action != android.view.MotionEvent.ACTION_UP && action != android.view.MotionEvent.ACTION_CANCEL;
+            view.getParent().requestDisallowInterceptTouchEvent(touching);
+            return false;
+        });
         holder.webviewAnswer.setBackgroundColor(0); // Làm trong suốt nền
 
         // Thay thế ký tự xuống dòng thành thẻ <br> của HTML
-        String answerText = item.getAnswer() != null ? item.getAnswer().replace("\n", "<br>") : "";
+        String answerText = item.getAnswer() != null ? android.text.TextUtils.htmlEncode(item.getAnswer()).replace("\n", "<br>") : "";
 
         // Bọc nội dung bằng HTML và nhúng thư viện MathJax để render LaTeX
         String htmlContent = "<!DOCTYPE html><html><head>" +
                 "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
                 "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML\"></script>" +
-                "<style>body { font-family: Arial, sans-serif; font-size: 15px; color: #555555; margin: 0; padding: 0; line-height: 1.5; word-wrap: break-word; }</style>" +
+                "<style>body { font-family: Arial, sans-serif; font-size: 15px; color: " + String.format(java.util.Locale.ROOT,"#%06X",androidx.core.content.ContextCompat.getColor(holder.itemView.getContext(),R.color.math_text_primary)&0xFFFFFF) + "; margin: 0; padding: 0; line-height: 1.5; word-wrap: break-word; }</style>" +
                 "</head><body>" + answerText + "</body></html>";
 
         holder.webviewAnswer.loadDataWithBaseURL(null, htmlContent, "text/html", "UTF-8", null);

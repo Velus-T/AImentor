@@ -2,7 +2,7 @@
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
 
-        <Button android:id="@+id/btnHistoryBack" style="@style/ScienceSquareIconButton" android:contentDescription="Back" android:text="‹" android:textSize="28sp" />
+        <Button android:id="@+id/btnHistoryBack" style="@style/ScienceSquareIconButton" android:contentDescription="@string/science_back" android:text="‹" android:textSize="28sp" />
 
         <TextView style="@style/ScienceHeaderTitle" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Science question history" />
     </LinearLayout>

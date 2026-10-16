@@ -1,0 +1,5 @@
+<resources>
+    <string name="reminder_permission_needed">Allow notifications in device settings to enable study reminders.</string>
+    <string name="reminder_enabled_time">Daily study reminders enabled, around 8 PM.</string>
+    <string name="reminder_disabled">Study reminders disabled.</string>
+</resources>

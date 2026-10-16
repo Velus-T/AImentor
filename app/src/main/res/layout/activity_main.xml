@@ -1,15 +1,14 @@
-<?xml version='1.0' encoding='utf-8'?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true" android:background="@color/backgroundColor">
     <com.example.asm_final.utils.AuthColumn android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
-            <ImageView android:layout_width="56dp" android:layout_height="56dp" android:src="@drawable/logoapp" android:contentDescription="@null" android:importantForAccessibility="no" />
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="14dp" android:orientation="vertical">
-                <TextView style="@style/AuthHeading" android:text="AI Mentor" android:textSize="22sp" />
-                <TextView style="@style/AuthBody" android:text="@string/auth_tagline" android:textSize="14sp" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center">
+            <ImageView android:layout_width="72dp" android:layout_height="72dp" android:src="@drawable/ic_mentor_brand" android:contentDescription="@null" android:importantForAccessibility="no" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="0dp" android:orientation="vertical" android:gravity="center">
+                <TextView style="@style/AuthHeading" android:text="AI Mentor" android:textSize="22sp" android:gravity="center" />
+                <TextView style="@style/AuthBody" android:text="@string/auth_tagline" android:textSize="14sp" android:gravity="center" android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
-        <TextView style="@style/AuthHeading" android:text="@string/login_title" android:layout_marginTop="28dp" />
-        <TextView style="@style/AuthBody" android:text="@string/auth_login_intro" android:layout_marginTop="8dp" />
+        <TextView style="@style/AuthHeading" android:text="@string/login_title" android:layout_marginTop="28dp" android:gravity="center" />
+        <TextView style="@style/AuthBody" android:text="@string/auth_login_intro" android:layout_marginTop="8dp" android:gravity="center" />
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:background="@drawable/auth_card" android:orientation="vertical" android:padding="20dp">
             <com.google.android.material.textfield.TextInputLayout style="@style/AuthInput" android:hint="@string/login_hint_user">
                 <com.google.android.material.textfield.TextInputEditText style="@style/AuthEdit" android:id="@+id/edtLoginUsername" android:inputType="text" android:autofillHints="username" android:imeOptions="actionNext" android:nextFocusForward="@id/edtLoginPassword" />

@@ -4,7 +4,7 @@
 
         <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/chat_history_title" android:textSize="24sp" android:textStyle="bold" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium" />
 
-        <ImageView android:id="@+id/iv_delete_all" android:layout_width="48dp" android:layout_height="48dp" android:src="@drawable/ic_delete" android:tint="#FF6B6B" android:padding="8dp" android:background="@drawable/bg_icon_circle_dark" android:clickable="true" android:focusable="true" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:visibility="gone" />
+        <ImageView android:id="@+id/iv_delete_all" android:layout_width="48dp" android:layout_height="48dp" android:src="@drawable/ic_delete" app:tint="#FF6B6B" android:padding="8dp" android:background="@drawable/bg_icon_circle_dark" android:clickable="true" android:focusable="true" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:visibility="gone" />
     </LinearLayout>
 
     <TextView android:id="@+id/tv_empty_history" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/chat_history_empty" android:textSize="18sp" android:textColor="@color/text_tertiary" android:fontFamily="sans-serif-light" android:visibility="gone" app:layout_constraintTop_toBottomOf="@id/ll_chat_history_header" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" />

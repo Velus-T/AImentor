@@ -46,6 +46,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":data-core"))
     implementation(project(":ui-core"))
     implementation(libs.appcompat)
     implementation(libs.material)

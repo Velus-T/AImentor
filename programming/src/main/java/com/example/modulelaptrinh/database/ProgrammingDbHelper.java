@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import com.example.mentor.data.ModuleDatabaseHelper;
 import android.util.Log;
 
 import com.example.modulelaptrinh.ProgrammingChatMessage;
@@ -35,7 +35,7 @@ import java.util.List;
  *   <li>{@code db.insert/update/query/delete} mới là thao tác dữ liệu CRUD.</li>
  * </ul>
  */
-public class ProgrammingDbHelper extends SQLiteOpenHelper {
+public class ProgrammingDbHelper extends ModuleDatabaseHelper {
     private static final String TAG = "ProgrammingDbHelper";
     // Tính/đọc và lưu giá trị `DATABASE_NAME` (database name) để sử dụng ở các bước phía sau.
     private static final String DATABASE_NAME = "ProgrammingMentor.db";
@@ -43,14 +43,14 @@ public class ProgrammingDbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 7;
 
     // Bảng sessions
-    public static final String TABLE_SESSIONS = "sessions";
+    public static final String TABLE_SESSIONS = "programming_sessions";
     public static final String COLUMN_SESSION_ID = "id";
     public static final String COLUMN_SESSION_NAME = "name";
     public static final String COLUMN_SESSION_USER_ID = "user_id";
     public static final String COLUMN_SESSION_TIMESTAMP = "timestamp";
 
     // Bảng messages
-    public static final String TABLE_MESSAGES = "messages";
+    public static final String TABLE_MESSAGES = "programming_messages";
     public static final String COLUMN_MESSAGE_ID = "id";
     public static final String COLUMN_MESSAGE_SESSION_ID = "session_id";
     public static final String COLUMN_MESSAGE_CONTENT = "content";
@@ -59,14 +59,14 @@ public class ProgrammingDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_MESSAGE_TIMESTAMP = "timestamp";
 
     // Bảng chat history cũ
-    public static final String TABLE_CHAT_HISTORY = "chat_history";
+    public static final String TABLE_CHAT_HISTORY = "programming_chat_history";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_QUESTION = "question";
     public static final String COLUMN_ANSWER = "answer";
     public static final String COLUMN_TIMESTAMP = "timestamp";
 
     // Bảng notes
-    public static final String TABLE_NOTES = "notes";
+    public static final String TABLE_NOTES = "programming_notes";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_CONTENT = "content";
     public static final String COLUMN_NOTE_USER_ID = "user_id";
@@ -83,7 +83,7 @@ public class ProgrammingDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_QUIZ_EXP_EARNED = "exp_earned";
     public static final String COLUMN_QUIZ_TIMESTAMP = "created_at";
 
-    public static final String TABLE_USER_PROGRESS = "user_progress";
+    public static final String TABLE_USER_PROGRESS = "programming_user_progress";
     public static final String COLUMN_PROGRESS_USER_ID = "user_id";
     public static final String COLUMN_PROGRESS_TOTAL_EXP = "total_exp";
     public static final String COLUMN_PROGRESS_SUBJECT = "subject";
@@ -95,7 +95,7 @@ public class ProgrammingDbHelper extends SQLiteOpenHelper {
                     COLUMN_SESSION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_SESSION_USER_ID + " INTEGER NOT NULL DEFAULT 0, " +
                     COLUMN_SESSION_NAME + " TEXT, " +
-                    COLUMN_SESSION_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP" +
+                    COLUMN_SESSION_TIMESTAMP + " INTEGER DEFAULT (CAST(strftime('%s','now') AS INTEGER)*1000)" +
                     ");";
 
     private static final String CREATE_MESSAGES_TABLE =
@@ -105,7 +105,7 @@ public class ProgrammingDbHelper extends SQLiteOpenHelper {
                     COLUMN_MESSAGE_CONTENT + " TEXT, " +
                     COLUMN_MESSAGE_IS_USER + " INTEGER, " +
                     COLUMN_MESSAGE_IMAGES + " TEXT, " +
-                    COLUMN_MESSAGE_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+                    COLUMN_MESSAGE_TIMESTAMP + " INTEGER DEFAULT (CAST(strftime('%s','now') AS INTEGER)*1000), " +
                     "FOREIGN KEY(" + COLUMN_MESSAGE_SESSION_ID + ") REFERENCES " +
                     TABLE_SESSIONS + "(" + COLUMN_SESSION_ID + ") ON DELETE CASCADE" +
                     ");";
@@ -115,7 +115,7 @@ public class ProgrammingDbHelper extends SQLiteOpenHelper {
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_QUESTION + " TEXT, " +
                     COLUMN_ANSWER + " TEXT, " +
-                    COLUMN_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP" +
+                    COLUMN_TIMESTAMP + " INTEGER DEFAULT (CAST(strftime('%s','now') AS INTEGER)*1000)" +
                     ");";
 
     private static final String CREATE_NOTES_TABLE =
@@ -124,7 +124,7 @@ public class ProgrammingDbHelper extends SQLiteOpenHelper {
                     COLUMN_NOTE_USER_ID + " INTEGER NOT NULL DEFAULT 0, " +
                     COLUMN_TITLE + " TEXT, " +
                     COLUMN_CONTENT + " TEXT, " +
-                    COLUMN_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP" +
+                    COLUMN_TIMESTAMP + " INTEGER DEFAULT (CAST(strftime('%s','now') AS INTEGER)*1000)" +
                     ");";
 
     private static final String CREATE_QUIZ_ATTEMPTS_TABLE =
@@ -447,26 +447,28 @@ public class ProgrammingDbHelper extends SQLiteOpenHelper {
      * Xóa session của đúng user.
      * Message con được xóa tự động bởi FOREIGN KEY ON DELETE CASCADE / trigger của database.
      */
-    public void deleteSession(long sessionId, int userId) {
+    public boolean deleteSession(long sessionId, int userId) {
         // Mở SQLite ở chế độ ghi; SQLiteOpenHelper sẽ tạo/mở database nếu cần.
         SQLiteDatabase db = this.getWritableDatabase();
         // Thực hiện DELETE để xóa record trong SQLite theo điều kiện chỉ định.
-        db.delete(TABLE_SESSIONS,
+        int deleted = db.delete(TABLE_SESSIONS,
                 COLUMN_SESSION_ID + "=? AND " + COLUMN_SESSION_USER_ID + "=?",
                 new String[]{String.valueOf(sessionId), String.valueOf(Math.max(0, userId))});
         // Đóng handle database của thao tác hiện tại sau khi xử lý xong.
         db.close();
+        return deleted > 0;
     }
 
     /** Xóa toàn bộ session của user; database tự cascade xóa messages tương ứng. */
-    public void deleteAllSessions(int userId) {
+    public boolean deleteAllSessions(int userId) {
         // Mở SQLite ở chế độ ghi; SQLiteOpenHelper sẽ tạo/mở database nếu cần.
         SQLiteDatabase db = this.getWritableDatabase();
         // Thực hiện DELETE để xóa record trong SQLite theo điều kiện chỉ định.
-        db.delete(TABLE_SESSIONS, COLUMN_SESSION_USER_ID + "=?",
+        int deleted = db.delete(TABLE_SESSIONS, COLUMN_SESSION_USER_ID + "=?",
                 new String[]{String.valueOf(Math.max(0, userId))});
         // Đóng handle database của thao tác hiện tại sau khi xử lý xong.
         db.close();
+        return deleted > 0;
     }
 
     // ===== CÁC HÀM XỬ LÝ TIN NHẮN =====
@@ -767,15 +769,16 @@ public class ProgrammingDbHelper extends SQLiteOpenHelper {
     }
 
     /** Xóa note theo cả id và user_id. */
-    public void deleteNote(int userId, int id) {
+    public boolean deleteNote(int userId, int id) {
         // Mở SQLite ở chế độ ghi; SQLiteOpenHelper sẽ tạo/mở database nếu cần.
         SQLiteDatabase db = this.getWritableDatabase();
         // Thực hiện DELETE để xóa record trong SQLite theo điều kiện chỉ định.
-        db.delete(TABLE_NOTES,
+        int deleted = db.delete(TABLE_NOTES,
                 COLUMN_ID + "=? AND " + COLUMN_NOTE_USER_ID + "=?",
                 new String[]{String.valueOf(id), String.valueOf(Math.max(0, userId))});
         // Đóng handle database của thao tác hiện tại sau khi xử lý xong.
         db.close();
+        return deleted > 0;
     }
 
     /** Update title/content của note đúng user. */

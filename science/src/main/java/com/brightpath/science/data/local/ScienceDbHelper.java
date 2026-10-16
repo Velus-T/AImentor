@@ -3,7 +3,7 @@ package com.brightpath.science.data.local;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import com.example.mentor.data.ModuleDatabaseHelper;
 
 /**
  * SQLiteOpenHelper for the Science-owned database {@code science_ai.db}.
@@ -17,7 +17,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  *
  * <p>Keeping this database separate prevents Science schema changes from affecting other modules.</p>
  */
-public final class ScienceDbHelper extends SQLiteOpenHelper {
+public final class ScienceDbHelper extends ModuleDatabaseHelper {
     private static final String DATABASE_NAME = "science_ai.db";
     private static final int DATABASE_VERSION = 5;
 

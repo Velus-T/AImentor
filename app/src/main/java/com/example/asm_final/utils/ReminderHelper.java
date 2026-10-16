@@ -25,7 +25,8 @@ public final class ReminderHelper {
 
     public static boolean isReminderEnabled(Context context) {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                .getBoolean(KEY_REMINDERS_ENABLED, true);
+                .getBoolean(KEY_REMINDERS_ENABLED, false)
+                && androidx.core.app.NotificationManagerCompat.from(context).areNotificationsEnabled();
     }
 
     /*

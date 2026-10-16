@@ -26,3 +26,5 @@ rootProject.name = "ASM-final"
 include(":app", ":math", ":science", ":programming", ":history")
 
 include(":ui-core")
+
+include(":data-core")

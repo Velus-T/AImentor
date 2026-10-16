@@ -2,7 +2,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingVertical="20dp" android:paddingBottom="80dp">
 
-        
+
         <LinearLayout android:id="@+id/ll_header" android:layout_width="0dp" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:background="@color/bg_header_custom" android:paddingHorizontal="16dp" android:paddingVertical="12dp" app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="20dp">
 
             <ImageView android:id="@+id/iv_back" android:layout_width="48dp" android:layout_height="48dp" android:src="@drawable/ic_back_dark" android:padding="8dp" android:clickable="true" android:focusable="true" android:foreground="?android:attr/selectableItemBackgroundBorderless" app:tint="@color/text_header_light" android:contentDescription="@string/back" />
@@ -10,15 +10,15 @@
             <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/progress_learning_title" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/text_header_light" android:fontFamily="sans-serif-medium" android:gravity="center" android:paddingEnd="40dp" />
         </LinearLayout>
 
-        
-        <androidx.cardview.widget.CardView android:id="@+id/card_level" android:layout_width="0dp" android:layout_height="wrap_content" app:cardCornerRadius="20dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/bg_secondary" app:layout_constraintTop_toBottomOf="@id/ll_header" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="20dp">
+
+        <androidx.cardview.widget.CardView android:id="@+id/card_level" android:layout_width="0dp" android:layout_height="wrap_content" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_secondary" app:layout_constraintTop_toBottomOf="@id/ll_header" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="20dp">
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
 
-                
+
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
 
-                    
+
                     <LinearLayout android:layout_width="64dp" android:layout_height="64dp" android:gravity="center" android:background="@drawable/bg_level_badge">
 
                         <TextView android:id="@+id/tv_level" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1" android:textSize="28sp" android:textStyle="bold" android:textColor="@color/primary" android:fontFamily="sans-serif-medium" />
@@ -32,7 +32,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                
+
                 <ProgressBar android:id="@+id/progress_bar_exp" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="8dp" android:progressTint="@color/primary" android:backgroundTint="@color/surface_light" android:layout_marginTop="20dp" android:progress="0" />
 
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="10dp">
@@ -44,8 +44,8 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        
-        <androidx.cardview.widget.CardView android:id="@+id/card_stats" android:layout_width="0dp" android:layout_height="wrap_content" app:cardCornerRadius="20dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/bg_secondary" app:layout_constraintTop_toBottomOf="@id/card_level" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="20dp" android:layout_marginBottom="20dp">
+
+        <androidx.cardview.widget.CardView android:id="@+id/card_stats" android:layout_width="0dp" android:layout_height="wrap_content" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_secondary" app:layout_constraintTop_toBottomOf="@id/card_level" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="20dp" android:layout_marginBottom="20dp">
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
 
@@ -53,7 +53,7 @@
 
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:layout_marginTop="8dp">
 
-                    
+
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
 
                         <TextView android:id="@+id/tv_quiz_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="26sp" android:textStyle="bold" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium" />
@@ -63,7 +63,7 @@
 
                     <View android:layout_width="0.5dp" android:layout_height="44dp" android:background="@color/surface_light" />
 
-                    
+
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
 
                         <TextView android:id="@+id/tv_accuracy" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0%" android:textSize="26sp" android:textStyle="bold" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium" />
@@ -73,7 +73,7 @@
 
                     <View android:layout_width="0.5dp" android:layout_height="44dp" android:background="@color/surface_light" />
 
-                    
+
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
 
                         <TextView android:id="@+id/tv_total_exp_all" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="26sp" android:textStyle="bold" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium" />
@@ -84,7 +84,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        
+
         <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:text="@string/progress_tip" android:textSize="14sp" android:textColor="@color/text_tertiary" android:fontFamily="sans-serif" android:gravity="center" android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@id/card_stats" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

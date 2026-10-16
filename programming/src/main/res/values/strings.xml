@@ -1,28 +1,28 @@
 <resources>
     <string name="programming_app_name">Lập trình</string>
 
-    <!-- Home Fragment -->
-    <string name="greeting">Chào buổi sáng!</string>
-    <string name="sub_greeting">Học lập trình mỗi ngày</string>
+
+    <string name="greeting">Học lập trình mỗi ngày</string>
+    <string name="sub_greeting">Hỏi, thực hành và lưu điều đã học</string>
     <string name="programming_languages">Ngôn ngữ lập trình</string>
     <string name="quick_chat">Hỏi nhanh</string>
     <string name="hint_question">Nhập câu hỏi của bạn...</string>
     <string name="hint_hint">Gõ câu hỏi hoặc chọn ngôn ngữ để bắt đầu</string>
 
-    <!-- Chat Detail -->
+
     <string name="ai_mentor">AI Mentor</string>
     <string name="chat_hint">Nhập câu hỏi của bạn...</string>
     <string name="back">Quay lại</string>
     <string name="upload_image">Tải ảnh lên</string>
     <string name="send">Gửi</string>
 
-    <!-- Bottom Navigation -->
+
     <string name="nav_home">Trang chủ</string>
     <string name="nav_history">Lịch sử</string>
     <string name="nav_notes">Ghi chú</string>
     <string name="nav_quiz">Quiz</string>
 
-    <!-- Language names -->
+
     <string name="lang_python">Python</string>
     <string name="lang_java">Java</string>
     <string name="lang_kotlin">Kotlin</string>
@@ -36,7 +36,7 @@
     <string name="lang_typescript">TS</string>
     <string name="lang_ruby">Ruby</string>
 
-    <!-- Content descriptions -->
+
     <string name="desc_arrow_right">Mũi tên phải</string>
     <string name="desc_python">Biểu tượng Python</string>
     <string name="desc_java">Biểu tượng Java</string>
@@ -52,13 +52,13 @@
     <string name="desc_ruby">Biểu tượng Ruby</string>
     <string name="desc_send">Gửi tin nhắn</string>
 
-    <!-- Expand/Collapse -->
+
     <string name="see_more">Xem thêm</string>
     <string name="collapse">Thu gọn</string>
     <string name="expand_more">...</string>
     <string name="collapse_minus">−</string>
 
-    <!-- Progress Detail -->
+
     <string name="progress_title">📊 Tiến độ Lập trình</string>
     <string name="progress_stats_label">Thống kê</string>
     <string name="progress_tip">Hoàn thành Quiz để nhận EXP và tăng cấp!</string>
@@ -71,9 +71,9 @@
     <string name="prog_quiz_label">Bài quiz</string>
     <string name="prog_accuracy_label">Độ chính xác</string>
     <string name="prog_total_exp_label">Tổng EXP</string>
-    <string name="prog_lang_count_format">%1$d/%2$d</string>
+    <string name="prog_lang_count_format">Hiện %1$d/%2$d</string>
 
-    <string name="prog_tab_home">AI Mentor Lập trình</string>
+    <string name="prog_tab_home">Lập trình</string>
     <string name="prog_tab_history">Lịch sử chat</string>
     <string name="prog_tab_notes">Ghi chú</string>
     <string name="prog_tab_quiz">Quiz Lập trình</string>
@@ -82,14 +82,14 @@
     <string name="prog_chat_new_ready">Cuộc trò chuyện mới đã sẵn sàng. Anh muốn thảo luận về ngôn ngữ hay thuật toán nào?</string>
     <string name="prog_chat_input_empty">Vui lòng nhập nội dung tin nhắn.</string>
 
-    <!-- Levels -->
+
     <string name="prog_level_1">Người mới học lập trình</string>
     <string name="prog_level_2">Học viên Code</string>
     <string name="prog_level_3">Lập trình viên</string>
     <string name="prog_level_4">Chuyên gia Code</string>
     <string name="prog_level_5">Bậc thầy Lập trình</string>
 
-    <!-- Notes -->
+
     <string name="note_edit_title">Sửa ghi chú</string>
     <string name="note_new_title">Ghi chú mới</string>
     <string name="note_save">Lưu</string>
@@ -132,7 +132,7 @@
     <string name="prog_chat_welcome_format">Xin chào! Tôi là AI Mentor %1$s. Hãy gửi câu hỏi, code hoặc ảnh lỗi cần phân tích.</string>
     <string name="prog_chat_new_conv">Cuộc trò chuyện mới</string>
 
-    <!-- Chat History -->
+
     <string name="chat_history_title">Lịch sử chat</string>
     <string name="chat_history_empty">Chưa có lịch sử chat</string>
     <string name="chat_history_hint_q">Câu hỏi...</string>
@@ -141,7 +141,7 @@
     <string name="prog_quiz_progress_title">Tiến độ học tập</string>
     <string name="prog_level_label">Cấp học:</string>
 
-    <!-- Quiz -->
+
     <string name="quiz_question_count_format">%1$d / %2$d</string>
     <string name="quiz_difficulty_format">%1$s • +%2$d EXP nếu đúng</string>
     <string name="quiz_placeholder">Câu hỏi sẽ hiển thị ở đây...</string>

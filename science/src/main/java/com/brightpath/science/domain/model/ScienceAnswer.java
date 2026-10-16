@@ -2,6 +2,9 @@ package com.brightpath.science.domain.model;
 
 public final class ScienceAnswer {
     private final String content;
+    private boolean local;
+    public boolean isLocal() { return local; }
+    public ScienceAnswer withLocalSource() { ScienceAnswer copy = new ScienceAnswer(content,detectedSubject,difficulty,fromCache,historyId,promptTokens,responseTokens,totalTokens);copy.local=true;return copy; }
     private final String detectedSubject;
     private final String difficulty;
     private final boolean fromCache;
@@ -82,7 +85,7 @@ public int getTotalTokens() { return totalTokens; }
  * Purpose: Provides controlled read access to immutable/model state shared between Science layers.
  */
 public ScienceAnswer withPersistence(long newHistoryId, boolean cached) {
-        return new ScienceAnswer(content, detectedSubject, difficulty, cached, newHistoryId,
-                promptTokens, responseTokens, totalTokens);
+        ScienceAnswer copy = new ScienceAnswer(content, detectedSubject, difficulty, cached, newHistoryId,
+                promptTokens, responseTokens, totalTokens);copy.local=local;return copy;
     }
 }

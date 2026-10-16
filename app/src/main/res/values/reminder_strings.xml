@@ -1,0 +1,5 @@
+<resources>
+    <string name="reminder_permission_needed">Cần cho phép thông báo trong cài đặt của máy để bật nhắc học.</string>
+    <string name="reminder_enabled_time">Đã bật nhắc học hằng ngày, khoảng 20:00.</string>
+    <string name="reminder_disabled">Đã tắt nhắc học.</string>
+</resources>

@@ -197,7 +197,7 @@ public class QuizFragment extends Fragment {
         // Khởi tạo hộp thoại loading để báo cho người dùng biết tác vụ đang xử lý.
         progressDialog = new ProgressDialog(getContext());
         // Gọi `setMessage()` để cập nhật thuộc tính/trạng thái của `progressDialog`.
-        progressDialog.setMessage("Đang tạo câu hỏi...");
+        progressDialog.setMessage(getString(R.string.program_quiz_loading));
         // Gọi `setCancelable()` để cập nhật thuộc tính/trạng thái của `progressDialog`.
         progressDialog.setCancelable(false);
         // Hiển thị dialog/loading lên màn hình.
@@ -208,7 +208,7 @@ public class QuizFragment extends Fragment {
         // Bật hoặc khóa khả năng tương tác với View theo trạng thái hiện tại.
         btnNext.setEnabled(false);
         // Cập nhật nội dung hiển thị của TextView/EditText trên giao diện.
-        tvQuestion.setText("Đang tạo câu hỏi...");
+        tvQuestion.setText(getString(R.string.program_quiz_loading));
         // Cập nhật giá trị `isLoading` (is loading) theo trạng thái/kết quả vừa tính được.
         isLoading = true;
 
@@ -242,7 +242,7 @@ public class QuizFragment extends Fragment {
                     // Xử lý trường hợp còn lại khi điều kiện phía trên không thỏa.
                     } else {
                         // Hiển thị thông báo ngắn cho người dùng về kết quả hoặc lỗi thao tác.
-                        Toast.makeText(getContext(), "Không thể tạo quiz, vui lòng thử lại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.program_quiz_failed), Toast.LENGTH_SHORT).show();
                         // Gọi hàm `requireActivity()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
                         requireActivity().getOnBackPressedDispatcher().onBackPressed();
                     }
@@ -262,7 +262,7 @@ public class QuizFragment extends Fragment {
                         progressDialog.dismiss();
                     }
                     // Hiển thị thông báo ngắn cho người dùng về kết quả hoặc lỗi thao tác.
-                    Toast.makeText(getContext(), "Lỗi tạo quiz: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.program_quiz_failed), Toast.LENGTH_LONG).show();
                     // Gọi hàm `requireActivity()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
                     requireActivity().getOnBackPressedDispatcher().onBackPressed();
                 });
@@ -301,7 +301,7 @@ public class QuizFragment extends Fragment {
         tvProgress.setText(getString(R.string.quiz_question_count_format, index + 1, questions.size()));
         // Gọi `setProgress()` để cập nhật thuộc tính/trạng thái của `pbQuiz`.
         pbQuiz.setProgress((int) Math.round(((index + 1) * 100.0) / questions.size()));
-        
+
         // Lấy chuỗi từ resources và lưu vào `difficultyName` để hỗ trợ đa ngôn ngữ.
         String difficultyName = getString(question.getDifficulty().getDisplayNameResId());
         // Cập nhật nội dung hiển thị của TextView/EditText trên giao diện.
@@ -348,11 +348,11 @@ public class QuizFragment extends Fragment {
         // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
         if (index == questions.size() - 1) {
             // Cập nhật nội dung hiển thị của TextView/EditText trên giao diện.
-            btnNext.setText("Xem kết quả");
+            btnNext.setText(getString(R.string.program_quiz_results));
         // Xử lý trường hợp còn lại khi điều kiện phía trên không thỏa.
         } else {
             // Cập nhật nội dung hiển thị của TextView/EditText trên giao diện.
-            btnNext.setText("Tiếp theo");
+            btnNext.setText(getString(R.string.program_quiz_next));
         }
         // Bật hoặc khóa khả năng tương tác với View theo trạng thái hiện tại.
         btnNext.setEnabled(false);
@@ -455,7 +455,7 @@ public class QuizFragment extends Fragment {
         // Bật hoặc khóa khả năng tương tác với View theo trạng thái hiện tại.
         btnNext.setEnabled(false);
         // Cập nhật nội dung hiển thị của TextView/EditText trên giao diện.
-        btnNext.setText("Đang lưu kết quả...");
+        btnNext.setText(getString(R.string.program_quiz_saving));
 
         // Đọc Bundle tham số đã truyền vào Fragment.
         String subject = getArguments() != null ? getArguments().getString(ARG_SUBJECT, "Lập trình") : "Lập trình";
@@ -492,10 +492,10 @@ public class QuizFragment extends Fragment {
                     // Bật hoặc khóa khả năng tương tác với View theo trạng thái hiện tại.
                     btnNext.setEnabled(true);
                     // Cập nhật nội dung hiển thị của TextView/EditText trên giao diện.
-                    btnNext.setText("Thử lưu lại");
+                    btnNext.setText(getString(R.string.program_quiz_retry));
                     // Hiển thị thông báo ngắn cho người dùng về kết quả hoặc lỗi thao tác.
                     Toast.makeText(requireContext(),
-                            "Không thể lưu kết quả. EXP chưa được cộng.",
+                            getString(R.string.program_quiz_save_failed),
                             Toast.LENGTH_LONG).show();
                     // Dừng hàm tại đây vì không cần tiếp tục các bước phía sau.
                     return;
@@ -513,7 +513,7 @@ public class QuizFragment extends Fragment {
         int level = ProgrammingLevelCalculator.getLevel(totalExp);
         // Lấy chuỗi từ resources và lưu vào `title` để hỗ trợ đa ngôn ngữ.
         String title = getString(ProgrammingLevelCalculator.getTitleResId(level));
-        
+
         // Lấy chuỗi từ resources và lưu vào `message` để hỗ trợ đa ngôn ngữ.
         String message = getString(R.string.quiz_result_correct, result.getCorrectAnswers(), result.getTotalQuestions()) + "\n" +
                 getString(R.string.quiz_result_accuracy, result.getAccuracyPercent()) + "\n" +

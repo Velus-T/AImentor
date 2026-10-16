@@ -82,8 +82,8 @@ public final class ScienceStudyPlannerActivity extends AppCompatActivity {
         } catch (Exception error) {
             showPlan(null);
             statusView.setTextColor(getColor(R.color.science_error));
-            statusView.setText("The saved study plan could not be opened safely.");
-            Toast.makeText(this, "Unable to read the saved study plan.", Toast.LENGTH_SHORT).show();
+            statusView.setText(getString(R.string.science_tool_the_saved_study_plan_could_not_be));
+            Toast.makeText(this, getString(R.string.science_tool_unable_to_read_the_saved_study_plan), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -116,11 +116,11 @@ private void setupSpinners() {
         String[] levels = new String[EducationLevel.values().length];
         for (int i = 0; i < levels.length; i++) levels[i] = getString(EducationLevel.values()[i].getDisplayNameResId());
         levelSpinner.setAdapter(adapter(levels));
-        
+
         String[] dayLabels = new String[DAY_VALUES.length];
         for (int i = 0; i < dayLabels.length; i++) dayLabels[i] = getString(R.string.science_planner_days_format, DAY_VALUES[i]);
         daysSpinner.setAdapter(adapter(dayLabels));
-        
+
         String[] minuteLabels = new String[MINUTE_VALUES.length];
         for (int i = 0; i < minuteLabels.length; i++) minuteLabels[i] = getString(R.string.science_planner_minutes_format, MINUTE_VALUES[i]);
         minutesSpinner.setAdapter(adapter(minuteLabels));
@@ -167,7 +167,7 @@ private void generatePlan() {
                 MINUTE_VALUES[Math.max(0, Math.min(minutesSpinner.getSelectedItemPosition(), MINUTE_VALUES.length - 1))],
                 startMoment
         );
-        statusView.setText("Creating a schedule from " + formatDateTime(startMoment) + "…");
+        statusView.setText(getString(R.string.science_planner_creating, formatDateTime(startMoment)));
         generateUseCase.execute(request, new ResultCallback<StudyPlan>() {
                         /*
  * Responsibility: Performs the `onSuccess` operation for  within the Science Module.
@@ -179,7 +179,7 @@ private void generatePlan() {
                 setLoading(false);
                 showPlan(result);
                 Toast.makeText(ScienceStudyPlannerActivity.this,
-                        "Study plan created from the current time.", Toast.LENGTH_SHORT).show();
+                        getString(R.string.science_tool_study_plan_created_from_the_current_time), Toast.LENGTH_SHORT).show();
             }
 
                         /*
@@ -190,7 +190,7 @@ private void generatePlan() {
             public void onError(String message, Throwable error) {
                 if (destroyed) return;
                 setLoading(false);
-                statusView.setText(message == null ? "Unable to create a study plan." : message);
+                statusView.setText(message == null ? getString(R.string.science_tool_unable_to_create_a_study_plan) : message);
                 statusView.setTextColor(getColor(R.color.science_error));
             }
         });
@@ -281,7 +281,7 @@ private void addSafeCompletionListener(CompoundButton checkBox, StudySession ses
                 button.setOnCheckedChangeListener(null);
                 button.setChecked(previous);
                 addSafeCompletionListener(button, session);
-                Toast.makeText(this, "Unable to save this change.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.science_tool_unable_to_save_this_change), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -311,7 +311,7 @@ private void confirmClear() {
                         repository.clear(userId);
                         showPlan(null);
                     } catch (Exception error) {
-                        Toast.makeText(this, "Unable to clear the saved plan.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.science_tool_unable_to_clear_the_saved_plan), Toast.LENGTH_SHORT).show();
                     }
                 })
                 .show();

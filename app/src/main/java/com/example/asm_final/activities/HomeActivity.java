@@ -62,7 +62,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment;
         if(id==R.id.nav_home) fragment=new HomeFragment();
         else if(id==R.id.nav_category) fragment=new CategoryFragment();
-        else if(id==R.id.nav_profile) fragment=new ProfileFragment();
+        else if(id==R.id.nav_profile) fragment=new ProfileHubFragment();
+        else if(id==R.id.nav_edit_profile) fragment=new ProfileFragment();
         else if(id==R.id.nav_settings) fragment=new SettingsFragment();
         else return;
         Bundle args=new Bundle();args.putString("USERNAME",username);fragment.setArguments(args);
@@ -76,15 +77,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Fragment current=getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if(current instanceof HomeFragment) destination=R.id.nav_home;
         else if(current instanceof CategoryFragment) destination=R.id.nav_category;
-        else if(current instanceof ProfileFragment) destination=R.id.nav_profile;
+        else if(current instanceof ProfileHubFragment) destination=R.id.nav_profile;
+        else if(current instanceof ProfileFragment) destination=R.id.nav_edit_profile;
         else if(current instanceof SettingsFragment) destination=R.id.nav_settings;
         syncNavigationSelection();
     }
     private void syncNavigationSelection() {
         syncing=true;
-        navigationView.setCheckedItem(destination);
+        navigationView.setCheckedItem(destination==R.id.nav_edit_profile?R.id.nav_profile:destination);
         // Profile is owned by Settings in bottom navigation, and remains selected correctly on back.
-        bottomNav.getMenu().findItem(destination==R.id.nav_profile?R.id.nav_settings:destination).setChecked(true);
+        bottomNav.getMenu().findItem(destination==R.id.nav_settings||destination==R.id.nav_edit_profile?R.id.nav_profile:destination).setChecked(true);
         syncing=false;
     }
     @Override protected void onSaveInstanceState(Bundle out) { out.putInt("shell_destination",destination);super.onSaveInstanceState(out); }
@@ -93,6 +95,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);return true;
     }
     public void logout() {
+        com.example.mentor.data.ActiveUser.clear(this);
         startActivity(new Intent(this,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
         finish();
     }

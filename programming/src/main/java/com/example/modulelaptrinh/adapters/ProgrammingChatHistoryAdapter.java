@@ -61,7 +61,7 @@ public class ProgrammingChatHistoryAdapter extends RecyclerView.Adapter<Programm
         // Cập nhật nội dung hiển thị của TextView/EditText trên giao diện.
         holder.tvChatQuestion.setText(session.getName());
         // Cập nhật nội dung hiển thị của TextView/EditText trên giao diện.
-        holder.tvChatTime.setText(session.getTimestamp());
+        holder.tvChatTime.setText(com.example.mentor.ui.TimeLabels.dateTime(holder.itemView.getContext(),session.getTimestamp()));
         // Thay đổi trạng thái hiển thị/ẩn của View trên giao diện.
         holder.tvChatAnswer.setVisibility(View.GONE);
 

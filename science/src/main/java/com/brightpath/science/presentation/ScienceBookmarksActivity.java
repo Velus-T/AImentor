@@ -49,7 +49,7 @@ public final class ScienceBookmarksActivity extends AppCompatActivity {
         emptyView = findViewById(R.id.tvBookmarksEmpty);
 
         subjectSpinner.setAdapter(ScienceUiFactory.spinnerAdapter(this,
-                new String[]{"All subjects", "Physics", "Chemistry", "Biology"}));
+                new String[]{getString(R.string.science_tool_all_subjects), getString(R.string.science_tool_physics), getString(R.string.science_tool_chemistry), getString(R.string.science_tool_biology)}));
 
         RecyclerView recyclerView = findViewById(R.id.rvScienceBookmarks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -73,13 +73,13 @@ private void loadBookmarks() {
                     searchInput.getText().toString()
             );
             adapter.submitList(items);
-            emptyView.setText("No bookmarks found.");
+            emptyView.setText(getString(R.string.science_tool_no_bookmarks_found));
             emptyView.setVisibility(items.isEmpty() ? View.VISIBLE : View.GONE);
         } catch (Exception error) {
             adapter.submitList(java.util.Collections.emptyList());
-            emptyView.setText("Bookmarks are temporarily unavailable on this device.");
+            emptyView.setText(getString(R.string.science_tool_bookmarks_are_temporarily_unavailable_on_this_device));
             emptyView.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "Unable to open encrypted Science bookmarks.",
+            Toast.makeText(this, getString(R.string.science_tool_unable_to_open_encrypted_science_bookmarks),
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -97,16 +97,16 @@ private void showBookmarkDetail(ScienceBookmark item) {
         new AlertDialog.Builder(this)
                 .setTitle(item.getTitle())
                 .setView(content)
-                .setNegativeButton("Remove", (dialog, which) -> {
+                .setNegativeButton(getString(R.string.science_tool_remove), (dialog, which) -> {
                     try {
                         repository.deleteForHistory(userId, item.getHistoryId());
                         loadBookmarks();
                     } catch (Exception error) {
-                        Toast.makeText(this, "Unable to remove this bookmark.",
+                        Toast.makeText(this, getString(R.string.science_tool_unable_to_remove_this_bookmark),
                                 Toast.LENGTH_LONG).show();
                     }
                 })
-                .setPositiveButton("Close", null)
+                .setPositiveButton(getString(R.string.science_tool_close), null)
                 .show();
     }
 

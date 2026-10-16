@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import com.example.mentor.data.ModuleDatabaseHelper;
 
 import com.example.historymodule.HistoryMessage;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * Role: Local data-layer class for History, responsible for SQLite and data read/write operations.
  * Purpose: Separating the database from the UI centralizes queries, improves maintainability, and reduces direct SQL dependencies in Activities and Fragments.
  */
-public final class SqliteDbHelper extends SQLiteOpenHelper {
+public final class SqliteDbHelper extends ModuleDatabaseHelper {
     private static final String DATABASE_NAME = "history_db";
     private static final int DATABASE_VERSION = 8;
 
@@ -68,14 +68,14 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
      * Purpose: Encapsulating creation rules prevents callers from repeating the same initialization steps.
      */
     private void createLegacyTables(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS history_items ("
+        db.execSQL("CREATE TABLE IF NOT EXISTS history_legacy_items ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "title TEXT NOT NULL DEFAULT '', "
                 + "content TEXT NOT NULL DEFAULT '', "
                 + "timestamp TEXT NOT NULL DEFAULT '', "
                 + "type TEXT NOT NULL DEFAULT 'search')");
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS note_items ("
+        db.execSQL("CREATE TABLE IF NOT EXISTS history_notes ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "title TEXT NOT NULL DEFAULT '', "
                 + "content TEXT NOT NULL DEFAULT '', "
@@ -86,9 +86,9 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
                 + "updated_at INTEGER NOT NULL DEFAULT 0)");
 
         // Retained only so old installations can migrate without losing data.
-        db.execSQL("CREATE TABLE IF NOT EXISTS quiz_sets ("
+        db.execSQL("CREATE TABLE IF NOT EXISTS history_quiz_sets ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, category TEXT)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS quiz_questions ("
+        db.execSQL("CREATE TABLE IF NOT EXISTS history_quiz_questions ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, set_id INTEGER, question TEXT, "
                 + "option_a TEXT, option_b TEXT, option_c TEXT, option_d TEXT, correct_option TEXT)");
     }
@@ -98,7 +98,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
      * Purpose: Encapsulating creation rules prevents callers from repeating the same initialization steps.
      */
     private void createConversationTable(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS chat_messages ("
+        db.execSQL("CREATE TABLE IF NOT EXISTS history_messages ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "user_id INTEGER NOT NULL DEFAULT 0, "
                 + "conversation_id TEXT NOT NULL, "
@@ -113,7 +113,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
      * Purpose: Encapsulating creation rules prevents callers from repeating the same initialization steps.
      */
     private void createQuizAttemptTable(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS quiz_attempts ("
+        db.execSQL("CREATE TABLE IF NOT EXISTS history_quiz_attempts ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "user_id INTEGER NOT NULL DEFAULT 0, "
                 + "topic TEXT NOT NULL, "
@@ -129,21 +129,19 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
      * Purpose: A focused method improves readability, reuse, and step-by-step explanation.
      */
     private void ensureColumns(SQLiteDatabase db) {
-        addColumnIfMissing(db, "note_items", "user_id", "INTEGER NOT NULL DEFAULT 0");
-        addColumnIfMissing(db, "note_items", "pinned", "INTEGER NOT NULL DEFAULT 0");
-        addColumnIfMissing(db, "note_items", "created_at", "INTEGER NOT NULL DEFAULT 0");
-        addColumnIfMissing(db, "note_items", "updated_at", "INTEGER NOT NULL DEFAULT 0");
+        addColumnIfMissing(db, "history_notes", "user_id", "INTEGER NOT NULL DEFAULT 0");
+        addColumnIfMissing(db, "history_notes", "pinned", "INTEGER NOT NULL DEFAULT 0");
+        addColumnIfMissing(db, "history_notes", "created_at", "INTEGER NOT NULL DEFAULT 0");
+        addColumnIfMissing(db, "history_notes", "updated_at", "INTEGER NOT NULL DEFAULT 0");
 
-        addColumnIfMissing(db, "chat_messages", "user_id", "INTEGER NOT NULL DEFAULT 0");
+        addColumnIfMissing(db, "history_messages", "user_id", "INTEGER NOT NULL DEFAULT 0");
 
-        addColumnIfMissing(db, "quiz_attempts", "user_id", "INTEGER NOT NULL DEFAULT 0");
-        addColumnIfMissing(db, "quiz_attempts", "education_level",
+        addColumnIfMissing(db, "history_quiz_attempts", "user_id", "INTEGER NOT NULL DEFAULT 0");
+        addColumnIfMissing(db, "history_quiz_attempts", "education_level",
                 "TEXT NOT NULL DEFAULT 'Trung học cơ sở'");
-        addColumnIfMissing(db, "quiz_attempts", "exp_earned", "INTEGER NOT NULL DEFAULT 0");
+        addColumnIfMissing(db, "history_quiz_attempts", "exp_earned", "INTEGER NOT NULL DEFAULT 0");
 
-        long now = System.currentTimeMillis();
-        db.execSQL("UPDATE note_items SET created_at = ? WHERE created_at <= 0", new Object[]{now});
-        db.execSQL("UPDATE note_items SET updated_at = created_at WHERE updated_at <= 0");
+        // Missing historical dates remain unknown; never fabricate a recent date during reads.
     }
 
     /*
@@ -179,11 +177,11 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
      */
     private void ensureIndexes(SQLiteDatabase db) {
         db.execSQL("CREATE INDEX IF NOT EXISTS idx_history_chat_user_conversation_time "
-                + "ON chat_messages(user_id, conversation_id, created_at)");
+                + "ON history_messages(user_id, conversation_id, created_at)");
         db.execSQL("CREATE INDEX IF NOT EXISTS idx_history_notes_user_pin_time "
-                + "ON note_items(user_id, pinned, updated_at)");
+                + "ON history_notes(user_id, pinned, updated_at)");
         db.execSQL("CREATE INDEX IF NOT EXISTS idx_history_quiz_user_time "
-                + "ON quiz_attempts(user_id, created_at)");
+                + "ON history_quiz_attempts(user_id, created_at)");
     }
 
     /*
@@ -202,7 +200,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
         values.put("content", content == null ? "" : content.trim());
         values.put("image_attached", imageAttached ? 1 : 0);
         values.put("created_at", System.currentTimeMillis());
-        return getWritableDatabase().insert("chat_messages", null, values);
+        return getWritableDatabase().insert("history_messages", null, values);
     }
 
     /*
@@ -212,7 +210,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
     public List<HistoryMessage> loadChatMessages(int userId, String conversationId) {
         List<HistoryMessage> result = new ArrayList<>();
         try (Cursor cursor = getReadableDatabase().query(
-                "chat_messages",
+                "history_messages",
                 new String[]{"role", "content", "image_attached"},
                 "user_id = ? AND conversation_id = ?",
                 new String[]{String.valueOf(Math.max(0, userId)), normalizeConversationId(conversationId)},
@@ -243,13 +241,13 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
         List<HistoryHistoryItem> result = new ArrayList<>();
         StringBuilder sql = new StringBuilder()
                 .append("SELECT c.conversation_id, MAX(c.created_at) AS last_time, ")
-                .append("(SELECT first.content FROM chat_messages first ")
+                .append("(SELECT first.content FROM history_messages first ")
                 .append(" WHERE first.user_id = c.user_id AND first.conversation_id = c.conversation_id ")
                 .append(" AND first.role = ? ORDER BY first.created_at ASC, first.id ASC LIMIT 1) AS first_user, ")
-                .append("(SELECT last.content FROM chat_messages last ")
+                .append("(SELECT last.content FROM history_messages last ")
                 .append(" WHERE last.user_id = c.user_id AND last.conversation_id = c.conversation_id ")
                 .append(" ORDER BY last.created_at DESC, last.id DESC LIMIT 1) AS last_content ")
-                .append("FROM chat_messages c WHERE c.user_id = ? ")
+                .append("FROM history_messages c WHERE c.user_id = ? ")
                 .append("GROUP BY c.conversation_id ");
 
         List<String> args = new ArrayList<>();
@@ -295,7 +293,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
      */
     public int deleteConversation(int userId, String conversationId) {
         return getWritableDatabase().delete(
-                "chat_messages",
+                "history_messages",
                 "user_id = ? AND conversation_id = ?",
                 new String[]{String.valueOf(Math.max(0, userId)), normalizeConversationId(conversationId)}
         );
@@ -315,7 +313,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
         values.put("pinned", 0);
         values.put("created_at", now);
         values.put("updated_at", now);
-        return getWritableDatabase().insert("note_items", null, values);
+        return getWritableDatabase().insert("history_notes", null, values);
     }
 
     /*
@@ -328,7 +326,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
         values.put("content", safeText(content));
         values.put("updated_at", System.currentTimeMillis());
         return getWritableDatabase().update(
-                "note_items",
+                "history_notes",
                 values,
                 "id = ? AND user_id = ?",
                 new String[]{String.valueOf(noteId), String.valueOf(Math.max(0, userId))}
@@ -341,7 +339,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
      */
     public int deleteNote(int userId, long noteId) {
         return getWritableDatabase().delete(
-                "note_items",
+                "history_notes",
                 "id = ? AND user_id = ?",
                 new String[]{String.valueOf(noteId), String.valueOf(Math.max(0, userId))}
         );
@@ -356,7 +354,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
         values.put("pinned", pinned ? 1 : 0);
         values.put("updated_at", System.currentTimeMillis());
         return getWritableDatabase().update(
-                "note_items",
+                "history_notes",
                 values,
                 "id = ? AND user_id = ?",
                 new String[]{String.valueOf(noteId), String.valueOf(Math.max(0, userId))}
@@ -370,7 +368,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
     public List<HistoryNoteItem> loadNotes(int userId) {
         List<HistoryNoteItem> result = new ArrayList<>();
         try (Cursor cursor = getReadableDatabase().query(
-                "note_items",
+                "history_notes",
                 new String[]{"id", "title", "content", "pinned", "updated_at"},
                 "user_id = ?",
                 new String[]{String.valueOf(Math.max(0, userId))},
@@ -410,7 +408,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
         values.put("total_count", Math.max(0, total));
         values.put("exp_earned", Math.max(0, expEarned));
         values.put("created_at", System.currentTimeMillis());
-        return getWritableDatabase().insert("quiz_attempts", null, values);
+        return getWritableDatabase().insert("history_quiz_attempts", null, values);
     }
 
     /*
@@ -419,7 +417,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
      */
     public int getTotalQuizExp(int userId) {
         try (Cursor cursor = getReadableDatabase().rawQuery(
-                "SELECT COALESCE(SUM(exp_earned), 0) FROM quiz_attempts WHERE user_id = ?",
+                "SELECT COALESCE(SUM(exp_earned), 0) FROM history_quiz_attempts WHERE user_id = ?",
                 new String[]{String.valueOf(Math.max(0, userId))})) {
             return cursor.moveToFirst() ? Math.max(0, cursor.getInt(0)) : 0;
         }
@@ -432,7 +430,7 @@ public final class SqliteDbHelper extends SQLiteOpenHelper {
     public List<HistoryHistoryItem> loadQuizAttempts(int userId, int limit) {
         List<HistoryHistoryItem> result = new ArrayList<>();
         try (Cursor cursor = getReadableDatabase().query(
-                "quiz_attempts",
+                "history_quiz_attempts",
                 new String[]{"id", "topic", "education_level", "correct_count",
                         "total_count", "exp_earned", "created_at"},
                 "user_id = ?",

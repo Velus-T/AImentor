@@ -44,7 +44,7 @@ public class RecentActivityAdapter extends RecyclerView.Adapter<RecentActivityAd
         RecentActivity activity = activities.get(position);
         holder.tvTitle.setText(activity.getTitle());
         holder.tvDesc.setText(activity.getDescription());
-        holder.tvTime.setText(DateUtils.getRelativeTimeSpanString(activity.getTimestamp(), System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS));
+        holder.tvTime.setText(activity.getTimestamp() <= 0 ? holder.itemView.getContext().getString(R.string.activity_time_unknown) : DateUtils.getRelativeTimeSpanString(activity.getTimestamp(), System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS));
 
         // Set Icon and Background based on subject
         int iconRes = R.drawable.ic_cat_math;

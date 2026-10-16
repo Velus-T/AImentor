@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import com.example.mentor.data.ModuleDatabaseHelper;
 
 import com.example.mathmodule.util.MathQuizDifficulty;
 import com.example.mathmodule.util.MathUserSession;
@@ -21,7 +21,7 @@ import java.util.List;
  * Role: Local data-layer class for Math, responsible for SQLite and data read/write operations.
  * Purpose: Separating the database from the UI centralizes queries, improves maintainability, and reduces direct SQL dependencies in Activities and Fragments.
  */
-public class SqliteDbHelper extends SQLiteOpenHelper {
+public class SqliteDbHelper extends ModuleDatabaseHelper {
 
     private static final String DATABASE_NAME = "MathMentor.db";
     private static final int DATABASE_VERSION = 8;
@@ -32,21 +32,21 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ANSWER = "answer";
     public static final String COLUMN_TIMESTAMP = "timestamp";
 
-    public static final String TABLE_NOTES = "Notes";
+    public static final String TABLE_NOTES = "math_notes";
     public static final String COLUMN_NOTE_ID = "id";
     public static final String COLUMN_NOTE_TITLE = "title";
     public static final String COLUMN_NOTE_FORMULA = "formula";
     public static final String COLUMN_NOTE_CATEGORY = "category";
     public static final String COLUMN_NOTE_PINNED = "is_pinned";
 
-    public static final String TABLE_QUIZ_SETS = "quiz_sets";
+    public static final String TABLE_QUIZ_SETS = "math_quiz_sets";
     public static final String COLUMN_SET_ID = "id";
     public static final String COLUMN_SET_TITLE = "title";
     public static final String COLUMN_SET_CATEGORY = "category";
     public static final String COLUMN_SET_DIFFICULTY = "difficulty";
     public static final String COLUMN_SET_EDUCATION_LEVEL = "education_level";
 
-    public static final String TABLE_QUESTIONS = "quiz_questions";
+    public static final String TABLE_QUESTIONS = "math_quiz_questions";
     public static final String COLUMN_Q_ID = "id";
     public static final String COLUMN_Q_SET_ID = "set_id";
     public static final String COLUMN_Q_TEXT = "question_text";
@@ -58,7 +58,7 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_Q_EXPLANATION = "explanation";
     public static final String COLUMN_Q_DIFFICULTY = "difficulty";
 
-    public static final String TABLE_USER = "user_profile";
+    public static final String TABLE_USER = "math_user_profile";
     public static final String COLUMN_USER_ID = "user_id";
     public static final String COLUMN_USER_EXP = "exp";
 
@@ -96,7 +96,7 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
                 + COLUMN_USER_ID + " INTEGER NOT NULL DEFAULT 0, "
                 + COLUMN_QUESTION + " TEXT NOT NULL DEFAULT '', "
                 + COLUMN_ANSWER + " TEXT NOT NULL DEFAULT '', "
-                + COLUMN_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP)");
+                + COLUMN_TIMESTAMP + " INTEGER DEFAULT (CAST(strftime('%s','now') AS INTEGER)*1000))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NOTES + " ("
                 + COLUMN_NOTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -138,7 +138,7 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
                 + COLUMN_ATTEMPT_CORRECT + " INTEGER NOT NULL DEFAULT 0, "
                 + COLUMN_ATTEMPT_TOTAL + " INTEGER NOT NULL DEFAULT 0, "
                 + COLUMN_ATTEMPT_EXP + " INTEGER NOT NULL DEFAULT 0, "
-                + COLUMN_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP)");
+                + COLUMN_TIMESTAMP + " INTEGER DEFAULT (CAST(strftime('%s','now') AS INTEGER)*1000))");
 
         db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS idx_math_user_profile_user ON "
                 + TABLE_USER + "(" + COLUMN_USER_ID + ")");
@@ -217,7 +217,7 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_QUESTION + " TEXT NOT NULL DEFAULT '', "
                 + COLUMN_ANSWER + " TEXT NOT NULL DEFAULT '', "
-                + COLUMN_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP)");
+                + COLUMN_TIMESTAMP + " INTEGER DEFAULT (CAST(strftime('%s','now') AS INTEGER)*1000))");
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NOTES + " ("
                 + COLUMN_NOTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_NOTE_TITLE + " TEXT NOT NULL DEFAULT '', "
@@ -355,7 +355,7 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_NOTE_TITLE, safe(title));
         values.put(COLUMN_NOTE_FORMULA, safe(formula));
-        values.put(COLUMN_NOTE_CATEGORY, safe(category).isEmpty() ? "Đại số" : safe(category));
+        values.put(COLUMN_NOTE_CATEGORY, com.example.mathmodule.util.MathCategory.canonical(safe(category).isEmpty() ? "algebra" : safe(category)));
         return values;
     }
 
@@ -448,8 +448,8 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
         try (Cursor cursor = getReadableDatabase().query(
                 TABLE_QUIZ_SETS,
                 quizSetColumns(),
-                COLUMN_SET_CATEGORY + "=?",
-                new String[]{category}, null, null,
+                COLUMN_SET_CATEGORY + " IN (?,?,?)",
+                com.example.mathmodule.util.MathCategory.aliases(category), null, null,
                 COLUMN_SET_ID + " DESC")) {
             readQuizSets(cursor, list);
         }
@@ -663,7 +663,7 @@ public class SqliteDbHelper extends SQLiteOpenHelper {
             int read = input.read(buffer);
             if (read <= 0) return;
             JSONObject root = new JSONObject(new String(buffer, 0, read, StandardCharsets.UTF_8));
-            JSONArray sets = root.getJSONArray("quiz_sets");
+            JSONArray sets = root.getJSONArray("math_quiz_sets");
 
             for (int i = 0; i < sets.length(); i++) {
                 JSONObject set = sets.getJSONObject(i);

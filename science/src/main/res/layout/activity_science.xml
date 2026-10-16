@@ -4,7 +4,7 @@
 
     <LinearLayout android:id="@+id/layoutScienceHeader" android:layout_width="0dp" android:layout_height="64dp" android:background="@color/science_bg_header_custom" android:elevation="3dp" android:gravity="center_vertical" android:orientation="horizontal" android:paddingStart="12dp" android:paddingEnd="12dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
 
-        <Button android:id="@+id/btnScienceBack" style="@style/ScienceSquareIconButton" android:contentDescription="@string/science_back" android:text="‹" android:textColor="@color/science_text_header_light" android:textSize="28sp" />
+        <Button android:id="@+id/btnScienceBack" style="@style/ScienceSquareIconButton" android:contentDescription="@string/science_back" android:text="‹" android:textColor="@color/science_text_primary" android:textSize="28sp" />
 
         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
 
@@ -15,7 +15,7 @@
 
         <Button android:id="@+id/btnNewScienceChat" android:layout_width="wrap_content" android:layout_height="wrap_content" android:backgroundTint="@color/science_icon_blue_background" android:minWidth="64dp" android:text="@string/science_chat_new" android:textAllCaps="false" android:textColor="@color/science_solve_color" android:textSize="14sp" android:textStyle="bold" android:minHeight="48dp" />
 
-        <Button android:id="@+id/btnChatTools" style="@style/ScienceSquareIconButton" android:layout_marginStart="6dp" android:contentDescription="@string/science_quick_tools" android:text="⋮" android:textColor="@color/science_text_header_light" android:textSize="24sp" />
+        <Button android:id="@+id/btnChatTools" style="@style/ScienceSquareIconButton" android:layout_marginStart="6dp" android:contentDescription="@string/science_quick_tools" android:text="⋮" android:textColor="@color/science_text_primary" android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout android:id="@+id/panelChatTools" android:layout_width="0dp" android:layout_height="wrap_content" android:background="@color/science_surface" android:elevation="2dp" android:orientation="vertical" android:paddingStart="16dp" android:paddingTop="12dp" android:paddingEnd="16dp" android:paddingBottom="12dp" android:visibility="gone" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/layoutScienceHeader">
@@ -68,7 +68,7 @@
 
         <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvScienceChat" android:layout_width="match_parent" android:layout_height="match_parent" android:clipToPadding="false" android:paddingStart="12dp" android:paddingTop="18dp" android:paddingEnd="12dp" android:paddingBottom="22dp" android:scrollbars="vertical" />
 
-        <com.google.android.material.card.MaterialCardView android:id="@+id/layoutModelInfo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|center_horizontal" android:layout_marginTop="8dp" app:cardBackgroundColor="@color/science_surface" app:cardCornerRadius="20dp" app:cardElevation="2dp" app:strokeColor="@color/science_border" app:strokeWidth="1dp">
+        <com.google.android.material.card.MaterialCardView android:id="@+id/layoutModelInfo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|center_horizontal" android:layout_marginTop="8dp" app:cardBackgroundColor="@color/science_surface" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:strokeColor="@color/science_border" app:strokeWidth="1dp">
 
             <TextView android:id="@+id/tvModelInfo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="12dp" android:paddingTop="6dp" android:paddingEnd="12dp" android:paddingBottom="6dp" android:text="AI đang sẵn sàng" android:textColor="@color/science_text_secondary" android:textSize="15sp" android:textStyle="bold" />
         </com.google.android.material.card.MaterialCardView>
@@ -101,7 +101,7 @@
             <Button android:id="@+id/btnClearImage" android:layout_width="48dp" android:layout_height="wrap_content" android:layout_gravity="top|end" android:background="@drawable/science_chat_remove_image_background" android:contentDescription="Xóa ảnh" android:minWidth="40dp" android:minHeight="48dp" android:padding="0dp" android:text="×" android:textColor="@color/science_white" android:textSize="20sp" />
         </FrameLayout>
 
-        <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" app:cardBackgroundColor="@color/science_surface_variant" app:cardCornerRadius="24dp" app:cardElevation="2dp" app:strokeColor="@color/science_border" app:strokeWidth="1dp">
+        <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" app:cardBackgroundColor="@color/science_surface_variant" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:strokeColor="@color/science_border" app:strokeWidth="1dp">
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="bottom" android:orientation="horizontal" android:padding="5dp">
 

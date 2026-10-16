@@ -31,6 +31,7 @@ public class ProfileFragment extends Fragment {
     private com.example.asm_final.utils.AsyncActionRunner actions;
     private String username;
     private boolean profileReady;
+    private boolean restoringDraft;
     private String avatarUri;
 
     public interface OnProfileUpdatedListener {
@@ -72,12 +73,13 @@ public class ProfileFragment extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        restoringDraft = savedInstanceState != null;
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         com.example.asm_final.AppServices services = ((com.example.asm_final.AiMentorApplication) requireActivity().getApplication()).services();
         profiles = services.profiles();
         actions = new com.example.asm_final.utils.AsyncActionRunner(services.io(), task -> new android.os.Handler(android.os.Looper.getMainLooper()).post(task));
-        
+
         if (getArguments() != null) {
             username = getArguments().getString("USERNAME");
         }
@@ -142,8 +144,9 @@ public class ProfileFragment extends Fragment {
             btnUpdate.setEnabled(true);btnChooseAvatar.setEnabled(true);
             if(profile==null) return;
             profileReady=true;
-            edtFullName.setText(profile.fullName);edtAddress.setText(profile.address);
-            edtPhone.setText(profile.phone);edtEmail.setText(profile.email);
+            if (!restoringDraft) { edtFullName.setText(profile.fullName);edtAddress.setText(profile.address);
+                edtPhone.setText(profile.phone);edtEmail.setText(profile.email); }
+            restoringDraft=false;
             avatarUri=profile.avatar;
             if(avatarUri!=null&&!avatarUri.isEmpty()) {
                 try { imgAvatar.setImageURI(Uri.parse(avatarUri)); }

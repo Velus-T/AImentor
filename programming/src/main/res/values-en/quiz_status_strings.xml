@@ -1,0 +1,9 @@
+<resources>
+    <string name="program_quiz_loading">Creating questions…</string>
+    <string name="program_quiz_failed">Unable to create the quiz. Please try again.</string>
+    <string name="program_quiz_results">View results</string>
+    <string name="program_quiz_next">Next</string>
+    <string name="program_quiz_saving">Saving results…</string>
+    <string name="program_quiz_retry">Retry saving</string>
+    <string name="program_quiz_save_failed">Unable to save results. EXP has not been awarded.</string>
+</resources>

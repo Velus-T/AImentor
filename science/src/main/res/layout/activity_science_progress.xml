@@ -25,7 +25,7 @@
                 style="@style/ScienceSquareIconButton"
                 android:contentDescription="@string/science_back"
                 android:text="‹"
-                android:textColor="@color/science_text_header_light"
+                android:textColor="@color/science_text_primary"
                 android:textSize="28sp" />
 
             <TextView

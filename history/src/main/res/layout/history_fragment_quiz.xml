@@ -1,140 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/history_background"
-    android:fillViewport="true">
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/history_background" android:fillViewport="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="2dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/history_banner_purple_bg"
-                android:orientation="vertical"
-                android:padding="16dp">
-                <TextView
-                    android:id="@+id/tvHistoryQuizLevel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/history_quiz_level_format"
-                    android:textColor="@color/history_banner_purple_text"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/tvHistoryQuizTotalExp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/history_quiz_exp_total"
-                    android:textColor="@color/history_banner_purple_subtext" />
-                <ProgressBar
-                    android:id="@+id/pbHistoryQuizLevel"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:layout_marginTop="10dp"
-                    android:max="100"
-                    android:progress="0"
-                    android:progressTint="@color/history_quiz_primary" />
-                <TextView
-                    android:id="@+id/tvHistoryQuizProgress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/history_quiz_exp_detail"
-                    android:textColor="@color/history_quiz_primary"
-                    android:textSize="12sp" />
+        <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" app:cardCornerRadius="20dp" app:cardElevation="1dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/history_banner_purple_bg" android:orientation="vertical" android:padding="16dp">
+                <TextView android:id="@+id/tvHistoryQuizLevel" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/history_quiz_level_format" android:textColor="@color/history_banner_purple_text" android:textSize="17sp" android:textStyle="bold" />
+                <TextView android:id="@+id/tvHistoryQuizTotalExp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="@string/history_quiz_exp_total" android:textColor="@color/history_banner_purple_subtext" />
+                <ProgressBar android:id="@+id/pbHistoryQuizLevel" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="8dp" android:layout_marginTop="10dp" android:max="100" android:progress="0" android:progressTint="@color/history_quiz_primary" />
+                <TextView android:id="@+id/tvHistoryQuizProgress" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="@string/history_quiz_exp_detail" android:textColor="@color/history_quiz_primary" android:textSize="12sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="@string/history_quiz_topic_title"
-            android:textColor="@color/history_quiz_accent"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="18dp" android:text="@string/history_quiz_topic_title" android:textColor="@color/history_quiz_accent" android:textSize="16sp" android:textStyle="bold" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/item_quiz_topic_vn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardCornerRadius="20dp">
+        <androidx.cardview.widget.CardView android:id="@+id/item_quiz_topic_vn" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackground" app:cardCornerRadius="20dp" app:cardElevation="1dp" android:stateListAnimator="@animator/mentor_card_press">
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/history_banner_green_bg" android:padding="18dp" android:text="@string/history_quiz_topic_vn" android:textColor="@color/history_banner_green_text" android:textSize="16sp" android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/item_quiz_topic_foreign"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardCornerRadius="20dp">
+        <androidx.cardview.widget.CardView android:id="@+id/item_quiz_topic_foreign" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackground" app:cardCornerRadius="20dp" app:cardElevation="1dp" android:stateListAnimator="@animator/mentor_card_press">
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/history_banner_blue_bg" android:padding="18dp" android:text="@string/history_quiz_topic_foreign" android:textColor="@color/history_accent_blue" android:textSize="16sp" android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/item_quiz_topic_mixed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardCornerRadius="20dp">
+        <androidx.cardview.widget.CardView android:id="@+id/item_quiz_topic_mixed" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackground" app:cardCornerRadius="20dp" app:cardElevation="1dp" android:stateListAnimator="@animator/mentor_card_press">
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/history_banner_orange_bg" android:padding="18dp" android:text="@string/history_quiz_topic_mixed" android:textColor="@color/history_banner_orange_text" android:textSize="16sp" android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/history_quiz_instruction"
-            android:textColor="@color/history_text_secondary"
-            android:textSize="13sp" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/history_quiz_instruction" android:textColor="@color/history_text_secondary" android:textSize="13sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/history_quiz_recent_title"
-            android:textColor="@color/history_quiz_accent"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:text="@string/history_quiz_recent_title" android:textColor="@color/history_quiz_accent" android:textSize="16sp" android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvHistoryQuizEmpty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="@string/history_quiz_empty"
-            android:textColor="@color/history_text_hint"
-            android:visibility="gone" />
+        <TextView android:id="@+id/tvHistoryQuizEmpty" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:gravity="center" android:text="@string/history_quiz_empty" android:textColor="@color/history_text_hint" android:visibility="gone" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_ai_quizzes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:nestedScrollingEnabled="false" />
+        <androidx.recyclerview.widget.RecyclerView android:id="@+id/recycler_ai_quizzes" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:nestedScrollingEnabled="false" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

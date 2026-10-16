@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":data-core"))
     implementation(project(":ui-core"))
     implementation(project(":math"))
     implementation(project(":science"))

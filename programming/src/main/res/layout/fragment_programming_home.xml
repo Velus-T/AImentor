@@ -1,995 +1,262 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_primary"
-    android:fillViewport="true">
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/bg_primary" android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="24dp">
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingHorizontal="16dp" android:paddingBottom="24dp">
 
-        <!-- Header -->
-        <LinearLayout
-            android:id="@+id/ll_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_header_dark"
-            android:padding="20dp"
-            android:paddingTop="28dp"
-            android:paddingBottom="28dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent="1">
 
-            <TextView
-                android:id="@+id/tv_greeting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/greeting"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_header_light"
-                android:fontFamily="sans-serif-medium"/>
+        <LinearLayout android:id="@+id/ll_header" android:layout_width="0dp" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/bg_header_dark" android:padding="20dp" android:paddingTop="28dp" android:paddingBottom="28dp" app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintWidth_percent="1">
 
-            <TextView
-                android:id="@+id/tv_sub_greeting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sub_greeting"
-                android:textSize="16sp"
-                android:textColor="@color/text_header_light"
-                android:alpha="0.8"
-                android:layout_marginTop="6dp"
-                android:fontFamily="sans-serif"/>
+            <TextView android:id="@+id/tv_greeting" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/greeting" android:textSize="30sp" android:textStyle="bold" android:textColor="@color/text_header_light" android:fontFamily="sans-serif-medium" />
+
+            <TextView android:id="@+id/tv_sub_greeting" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sub_greeting" android:textSize="16sp" android:textColor="@color/text_header_light" android:alpha="0.8" android:layout_marginTop="6dp" android:fontFamily="sans-serif" />
         </LinearLayout>
 
-        <!-- EXP Progress Card -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_exp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="@color/bg_secondary"
-            app:layout_constraintTop_toBottomOf="@id/ll_header"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+        <androidx.cardview.widget.CardView android:id="@+id/card_exp" android:layout_width="0dp" android:layout_height="wrap_content" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_secondary" app:layout_constraintTop_toBottomOf="@id/ll_header" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp" android:clickable="true" android:focusable="true" android:foreground="?android:attr/selectableItemBackground" android:stateListAnimator="@animator/mentor_card_press">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
 
-                        <TextView
-                            android:id="@+id/tv_exp_level"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/prog_level_1"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary"
-                            android:fontFamily="sans-serif-medium"/>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tv_exp_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/prog_level_1"
-                            android:textSize="13sp"
-                            android:textColor="@color/text_secondary"
-                            android:fontFamily="sans-serif"/>
+                        <TextView android:id="@+id/tv_exp_level" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/prog_level_1" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium" />
+
+                        <TextView android:id="@+id/tv_exp_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/prog_level_1" android:textSize="13sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tv_exp_total"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0 EXP"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/primary"
-                        android:fontFamily="sans-serif-medium"/>
+                    <TextView android:id="@+id/tv_exp_total" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0 EXP" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/primary" android:fontFamily="sans-serif-medium" />
                 </LinearLayout>
 
-                <ProgressBar
-                    android:id="@+id/pb_exp"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:progressTint="@color/primary"
-                    android:backgroundTint="@color/surface_light"
-                    android:layout_marginTop="12dp"
-                    android:progress="0"/>
+                <ProgressBar android:id="@+id/pb_exp" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="8dp" android:progressTint="@color/primary" android:backgroundTint="@color/surface_light" android:layout_marginTop="12dp" android:progress="0" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="6dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="6dp">
 
-                    <TextView
-                        android:id="@+id/tv_exp_progress"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="0 / 120 EXP"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_tertiary"
-                        android:fontFamily="sans-serif"/>
+                    <TextView android:id="@+id/tv_exp_progress" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="0 / 120 EXP" android:textSize="12sp" android:textColor="@color/text_tertiary" android:fontFamily="sans-serif" />
 
-                    <TextView
-                        android:id="@+id/tv_exp_percent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0%"
-                        android:textSize="12sp"
-                        android:textColor="@color/primary"
-                        android:fontFamily="sans-serif"
-                        android:textStyle="bold"/>
+                    <TextView android:id="@+id/tv_exp_percent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0%" android:textSize="12sp" android:textColor="@color/primary" android:fontFamily="sans-serif" android:textStyle="bold" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/surface_light"
-                    android:layout_marginTop="12dp"/>
+                <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/surface_light" android:layout_marginTop="12dp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="12dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="12dp">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
 
-                        <TextView
-                            android:id="@+id/tv_quiz_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary"
-                            android:fontFamily="sans-serif-medium"/>
+                        <TextView android:id="@+id/tv_quiz_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/prog_quiz_label"
-                            android:textSize="12sp"
-                            android:textColor="@color/text_tertiary"
-                            android:fontFamily="sans-serif"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/prog_quiz_label" android:textSize="12sp" android:textColor="@color/text_tertiary" android:fontFamily="sans-serif" />
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="0.5dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/surface_light"/>
+                    <View android:layout_width="0.5dp" android:layout_height="match_parent" android:background="@color/surface_light" />
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
 
-                        <TextView
-                            android:id="@+id/tv_accuracy"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0%"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary"
-                            android:fontFamily="sans-serif-medium"/>
+                        <TextView android:id="@+id/tv_accuracy" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0%" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/prog_accuracy_label"
-                            android:textSize="12sp"
-                            android:textColor="@color/text_tertiary"
-                            android:fontFamily="sans-serif"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/prog_accuracy_label" android:textSize="12sp" android:textColor="@color/text_tertiary" android:fontFamily="sans-serif" />
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="0.5dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/surface_light"/>
+                    <View android:layout_width="0.5dp" android:layout_height="match_parent" android:background="@color/surface_light" />
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
 
-                        <TextView
-                            android:id="@+id/tv_total_exp_all"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary"
-                            android:fontFamily="sans-serif-medium"/>
+                        <TextView android:id="@+id/tv_total_exp_all" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/prog_total_exp_label"
-                            android:textSize="12sp"
-                            android:textColor="@color/text_tertiary"
-                            android:fontFamily="sans-serif"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/prog_total_exp_label" android:textSize="12sp" android:textColor="@color/text_tertiary" android:fontFamily="sans-serif" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Language Section -->
-        <LinearLayout
-            android:id="@+id/ll_lang_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:baselineAligned="false"
-            app:layout_constraintTop_toBottomOf="@id/card_exp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/programming_languages"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:fontFamily="sans-serif-medium"/>
+        <LinearLayout android:id="@+id/ll_lang_title" android:layout_width="0dp" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:baselineAligned="false" app:layout_constraintTop_toBottomOf="@id/card_exp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="24dp">
 
-            <TextView
-                android:id="@+id/tv_lang_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4/12"
-                android:textSize="13sp"
-                android:textColor="@color/text_tertiary"
-                android:fontFamily="sans-serif"/>
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/programming_languages" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium" />
+
+            <TextView android:id="@+id/tv_lang_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4/12" android:textSize="13sp" android:textColor="@color/text_tertiary" android:fontFamily="sans-serif" />
         </LinearLayout>
 
-        <!-- Languages Grid -->
-        <LinearLayout
-            android:id="@+id/ll_languages_container"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:baselineAligned="false"
-            app:layout_constraintTop_toBottomOf="@id/ll_lang_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp">
 
-            <!-- Row 1 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false"
-                android:layout_marginBottom="8dp">
+        <LinearLayout android:id="@+id/ll_languages_container" android:layout_width="0dp" android:layout_height="wrap_content" android:orientation="vertical" android:baselineAligned="false" app:layout_constraintTop_toBottomOf="@id/ll_lang_title" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="12dp">
 
-                <LinearLayout
-                    android:id="@+id/ll_python"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    android:layout_marginEnd="8dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:baselineAligned="false" android:layout_marginBottom="8dp">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_python"
-                            android:contentDescription="@string/desc_python"/>
+                <LinearLayout android:id="@+id/ll_python" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:layout_marginEnd="8dp">
+
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
+
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="center" android:src="@drawable/ic_python" android:contentDescription="@string/desc_python" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lang_python"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lang_python" android:textSize="12sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_java"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    android:layout_marginEnd="8dp">
+                <LinearLayout android:id="@+id/ll_java" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:layout_marginEnd="8dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_java"
-                            android:contentDescription="@string/desc_java"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="center" android:src="@drawable/ic_java" android:contentDescription="@string/desc_java" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lang_java"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lang_java" android:textSize="12sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_kotlin"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    android:layout_marginEnd="8dp">
+                <LinearLayout android:id="@+id/ll_kotlin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:layout_marginEnd="8dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_kotlin"
-                            android:contentDescription="@string/desc_kotlin"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="center" android:src="@drawable/ic_kotlin" android:contentDescription="@string/desc_kotlin" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lang_kotlin"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lang_kotlin" android:textSize="12sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_javascript"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless">
+                <LinearLayout android:id="@+id/ll_javascript" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_javascript"
-                            android:contentDescription="@string/desc_javascript"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="center" android:src="@drawable/ic_javascript" android:contentDescription="@string/desc_javascript" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lang_javascript"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lang_javascript" android:textSize="12sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Row 2 -->
-            <LinearLayout
-                android:id="@+id/row_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false"
-                android:visibility="gone"
-                android:layout_marginBottom="8dp">
 
-                <LinearLayout
-                    android:id="@+id/ll_cpp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    android:layout_marginEnd="8dp">
+            <LinearLayout android:id="@+id/row_2" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:baselineAligned="false" android:visibility="gone" android:layout_marginBottom="8dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                <LinearLayout android:id="@+id/ll_cpp" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:layout_marginEnd="8dp">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_cpp"
-                            android:contentDescription="@string/desc_cpp"/>
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
+
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="center" android:src="@drawable/ic_cpp" android:contentDescription="@string/desc_cpp" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lang_cpp"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lang_cpp" android:textSize="12sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_csharp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    android:layout_marginEnd="8dp">
+                <LinearLayout android:id="@+id/ll_csharp" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:layout_marginEnd="8dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_csharp"
-                            android:contentDescription="@string/desc_csharp"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="center" android:src="@drawable/ic_csharp" android:contentDescription="@string/desc_csharp" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lang_csharp"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lang_csharp" android:textSize="12sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_php"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    android:layout_marginEnd="8dp">
+                <LinearLayout android:id="@+id/ll_php" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:layout_marginEnd="8dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_php"
-                            android:contentDescription="@string/desc_php"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="center" android:src="@drawable/ic_php" android:contentDescription="@string/desc_php" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lang_php"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lang_php" android:textSize="12sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_swift"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless">
+                <LinearLayout android:id="@+id/ll_swift" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_swift"
-                            android:contentDescription="@string/desc_swift"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="center" android:src="@drawable/ic_swift" android:contentDescription="@string/desc_swift" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lang_swift"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lang_swift" android:textSize="12sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Row 3 -->
-            <LinearLayout
-                android:id="@+id/row_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false"
-                android:visibility="gone"
-                android:layout_marginBottom="8dp">
 
-                <LinearLayout
-                    android:id="@+id/ll_go"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    android:layout_marginEnd="8dp">
+            <LinearLayout android:id="@+id/row_3" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:baselineAligned="false" android:visibility="gone" android:layout_marginBottom="8dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                <LinearLayout android:id="@+id/ll_go" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:layout_marginEnd="8dp">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_go"
-                            android:contentDescription="@string/desc_go"/>
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
+
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="center" android:src="@drawable/ic_go" android:contentDescription="@string/desc_go" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lang_go"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lang_go" android:textSize="12sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_rust"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    android:layout_marginEnd="8dp">
+                <LinearLayout android:id="@+id/ll_rust" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:layout_marginEnd="8dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_rust"
-                            android:contentDescription="@string/desc_rust"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="center" android:src="@drawable/ic_rust" android:contentDescription="@string/desc_rust" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lang_rust"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lang_rust" android:textSize="12sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_typescript"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    android:layout_marginEnd="8dp">
+                <LinearLayout android:id="@+id/ll_typescript" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:layout_marginEnd="8dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_typescript"
-                            android:contentDescription="@string/desc_typescript"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="center" android:src="@drawable/ic_typescript" android:contentDescription="@string/desc_typescript" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lang_typescript"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lang_typescript" android:textSize="12sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_ruby"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless">
+                <LinearLayout android:id="@+id/ll_ruby" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_ruby"
-                            android:contentDescription="@string/desc_ruby"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="center" android:src="@drawable/ic_ruby" android:contentDescription="@string/desc_ruby" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lang_ruby"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/lang_ruby" android:textSize="12sp" android:textColor="@color/text_secondary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Expand/Collapse -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false"
-                android:layout_marginTop="4dp">
 
-                <LinearLayout
-                    android:id="@+id/ll_expand"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    android:layout_marginEnd="8dp"
-                    android:visibility="visible">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:baselineAligned="false" android:layout_marginTop="4dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                <LinearLayout android:id="@+id/ll_expand" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:layout_marginEnd="8dp" android:visibility="visible">
 
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_expand"
-                            app:tint="@color/text_tertiary"
-                            android:contentDescription="@string/see_more"/>
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
+
+                        <ImageView android:layout_width="28dp" android:layout_height="28dp" android:layout_gravity="center" android:src="@drawable/ic_expand" app:tint="@color/text_tertiary" android:contentDescription="@string/see_more" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:id="@+id/tv_expand_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/see_more"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_tertiary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:id="@+id/tv_expand_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/see_more" android:textSize="12sp" android:textColor="@color/text_tertiary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_collapse"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_lang_card"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                    android:visibility="gone">
+                <LinearLayout android:id="@+id/ll_collapse" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:clickable="true" android:focusable="true" android:background="@drawable/bg_lang_card" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:visibility="gone">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/bg_primary">
+                    <androidx.cardview.widget.CardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/bg_primary">
 
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_collapse"
-                            app:tint="@color/text_tertiary"
-                            android:contentDescription="@string/collapse"/>
+                        <ImageView android:layout_width="28dp" android:layout_height="28dp" android:layout_gravity="center" android:src="@drawable/ic_collapse" app:tint="@color/text_tertiary" android:contentDescription="@string/collapse" />
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:id="@+id/tv_collapse_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/collapse"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_tertiary"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginTop="8dp"/>
+                    <TextView android:id="@+id/tv_collapse_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/collapse" android:textSize="12sp" android:textColor="@color/text_tertiary" android:fontFamily="sans-serif" android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    android:visibility="invisible"/>
+                <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:visibility="invisible" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    android:visibility="invisible"/>
+                <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:visibility="invisible" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    android:visibility="invisible"/>
+                <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:visibility="invisible" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <!-- Quick Chat Section -->
-        <TextView
-            android:id="@+id/tv_quick_chat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/quick_chat"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:fontFamily="sans-serif-medium"
-            app:layout_constraintTop_toBottomOf="@id/ll_languages_container"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp"/>
 
-        <LinearLayout
-            android:id="@+id/ll_chat_input_container"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@drawable/bg_chat_input_dark"
-            android:paddingStart="16dp"
-            android:paddingEnd="4dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:elevation="4dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_quick_chat"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp">
+        <TextView android:id="@+id/tv_quick_chat" android:layout_width="0dp" android:layout_height="wrap_content" android:text="@string/quick_chat" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium" app:layout_constraintTop_toBottomOf="@id/ll_languages_container" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="24dp" />
 
-            <EditText
-                android:id="@+id/et_question_input"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:hint="@string/hint_question"
-                android:background="@null"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:textSize="15sp"
-                android:textColor="@color/text_primary"
-                android:textColorHint="@color/text_tertiary"
-                android:fontFamily="sans-serif"
-                android:imeOptions="actionSend"
-                android:inputType="text"
-                android:maxLines="1"
-                android:autofillHints="no"/>
+        <LinearLayout android:id="@+id/ll_chat_input_container" android:layout_width="0dp" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:background="@drawable/bg_chat_input_dark" android:paddingStart="16dp" android:paddingEnd="4dp" android:paddingTop="4dp" android:paddingBottom="4dp" android:elevation="4dp" app:layout_constraintTop_toBottomOf="@id/tv_quick_chat" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="12dp">
 
-            <LinearLayout
-                android:id="@+id/ll_send_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:gravity="center"
-                android:background="@drawable/bg_send_dark"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                android:visibility="gone">
+            <EditText android:id="@+id/et_question_input" android:layout_width="0dp" android:layout_height="52dp" android:layout_weight="1" android:hint="@string/hint_question" android:background="@null" android:paddingStart="12dp" android:paddingEnd="12dp" android:textSize="15sp" android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary" android:fontFamily="sans-serif" android:imeOptions="actionSend" android:inputType="text" android:maxLines="1" android:autofillHints="no" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_send"
-                    app:tint="@color/programming_white"
-                    android:contentDescription="@string/desc_send"/>
+            <LinearLayout android:id="@+id/ll_send_button" android:layout_width="48dp" android:layout_height="48dp" android:gravity="center" android:background="@drawable/bg_send_dark" android:clickable="true" android:focusable="true" android:foreground="?android:attr/selectableItemBackgroundBorderless" android:visibility="gone">
+
+                <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_send" app:tint="@color/programming_white" android:contentDescription="@string/desc_send" />
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_hint"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/hint_hint"
-            android:textSize="12sp"
-            android:textColor="@color/text_tertiary"
-            android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/ll_chat_input_container"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView android:id="@+id/tv_hint" android:layout_width="0dp" android:layout_height="wrap_content" android:text="@string/hint_hint" android:textSize="12sp" android:textColor="@color/text_tertiary" android:fontFamily="sans-serif" android:gravity="center" android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@id/ll_chat_input_container" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

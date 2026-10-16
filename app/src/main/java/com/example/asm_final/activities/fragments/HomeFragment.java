@@ -33,15 +33,15 @@ public class HomeFragment extends Fragment {
 
     private TextView txtUsername, tvTotalLevel, tvLevelTitle, tvExpDetail;
     private ProgressBar pbTotal;
-    
+
     // Subject mini stats
     private View miniMath, miniScience, miniHistory, miniProg;
-    
+
     // Advanced stats
     private SimplePieChartView pieChart;
-    private ProgressBar pbTimeMath, pbTimeScience, pbTimeHistory, pbTimeProg;
+    private ProgressBar pbExpMath, pbExpScience, pbExpHistory, pbExpProg;
     private RecyclerView rvRecent;
-    
+
     private String username;
     private int userId;
     private int loadVersion;
@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        
+
         txtUsername = view.findViewById(R.id.txt_home_content);
         tvTotalLevel = view.findViewById(R.id.tv_total_level_value);
         tvLevelTitle = view.findViewById(R.id.tv_level_title);
@@ -78,11 +78,11 @@ public class HomeFragment extends Fragment {
         miniProg = view.findViewById(R.id.mini_prog);
 
         pieChart = view.findViewById(R.id.pie_chart_exp);
-        pbTimeMath = view.findViewById(R.id.pb_time_math);
-        pbTimeScience = view.findViewById(R.id.pb_time_science);
-        pbTimeHistory = view.findViewById(R.id.pb_time_history);
-        pbTimeProg = view.findViewById(R.id.pb_time_prog);
-        
+        pbExpMath = view.findViewById(R.id.pb_time_math);
+        pbExpScience = view.findViewById(R.id.pb_time_science);
+        pbExpHistory = view.findViewById(R.id.pb_time_history);
+        pbExpProg = view.findViewById(R.id.pb_time_prog);
+
         rvRecent = view.findViewById(R.id.rv_recent_activity);
         rvRecent.setLayoutManager(new LinearLayoutManager(requireContext()));
 
@@ -129,7 +129,7 @@ public class HomeFragment extends Fragment {
         int historyExp = snapshot.progress(RecentActivity.Subject.HISTORY).experience;
         int programmingExp = snapshot.progress(RecentActivity.Subject.PROGRAMMING).experience;
         int totalExp = mathExp + historyExp + programmingExp + scienceExp;
-        
+
         // --- UPDATE UI TOTAL ---
         int level = ExpLevelCalculator.getLevel(totalExp);
         tvTotalLevel.setText(getString(R.string.home_level_prefix) + level);
@@ -151,15 +151,11 @@ public class HomeFragment extends Fragment {
         slices.add(new SimplePieChartView.Slice(programmingExp, ContextCompat.getColor(requireContext(), R.color.cat_it_text)));
         pieChart.setData(slices);
 
-        long mathSec = snapshot.progress(RecentActivity.Subject.MATH).estimatedSeconds;
-        long histSec = snapshot.progress(RecentActivity.Subject.HISTORY).estimatedSeconds;
-        long progSec = snapshot.progress(RecentActivity.Subject.PROGRAMMING).estimatedSeconds;
-        long scienceSec = snapshot.progress(RecentActivity.Subject.SCIENCE).estimatedSeconds;
-        long maximum = Math.max(1, Math.max(mathSec, Math.max(histSec, Math.max(progSec, scienceSec))));
-        pbTimeMath.setProgress((int)(mathSec * 100 / maximum));
-        pbTimeScience.setProgress((int)(scienceSec * 100 / maximum));
-        pbTimeHistory.setProgress((int)(histSec * 100 / maximum));
-        pbTimeProg.setProgress((int)(progSec * 100 / maximum));
+        int maximum = Math.max(1, Math.max(mathExp, Math.max(historyExp, Math.max(programmingExp, scienceExp))));
+        pbExpMath.setProgress((int)(mathExp * 100L / maximum));
+        pbExpScience.setProgress((int)(scienceExp * 100L / maximum));
+        pbExpHistory.setProgress((int)(historyExp * 100L / maximum));
+        pbExpProg.setProgress((int)(programmingExp * 100L / maximum));
         rvRecent.setAdapter(new RecentActivityAdapter(snapshot.activities));
         TextView status = getView().findViewById(R.id.tv_dashboard_status);
         status.setVisibility(snapshot.unavailable.isEmpty() ? View.GONE : View.VISIBLE);

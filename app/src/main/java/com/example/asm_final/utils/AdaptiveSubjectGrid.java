@@ -8,7 +8,7 @@ public final class AdaptiveSubjectGrid extends GridLayout {
     public AdaptiveSubjectGrid(Context context, AttributeSet attrs) { super(context, attrs); }
     @Override protected void onMeasure(int width, int height) {
         float density = getResources().getDisplayMetrics().density;
-        int columns = MeasureSpec.getSize(width) / density >= 600 ? 2 : 1;
+        int columns = MeasureSpec.getSize(width) / density >= 320 * Math.max(1f, getResources().getConfiguration().fontScale) ? 2 : 1;
         setColumnCount(columns);
         setRowCount((getChildCount() + columns - 1) / columns);
         for (int i = 0; i < getChildCount(); i++) {

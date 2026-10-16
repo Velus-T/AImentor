@@ -62,7 +62,7 @@ public class ProgrammingNoteAdapter extends RecyclerView.Adapter<ProgrammingNote
         // Cập nhật nội dung hiển thị của TextView/EditText trên giao diện.
         holder.tvNotePreview.setText(note.getContent());
         // Cập nhật nội dung hiển thị của TextView/EditText trên giao diện.
-        holder.tvNoteDate.setText(note.getTimestamp());
+        holder.tvNoteDate.setText(com.example.mentor.ui.TimeLabels.dateTime(holder.itemView.getContext(),note.getTimestamp()));
 
         // Đăng ký sự kiện click; đoạn lambda/callback bên trong sẽ chạy khi người dùng bấm vào View.
         holder.itemView.setOnClickListener(v -> {

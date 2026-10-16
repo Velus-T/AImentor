@@ -24,6 +24,7 @@ public final class ProgrammingFeature {
             return;
         }
 
+        com.example.mentor.data.ActiveUser.set(context,userId);
         // MainActivity là màn hình root của Programming Module.
         Intent intent = new Intent(context, MainActivity.class);
         // Truyền ID tài khoản để database lọc dữ liệu đúng user.

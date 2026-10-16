@@ -26,7 +26,7 @@ public final class LocalScienceService implements ScienceAnswerService, ScienceQ
                 question.getEducationLevel().getDisplayName(),
                 false,
                 0
-        ));
+        ).withLocalSource());
     }
 
         /*

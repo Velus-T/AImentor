@@ -50,8 +50,8 @@ not rewrite every module or introduce interfaces around trivial utility methods.
 ## Validation
 
 - Debug and release APK builds.
-- App lint (including dependent modules): zero errors; 50 remaining warnings.
-- 58 unit tests: 49 existing module tests, plus 9 shell regressions covering UTC/epoch
+- App lint (including dependent modules): zero errors; remaining warnings are recorded in the generated lint reports.
+- 74 unit tests: 49 existing module tests, 16 calculator/circuit cases and 9 shell regressions covering UTC/epoch
   timestamps, ordering, per-user contracts, partial failure, anonymous access,
   duplicate submissions, disposed views, retry and shared password policy.
 - CanonicalSmokeTest includes registration, login, profile/password change, logout,
@@ -73,3 +73,17 @@ not rewrite every module or introduce interfaces around trivial utility methods.
    presenters/use cases as those features change. Preserve migration and user isolation tests.
 6. Review remaining lint warnings and language restrictions (Gmail-only registration)
    as product decisions; do not silently relax validation during architecture work.
+
+## Reform extension
+
+`data-core` centralizes physical storage and schema/version management without coupling
+feature screens to the host app. Existing helpers retain subject CRUD responsibilities.
+`CalculatorEngine` and `CircuitModel` are pure computation models; their Android views
+handle display and interaction. `MathCategory` stores stable keys while localized labels
+remain in resources. `TimeLabels` formats shared timestamps using locale/device timezone.
+
+The migration suite covers a fresh five-module install, unchanged legacy source files,
+one-time import, subsequent edits and rollback on conflicting rows. UI tests cover the
+Math-only calculator, circuit switch/topology changes, four language/theme combinations,
+login draft and unsaved profile name restoration. Large legacy datasets and arbitrary
+unsupported historical schemas still need dedicated fixtures before broader guarantees.

@@ -94,13 +94,13 @@ private void loadStats() {
                 .setText(getString(R.string.science_total_exp_format, totalExp));
         ((TextView) findViewById(R.id.tvTotalQuestions))
                 .setText(getString(R.string.science_stat_questions, stats.getTotalQuestions()));
-        
+
         String mostStudied = stats.getTotalQuestions() == 0
                 ? getString(R.string.science_stat_no_data)
                 : getString(stats.getMostStudiedSubject().getDisplayNameResId());
         ((TextView) findViewById(R.id.tvMostStudied))
                 .setText(getString(R.string.science_stat_most_studied, mostStudied));
-                
+
         ((TextView) findViewById(R.id.tvBookmarkCount))
                 .setText(getString(R.string.science_stat_bookmarks, stats.getBookmarkCount()));
 
@@ -113,33 +113,28 @@ private void loadStats() {
         }
 
         ((TextView) findViewById(R.id.tvQuizAccuracyPhysics))
-                .setText(formatSubjectQuiz("Vật lý", physics));
+                .setText(formatSubjectQuiz(getString(R.string.science_progress_physics), physics));
         ((TextView) findViewById(R.id.tvQuizAccuracyChemistry))
-                .setText(formatSubjectQuiz("Hóa học", chemistry));
+                .setText(formatSubjectQuiz(getString(R.string.science_progress_chemistry), chemistry));
         ((TextView) findViewById(R.id.tvQuizAccuracyBiology))
-                .setText(formatSubjectQuiz("Sinh học", biology));
+                .setText(formatSubjectQuiz(getString(R.string.science_progress_biology), biology));
 
         ((TextView) findViewById(R.id.tvScienceExp))
-                .setText("Tổng EXP Khoa học: " + totalExp);
+                .setText(getString(R.string.science_total_exp_format, totalExp));
         ((TextView) findViewById(R.id.tvReviewTime))
-                .setText("Thời gian xem lại câu trả lời: "
-                        + formatDuration(stats.getReviewSeconds()));
+                .setText(getString(R.string.science_review_duration, formatDuration(stats.getReviewSeconds())));
 
         String insight;
         if (stats.getQuizAttempts() == 0) {
-            insight = "Hoàn thành Quiz để nhận EXP và bắt đầu tăng cấp Khoa học.";
+            insight = getString(R.string.science_progress_complete_a_quiz_to_earn_exp_and);
         } else if (stats.getQuizAccuracy() < 60) {
-            insight = "Hãy xem lại các câu trả lời sai trước khi thử Quiz khó hơn. "
-                    + "Câu khó thưởng nhiều EXP nhưng chỉ có lợi khi trả lời đúng.";
+            insight = getString(R.string.science_progress_review_incorrect_answers_before_trying_harder_quizzes);
         } else if (level < 5) {
-            insight = "Tiến độ đang ổn. Hãy duy trì Quiz đều đặn để đạt danh hiệu "
-                    + "Học viên Khoa học ở cấp 5.";
+            insight = getString(R.string.science_progress_keep_practicing_quizzes_to_reach_science_learner);
         } else if (level < 13) {
-            insight = "Bạn đã xây dựng nền tảng tốt. Hãy kết hợp Quiz Vật lý, Hóa học "
-                    + "và Sinh học để tăng cấp cân bằng.";
+            insight = getString(R.string.science_progress_combine_physics_chemistry_and_biology_quizzes_for);
         } else {
-            insight = "Cấp độ hiện tại rất tốt. Ưu tiên câu khó và Quiz tổng hợp để "
-                    + "tiến tới Bậc thầy Khoa học.";
+            insight = getString(R.string.science_progress_try_harder_and_mixed_quizzes_to_work);
         }
         ((TextView) findViewById(R.id.tvProgressInsight)).setText(insight);
     }
@@ -150,11 +145,10 @@ private void loadStats() {
  */
 private String formatSubjectQuiz(String subjectName, QuizPerformance performance) {
         if (performance == null || performance.getTotalQuestions() == 0) {
-            return subjectName + ": Chưa có dữ liệu Quiz";
+            return getString(R.string.science_subject_no_quiz, subjectName);
         }
 
-        return String.format(Locale.getDefault(),
-                "%s: %.0f%% • %d/%d câu đúng • %d lượt",
+        return getString(R.string.science_subject_quiz_summary,
                 subjectName,
                 performance.getAccuracyPercent(),
                 performance.getCorrectAnswers(),
@@ -168,31 +162,31 @@ private String formatSubjectQuiz(String subjectName, QuizPerformance performance
  */
 private void showUnavailableState() {
         ((TextView) findViewById(R.id.tvScienceLevelTitle))
-                .setText("Cấp độ tạm thời không khả dụng");
+                .setText(getString(R.string.science_progress_level_temporarily_unavailable));
         ((ProgressBar) findViewById(R.id.progressScienceLevel)).setProgress(0);
         ((TextView) findViewById(R.id.tvScienceLevelProgress)).setText("0 / 120 EXP");
         ((TextView) findViewById(R.id.tvScienceLevelTotalExp))
-                .setText("Tổng EXP Khoa học: không khả dụng");
+                .setText(getString(R.string.science_progress_science_exp_unavailable));
         ((TextView) findViewById(R.id.tvTotalQuestions))
-                .setText("Tiến độ tạm thời không khả dụng.");
+                .setText(getString(R.string.science_progress_progress_temporarily_unavailable));
         ((TextView) findViewById(R.id.tvMostStudied))
-                .setText("Môn học nhiều nhất: không khả dụng");
+                .setText(getString(R.string.science_progress_most_studied_subject_unavailable));
         ((TextView) findViewById(R.id.tvBookmarkCount))
-                .setText("Câu trả lời đã lưu: không khả dụng");
+                .setText(getString(R.string.science_progress_saved_answers_unavailable));
         ((TextView) findViewById(R.id.tvQuizAccuracy))
-                .setText("Độ chính xác Quiz toàn module: không khả dụng");
+                .setText(getString(R.string.science_progress_overall_quiz_accuracy_unavailable));
         ((TextView) findViewById(R.id.tvQuizAccuracyPhysics))
-                .setText("Vật lý: không khả dụng");
+                .setText(getString(R.string.science_progress_physics_unavailable));
         ((TextView) findViewById(R.id.tvQuizAccuracyChemistry))
-                .setText("Hóa học: không khả dụng");
+                .setText(getString(R.string.science_progress_chemistry_unavailable));
         ((TextView) findViewById(R.id.tvQuizAccuracyBiology))
-                .setText("Sinh học: không khả dụng");
+                .setText(getString(R.string.science_progress_biology_unavailable));
         ((TextView) findViewById(R.id.tvScienceExp))
-                .setText("Tổng EXP Khoa học: không khả dụng");
+                .setText(getString(R.string.science_progress_science_exp_unavailable));
         ((TextView) findViewById(R.id.tvReviewTime))
-                .setText("Thời gian xem lại: không khả dụng");
+                .setText(getString(R.string.science_progress_review_time_unavailable));
         ((TextView) findViewById(R.id.tvProgressInsight))
-                .setText("Không thể đọc cơ sở dữ liệu Khoa học trên thiết bị này.");
+                .setText(getString(R.string.science_progress_unable_to_read_the_science_database_on));
     }
 
         /*
@@ -202,6 +196,6 @@ private void showUnavailableState() {
 private String formatDuration(int seconds) {
         int minutes = seconds / 60;
         int remainingSeconds = seconds % 60;
-        return minutes + " phút " + remainingSeconds + " giây";
+        return getString(R.string.science_duration_parts, minutes, remainingSeconds);
     }
 }

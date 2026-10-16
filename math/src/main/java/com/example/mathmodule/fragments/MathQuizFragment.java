@@ -125,9 +125,9 @@ public class MathQuizFragment extends Fragment {
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
     private void loadQuizSets(String category) {
-        if ("Tất cả".equals(category)) {
+        if ("ALL".equals(category)) {
             quizSetList = dbHelper.getAllQuizSets();
-        } else if ("AI tạo".equals(category)) {
+        } else if ("AI".equals(category)) {
             quizSetList = dbHelper.getQuizSetsByCategory("AI Generated");
         } else {
             quizSetList = dbHelper.getQuizSetsByCategory(category);
@@ -164,10 +164,10 @@ public class MathQuizFragment extends Fragment {
                     ContextCompat.getColor(requireContext(), R.color.math_quiz_primary)));
             active.setTextColor(ContextCompat.getColor(requireContext(), R.color.math_active_text));
 
-            if (selected.getId() == R.id.btn_filter_algebra) loadQuizSets(getString(R.string.math_formula_filter_algebra));
-            else if (selected.getId() == R.id.btn_filter_geometry) loadQuizSets(getString(R.string.math_formula_filter_geometry));
-            else if (selected.getId() == R.id.btn_filter_ai) loadQuizSets(getString(R.string.math_quiz_filter_ai));
-            else loadQuizSets(getString(R.string.math_history_filter_all));
+            if (selected.getId() == R.id.btn_filter_algebra) loadQuizSets(com.example.mathmodule.util.MathCategory.ALGEBRA);
+            else if (selected.getId() == R.id.btn_filter_geometry) loadQuizSets(com.example.mathmodule.util.MathCategory.GEOMETRY);
+            else if (selected.getId() == R.id.btn_filter_ai) loadQuizSets("AI");
+            else loadQuizSets("ALL");
         };
         for (Button button : buttons) button.setOnClickListener(listener);
         btnAll.performClick();
@@ -304,7 +304,7 @@ public class MathQuizFragment extends Fragment {
 
                 runOnUiThread(() -> {
                     progressDialog.dismiss();
-                    loadQuizSets(getString(R.string.math_quiz_filter_ai));
+                    loadQuizSets("AI");
                     Toast.makeText(
                             requireContext(),
                             getString(R.string.math_quiz_ai_success, questions.size(), safeLevel.getDisplayName()),

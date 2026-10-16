@@ -1,0 +1,9 @@
+<resources>
+    <string name="program_quiz_loading">Đang tạo câu hỏi…</string>
+    <string name="program_quiz_failed">Không thể tạo quiz. Vui lòng thử lại.</string>
+    <string name="program_quiz_results">Xem kết quả</string>
+    <string name="program_quiz_next">Tiếp theo</string>
+    <string name="program_quiz_saving">Đang lưu kết quả…</string>
+    <string name="program_quiz_retry">Thử lưu lại</string>
+    <string name="program_quiz_save_failed">Không thể lưu kết quả. EXP chưa được cộng.</string>
+</resources>

@@ -121,7 +121,7 @@ public class CanonicalSmokeTest {
         });
         capture("home");
         main(() -> {
-            ((BottomNavigationView) resumed().findViewById(R.id.bottom_navigation)).setSelectedItemId(R.id.nav_settings);
+            ((BottomNavigationView) resumed().findViewById(R.id.bottom_navigation)).setSelectedItemId(R.id.nav_profile);
             ((AppCompatActivity) resumed()).getSupportFragmentManager().executePendingTransactions();
         });
         capture("settings");
@@ -256,7 +256,7 @@ public class CanonicalSmokeTest {
                 resumed().findViewById(R.id.btnLogin).performClick();
             });
             awaitActivity(HomeActivity.class.getName());
-            main(() -> { ((HomeActivity)resumed()).navigateTo(R.id.nav_profile,false);
+            main(() -> { ((HomeActivity)resumed()).navigateTo(R.id.nav_edit_profile,false);
                 ((AppCompatActivity)resumed()).getSupportFragmentManager().executePendingTransactions(); });
             awaitEnabled(R.id.btnUpdateProfile);
             main(() -> {

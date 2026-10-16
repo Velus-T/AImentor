@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             tvGoToRegister.setEnabled(true);
             if (!getLifecycle().getCurrentState().isAtLeast(androidx.lifecycle.Lifecycle.State.STARTED)) return;
             if (authenticated) {
+                com.example.mentor.data.ActiveUser.set(this, ((com.example.asm_final.AiMentorApplication)getApplication()).services().accountLookup().userId(username));
                 Toast.makeText(this, R.string.login_msg_success, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("USERNAME", username);

@@ -13,6 +13,6 @@ public final class DashboardSnapshot {
     }
     public SubjectProgress progress(Subject subject) {
         SubjectProgress value = progress.get(subject);
-        return value == null ? new SubjectProgress(0, 0, Collections.emptyList()) : value;
+        return value == null ? new SubjectProgress(0, Collections.emptyList()) : value;
     }
 }

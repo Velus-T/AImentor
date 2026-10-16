@@ -129,12 +129,8 @@ public class NoteFragment extends Fragment {
             @Override
             // Hàm `onDeleteClick()`: Thực hiện chức năng `onDeleteClick` của class này.
             public void onDeleteClick(int position, ProgrammingNote note) {
-                // Gọi `deleteNote()` trên `dbHelper` để thực hiện thao tác tương ứng.
-                dbHelper.deleteNote(userId, note.getId());
-                // Gọi hàm `loadNotes()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-                loadNotes();
-                // Hiển thị thông báo ngắn cho người dùng về kết quả hoặc lỗi thao tác.
-                Toast.makeText(getContext(), "Đã xóa ghi chú", Toast.LENGTH_SHORT).show();
+                com.example.modulelaptrinh.util.ConfirmDeletion.show(requireContext(), R.string.program_delete_note,
+                        () -> dbHelper.deleteNote(userId, note.getId()), NoteFragment.this::loadNotes);
             }
         });
 

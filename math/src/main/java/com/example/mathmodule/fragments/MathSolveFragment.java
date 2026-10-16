@@ -46,6 +46,7 @@ public class MathSolveFragment extends Fragment {
             startActivity(intent);
         });
 
+        view.findViewById(R.id.button_math_calculator).setOnClickListener(v -> com.example.mathmodule.calculator.MathCalculator.show(requireActivity()));
         return view; // Trả về view đã hoàn thiện
     }
 }

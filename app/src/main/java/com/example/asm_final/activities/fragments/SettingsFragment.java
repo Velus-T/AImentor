@@ -27,6 +27,14 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 public class SettingsFragment extends Fragment {
 
     private String username;
+    private SwitchMaterial reminderSwitch;
+    private boolean updatingReminderSwitch;
+    private final androidx.activity.result.ActivityResultLauncher<String> notificationPermission =
+            registerForActivityResult(new androidx.activity.result.contract.ActivityResultContracts.RequestPermission(),
+                    granted -> { if (isAdded()) {
+                        applyReminderChoice(granted);
+                        if (!granted) Toast.makeText(requireContext(), R.string.reminder_permission_needed, Toast.LENGTH_LONG).show();
+                    } });
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +53,7 @@ public class SettingsFragment extends Fragment {
         setupAbout(view);
         setupLogout(view);
 
+        if (getArguments()!=null && getArguments().getBoolean("embedded",false)) view.findViewById(R.id.settings_heading).setVisibility(View.GONE);
         return view;
     }
 
@@ -55,7 +64,7 @@ public class SettingsFragment extends Fragment {
     private void setupEditProfile(View view) {
         LinearLayout layoutEditProfile = view.findViewById(R.id.setting_edit_profile);
         layoutEditProfile.setOnClickListener(v -> {
-            ((com.example.asm_final.activities.HomeActivity) requireActivity()).navigateTo(R.id.nav_profile, true);
+            ((com.example.asm_final.activities.HomeActivity) requireActivity()).navigateTo(R.id.nav_edit_profile, true);
         });
     }
 
@@ -64,28 +73,47 @@ public class SettingsFragment extends Fragment {
      * Purpose: Separating configuration from the main flow keeps initialization concise and easier to verify.
      */
     private void setupReminders(View view) {
-        SwitchMaterial switchReminders = view.findViewById(R.id.switch_reminders);
-        switchReminders.setChecked(ReminderHelper.isReminderEnabled(requireContext()));
-        
-        switchReminders.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (requireContext().checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) 
-                        != android.content.pm.PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 101);
-                }
+        reminderSwitch = view.findViewById(R.id.switch_reminders);
+        reminderSwitch.setChecked(ReminderHelper.isReminderEnabled(requireContext()));
+        reminderSwitch.setOnCheckedChangeListener((button, enabled) -> {
+            if (updatingReminderSwitch) return;
+            if (enabled && Build.VERSION.SDK_INT >= 33 && requireContext().checkSelfPermission(
+                    android.Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                updatingReminderSwitch = true;
+                reminderSwitch.setChecked(false);
+                updatingReminderSwitch = false;
+                notificationPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS);
+                return;
             }
-            
-            ReminderHelper.setReminderEnabled(requireContext(), isChecked);
-            
-            int status = isChecked
-                    ? R.string.settings_status_on
-                    : R.string.settings_status_off;
-            String message = getString(
-                    R.string.settings_option_status,
-                    getString(R.string.settings_reminders),
-                    getString(status));
-            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+            applyReminderChoice(enabled);
         });
+    }
+
+    private void applyReminderChoice(boolean requested) {
+        boolean enabled = requested && androidx.core.app.NotificationManagerCompat.from(requireContext()).areNotificationsEnabled();
+        ReminderHelper.setReminderEnabled(requireContext(), enabled);
+        if (reminderSwitch != null) {
+            updatingReminderSwitch = true;
+            reminderSwitch.setChecked(enabled);
+            updatingReminderSwitch = false;
+        }
+        int message = requested && !enabled ? R.string.reminder_permission_needed
+                : enabled ? R.string.reminder_enabled_time : R.string.reminder_disabled;
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override public void onResume() {
+        super.onResume();
+        if (reminderSwitch != null) {
+            updatingReminderSwitch = true;
+            reminderSwitch.setChecked(ReminderHelper.isReminderEnabled(requireContext()));
+            updatingReminderSwitch = false;
+        }
+    }
+
+    @Override public void onDestroyView() {
+        reminderSwitch = null;
+        super.onDestroyView();
     }
 
     /*

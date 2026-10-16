@@ -31,7 +31,7 @@ public final class LocalSubjectSources {
                 com.example.mathmodule.databases.MathHistoryItem item=history.get(i);
                 events.add(new RecentActivity(Subject.MATH,Type.CHAT,c.getString(R.string.activity_solve_math),item.getQuestion(),ActivityTimestamp.parse(item.getTimestamp())));
             }
-            return new SubjectProgress(exp, exp*10L, events);
+            return new SubjectProgress(exp, events);
         }
     }
     private static SubjectProgress programming(Context c, int id) {
@@ -43,7 +43,7 @@ public final class LocalSubjectSources {
                 com.example.modulelaptrinh.database.SessionItem item=sessions.get(i);
                 events.add(new RecentActivity(Subject.PROGRAMMING,Type.CHAT,c.getString(R.string.activity_chat_prog),item.getName(),ActivityTimestamp.parse(item.getTimestamp())));
             }
-            return new SubjectProgress(exp,exp*10L,events);
+            return new SubjectProgress(exp,events);
         }
     }
     private static SubjectProgress history(Context c, int id) {
@@ -54,23 +54,20 @@ public final class LocalSubjectSources {
                 events.add(new RecentActivity(Subject.HISTORY,Type.QUIZ,c.getString(R.string.activity_quiz_history),item.getTitle(),ActivityTimestamp.parse(item.getTimestamp())));
             for (com.example.historymodule.databases.HistoryHistoryItem item:db.loadConversationSummaries(id,0,0,3))
                 events.add(new RecentActivity(Subject.HISTORY,Type.CHAT,c.getString(R.string.activity_chat_history),item.getTitle(),ActivityTimestamp.parse(item.getTimestamp())));
-            return new SubjectProgress(exp,exp*10L,events);
+            return new SubjectProgress(exp,events);
         }
     }
     private static SubjectProgress science(Context c, int id) {
         try (com.brightpath.science.data.local.ScienceDbHelper db=new com.brightpath.science.data.local.ScienceDbHelper(c)) {
-            int exp=db.getTotalExp(id);long reviewed=0;
+            int exp=db.getTotalExp(id);
             List<RecentActivity> events=new ArrayList<>();
-            try (Cursor cursor=db.getReadableDatabase().rawQuery("SELECT SUM(review_seconds) FROM science_history WHERE user_id=?",new String[]{String.valueOf(id)})) {
-                if(cursor.moveToFirst()) reviewed=cursor.getLong(0);
-            }
             try (Cursor cursor=db.getReadableDatabase().query("science_history",new String[]{"question","created_at"},"user_id=?",new String[]{String.valueOf(id)},null,null,"created_at DESC","3")) {
                 while(cursor.moveToNext()) events.add(new RecentActivity(Subject.SCIENCE,Type.CHAT,c.getString(R.string.activity_ask_science),cursor.getString(0),cursor.getLong(1)));
             }
             try (Cursor cursor=db.getReadableDatabase().query("science_quiz_attempts",new String[]{"topic","created_at"},"user_id=?",new String[]{String.valueOf(id)},null,null,"created_at DESC","2")) {
                 while(cursor.moveToNext()) events.add(new RecentActivity(Subject.SCIENCE,Type.QUIZ,c.getString(R.string.activity_quiz_science),cursor.getString(0),cursor.getLong(1)));
             }
-            return new SubjectProgress(exp,reviewed+exp*5L,events);
+            return new SubjectProgress(exp,events);
         }
     }
 }

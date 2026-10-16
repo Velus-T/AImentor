@@ -1,84 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/science_background"
-    android:fillViewport="true">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:background="@color/science_bg_header_custom"
-            android:padding="12dp">
-
-            <Button
-                android:id="@+id/btnCircuitBack"
-                style="@style/ScienceSquareIconButton"
-                android:contentDescription="@string/science_back"
-                android:text="‹"
-                android:textColor="@color/science_text_header_light"
-                android:textSize="28sp" />
-
-            <TextView
-                style="@style/ScienceHeaderTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_weight="1"
-                android:text="@string/science_circuit_title"
-                android:textColor="@color/science_text_header_light" />
+<?xml version='1.0' encoding='utf-8'?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/science_background" android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:background="@color/science_bg_header_custom" android:padding="12dp">
+            <Button android:id="@+id/btnCircuitBack" style="@style/ScienceSquareIconButton" android:contentDescription="@string/science_back" android:text="‹" android:textColor="@color/science_text_primary" android:textSize="28sp" />
+            <TextView style="@style/ScienceHeaderTitle" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="@string/science_circuit_title" android:textColor="@color/science_text_header_light" />
         </LinearLayout>
-
-        <TextView
-            style="@style/ScienceSecondaryText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/science_circuit_type_label" />
-
-        <Spinner
-            android:id="@+id/spCircuitType"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="@drawable/science_field_background"
-            android:contentDescription="@string/science_circuit_type_label"
-            android:paddingStart="10dp"
-            android:paddingEnd="8dp" />
-
-        <CheckBox
-            android:id="@+id/cbCircuitSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/science_control_tint"
-            android:checked="true"
-            android:minHeight="48dp"
-            android:text="@string/science_circuit_switch_closed"
-            android:textColor="@color/science_text_primary" />
-
-        <com.brightpath.science.presentation.view.CircuitDiagramView
-            android:id="@+id/circuitDiagramView"
-            android:layout_width="match_parent"
-            android:layout_height="320dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/science_panel"
-            android:contentDescription="Interactive series or parallel circuit diagram" />
-
-        <TextView
-            android:id="@+id/tvCircuitExplanation"
-            style="@style/ScienceBodyText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/science_panel"
-            android:lineSpacingExtra="4dp"
-            android:padding="14dp" />
+        <TextView style="@style/ScienceSecondaryText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/science_circuit_type_label" />
+        <Spinner android:id="@+id/spCircuitType" android:layout_width="match_parent" android:layout_height="52dp" android:background="@drawable/science_field_background" android:contentDescription="@string/science_circuit_type_label" android:paddingStart="10dp" android:paddingEnd="8dp" />
+        <CheckBox android:id="@+id/cbCircuitSwitch" android:layout_width="match_parent" android:layout_height="wrap_content" android:buttonTint="@color/science_control_tint" android:checked="true" android:minHeight="48dp" android:text="@string/science_circuit_switch_closed" android:textColor="@color/science_text_primary" />
+        <com.example.mentor.ui.AdaptiveCardRow android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="12dp">
+            <com.google.android.material.textfield.TextInputLayout style="@style/MentorScienceInput" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginEnd="4dp" android:hint="U (V)">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/etCircuitVoltage" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="56dp" android:inputType="numberDecimal" android:text="6" android:textSize="16sp" android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout style="@style/MentorScienceInput" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginEnd="4dp" android:hint="R1 (Ω)">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/etCircuitR1" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="56dp" android:inputType="numberDecimal" android:text="10" android:textSize="16sp" android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout style="@style/MentorScienceInput" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginEnd="4dp" android:hint="R2 (Ω)">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/etCircuitR2" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="56dp" android:inputType="numberDecimal" android:text="20" android:textSize="16sp" android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </com.example.mentor.ui.AdaptiveCardRow>
+        <com.brightpath.science.presentation.view.CircuitDiagramView android:id="@+id/circuitDiagramView" android:layout_width="match_parent" android:layout_height="320dp" android:layout_marginTop="12dp" android:background="@drawable/science_panel" android:contentDescription="@string/science_circuit_touch_hint" />
+        <TextView android:id="@+id/tvCircuitExplanation" style="@style/ScienceBodyText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="@drawable/science_panel" android:lineSpacingExtra="4dp" android:padding="14dp" />
+        <TextView android:id="@+id/tvCircuitResult" style="@style/ScienceBodyText" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp" android:background="@drawable/science_panel" android:layout_marginTop="12dp" android:accessibilityLiveRegion="polite" />
     </LinearLayout>
 </ScrollView>

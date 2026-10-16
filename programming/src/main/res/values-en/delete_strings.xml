@@ -1,0 +1,9 @@
+<resources>
+    <string name="program_delete_title">Confirm deletion</string>
+    <string name="program_delete_action">Delete</string>
+    <string name="program_delete_done">Deleted.</string>
+    <string name="program_delete_failed">Unable to delete. Refresh and try again.</string>
+    <string name="program_delete_note">Delete this note? This cannot be undone.</string>
+    <string name="program_delete_chat">Delete this conversation and all its messages? This cannot be undone.</string>
+    <string name="program_delete_all_chats">Delete all chat history for this account? This cannot be undone.</string>
+</resources>

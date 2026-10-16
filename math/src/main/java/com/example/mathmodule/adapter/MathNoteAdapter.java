@@ -66,7 +66,7 @@ public class MathNoteAdapter extends RecyclerView.Adapter<MathNoteAdapter.NoteVi
         MathNoteItem item = noteList.get(position);
         holder.txtTitle.setText(item.getTitle());
         holder.txtFormula.setText(item.getFormula());
-        holder.txtCategory.setText(item.getCategory());
+        holder.txtCategory.setText(com.example.mathmodule.util.MathCategory.GEOMETRY.equals(item.getCategory()) ? holder.itemView.getContext().getString(R.string.math_formula_filter_geometry) : com.example.mathmodule.util.MathCategory.ALGEBRA.equals(item.getCategory()) ? holder.itemView.getContext().getString(R.string.math_formula_filter_algebra) : item.getCategory());
 
         if (item.getIsPinned() == 1) {
             holder.imgStar.setImageResource(android.R.drawable.btn_star_big_on);

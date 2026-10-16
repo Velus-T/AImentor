@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import com.example.mentor.data.ModuleDatabaseHelper;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
@@ -12,7 +12,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
  * Role: Local data-layer class for App Shell, responsible for SQLite and data read/write operations.
  * Purpose: Separating the database from the UI centralizes queries, improves maintainability, and reduces direct SQL dependencies in Activities and Fragments.
  */
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends ModuleDatabaseHelper {
 
     private static final String DB_NAME = "user_db";
     private static final int DB_VERSION = 2;

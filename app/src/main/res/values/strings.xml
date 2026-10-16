@@ -3,7 +3,7 @@
     <string name="navigation_drawer_open">Mở menu</string>
     <string name="navigation_drawer_close">Đóng menu</string>
     <string name="menu_home">Trang chủ</string>
-    <string name="menu_category">Danh mục</string>
+    <string name="menu_category">Môn học</string>
     <string name="menu_profile">Hồ sơ</string>
     <string name="menu_settings">Cài đặt</string>
     <string name="menu_logout">Đăng xuất</string>
@@ -36,7 +36,7 @@
     <string name="prof_btn_update">Cập nhật thông tin</string>
     <string name="prof_update_success">Cập nhật thành công!</string>
     <string name="prof_update_fail">Cập nhật thất bại!</string>
-    <string name="login_title">Chào mừng trở lại</string>
+    <string name="login_title">AI Mentor luôn sẵn sàng cùng bạn</string>
     <string name="login_subtitle">Knowledge is power!</string>
     <string name="login_hint_user">Tên đăng nhập</string>
     <string name="login_hint_pass">Mật khẩu</string>
@@ -66,13 +66,13 @@
     <string name="reg_msg_weak_pass">❌ MK phải &gt;= 8 ký tự, có số và chữ hoa!</string>
     <string name="home_welcome_back">Chào mừng trở lại!</string>
     <string name="home_default_user">Người dùng</string>
-    <string name="home_overall_level">Cấp độ tổng thể</string>
+    <string name="home_overall_level">Cấp tổng hợp</string>
     <string name="home_level_prefix">Cấp </string>
     <string name="home_exp_remaining">Còn %1$d EXP để lên cấp</string>
-    <string name="home_completion_ratio">Tỉ lệ hoàn thành</string>
-    <string name="home_based_on_exp">Dựa trên EXP</string>
-    <string name="home_learning_time">Thời gian học (ước tính)</string>
-    <string name="home_subject_progress">Tiến độ môn học</string>
+    <string name="home_completion_ratio">Phân bố EXP</string>
+    <string name="home_based_on_exp">Tỉ trọng EXP giữa các môn</string>
+    <string name="home_learning_time">So sánh EXP</string>
+    <string name="home_subject_progress">EXP và cấp theo môn</string>
     <string name="home_recent_activity">Hoạt động gần đây</string>
     <string name="home_level_1">Tân thủ</string>
     <string name="home_level_2">Người tìm tòi</string>
@@ -109,8 +109,8 @@ BTEC FPT Student</string>
     <string name="recent_activity_title_placeholder">Tiêu đề hoạt động</string>
     <string name="recent_activity_description_placeholder">Mô tả chi tiết hoạt động</string>
     <string name="recent_activity_time_placeholder">2 giờ trước</string>
-    <string name="auth_tagline">Học theo nhịp của riêng bạn.</string>
-    <string name="auth_login_intro">Đăng nhập để khám phá Toán, Khoa học, Lịch sử và Lập trình.</string>
+    <string name="auth_tagline">Học rõ hơn, tiến bộ mỗi ngày</string>
+    <string name="auth_login_intro">Học rõ hơn, tiến bộ mỗi ngày</string>
     <string name="auth_register_intro">Một khởi đầu cho những khám phá mới.</string>
     <string name="auth_password_help">Ít nhất 8 ký tự, gồm chữ hoa và chữ số.</string>
 </resources>

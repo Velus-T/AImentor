@@ -128,7 +128,7 @@ public class MathFormulaFragment extends Fragment {
         if (editing) {
             edtTitle.setText(existing.getTitle());
             edtFormula.setText(existing.getFormula());
-            categoryGroup.check(getString(R.string.math_formula_filter_geometry).equals(existing.getCategory())
+            categoryGroup.check(com.example.mathmodule.util.MathCategory.GEOMETRY.equals(existing.getCategory())
                     ? R.id.rb_geometry : R.id.rb_algebra);
         }
 
@@ -145,7 +145,7 @@ public class MathFormulaFragment extends Fragment {
                     String title = edtTitle.getText().toString().trim();
                     String formula = edtFormula.getText().toString().trim();
                     String category = categoryGroup.getCheckedRadioButtonId() == R.id.rb_geometry
-                            ? getString(R.string.math_formula_filter_geometry) : getString(R.string.math_formula_filter_algebra);
+                            ? com.example.mathmodule.util.MathCategory.GEOMETRY : com.example.mathmodule.util.MathCategory.ALGEBRA;
 
                     if (title.isEmpty()) {
                         edtTitle.setError(getString(R.string.math_formula_hint_title));
@@ -234,8 +234,8 @@ public class MathFormulaFragment extends Fragment {
      */
     private void filterData(String filterType) {
         displayList.clear();
-        String algebra = getString(R.string.math_formula_filter_algebra);
-        String geometry = getString(R.string.math_formula_filter_geometry);
+        String algebra = com.example.mathmodule.util.MathCategory.ALGEBRA;
+        String geometry = com.example.mathmodule.util.MathCategory.GEOMETRY;
         for (MathNoteItem item : fullNoteList) {
             if ("ALL".equals(filterType)
                     || ("ALGEBRA".equals(filterType) && algebra.equals(item.getCategory()))

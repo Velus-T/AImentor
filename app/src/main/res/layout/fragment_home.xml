@@ -2,13 +2,13 @@
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
 
-        
+
         <TextView android:id="@+id/tv_home_welcome" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/home_welcome_back" android:textColor="@color/textColorSecondary" android:textSize="16sp" />
 
         <TextView android:id="@+id/txt_home_content" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="@string/home_default_user" android:textColor="@color/textColorPrimary" android:textSize="24sp" android:textStyle="bold" />
 
-        
-        <TextView android:id="@+id/tv_dashboard_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="48dp" android:text="@string/dashboard_partial" android:textColor="@color/textColorSecondary" android:textSize="14sp" android:visibility="gone" android:clickable="true" android:focusable="true" /><androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" app:cardCornerRadius="24dp" app:cardElevation="2dp" app:cardBackgroundColor="@android:color/transparent">
+
+        <TextView android:id="@+id/tv_dashboard_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="48dp" android:text="@string/dashboard_partial" android:textColor="@color/textColorSecondary" android:textSize="14sp" android:visibility="gone" android:clickable="true" android:focusable="true" /><androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@android:color/transparent">
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/neumorphic_card_bg" android:orientation="vertical" android:padding="20dp">
 
@@ -28,11 +28,11 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        
+
         <com.example.mentor.ui.AdaptiveCardRow android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:baselineAligned="false" android:orientation="horizontal">
 
-            
-            <androidx.cardview.widget.CardView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.2" android:layout_marginEnd="8dp" app:cardCornerRadius="20dp" app:cardElevation="2dp" app:cardBackgroundColor="@android:color/transparent">
+
+            <androidx.cardview.widget.CardView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.2" android:layout_marginEnd="8dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/neumorphic_card_bg" android:gravity="center" android:orientation="vertical" android:padding="16dp">
 
@@ -44,14 +44,14 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            
-            <androidx.cardview.widget.CardView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="8dp" app:cardCornerRadius="20dp" app:cardElevation="2dp" app:cardBackgroundColor="@android:color/transparent">
+
+            <androidx.cardview.widget.CardView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="8dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/neumorphic_card_bg" android:orientation="vertical" android:padding="16dp">
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/home_learning_time" android:textColor="@color/textColorPrimary" android:textSize="14sp" android:textStyle="bold" />
 
-                    
+
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cat_math" android:textSize="12sp" android:layout_marginTop="12dp" />
                     <ProgressBar android:id="@+id/pb_time_math" style="@android:style/Widget.ProgressBar.Horizontal" android:layout_width="match_parent" android:layout_height="4dp" android:progressDrawable="@drawable/custom_progress_bar" />
 
@@ -82,7 +82,7 @@
         </HorizontalScrollView>
 
 
-        
+
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:text="@string/home_recent_activity" android:textColor="@color/textColorPrimary" android:textSize="18sp" android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView android:id="@+id/rv_recent_activity" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:nestedScrollingEnabled="false" />

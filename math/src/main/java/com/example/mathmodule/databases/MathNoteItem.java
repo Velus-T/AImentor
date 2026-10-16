@@ -19,7 +19,7 @@ public class MathNoteItem {
         this.id = id;
         this.title = title;
         this.formula = formula;
-        this.category = category;
+        this.category = com.example.mathmodule.util.MathCategory.canonical(category);
         this.isPinned = isPinned;
     }
 
