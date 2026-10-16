@@ -96,6 +96,7 @@ public final class MathCalculator implements Application.ActivityLifecycleCallba
             if (e.getActionMasked() == MotionEvent.ACTION_MOVE) {
               if (Math.hypot(e.getRawX() - x, e.getRawY() - y) > dp(a, 8)) dragged = true;
               if (dragged) {
+                v.cancelLongPress();
                 v.setPressed(false);
                 v.setX(
                     Math.max(
@@ -179,10 +180,8 @@ public final class MathCalculator implements Application.ActivityLifecycleCallba
             v -> {
               try {
                 if (justCalculated[0]
-                    && (Character.isDigit(key.charAt(0))
-                        || key.equals(".")
-                        || key.equals("(")
-                        || key.equals("√"))) expression.setLength(0);
+                    && (Character.isDigit(key.charAt(0)) || key.equals(".") || key.equals("(")))
+                  expression.setLength(0);
                 justCalculated[0] = false;
                 switch (key) {
                   case "C":
@@ -199,10 +198,28 @@ public final class MathCalculator implements Application.ActivityLifecycleCallba
                     }
                     break;
                   case "√":
-                    expression.append("sqrt(");
+                    boolean complete = expression.length() > 0;
+                    if (complete) {
+                      try {
+                        CalculatorEngine.calculate(expression.toString());
+                      } catch (IllegalArgumentException incomplete) {
+                        complete = false;
+                      }
+                    }
+                    if (complete) {
+                      String root = CalculatorEngine.calculate("sqrt(" + expression + ")");
+                      expression.setLength(0);
+                      expression.append(root);
+                      justCalculated[0] = true;
+                    } else expression.append("sqrt(");
                     break;
                   case "x²":
-                    expression.append("^2");
+                    String square =
+                        CalculatorEngine.calculate(
+                            "(" + (expression.length() == 0 ? "0" : expression) + ")^2");
+                    expression.setLength(0);
+                    expression.append(square);
+                    justCalculated[0] = true;
                     break;
                   case "=":
                     String result = CalculatorEngine.calculate(expression.toString());

@@ -97,3 +97,17 @@ for future decomposition rather than claiming the entire codebase is perfectly S
    storage-backup policy once migration has been validated on real installations.
 
 Built-in reference data and user/AI-authored content retain their original language; changing UI language does not translate saved content.
+
+## Debug follow-up
+
+Reproduced a calculator keypad regression before fixing it: pressing square repeatedly
+built a right-associative power chain instead of repeatedly squaring the displayed value.
+For example, 2 followed by square three times produced 65,536 instead of 256.
+Square now computes the current complete expression. Square root also operates on a
+complete displayed value (including the last result); for an incomplete expression it
+still inserts the root prefix for continued input. Dragging explicitly cancels long press.
+
+CalculatorInteractionDebugTest covers repeated square, root after entering a value,
+root of the previous result, drag clamping, edge persistence and absence of an accidental
+Hide dialog while dragging. These extend the instrumentation suite from 13 to 15 cases.
+API credentials remain empty; live AI calls are outside this debug session.
