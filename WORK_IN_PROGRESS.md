@@ -41,3 +41,14 @@ Người dùng yêu cầu kiểm tra logic toàn bộ app. Chi tiết: LOGIC_AUD
 - API key vẫn trống; không gọi Gemini thật, không thêm backend máy chủ.
 
 APK bàn giao ../AIMentor_QA/AImentor-debug.apk đã cập nhật từ bản build cuối; SHA256 7799FD7B0D43E4BA66FDE2C7B4663486191FAC6E0814881BC1C15BDAE0265E70.
+
+
+## API cũ — kiểm thử thật hoàn tất 17/10/2026
+
+Người dùng cho phép thử lại API cũ. Chi tiết LIVE_API_TEST_2026-10-17.md.
+- 7/7 khóa cũ gọi danh sách model HTTP 200.
+- live-old-api-runtime-verification.log: 8/8 ca Gemini thật PASS (181,603 giây): chat bốn môn; quiz Toán/Science/Lập trình 5 câu và Lịch sử 15 câu, đều lưu bank.
+- Science tạm dùng pool khóa Toán vì ZIP không có khóa riêng.
+- Test chỉ chạy khi mentorLiveAi=true; mặc định 8 ca được bỏ qua (đã xác nhận), không gọi mạng.
+- Đã phục hồi API công khai trống và BuildConfig bốn module trống; đã cài lại APK trống, xóa APK chứa khóa và đóng giả lập.
+- Chưa thử ảnh, các lỗi mạng/quota cưỡng bức hoặc kiểm duyệt toàn bộ kiến thức AI.

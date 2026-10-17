@@ -133,3 +133,8 @@ draft. Math's image action is labeled as choosing an image to match the current 
 ## Whole-app logic audit — 2026-10-17
 
 See [LOGIC_AUDIT_2026-10-17.md](LOGIC_AUDIT_2026-10-17.md) for confirmed findings, corrections, review coverage and limitations. This pass fixes AI quiz parsing/answer integrity, false persistence success, chat and note recreation, tab restoration and unsaved quiz exits. It adds 13 unit tests and 10 Android regression cases. Latest verification and publication status is recorded in WORK_IN_PROGRESS.md.
+
+
+## Live Gemini smoke verification — 2026-10-17
+
+See [LIVE_API_TEST_2026-10-17.md](LIVE_API_TEST_2026-10-17.md). Eight opt-in Android cases passed with real Gemini responses using the user-authorized old API configuration. The normal 48-case offline suite remains separate; live cases are skipped unless explicitly enabled. Public API fields remain empty; temporary credential-bearing APKs were removed.
