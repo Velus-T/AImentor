@@ -96,6 +96,12 @@ public ScienceFormulaFragment() {
         bindFilterChip(view, R.id.chipFormulaBiology, getString(R.string.science_subj_biology));
 
         refreshNotes();
+        editorState.restore(savedInstanceState == null ? null : savedInstanceState.getBundle("editor"));
+        if (editorState.hasDraft()) {
+            ScienceNote existing = null;
+            for (ScienceNote note : noteRepository.getAll(userId)) if (note.getId() == editorState.recordId()) existing = note;
+            showNoteDialog(existing);
+        }
     }
 
         /*
@@ -179,6 +185,8 @@ private void initFormulaList() {
  * Responsibility: Prepares and presents the data/state handled by `showNoteDialog` on the UI.
  * Purpose: Transforms application state into information the learner can see and interact with.
  */
+private final com.example.mentor.ui.NoteEditorState editorState = new com.example.mentor.ui.NoteEditorState();
+
 private void showNoteDialog(@Nullable ScienceNote note) {
         LinearLayout form = new LinearLayout(requireContext());
         form.setOrientation(LinearLayout.VERTICAL);
@@ -208,7 +216,7 @@ private void showNoteDialog(@Nullable ScienceNote note) {
         if (note != null) {
             titleInput.setText(note.getTitle());
             contentInput.setText(note.getContent());
-            selectSpinnerValue(subjectSpinner, subjects, note.getSubject());
+            subjectSpinner.setSelection(com.brightpath.science.util.ScienceNoteSubject.index(note.getSubject()));
         }
 
         form.addView(titleInput);
@@ -231,6 +239,9 @@ private void showNoteDialog(@Nullable ScienceNote note) {
                         contentInput,
                         subjectSpinner)));
 
+        editorState.bind(dialog, note == null ? 0 : note.getId(), titleInput, contentInput,
+                () -> com.brightpath.science.util.ScienceNoteSubject.code(subjectSpinner.getSelectedItemPosition()),
+                category -> subjectSpinner.setSelection(com.brightpath.science.util.ScienceNoteSubject.index(category)));
         dialog.show();
     }
 
@@ -255,13 +266,12 @@ private void saveNoteFromDialog(AlertDialog dialog,
             return;
         }
 
-        String subject = String.valueOf(subjectSpinner.getSelectedItem());
+        String subject = com.brightpath.science.util.ScienceNoteSubject.code(subjectSpinner.getSelectedItemPosition());
         boolean saved;
-        if (note == null) {
-            saved = noteRepository.insert(userId, title, content, subject) != -1L;
-        } else {
-            saved = noteRepository.update(note.getId(), userId, title, content, subject);
-        }
+        try {
+            saved = note == null ? noteRepository.insert(userId, title, content, subject) > 0
+                    : noteRepository.update(note.getId(), userId, title, content, subject);
+        } catch (RuntimeException error) { saved = false; }
 
         if (!saved) {
             Toast.makeText(requireContext(), R.string.science_note_save_error, Toast.LENGTH_SHORT)
@@ -287,7 +297,8 @@ private void refreshNotes() {
         try {
             notes = noteRepository.getAll(userId);
         } catch (Exception error) {
-            notes = new ArrayList<>();
+            Toast.makeText(requireContext(), com.example.mentor.ui.R.string.mentor_data_read_error, Toast.LENGTH_LONG).show();
+            return;
         }
 
         notesContainer.removeAllViews();
@@ -317,7 +328,9 @@ private View createNoteCard(ScienceNote note) {
         body.setOrientation(LinearLayout.VERTICAL);
 
         TextView title = new TextView(requireContext());
-        title.setText(note.getTitle() + " • " + note.getSubject());
+        int[] labels = {R.string.science_subj_physics, R.string.science_subj_chemistry,
+                R.string.science_subj_biology, R.string.science_subj_others};
+        title.setText(note.getTitle() + " • " + getString(labels[com.brightpath.science.util.ScienceNoteSubject.index(note.getSubject())]));
         title.setTextSize(16);
         title.setTextColor(ContextCompat.getColor(requireContext(), R.color.science_text_primary));
         title.setTypeface(title.getTypeface(), android.graphics.Typeface.BOLD);
@@ -363,7 +376,10 @@ private void confirmDelete(ScienceNote note) {
                 .setMessage(getString(R.string.science_note_delete_msg, note.getTitle()))
                 .setNegativeButton(R.string.science_cancel, null)
                 .setPositiveButton(R.string.science_delete, (dialog, which) -> {
-                    if (noteRepository.delete(note.getId(), userId)) {
+                    boolean deleted;
+                    try { deleted = noteRepository.delete(note.getId(), userId); }
+                    catch (RuntimeException error) { deleted = false; }
+                    if (deleted) {
                         refreshNotes();
                         Toast.makeText(
                                 requireContext(),
@@ -389,6 +405,15 @@ private void selectSpinnerValue(Spinner spinner, String[] values, String selecte
     }
 
     // endregion
+
+    @Override public void onSaveInstanceState(@NonNull Bundle out) {
+        super.onSaveInstanceState(out); out.putBundle("editor", editorState.save());
+    }
+
+    @Override public void onDestroyView() {
+        editorState.close(); notesContainer = null; emptyNotes = null; formulaRecycler = null;
+        super.onDestroyView();
+    }
 
     // region Formula filtering
 

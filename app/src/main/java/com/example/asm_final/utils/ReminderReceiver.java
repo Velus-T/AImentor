@@ -31,7 +31,7 @@ public class ReminderReceiver extends BroadcastReceiver {
             return;
         }
 
-        showNotification(context);
+        if (ReminderHelper.isReminderEnabled(context)) showNotification(context);
     }
 
     /*
@@ -41,6 +41,7 @@ public class ReminderReceiver extends BroadcastReceiver {
     private void showNotification(Context context) {
         NotificationManager notificationManager = (NotificationManager) 
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (notificationManager == null) return;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(

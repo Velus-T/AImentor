@@ -743,6 +743,7 @@ private void askQuestion() {
                 : typedText;
         String conversationContext = buildConversationContext();
         String activeConversationId = currentConversationId();
+        final int requestUserId = userSession.getUserId();
         String visibleImageUri = imageUri == null ? null : imageUri.toString();
 
         persistCurrentPreferences();
@@ -763,7 +764,7 @@ private void askQuestion() {
                 String privateImageUri = imageData == null
                         ? null : privateImageStore.saveJpeg(imageData.getBytes());
                 ScienceQuestion question = new ScienceQuestion(
-                        userSession.getUserId(),
+                        requestUserId,
                         selectedSubject,
                         level,
                         style,

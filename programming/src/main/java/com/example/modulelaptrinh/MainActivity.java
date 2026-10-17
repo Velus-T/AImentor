@@ -28,6 +28,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  */
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_USER_ID = "programming_user_id";
+    private boolean confirmedQuizExit;
 
     // Tham chiếu `bottomNav` tới thanh điều hướng dưới trong layout để đọc/cập nhật giao diện.
     private BottomNavigationView bottomNav;
@@ -72,6 +73,18 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnItemSelectedListener(item -> {
             // Tính/đọc và lưu giá trị `itemId` (item id) để sử dụng ở các bước phía sau.
             int itemId = item.getItemId();
+            Fragment active = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            com.example.mentor.ui.QuizFormView quiz = active == null || active.getView() == null ? null
+                    : active.getView().findViewById(com.example.mentor.ui.R.id.mentor_quiz_form);
+            if (!confirmedQuizExit && itemId != bottomNav.getSelectedItemId() && quiz != null
+                    && quiz.getVisibility() == android.view.View.VISIBLE && !quiz.submitted()) {
+                quiz.confirmReplacement(() -> {
+                    confirmedQuizExit = true;
+                    bottomNav.setSelectedItemId(itemId);
+                    confirmedQuizExit = false;
+                });
+                return false;
+            }
             // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
             if (itemId == R.id.nav_home) {
                 // Trả kết quả của hàm về cho nơi đã gọi hàm này.
@@ -100,6 +113,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             // Hàm `handleOnBackPressed()`: Thực hiện chức năng `handleOnBackPressed` của class này.
             public void handleOnBackPressed() {
+                com.example.mentor.ui.QuizFormView form = findViewById(com.example.mentor.ui.R.id.mentor_quiz_form);
+                if (!confirmedQuizExit && form != null && form.getVisibility() == android.view.View.VISIBLE
+                        && !form.submitted()) {
+                    form.confirmReplacement(() -> {
+                        confirmedQuizExit = true;
+                        handleOnBackPressed();
+                        confirmedQuizExit = false;
+                    });
+                    return;
+                }
                 // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
                 if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
                     // Lấy FragmentManager để thực hiện chuyển/replace Fragment.
@@ -132,6 +155,11 @@ public class MainActivity extends AppCompatActivity {
         if (fragment == null) {
             // Trả kết quả của hàm về cho nơi đã gọi hàm này.
             return false;
+        }
+        Fragment existing = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (existing != null && existing.getClass() == fragment.getClass()) {
+            if (getSupportActionBar() != null) getSupportActionBar().setTitle(title);
+            return true;
         }
 
         // Lấy FragmentManager để thực hiện chuyển/replace Fragment.

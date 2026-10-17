@@ -75,7 +75,8 @@ public class MathFormulaFragment extends Fragment {
              */
             @Override
             public void onPin(MathNoteItem item) {
-                dbHelper.updatePinStatus(item.getId(), item.getIsPinned() == 1 ? 0 : 1);
+                try { dbHelper.updatePinStatus(item.getId(), item.getIsPinned() == 1 ? 0 : 1); }
+                catch (RuntimeException error) { Toast.makeText(requireContext(), R.string.math_formula_error_save, Toast.LENGTH_SHORT).show(); }
                 loadNotesFromDatabase();
             }
 
@@ -98,6 +99,12 @@ public class MathFormulaFragment extends Fragment {
         setupFilters();
         btnAddNote.setOnClickListener(v -> showNoteDialog(null));
         loadNotesFromDatabase();
+        editorState.restore(savedInstanceState == null ? null : savedInstanceState.getBundle("editor"));
+        if (editorState.hasDraft()) {
+            MathNoteItem existing = null;
+            for (MathNoteItem note : fullNoteList) if (note.getId() == editorState.recordId()) existing = note;
+            showNoteDialog(existing);
+        }
         return view;
     }
 
@@ -115,6 +122,8 @@ public class MathFormulaFragment extends Fragment {
      * Responsibility: Displays or binds data from `show note dialog` to the appropriate UI or navigation destination.
      * Purpose: Separating presentation logic prevents data processing from being mixed with UI rendering.
      */
+    private final com.example.mentor.ui.NoteEditorState editorState = new com.example.mentor.ui.NoteEditorState();
+
     private void showNoteDialog(@Nullable MathNoteItem existing) {
         View dialogView = LayoutInflater.from(requireContext())
                 .inflate(R.layout.dialog_add_note, null, false);
@@ -159,11 +168,10 @@ public class MathFormulaFragment extends Fragment {
                     }
 
                     boolean success;
-                    if (editing) {
-                        success = dbHelper.updateNote(existing.getId(), title, formula, category);
-                    } else {
-                        success = dbHelper.insertNote(title, formula, category) > 0;
-                    }
+                    try {
+                        success = editing ? dbHelper.updateNote(existing.getId(), title, formula, category)
+                                : dbHelper.insertNote(title, formula, category) > 0;
+                    } catch (RuntimeException error) { success = false; }
 
                     if (!success) {
                         Toast.makeText(requireContext(), R.string.math_formula_error_save, Toast.LENGTH_SHORT).show();
@@ -175,6 +183,9 @@ public class MathFormulaFragment extends Fragment {
                     dialog.dismiss();
                     loadNotesFromDatabase();
                 }));
+        editorState.bind(dialog, existing == null ? 0 : existing.getId(), edtTitle, edtFormula,
+                () -> categoryGroup.getCheckedRadioButtonId() == R.id.rb_geometry ? "GEOMETRY" : "ALGEBRA",
+                category -> categoryGroup.check("GEOMETRY".equals(category) ? R.id.rb_geometry : R.id.rb_algebra));
         dialog.show();
     }
 
@@ -187,7 +198,9 @@ public class MathFormulaFragment extends Fragment {
                 .setTitle(R.string.math_formula_delete_title)
                 .setMessage(getString(R.string.math_formula_delete_msg, item.getTitle()))
                 .setPositiveButton(R.string.math_formula_delete_confirm, (dialog, which) -> {
-                    boolean deleted = dbHelper.deleteNote(item.getId());
+                    boolean deleted;
+                    try { deleted = dbHelper.deleteNote(item.getId()); }
+                    catch (RuntimeException error) { deleted = false; }
                     Toast.makeText(requireContext(),
                             deleted ? R.string.math_formula_delete_success : R.string.math_formula_delete_error,
                             Toast.LENGTH_SHORT).show();
@@ -202,8 +215,13 @@ public class MathFormulaFragment extends Fragment {
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
     private void loadNotesFromDatabase() {
-        fullNoteList.clear();
-        fullNoteList.addAll(dbHelper.getAllNotes());
+        List<MathNoteItem> loaded;
+        try { loaded = dbHelper.getAllNotes(); }
+        catch (RuntimeException error) {
+            Toast.makeText(requireContext(), com.example.mentor.ui.R.string.mentor_data_read_error, Toast.LENGTH_LONG).show();
+            return;
+        }
+        fullNoteList.clear(); fullNoteList.addAll(loaded);
         filterData(currentFilter);
     }
 
@@ -253,6 +271,17 @@ public class MathFormulaFragment extends Fragment {
      * Responsibility: Updates or synchronizes `update button colors` with the latest data or state.
      * Purpose: Keeps the UI and data synchronized after user actions.
      */
+    @Override public void onSaveInstanceState(@NonNull Bundle out) {
+        super.onSaveInstanceState(out); out.putBundle("editor", editorState.save());
+    }
+
+    @Override public void onDestroyView() {
+        editorState.close();
+        if (dbHelper != null) dbHelper.close();
+        dbHelper = null;
+        super.onDestroyView();
+    }
+
     private void updateButtonColors(Button active, Button... inactives) {
         active.setBackgroundTintList(ColorStateList.valueOf(
                 ContextCompat.getColor(requireContext(), R.color.math_formula_icon)));

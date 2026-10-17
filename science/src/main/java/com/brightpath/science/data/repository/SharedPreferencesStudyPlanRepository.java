@@ -48,12 +48,14 @@ public SharedPreferencesStudyPlanRepository(Context context, TextCipher textCiph
  */
 @Override
     public void save(int userId, StudyPlan plan) {
-        if (plan == null) return;
+        if (plan == null) throw new IllegalArgumentException("Study plan is missing.");
         try {
             String encrypted = textCipher.encrypt(plan.toJson().toString());
-            preferences.edit().putString(key(userId), encrypted).apply();
-        } catch (Exception ignored) {
-            // A storage failure should not crash the active study session.
+            if (!preferences.edit().putString(key(userId), encrypted).commit()) {
+                throw new IllegalStateException("Unable to write study plan.");
+            }
+        } catch (Exception error) {
+            throw new IllegalStateException("Unable to save study plan.", error);
         }
     }
 
@@ -63,7 +65,9 @@ public SharedPreferencesStudyPlanRepository(Context context, TextCipher textCiph
  */
 @Override
     public void clear(int userId) {
-        preferences.edit().remove(key(userId)).apply();
+        if (!preferences.edit().remove(key(userId)).commit()) {
+            throw new IllegalStateException("Unable to remove study plan.");
+        }
     }
 
         /*

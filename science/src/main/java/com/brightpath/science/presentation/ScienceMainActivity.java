@@ -161,6 +161,8 @@ private boolean navigateTo(@IdRes int itemId) {
 
         selectedItemId = itemId;
         applyNavigationTint(itemId);
+        Fragment existing = getSupportFragmentManager().findFragmentById(R.id.scienceFragmentContainer);
+        if (existing != null && existing.getClass() == fragment.getClass()) return true;
 
         getSupportFragmentManager()
                 .beginTransaction()

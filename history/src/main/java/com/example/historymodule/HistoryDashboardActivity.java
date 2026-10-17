@@ -61,6 +61,8 @@ public final class HistoryDashboardActivity extends AppCompatActivity {
 
     private void showPage(Fragment fragment, String title) {
         titleView.setText(title);
+        Fragment existing = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (existing != null && existing.getClass() == fragment.getClass()) return;
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();

@@ -35,7 +35,7 @@ public class MathQuizQuestionTest {
                 "Z", null, (MathQuizDifficulty) null);
 
         assertEquals("", question.getQuestionText());
-        assertEquals("A", question.getCorrectAnswer());
+        assertEquals("", question.getCorrectAnswer());
         assertEquals(MathQuizDifficulty.MEDIUM, question.getDifficulty());
 
         question.setSelectedAnswer(" d ");

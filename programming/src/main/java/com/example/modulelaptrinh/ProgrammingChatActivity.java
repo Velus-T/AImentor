@@ -209,14 +209,21 @@ public class ProgrammingChatActivity extends AppCompatActivity {
         // Lấy Intent đã dùng để mở Activity nhằm đọc các tham số được truyền vào.
         String initialQuestion = getIntent().getStringExtra("QUESTION");
         // Lấy Intent đã dùng để mở Activity nhằm đọc các tham số được truyền vào.
-        sessionId = getIntent().getLongExtra("SESSION_ID", -1);
+        sessionId = savedInstanceState == null ? getIntent().getLongExtra("SESSION_ID", -1)
+                : savedInstanceState.getLong("activeSession", -1);
+        isFirstMessageSent = savedInstanceState != null && savedInstanceState.getBoolean("initialSent");
 
         // Gọi hàm `initViews()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
         initViews();
         // Gọi hàm `initAdapters()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
         initAdapters();
         // Gọi hàm `initChatHistory()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-        initChatHistory(initialQuestion);
+        initChatHistory(savedInstanceState == null ? initialQuestion : null);
+        if (savedInstanceState != null) {
+            ArrayList<Uri> images = savedInstanceState.getParcelableArrayList("pendingImages");
+            if (images != null) pendingImageAdapter.addImages(images);
+            updatePendingImagesVisibility();
+        }
         // Gọi hàm `setupListeners()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
         setupListeners();
     }
@@ -846,7 +853,8 @@ public class ProgrammingChatActivity extends AppCompatActivity {
         // Bắt đầu khối có thể phát sinh ngoại lệ để xử lý an toàn.
         try {
             // isUser=false -> messages.is_user = 0, tức message của AI.
-            dbHelper.insertMessage(sessionId, aiAnswer, false, null);
+            if (dbHelper.insertMessage(sessionId, aiAnswer, false, null) <= 0)
+                throw new IllegalStateException("Answer was not saved.");
             // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
             if (messageList.size() <= 4) {
                 // Lấy chuỗi từ resources và lưu vào `sessionName` để hỗ trợ đa ngôn ngữ.
@@ -866,6 +874,7 @@ public class ProgrammingChatActivity extends AppCompatActivity {
         } catch (Exception e) {
             // Gọi `e()` trên `Log` để thực hiện thao tác tương ứng.
             Log.e(TAG, "Lỗi lưu câu trả lời", e);
+            Toast.makeText(this, com.example.mentor.ui.R.string.mentor_chat_save_error, Toast.LENGTH_LONG).show();
         }
 
         // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
@@ -1093,6 +1102,14 @@ public class ProgrammingChatActivity extends AppCompatActivity {
 
     @Override
     // Hàm `onDestroy()`: Giải phóng tài nguyên khi đối tượng/màn hình bị hủy.
+    protected void onSaveInstanceState(Bundle out) {
+        super.onSaveInstanceState(out);
+        out.putLong("activeSession", sessionId);
+        out.putBoolean("initialSent", isFirstMessageSent);
+        if (pendingImageAdapter != null) out.putParcelableArrayList("pendingImages", new ArrayList<>(pendingImageAdapter.getImageUris()));
+    }
+
+    @Override
     protected void onDestroy() {
         // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
         if (previewDialog != null && previewDialog.isShowing()) {

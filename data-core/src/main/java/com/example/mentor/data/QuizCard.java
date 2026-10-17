@@ -69,9 +69,13 @@ public final class QuizCard implements Serializable {
     String expectedText = normalize(answer), actualText = normalize(actual);
     String number = "[+-]?(?:[0-9]+(?:[.,][0-9]+)?|[.,][0-9]+)(?:[eE][+-]?[0-9]+)?";
     if (options.isEmpty() && expectedText.matches(number) && actualText.matches(number)) {
-      return new java.math.BigDecimal(expectedText.replace(',', '.'))
-              .compareTo(new java.math.BigDecimal(actualText.replace(',', '.')))
-          == 0;
+      try {
+        return new java.math.BigDecimal(expectedText.replace(',', '.'))
+                .compareTo(new java.math.BigDecimal(actualText.replace(',', '.')))
+            == 0;
+      } catch (NumberFormatException invalidNumber) {
+        return false;
+      }
     }
     return expectedText.equals(actualText);
   }

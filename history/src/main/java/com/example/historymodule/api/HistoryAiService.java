@@ -242,7 +242,7 @@ public final class HistoryAiService {
         String json = extractJsonArray(rawText);
         JSONArray array = new JSONArray(json);
         List<HistoryQuizQuestion> result = new ArrayList<>();
-        int limit = Math.min(array.length(), Math.max(5, Math.min(10, expectedCount)));
+        int limit = Math.min(array.length(), Math.max(5, Math.min(15, expectedCount)));
 
         for (int i = 0; i < limit; i++) {
             JSONObject item = array.optJSONObject(i);
@@ -321,9 +321,8 @@ public final class HistoryAiService {
     private int resolveCorrectIndex(String value, List<String> options) {
         if (value == null) return -1;
         String normalized = value.trim();
-        if (normalized.matches("[0-3]")) {
-            return Integer.parseInt(normalized);
-        }
+        // correctIndex is zero-based; a numeric correctAnswer is the displayed 1-4 choice.
+        if (normalized.equals("0")) return 0;
         if (normalized.matches("[1-4]")) {
             return Integer.parseInt(normalized) - 1;
         }

@@ -1,0 +1,6 @@
+<resources>
+    <string name="mentor_chat_save_error">Nội dung đang hiển thị nhưng chưa lưu được. Hãy sao chép trước khi rời màn hình.</string>
+    <string name="mentor_chat_input_save_error">Chưa lưu được câu hỏi. Nội dung và ảnh vẫn được giữ để thử lại.</string>
+    <string name="mentor_chat_interrupted">Yêu cầu đã bị gián đoạn khi màn hình được tạo lại. Hãy gửi lại câu hỏi nếu chưa có câu trả lời.</string>
+    <string name="mentor_data_read_error">Chưa đọc được dữ liệu. Hãy thử mở lại màn hình.</string>
+</resources>

@@ -55,7 +55,12 @@ public final class HistoryFormulaFragment extends Fragment {
             @Override public void onEdit(HistoryNoteItem item) { showNoteDialog(item); }
             @Override public void onDelete(HistoryNoteItem item) { confirmDelete(item); }
             @Override public void onTogglePin(HistoryNoteItem item) {
-                dbHelper.setNotePinned(userId, item.getId(), !item.isPinned());
+                try {
+                      if (dbHelper.setNotePinned(userId, item.getId(), !item.isPinned()) <= 0)
+                          throw new IllegalStateException("Note was not changed.");
+                  } catch (RuntimeException error) {
+                      Toast.makeText(requireContext(), R.string.history_notes_error_save, Toast.LENGTH_SHORT).show();
+                  }
                 loadNotes();
             }
         });
@@ -64,6 +69,12 @@ public final class HistoryFormulaFragment extends Fragment {
 
         view.findViewById(R.id.fab_add_event).setOnClickListener(v -> showNoteDialog(null));
         loadNotes();
+        editorState.restore(savedInstanceState == null ? null : savedInstanceState.getBundle("editor"));
+        if (editorState.hasDraft()) {
+            HistoryNoteItem existing = null;
+            for (HistoryNoteItem note : notes) if (note.getId() == editorState.recordId()) existing = note;
+            showNoteDialog(existing);
+        }
         return view;
     }
 
@@ -81,6 +92,8 @@ public final class HistoryFormulaFragment extends Fragment {
      * Responsibility: Displays or binds data from `show note dialog` to the appropriate UI or navigation destination.
      * Purpose: Separating presentation logic prevents data processing from being mixed with UI rendering.
      */
+    private final com.example.mentor.ui.NoteEditorState editorState = new com.example.mentor.ui.NoteEditorState();
+
     private void showNoteDialog(@Nullable HistoryNoteItem existing) {
         View dialogView = LayoutInflater.from(requireContext())
                 .inflate(R.layout.history_dialog_note, null, false);
@@ -109,9 +122,11 @@ public final class HistoryFormulaFragment extends Fragment {
                         contentInput.setError(getString(R.string.history_notes_error_content));
                         return;
                     }
-                    long changed = existing == null
-                            ? dbHelper.insertNote(userId, title, content)
-                            : dbHelper.updateNote(userId, existing.getId(), title, content);
+                    long changed;
+                    try {
+                        changed = existing == null ? dbHelper.insertNote(userId, title, content)
+                                : dbHelper.updateNote(userId, existing.getId(), title, content);
+                    } catch (RuntimeException error) { changed = -1; }
                     if (changed <= 0) {
                         Toast.makeText(requireContext(), R.string.history_notes_error_save, Toast.LENGTH_SHORT).show();
                         return;
@@ -119,6 +134,8 @@ public final class HistoryFormulaFragment extends Fragment {
                     dialog.dismiss();
                     loadNotes();
                 }));
+        editorState.bind(dialog, existing == null ? 0 : existing.getId(), titleInput, contentInput,
+                () -> "", ignoredCategory -> {});
         dialog.show();
     }
 
@@ -131,7 +148,12 @@ public final class HistoryFormulaFragment extends Fragment {
                 .setTitle(R.string.history_notes_delete_title)
                 .setMessage(getString(R.string.history_notes_delete_msg, item.getTitle()))
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                    dbHelper.deleteNote(userId, item.getId());
+                    try {
+                        if (dbHelper.deleteNote(userId, item.getId()) <= 0)
+                            throw new IllegalStateException("Note was not removed.");
+                    } catch (RuntimeException error) {
+                        Toast.makeText(requireContext(), R.string.history_notes_error_save, Toast.LENGTH_SHORT).show();
+                    }
                     loadNotes();
                 })
                 .setNegativeButton(android.R.string.cancel, null)
@@ -143,8 +165,13 @@ public final class HistoryFormulaFragment extends Fragment {
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
     private void loadNotes() {
-        notes.clear();
-        notes.addAll(dbHelper.loadNotes(userId));
+        List<HistoryNoteItem> loaded;
+        try { loaded = dbHelper.loadNotes(userId); }
+        catch (RuntimeException error) {
+            Toast.makeText(requireContext(), com.example.mentor.ui.R.string.mentor_data_read_error, Toast.LENGTH_LONG).show();
+            return;
+        }
+        notes.clear(); notes.addAll(loaded);
         adapter.notifyDataSetChanged();
         emptyView.setVisibility(notes.isEmpty() ? View.VISIBLE : View.GONE);
     }
@@ -154,7 +181,12 @@ public final class HistoryFormulaFragment extends Fragment {
      * Purpose: Keeping callbacks separate makes event flow clearer and follows the Android lifecycle cleanly.
      */
     @Override
-    public void onDestroyView() {
+    public void onSaveInstanceState(@NonNull Bundle out) {
+        super.onSaveInstanceState(out); out.putBundle("editor", editorState.save());
+    }
+
+    @Override public void onDestroyView() {
+        editorState.close();
         if (dbHelper != null) dbHelper.close();
         dbHelper = null;
         adapter = null;

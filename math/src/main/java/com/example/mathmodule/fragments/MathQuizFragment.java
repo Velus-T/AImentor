@@ -301,6 +301,7 @@ public class MathQuizFragment extends Fragment {
             }
 
             if (questions.size() != count) throw new JSONException("Unexpected question count");
+            com.example.mentor.data.QuizContentValidator.generated(com.example.mathmodule.util.QuizCards.from(questions));
             String title = quizJson.optString("set_title", "Đề " + topic + " (AI tạo)").trim();
             String setDifficulty =
                 quizJson.optString("difficulty", summarizeDifficulty(questions)).trim();

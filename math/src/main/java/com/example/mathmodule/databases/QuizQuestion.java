@@ -72,7 +72,7 @@ public class QuizQuestion {
 
     private static String normalizeAnswer(String value) {
         String answer = safe(value).toUpperCase();
-        return answer.matches("[ABCD]") ? answer : "A";
+        return answer.matches("[ABCD]") ? answer : "";
     }
 
     /*

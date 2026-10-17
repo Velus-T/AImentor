@@ -91,6 +91,7 @@ public final class QuizBank extends ModuleDatabaseHelper {
       List<QuizCard> cards) {
     if (userId <= 0 || cards == null || cards.isEmpty())
       throw new IllegalArgumentException("Missing owner or questions");
+    if ("GEMINI".equals(source)) QuizContentValidator.generated(cards);
     StringBuilder content = new StringBuilder();
     content.append(new JSONArray(Arrays.asList(scope, level, topic, source)).toString());
     for (QuizCard q : cards) {

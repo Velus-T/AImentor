@@ -26,7 +26,7 @@ public final class QuizCards {
               q.getType() == QuizQuestion.Type.TRUE_FALSE
                   ? java.util.Arrays.asList("TRUE", "FALSE")
                   : com.example.mentor.data.QuizCard.letters(options.size()),
-              q.getCorrectAnswer(),
+              options.isEmpty() ? q.getCorrectAnswer() : q.getCorrectAnswer().trim().toUpperCase(Locale.ROOT),
               q.getExplanation(),
               q.getDifficulty().name(),
               false,

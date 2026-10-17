@@ -40,7 +40,12 @@ public void execute(StudyPlanRequest request, ResultCallback<StudyPlan> callback
                     callback.onError("The generated study plan was empty.", null);
                     return;
                 }
-                repository.save(request.getUserId(), result);
+                try {
+                    repository.save(request.getUserId(), result);
+                } catch (RuntimeException error) {
+                    callback.onError("Unable to save the study plan. Please try again.", error);
+                    return;
+                }
                 callback.onSuccess(result);
             }
 

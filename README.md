@@ -115,7 +115,7 @@ grading and persistence logic; they do not add a server backend.
 
 See [QUIZ_AND_HISTORY_REPORT.md](QUIZ_AND_HISTORY_REPORT.md) for migration details,
 known limitations and backend handoff, and [WORK_IN_PROGRESS.md](WORK_IN_PROGRESS.md)
-for the latest verification status. The expanded unit suite contains 84 tests.
+for the latest verification status. The expanded unit suite contains 97 tests.
 
 ## Review-driven interface changes
 
@@ -128,3 +128,8 @@ When online AI is unconfigured, Math/History/Programming preserve the typed ques
 instead of pretending to send it. Science retains its local reference mode. Programming
 notes only exit after a successful write or explicit discard; failed writes preserve the
 draft. Math's image action is labeled as choosing an image to match the current gallery picker.
+
+
+## Whole-app logic audit — 2026-10-17
+
+See [LOGIC_AUDIT_2026-10-17.md](LOGIC_AUDIT_2026-10-17.md) for confirmed findings, corrections, review coverage and limitations. This pass fixes AI quiz parsing/answer integrity, false persistence success, chat and note recreation, tab restoration and unsaved quiz exits. It adds 13 unit tests and 10 Android regression cases. Latest verification and publication status is recorded in WORK_IN_PROGRESS.md.

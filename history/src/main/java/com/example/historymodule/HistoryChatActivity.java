@@ -95,7 +95,9 @@ public final class HistoryChatActivity extends AppCompatActivity {
         dbHelper = new SqliteDbHelper(this);
         aiService = new HistoryAiService();
         imageReader = new HistoryImageReader();
-        conversationId = resolveConversationId();
+        conversationId = savedInstanceState == null ? resolveConversationId()
+                : savedInstanceState.getString("activeConversation");
+        if (conversationId == null) conversationId = resolveConversationId();
 
         bindViews();
         com.example.mentor.ui.AiAvailabilityNotice.bind(findViewById(android.R.id.content), aiService.isConfigured());
@@ -182,6 +184,11 @@ public final class HistoryChatActivity extends AppCompatActivity {
      * Responsibility: Performs the `resolve conversation id` responsibility of `HistoryChatActivity` and returns or updates the result for the caller.
      * Purpose: A focused method improves readability, reuse, and step-by-step explanation.
      */
+    @Override protected void onSaveInstanceState(Bundle out) {
+        super.onSaveInstanceState(out);
+        out.putString("activeConversation", conversationId);
+    }
+
     private String resolveConversationId() {
         String requested = getIntent() == null ? null
                 : getIntent().getStringExtra(EXTRA_CONVERSATION_ID);
@@ -252,6 +259,15 @@ public final class HistoryChatActivity extends AppCompatActivity {
         if (hasImage) visibleText += getString(R.string.history_chat_attached_label);
         String context = buildConversationContext();
 
+        try {
+            long saved = dbHelper.saveChatMessage(userId, conversationId, HistoryMessage.SENT_BY_ME,
+                    visibleText, hasImage);
+            if (saved <= 0) throw new IllegalStateException("Question was not saved.");
+        } catch (RuntimeException error) {
+            Toast.makeText(this, com.example.mentor.ui.R.string.mentor_chat_input_save_error, Toast.LENGTH_LONG).show();
+            return;
+        }
+
         HistoryMessage userMessage = new HistoryMessage(
                 visibleText,
                 HistoryMessage.SENT_BY_ME,
@@ -264,14 +280,6 @@ public final class HistoryChatActivity extends AppCompatActivity {
         int insertedAt = messages.size() - 2;
         adapter.notifyItemRangeInserted(insertedAt, 2);
         scrollToBottom(true);
-
-        dbHelper.saveChatMessage(
-                userId,
-                conversationId,
-                HistoryMessage.SENT_BY_ME,
-                visibleText,
-                hasImage
-        );
 
         messageEditText.setText("");
         setLoading(true);
@@ -323,13 +331,13 @@ public final class HistoryChatActivity extends AppCompatActivity {
                     public void onSuccess(String answer) {
                         if (destroyed) return;
                         replacePending(pendingMessage, answer, false);
-                        dbHelper.saveChatMessage(
-                                userId,
-                                conversationId,
-                                HistoryMessage.SENT_BY_BOT,
-                                answer,
-                                false
-                        );
+                        try {
+                            long saved = dbHelper.saveChatMessage(userId, conversationId,
+                                    HistoryMessage.SENT_BY_BOT, answer, false);
+                            if (saved <= 0) throw new IllegalStateException("Answer was not saved.");
+                        } catch (RuntimeException error) {
+                            Toast.makeText(HistoryChatActivity.this, com.example.mentor.ui.R.string.mentor_chat_save_error, Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     /*

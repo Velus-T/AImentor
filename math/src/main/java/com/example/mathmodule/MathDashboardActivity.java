@@ -17,6 +17,8 @@ public class MathDashboardActivity extends AppCompatActivity {
  }
  private void show(int id) {
   Fragment page=id==R.id.nav_history?new MathHistoryFragment():id==R.id.nav_formula?new MathFormulaFragment():id==R.id.nav_quiz?new MathQuizFragment():new MathSolveFragment();
+  Fragment existing=getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+  if(existing!=null&&existing.getClass()==page.getClass())return;
   getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out).replace(R.id.fragment_container,page).commit();
  }
 }

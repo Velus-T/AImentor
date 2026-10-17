@@ -31,9 +31,11 @@ public boolean toggle(int userId, long historyId, ScienceSubject subject, String
         if (historyId <= 0 || content == null || content.trim().isEmpty()) return false;
         if (repository.existsForHistory(userId, historyId)) {
             repository.deleteForHistory(userId, historyId);
+            if (repository.existsForHistory(userId, historyId))
+                throw new IllegalStateException("Unable to remove bookmark.");
             return false;
         }
-        repository.save(new ScienceBookmark(
+        long saved = repository.save(new ScienceBookmark(
                 0,
                 userId,
                 historyId,
@@ -42,6 +44,7 @@ public boolean toggle(int userId, long historyId, ScienceSubject subject, String
                 content.trim(),
                 System.currentTimeMillis()
         ));
+        if (saved <= 0) throw new IllegalStateException("Unable to save bookmark.");
         return true;
     }
 }

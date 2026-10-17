@@ -1,0 +1,6 @@
+<resources>
+    <string name="mentor_chat_save_error">This content is visible but could not be saved. Copy it before leaving this screen.</string>
+    <string name="mentor_chat_input_save_error">The question could not be saved. Your text and image are kept so you can retry.</string>
+    <string name="mentor_chat_interrupted">The request was interrupted when the screen was recreated. Send the question again if no answer is available.</string>
+    <string name="mentor_data_read_error">Data could not be loaded. Try reopening this screen.</string>
+</resources>

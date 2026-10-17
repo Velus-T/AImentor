@@ -42,7 +42,7 @@ public SQLiteScienceNoteRepository(ScienceDbHelper helper) {
         values.put(ScienceDbContract.Note.USER_ID, userId);
         values.put(ScienceDbContract.Note.TITLE, clean(title));
         values.put(ScienceDbContract.Note.CONTENT, clean(content));
-        values.put(ScienceDbContract.Note.SUBJECT, clean(subject));
+        values.put(ScienceDbContract.Note.SUBJECT, com.brightpath.science.util.ScienceNoteSubject.normalize(subject));
         values.put(ScienceDbContract.Note.CREATED_AT, now);
         values.put(ScienceDbContract.Note.UPDATED_AT, now);
 
@@ -66,7 +66,7 @@ public SQLiteScienceNoteRepository(ScienceDbHelper helper) {
         ContentValues values = new ContentValues();
         values.put(ScienceDbContract.Note.TITLE, clean(title));
         values.put(ScienceDbContract.Note.CONTENT, clean(content));
-        values.put(ScienceDbContract.Note.SUBJECT, clean(subject));
+        values.put(ScienceDbContract.Note.SUBJECT, com.brightpath.science.util.ScienceNoteSubject.normalize(subject));
         values.put(ScienceDbContract.Note.UPDATED_AT, System.currentTimeMillis());
 
         int rows = helper.getWritableDatabase().update(
@@ -118,7 +118,7 @@ public SQLiteScienceNoteRepository(ScienceDbHelper helper) {
                         cursor.getLong(0),
                         cursor.getString(1),
                         cursor.getString(2),
-                        cursor.getString(3),
+                        com.brightpath.science.util.ScienceNoteSubject.normalize(cursor.getString(3)),
                         cursor.getLong(4)
                 ));
             }

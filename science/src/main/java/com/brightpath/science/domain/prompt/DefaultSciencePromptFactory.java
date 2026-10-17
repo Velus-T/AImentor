@@ -140,6 +140,8 @@ public DefaultSciencePromptFactory() {
                 + "Return only a valid JSON array. Each object must contain: type, difficulty, prompt, options, correctAnswer, explanation.\n"
                 + "Set difficulty to exactly EASY, MEDIUM or HARD for each individual question. EASY should test direct recall or one simple step; MEDIUM should require application or two linked steps; HARD should require stronger reasoning, comparison or a multi-step solution while staying inside the selected education level.\n"
                 + "For MATCHING, options should contain labels such as 'A. item' and '1. match', and correctAnswer should be like 'A-2, B-1'.\n"
+                + "For MULTIPLE_CHOICE provide four distinct options and correctAnswer as A, B, C or D.\n"
+                + "For TRUE_FALSE use options [\"True\",\"False\"] and correctAnswer True or False.\n"
                 + "Every explanation must teach why the answer is correct.\n"
                 + "Do not wrap the JSON in markdown fences.";
     }

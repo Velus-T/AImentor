@@ -297,29 +297,44 @@ private List<QuizQuestion> parseQuiz(String rawText, int maximumQuestions) throw
         if (start < 0 || end <= start) throw new IllegalArgumentException("Quiz JSON array was not found.");
         JSONArray array = new JSONArray(cleaned.substring(start, end + 1));
         List<QuizQuestion> result = new ArrayList<>();
-        for (int i = 0; i < array.length() && result.size() < maximumQuestions; i++) {
+        if (array.length() != maximumQuestions) throw new IllegalArgumentException("AI returned an unexpected question count.");
+        for (int i = 0; i < array.length(); i++) {
             JSONObject item = array.getJSONObject(i);
             QuizQuestion.Type type;
             try {
                 type = QuizQuestion.Type.valueOf(item.optString("type", "MULTIPLE_CHOICE")
                         .toUpperCase(Locale.ROOT));
             } catch (IllegalArgumentException error) {
-                type = QuizQuestion.Type.MULTIPLE_CHOICE;
+                throw new IllegalArgumentException("AI returned an unknown question type.", error);
             }
             List<String> options = new ArrayList<>();
             JSONArray optionsArray = item.optJSONArray("options");
             if (optionsArray != null) {
                 for (int j = 0; j < optionsArray.length(); j++) options.add(optionsArray.optString(j));
             }
+            // The player maps the first true/false row to TRUE, independently of AI ordering.
+            if (type == QuizQuestion.Type.TRUE_FALSE) options = java.util.Arrays.asList("True", "False");
+            String correctAnswer = item.optString("correctAnswer").trim();
+            if (type == QuizQuestion.Type.MULTIPLE_CHOICE) {
+                for (int j = 0; j < options.size(); j++) {
+                    String body = options.get(j).replaceFirst("(?i)^[A-D][.)]\\s*", "").trim();
+                    String given = correctAnswer.replaceFirst("(?i)^[A-D][.)]\\s*", "").trim();
+                    if (body.equalsIgnoreCase(given)) {
+                        correctAnswer = String.valueOf((char) ('A' + j));
+                        break;
+                    }
+                }
+            }
             result.add(new QuizQuestion(
                     type,
                     item.optString("prompt"),
                     options,
-                    item.optString("correctAnswer"),
+                    correctAnswer,
                     item.optString("explanation"),
                     QuizDifficulty.fromApiValue(item.optString("difficulty", "MEDIUM"))
             ));
         }
+        com.brightpath.science.domain.model.ScienceQuizValidator.validate(result, maximumQuestions);
         return result;
     }
 }
