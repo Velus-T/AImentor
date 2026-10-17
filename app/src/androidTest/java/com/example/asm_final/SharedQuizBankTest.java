@@ -223,21 +223,21 @@ public class SharedQuizBankTest {
                     assertEquals(35, exp);
                     done.complete(saves[0] > 1, 35);
                   });
-          form().submit(false);
+          form().submit();
           assertEquals(0, saves[0]);
           answerAll();
-          form().submit(false);
+          form().submit();
           assertFalse(form().submitted());
           assertEquals("A", form().answers().get(0));
-          form().submit(false);
-          form().submit(false);
+          form().submit();
+          form().submit();
           assertTrue(form().submitted());
           assertEquals(2, saves[0]);
           state[0] = form().state();
           assertTrue(
               form().restore(state[0], (c, n, e, d) -> fail("Restoring must not save again")));
           assertTrue(form().submitted());
-          form().submit(false);
+          form().submit();
         });
   }
 
@@ -282,7 +282,7 @@ public class SharedQuizBankTest {
         () -> {
           assertEquals(android.view.View.VISIBLE, form().getVisibility());
           answerAll();
-          form().submit(false);
+          form().submit();
           assertTrue(form().submitted());
         });
   }
@@ -474,7 +474,7 @@ public class SharedQuizBankTest {
     main(
         () -> {
           assertTrue(form().submitted());
-          form().submit(false);
+          form().submit();
         });
     try (com.example.historymodule.databases.SqliteDbHelper db =
         new com.example.historymodule.databases.SqliteDbHelper(context)) {
@@ -720,5 +720,52 @@ public class SharedQuizBankTest {
       if(ready[0])return;android.os.SystemClock.sleep(50);
     }
     fail("Keyboard visibility did not update");
+  }
+  @Test
+  public void reviewMistakesOnlyKeepsAnswersAndNeverAwardsAgain() {
+    launchHistory();
+    main(
+        () -> {
+          final int[] saves = {0};
+          form()
+              .bind(
+                  cards(false),
+                  (c, n, e, done) -> {
+                    saves[0]++;
+                    done.complete(true, e);
+                  });
+          answerAll();
+          ((QuizQuestionCard) form().getChildAt(1)).restore("B");
+          form().submit();
+          android.widget.Button filter = null;
+          for (int i = 0; i < form().getChildCount(); i++)
+            if (form().getChildAt(i) instanceof android.widget.Button) {
+              android.widget.Button b = (android.widget.Button) form().getChildAt(i);
+              if (b.isEnabled() && b.getVisibility() == android.view.View.VISIBLE) filter = b;
+            }
+          assertNotNull(filter);
+          filter.performClick();
+          assertEquals(android.view.View.GONE, form().getChildAt(0).getVisibility());
+          assertEquals(android.view.View.VISIBLE, form().getChildAt(1).getVisibility());
+          assertEquals("B", form().answers().get(1));
+          Bundle state = form().state();
+          assertTrue(form().restore(state, (c, n, e, d) -> fail("Review must not save again")));
+          assertEquals(android.view.View.GONE, form().getChildAt(0).getVisibility());
+          form().submit();
+          assertEquals(1, saves[0]);
+        });
+  }
+
+  @Test public void legacyTimedOutDraftRemainsEditableAndRequiresAllAnswers() {
+    launchHistory();
+    main(() -> {
+      final int[] saves={0};
+      QuizFormView.Saver saver=(c,n,e,d)->{saves[0]++;d.complete(true,e);};
+      form().bind(cards(false),saver);
+      Bundle state=form().state();state.putBoolean("timedOut",true);
+      assertTrue(form().restore(state,saver));
+      form().submit();assertEquals(0,saves[0]);assertFalse(form().submitted());
+      answerAll();form().submit();assertEquals(1,saves[0]);assertTrue(form().submitted());
+    });
   }
 }

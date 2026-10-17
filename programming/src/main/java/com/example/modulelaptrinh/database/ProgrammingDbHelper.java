@@ -1020,6 +1020,9 @@ public class ProgrammingDbHelper extends ModuleDatabaseHelper {
           db.insertOrThrow(TABLE_USER_PROGRESS, null, progress);
         }
       }
+      if (totalQuestions > 0)
+        com.example.mentor.data.LearningDays.record(
+            db, userId, attempt.getAsLong(COLUMN_QUIZ_TIMESTAMP));
       db.setTransactionSuccessful();
       return id;
     } catch (android.database.SQLException error) {

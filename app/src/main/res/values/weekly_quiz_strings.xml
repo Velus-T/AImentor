@@ -1,0 +1,8 @@
+<resources>
+<string name="weekly_quiz_title">XP quiz tuần này</string>
+<string name="weekly_quiz_xp">%d XP</string>
+<string name="weekly_quiz_period">%1$s – %2$s · %3$d quiz</string>
+<string name="weekly_quiz_rule">Thi đua bằng XP quiz mỗi tuần, cùng nhóm hạng. Level cá nhân chỉ thể hiện tiến độ học.</string>
+<string name="weekly_quiz_pending">Giải đấu chưa mở. Đây là XP lưu trên thiết bị, chưa phải điểm xếp hạng.</string>
+<string name="weekly_quiz_error">Chưa tải được XP tuần. Chạm để thử lại.</string>
+</resources>

@@ -39,3 +39,6 @@ API key trong bản Git vẫn trống. Chưa kiểm tra chất lượng câu h�
 ## Kiểm chứng
 
 Kết quả cuối: debug/release/AndroidTest build thành công; 84 unit test và 38/38 ca Android trên màn hình 320dp, font 1.3, điều hướng ba nút, offline đều qua. Hai ca bổ sung với bàn phím thật cũng qua. Lint toàn project không có lỗi, còn 475 cảnh báo. Các log `*-verification.log` là dữ liệu kiểm tra cục bộ, không đưa lên Git. Chi tiết mốc kiểm chứng nằm trong WORK_IN_PROGRESS.md.
+## Cập nhật streak và thi đua tuần — 17/10/2026
+
+Streak chỉ tính quiz đã nộp thành công; bỏ thời gian làm quiz, thêm xem câu sai dùng chung. Trang chủ hiển thị XP quiz trong tuần tách khỏi level. Chưa triển khai giải đấu nhiều người ở backend. Chi tiết quy tắc, nghiên cứu mã nguồn mở, hạn chế offline và hợp đồng dữ liệu đề xuất: [STREAK_AND_LEAGUES_2026-10-17.md](STREAK_AND_LEAGUES_2026-10-17.md).

@@ -1,0 +1,5 @@
+<resources>
+<string name="mentor_quiz_review_mistakes">Review mistakes (%d)</string>
+<string name="mentor_quiz_review_all">Show all questions</string>
+<string name="mentor_quiz_no_mistakes">You answered every question correctly.</string>
+</resources>

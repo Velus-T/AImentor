@@ -138,3 +138,10 @@ See [LOGIC_AUDIT_2026-10-17.md](LOGIC_AUDIT_2026-10-17.md) for confirmed finding
 ## Live Gemini smoke verification — 2026-10-17
 
 See [LIVE_API_TEST_2026-10-17.md](LIVE_API_TEST_2026-10-17.md). Eight opt-in Android cases passed with real Gemini responses using the user-authorized old API configuration. The normal 48-case offline suite remains separate; live cases are skipped unless explicitly enabled. Public API fields remain empty; temporary credential-bearing APKs were removed.
+
+## Quiz streak and weekly progress
+
+Streaks now count successfully completed quizzes only, including offline practice.
+All subjects use explicit, untimed submission and a common mistakes-only result review.
+The home screen separates local weekly quiz XP from personal lifetime levels.
+Competitive server leagues are not active yet; see [policy, research and backend handoff](STREAK_AND_LEAGUES_2026-10-17.md).

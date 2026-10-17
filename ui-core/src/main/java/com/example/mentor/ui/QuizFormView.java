@@ -22,10 +22,13 @@ public final class QuizFormView extends LinearLayout {
   private final ArrayList<QuizQuestionCard> rows = new ArrayList<>();
   private final Button submit;
   private final TextView result;
+  private final Button reviewFilter;
+  private final TextView reviewEmpty;
+  private boolean mistakesOnly;
   private Saver saver;
   private boolean saving, submitted;
   private int totalExp;
-  private boolean timedOut, restoring;
+  private boolean restoring;
 
   private void onMain(Runnable action) {
     if (android.os.Looper.myLooper() == android.os.Looper.getMainLooper()) action.run();
@@ -49,7 +52,23 @@ public final class QuizFormView extends LinearLayout {
     submit.setAllCaps(false);
     submit.setText(R.string.mentor_quiz_submit);
     UiPalette.primary(submit);
-    submit.setOnClickListener(v -> submit(false));
+    submit.setOnClickListener(v -> submit());
+    reviewFilter = new Button(context);
+    reviewFilter.setAllCaps(false);
+    reviewFilter.setMinHeight(Math.round(48 * getResources().getDisplayMetrics().density));
+    UiPalette.primary(reviewFilter);
+    reviewFilter.setOnClickListener(
+        v -> {
+          if (submitted) {
+            mistakesOnly = !mistakesOnly;
+            updateReview();
+          }
+        });
+    reviewEmpty = new TextView(context);
+    reviewEmpty.setText(R.string.mentor_quiz_no_mistakes);
+    reviewEmpty.setTextSize(16);
+    reviewEmpty.setTextColor(getResources().getColor(R.color.mentor_quiz_text, context.getTheme()));
+    reviewEmpty.setPadding(16, 16, 16, 16);
     setVisibility(GONE);
   }
 
@@ -59,7 +78,7 @@ public final class QuizFormView extends LinearLayout {
     this.saver = saver;
     saving = false;
     submitted = false;
-    timedOut = false;
+    mistakesOnly = false;
     for (int i = 0; i < cards.size(); i++) {
       QuizQuestionCard row = new QuizQuestionCard(getContext(), cards.get(i), i + 1);
       rows.add(row);
@@ -67,6 +86,10 @@ public final class QuizFormView extends LinearLayout {
     }
     addView(submit, new LayoutParams(-1, -2));
     addView(result, new LayoutParams(-1, -2));
+    addView(reviewFilter, new LayoutParams(-1, -2));
+    addView(reviewEmpty, new LayoutParams(-1, -2));
+    reviewFilter.setVisibility(GONE);
+    reviewEmpty.setVisibility(GONE);
     submit.setEnabled(!rows.isEmpty());
     submit.setText(R.string.mentor_quiz_submit);
     result.setVisibility(GONE);
@@ -79,10 +102,10 @@ public final class QuizFormView extends LinearLayout {
           });
   }
 
-  public void submit(boolean allowUnanswered) {
+  public void submit() {
     if (saving || submitted || rows.isEmpty() || saver == null) return;
     for (QuizQuestionCard row : rows)
-      if (!allowUnanswered && !timedOut && row.answer().trim().isEmpty()) {
+      if (row.answer().trim().isEmpty()) {
         result.setText(R.string.mentor_quiz_answer_all);
         result.setVisibility(VISIBLE);
         row.requestFocus();
@@ -90,7 +113,6 @@ public final class QuizFormView extends LinearLayout {
             new android.graphics.Rect(0, 0, row.getWidth(), row.getHeight()), false);
         return;
       }
-    timedOut |= allowUnanswered;
     int correct = 0, exp = 0;
     for (QuizQuestionCard row : rows)
       if (row.correct()) {
@@ -117,7 +139,7 @@ public final class QuizFormView extends LinearLayout {
                       totalExp = total;
                       showResult(score, earned);
                     } else {
-                      for (QuizQuestionCard row : rows) row.setAnswersEnabled(!timedOut);
+                      for (QuizQuestionCard row : rows) row.setAnswersEnabled(true);
                       result.setText(R.string.mentor_quiz_save_error);
                       result.setVisibility(VISIBLE);
                       submit.setText(R.string.mentor_quiz_retry_save);
@@ -126,7 +148,7 @@ public final class QuizFormView extends LinearLayout {
                   }));
     } catch (RuntimeException error) {
       saving = false;
-      for (QuizQuestionCard row : rows) row.setAnswersEnabled(!timedOut);
+      for (QuizQuestionCard row : rows) row.setAnswersEnabled(true);
       result.setText(R.string.mentor_quiz_save_error);
       result.setVisibility(VISIBLE);
       submit.setText(R.string.mentor_quiz_retry_save);
@@ -149,10 +171,25 @@ public final class QuizFormView extends LinearLayout {
     result.setVisibility(VISIBLE);
     submit.setEnabled(false);
     submit.setText(R.string.mentor_quiz_saved);
+    updateReview();
     afterLayout(
         () ->
             result.requestRectangleOnScreen(
                 new android.graphics.Rect(0, 0, result.getWidth(), result.getHeight()), false));
+  }
+
+  private void updateReview() {
+    reviewFilter.setVisibility(submitted ? VISIBLE : GONE);
+    int wrong = 0;
+    for (QuizQuestionCard row : rows) {
+      if (!row.correct()) wrong++;
+      row.setVisibility(!submitted || !mistakesOnly || !row.correct() ? VISIBLE : GONE);
+    }
+    reviewFilter.setText(
+        mistakesOnly
+            ? getContext().getString(R.string.mentor_quiz_review_all)
+            : getContext().getString(R.string.mentor_quiz_review_mistakes, wrong));
+    reviewEmpty.setVisibility(submitted && mistakesOnly && wrong == 0 ? VISIBLE : GONE);
   }
 
   public void confirmReplacement(Runnable action) {
@@ -212,8 +249,8 @@ public final class QuizFormView extends LinearLayout {
     if (scroll != null) out.putInt("scroll", scroll.getScrollY());
     out.putSerializable("cards", cards);
     out.putStringArrayList("answers", answers());
-    out.putBoolean("timedOut", timedOut);
     out.putBoolean("submitted", submitted);
+    out.putBoolean("mistakes_only", mistakesOnly);
     out.putInt("total", totalExp);
     return out;
   }
@@ -229,10 +266,9 @@ public final class QuizFormView extends LinearLayout {
     ArrayList<String> answers = state.getStringArrayList("answers");
     for (int i = 0; answers != null && i < Math.min(rows.size(), answers.size()); i++)
       rows.get(i).restore(answers.get(i));
-    timedOut = state.getBoolean("timedOut");
     submitted = state.getBoolean("submitted");
+    mistakesOnly = state.getBoolean("mistakes_only");
     totalExp = state.getInt("total");
-    if (timedOut && !submitted) for (QuizQuestionCard row : rows) row.setAnswersEnabled(false);
     if (submitted) {
       int correct = 0, exp = 0;
       for (QuizQuestionCard row : rows)

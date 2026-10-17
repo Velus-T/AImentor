@@ -412,7 +412,14 @@ public final class SqliteDbHelper extends ModuleDatabaseHelper {
     values.put("total_count", Math.max(0, total));
     values.put("exp_earned", Math.max(0, expEarned));
     values.put("created_at", System.currentTimeMillis());
-    return getWritableDatabase().insert("history_quiz_attempts", null, values);
+    return total > 0
+        ? com.example.mentor.data.LearningDays.insert(
+            getWritableDatabase(),
+            "history_quiz_attempts",
+            values,
+            userId,
+            values.getAsLong("created_at"))
+        : getWritableDatabase().insert("history_quiz_attempts", null, values);
   }
 
   /*

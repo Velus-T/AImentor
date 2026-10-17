@@ -1,0 +1,8 @@
+<resources>
+<string name="weekly_quiz_title">Weekly quiz XP</string>
+<string name="weekly_quiz_xp">%d XP</string>
+<string name="weekly_quiz_period">%1$s – %2$s · %3$d quizzes</string>
+<string name="weekly_quiz_rule">Compete with weekly quiz XP in a league group. Your personal level shows learning progress.</string>
+<string name="weekly_quiz_pending">Leagues are not open yet. This XP is saved on your device and is not a competitive score.</string>
+<string name="weekly_quiz_error">Unable to load weekly XP. Tap to retry.</string>
+</resources>

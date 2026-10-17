@@ -905,6 +905,8 @@ public class SqliteDbHelper extends ModuleDatabaseHelper {
       attempt.put(COLUMN_ATTEMPT_CORRECT, safeCorrect);
       attempt.put(COLUMN_ATTEMPT_TOTAL, safeTotal);
       attempt.put(COLUMN_ATTEMPT_EXP, safeExp);
+      long completedAt = System.currentTimeMillis();
+      attempt.put("timestamp", completedAt);
       if (db.insert(TABLE_QUIZ_ATTEMPTS, null, attempt) < 0) return false;
 
       if (safeExp > 0) {
@@ -920,6 +922,7 @@ public class SqliteDbHelper extends ModuleDatabaseHelper {
                 + "=?",
             new Object[] {safeExp, userId});
       }
+      if (safeTotal > 0) com.example.mentor.data.LearningDays.record(db, userId, completedAt);
       db.setTransactionSuccessful();
       return true;
     } finally {

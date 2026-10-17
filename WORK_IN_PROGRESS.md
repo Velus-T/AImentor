@@ -52,3 +52,20 @@ Người dùng cho phép thử lại API cũ. Chi tiết LIVE_API_TEST_2026-10-1
 - Test chỉ chạy khi mentorLiveAi=true; mặc định 8 ca được bỏ qua (đã xác nhận), không gọi mạng.
 - Đã phục hồi API công khai trống và BuildConfig bốn module trống; đã cài lại APK trống, xóa APK chứa khóa và đóng giả lập.
 - Chưa thử ảnh, các lỗi mạng/quota cưỡng bức hoặc kiểm duyệt toàn bộ kiến thức AI.
+
+## Hoàn tất streak quiz, bỏ thời gian và nghiên cứu mã nguồn mở — 17/10/2026
+
+- Streak chỉ tính quiz đã trả lời đầy đủ, nộp/lưu thành công; chat không được tính. Cả bốn môn và ôn offline dùng chung quy tắc; mỗi ngày một lần, giữ kỷ lục khi đứt chuỗi.
+- Trang chủ có chuỗi hiện tại/kỷ lục/lịch 7 ngày và XP quiz tuần tách khỏi level. Chưa có giải đấu nhiều người; đã ghi rõ trạng thái và bàn giao cơ chế XP theo tuần/ghép nhóm/thăng-xuống hạng cho backend. Không có leaderboard theo level cũ trong nguồn để gỡ.
+- Đã bỏ hoàn toàn countdown, deadline và tự nộp quiz Toán; form chung chỉ cho nộp khi trả lời đủ. Bundle cũ có timeout vẫn chỉnh sửa được.
+- Áp dụng ý tưởng phù hợp từ AnkiDroid/Moodle/LibreLingo: tiến độ cá nhân gọn, giữ ôn offline, thêm xem riêng câu sai sau quiz; lọc/khôi phục không cộng XP lại. Chưa triển khai spaced repetition.
+- Sửa thêm lỗi nút ẩn máy tính Toán bị cắt khi font lớn: vùng phím cuộn nhường chiều cao cho các nút xếp dọc.
+- `learning-responsive-verification.log`: debug, release, APK test, toàn bộ unit tests và lint PASS. **110 unit tests, 0 thất bại; lint toàn project 0 lỗi, 479 cảnh báo.**
+- `learning-target-runtime-verification.log`: **10/10 PASS** ở cấu hình thường.
+- `learning-calculator-target-verification.log`: **8/8 PASS** sau sửa máy tính và kiểm tra điểm ghi streak Khoa học ngay khi nộp.
+- `learning-full-compact-final-runtime-verification.log`: **58 ca chức năng PASS, 8 live API chủ động bỏ qua** (runner ghi OK 66 tests), 190,949 giây; màn hình 320dp/font 1.3/ba nút/offline, tiếng Anh + chế độ tối ở các ca có cấu hình này.
+- Lượt full đầu phát hiện nút máy tính bị cắt; đã sửa, xác minh trực tiếp và chạy lại toàn bộ thành công. Lượt đầu bị kết thúc trước khi hoàn tất, không tính là đạt.
+- Đã xem ảnh lịch streak tiếng Anh/tối trên màn hình nhỏ: 7 cột vừa chiều ngang, đọc được, card cuộn nằm trên điều hướng.
+- API: 10 trường key trong file cấu hình và BuildConfig các môn đều trống; không gọi Gemini trong lượt này. APK bàn giao được cập nhật ở `../AIMentor_QA/AImentor-debug.apk`.
+
+Quy tắc, nghiên cứu, giới hạn và hợp đồng dữ liệu giải đấu đề xuất: [STREAK_AND_LEAGUES_2026-10-17.md](STREAK_AND_LEAGUES_2026-10-17.md). Giải đấu, đồng bộ streak nhiều máy và chống chỉnh đồng hồ/XP vẫn thuộc backend.

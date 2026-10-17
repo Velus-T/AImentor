@@ -126,6 +126,34 @@ public class HomeFragment extends Fragment {
   public void onResume() {
     super.onResume();
     setupData();
+    timeContext = requireContext().getApplicationContext();
+    android.content.IntentFilter filter = new android.content.IntentFilter();
+    filter.addAction(android.content.Intent.ACTION_DATE_CHANGED);
+    filter.addAction(android.content.Intent.ACTION_TIME_CHANGED);
+    filter.addAction(android.content.Intent.ACTION_TIMEZONE_CHANGED);
+    androidx.core.content.ContextCompat.registerReceiver(
+        timeContext,
+        timeChanges,
+        filter,
+        androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED);
+  }
+
+  private android.content.Context timeContext;
+  private final android.content.BroadcastReceiver timeChanges =
+      new android.content.BroadcastReceiver() {
+        @Override
+        public void onReceive(android.content.Context context, android.content.Intent intent) {
+          if (isAdded() && getView() != null) setupData();
+        }
+      };
+
+  @Override
+  public void onPause() {
+    if (timeContext != null) {
+      timeContext.unregisterReceiver(timeChanges);
+      timeContext = null;
+    }
+    super.onPause();
   }
 
   private void setupData() {
@@ -156,6 +184,18 @@ public class HomeFragment extends Fragment {
                         java.util.Collections.emptyList(),
                         java.util.EnumSet.allOf(RecentActivity.Subject.class));
               }
+              com.example.mentor.data.StreakSnapshot streak = null;
+              try {
+                streak = services.streaks().load(resolvedId);
+              } catch (RuntimeException ignored) {
+              }
+              final com.example.mentor.data.StreakSnapshot loadedStreak = streak;
+              com.example.asm_final.dashboard.WeeklyQuizProgress weekly = null;
+              try {
+                weekly = services.weeklyQuizzes().load(resolvedId);
+              } catch (RuntimeException ignored) {
+              }
+              final com.example.asm_final.dashboard.WeeklyQuizProgress loadedWeekly = weekly;
               final int loadedUserId = resolvedId;
               final com.example.asm_final.dashboard.DashboardSnapshot snapshot = loaded;
               new android.os.Handler(android.os.Looper.getMainLooper())
@@ -164,9 +204,106 @@ public class HomeFragment extends Fragment {
                         if (isAdded() && getView() == owner && loadVersion == version) {
                           userId = loadedUserId;
                           render(snapshot);
+                          renderStreak(loadedStreak);
+                          renderWeekly(loadedWeekly);
                         }
                       });
             });
+  }
+
+  private void renderWeekly(com.example.asm_final.dashboard.WeeklyQuizProgress weekly) {
+    TextView xp = getView().findViewById(R.id.weekly_quiz_xp);
+    TextView period = getView().findViewById(R.id.weekly_quiz_period);
+    if (weekly == null) {
+      xp.setText(R.string.weekly_quiz_error);
+      period.setText("");
+      xp.setOnClickListener(v -> setupData());
+      return;
+    }
+    xp.setOnClickListener(null);
+    xp.setText(getString(R.string.weekly_quiz_xp, weekly.experience));
+    java.text.DateFormat format =
+        java.text.DateFormat.getDateInstance(
+            java.text.DateFormat.MEDIUM, getResources().getConfiguration().getLocales().get(0));
+    period.setText(
+        getString(
+            R.string.weekly_quiz_period,
+            format.format(new java.util.Date(weekly.startsAt)),
+            format.format(new java.util.Date(weekly.endsAt - 1)),
+            weekly.completedQuizzes));
+  }
+
+  private void renderStreak(com.example.mentor.data.StreakSnapshot streak) {
+    View root = getView();
+    TextView current = root.findViewById(R.id.streak_current);
+    TextView best = root.findViewById(R.id.streak_best);
+    TextView status = root.findViewById(R.id.streak_status);
+    android.widget.LinearLayout week = root.findViewById(R.id.streak_week_days);
+    week.removeAllViews();
+    if (streak == null) {
+      current.setText(R.string.streak_error);
+      best.setText("");
+      status.setText("");
+      current.setOnClickListener(v -> setupData());
+      return;
+    }
+    current.setOnClickListener(null);
+    current.setText(
+        getResources().getQuantityString(R.plurals.streak_days, streak.current, streak.current));
+    best.setText(getString(R.string.streak_best, streak.best));
+    status.setText(
+        streak.completedToday
+            ? R.string.streak_completed
+            : streak.current > 0
+                ? R.string.streak_pending
+                : streak.best > 0 ? R.string.streak_restart : R.string.streak_start);
+    float density = getResources().getDisplayMetrics().density;
+    java.util.Locale locale = getResources().getConfiguration().getLocales().get(0);
+    java.text.DateFormat dateLabel =
+        java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL, locale);
+    dateLabel.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
+    java.util.Calendar calendar =
+        java.util.Calendar.getInstance(java.util.TimeZone.getTimeZone("UTC"));
+    for (int offset = 6; offset >= 0; offset--) {
+      long day = streak.today - offset;
+      boolean learned = streak.days.contains(day);
+      calendar.setTimeInMillis(day * 86400000L);
+      TextView cell = new TextView(requireContext());
+      cell.setText(
+          String.format(
+              locale,
+              "%d\n%s",
+              calendar.get(java.util.Calendar.DAY_OF_MONTH),
+              getString(learned ? R.string.streak_done_glyph : R.string.streak_missing_glyph)));
+      cell.setTextSize(13);
+      cell.setGravity(android.view.Gravity.CENTER);
+      cell.setPadding(0, (int) (6 * density), 0, (int) (6 * density));
+      cell.setMinHeight((int) (52 * density));
+      cell.setTextColor(
+          ContextCompat.getColor(
+              requireContext(), learned ? R.color.primaryColor : R.color.textColorSecondary));
+      if (offset == 0) cell.setTypeface(cell.getTypeface(), android.graphics.Typeface.BOLD);
+      android.graphics.drawable.GradientDrawable background =
+          new android.graphics.drawable.GradientDrawable();
+      background.setCornerRadius(10 * density);
+      background.setColor(
+          ContextCompat.getColor(
+              requireContext(),
+              learned ? R.color.primaryContainerColor : R.color.surfaceVariantColor));
+      if (offset == 0)
+        background.setStroke(
+            (int) Math.max(1, density),
+            ContextCompat.getColor(requireContext(), R.color.primaryColor));
+      cell.setBackground(background);
+      cell.setContentDescription(
+          getString(
+              learned ? R.string.streak_day_done : R.string.streak_day_missing,
+              dateLabel.format(calendar.getTime())));
+      android.widget.LinearLayout.LayoutParams params =
+          new android.widget.LinearLayout.LayoutParams(0, -2, 1);
+      if (offset > 0) params.setMarginEnd((int) (4 * density));
+      week.addView(cell, params);
+    }
   }
 
   private void render(com.example.asm_final.dashboard.DashboardSnapshot snapshot) {

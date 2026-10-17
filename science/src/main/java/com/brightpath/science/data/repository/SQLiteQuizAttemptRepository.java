@@ -40,8 +40,12 @@ public SQLiteQuizAttemptRepository(ScienceDbHelper dbHelper) {
         values.put(ScienceDbContract.QuizAttempt.CORRECT, Math.max(0, correctAnswers));
         values.put(ScienceDbContract.QuizAttempt.EXP_EARNED, Math.max(0, expEarned));
         values.put(ScienceDbContract.QuizAttempt.CREATED_AT, System.currentTimeMillis());
-        return dbHelper.getWritableDatabase().insert(
-                ScienceDbContract.QuizAttempt.TABLE, null, values);
+        return totalQuestions > 0
+                ? com.example.mentor.data.LearningDays.insert(dbHelper.getWritableDatabase(),
+                    ScienceDbContract.QuizAttempt.TABLE, values, userId,
+                    values.getAsLong(ScienceDbContract.QuizAttempt.CREATED_AT))
+                : dbHelper.getWritableDatabase().insert(
+                    ScienceDbContract.QuizAttempt.TABLE, null, values);
     }
 
         /*

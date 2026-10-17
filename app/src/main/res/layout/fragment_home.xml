@@ -16,6 +16,9 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <include layout="@layout/card_learning_streak" />
+        <include layout="@layout/card_weekly_quiz" />
+
         <TextView android:id="@+id/tv_dashboard_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="48dp" android:text="@string/dashboard_partial" android:textColor="@color/textColorSecondary" android:textSize="14sp" android:visibility="gone" android:clickable="true" android:focusable="true" /><androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@android:color/transparent">
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/neumorphic_card_bg" android:orientation="vertical" android:padding="20dp">

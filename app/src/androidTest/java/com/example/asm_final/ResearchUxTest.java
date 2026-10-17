@@ -526,4 +526,44 @@ public class ResearchUxTest {
     capture("ux-calculator-landscape");
     onView(withText(com.example.mathmodule.R.string.math_calculator_collapse)).inRoot(androidx.test.espresso.matcher.RootMatchers.isDialog()).perform(click());
   }
+  @Test
+  public void homeStreakCalendarAndWeeklyXpFitTheScreen() {
+    String previousLanguage = com.example.asm_final.utils.LocaleHelper.getLanguage(context);
+    main(() -> {
+      com.example.asm_final.utils.LocaleHelper.setLocale(context,
+          InstrumentationRegistry.getArguments().getString("mentorLocale", "vi"));
+      ThemeHelper.setDarkMode(context, Boolean.parseBoolean(
+          InstrumentationRegistry.getArguments().getString("mentorNight", "false")));
+    });
+    try {
+
+    start(HomeActivity.class);
+    waitFor(
+        a ->
+            a.findViewById(R.id.streak_week_days) != null
+                && ((LinearLayout) a.findViewById(R.id.streak_week_days)).getChildCount() == 7);
+    main(
+        () -> {
+          LinearLayout week = resumed().findViewById(R.id.streak_week_days);
+          for (int i = 0; i < 7; i++) {
+            TextView day = (TextView) week.getChildAt(i);
+            assertTrue(day.getWidth() > 0);
+            assertTrue(day.getRight() <= week.getWidth());
+            assertNotNull(day.getContentDescription());
+            assertTrue(day.getLineCount() <= 2);
+          }
+          assertTrue(
+              ((TextView) resumed().findViewById(R.id.weekly_quiz_xp))
+                  .getText()
+                  .toString()
+                  .contains("0"));
+          View card = resumed().findViewById(R.id.card_learning_streak);
+          card.requestRectangleOnScreen(new android.graphics.Rect(0, 0, card.getWidth(), card.getHeight()), true);
+        });
+    capture("ux-streak-weekly-progress");
+    } finally {
+      main(() -> com.example.asm_final.utils.LocaleHelper.setLocale(context, previousLanguage));
+    }
+
+  }
 }

@@ -1,0 +1,5 @@
+<resources>
+<string name="mentor_quiz_review_mistakes">Xem câu cần ôn (%d)</string>
+<string name="mentor_quiz_review_all">Xem tất cả câu</string>
+<string name="mentor_quiz_no_mistakes">Bạn đã trả lời đúng tất cả các câu.</string>
+</resources>

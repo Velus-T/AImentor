@@ -1,0 +1,15 @@
+<resources>
+    <string name="streak_title">Learning streak</string>
+    <string name="streak_loading">Loading…</string>
+    <plurals name="streak_days"><item quantity="one">%d day in a row</item><item quantity="other">%d days in a row</item></plurals>
+    <string name="streak_best">Personal best: %d days</string>
+    <string name="streak_completed">Your streak is safe for today!</string>
+    <string name="streak_pending">Complete a quiz today to keep your streak going.</string>
+    <string name="streak_restart">Start again today. Your personal best is still saved.</string>
+    <string name="streak_start">Complete a quiz to begin.</string>
+    <string name="streak_week">Last 7 days</string>
+    <string name="streak_rule">Complete at least one quiz each day to keep your streak going.</string>
+    <string name="streak_error">Unable to load your streak. Tap to retry.</string>
+    <string name="streak_day_done">%s: quiz completed</string>
+    <string name="streak_day_missing">%s: no quiz completed</string>
+</resources>

@@ -1,0 +1,17 @@
+<resources>
+    <string name="streak_title">Chuỗi học tập</string>
+    <string name="streak_loading">Đang tải…</string>
+    <plurals name="streak_days"><item quantity="other">%d ngày liên tiếp</item></plurals>
+    <string name="streak_best">Kỷ lục: %d ngày</string>
+    <string name="streak_completed">Bạn đã giữ chuỗi hôm nay!</string>
+    <string name="streak_pending">Hoàn thành quiz hôm nay để nối tiếp chuỗi.</string>
+    <string name="streak_restart">Bắt đầu lại hôm nay — kỷ lục của bạn vẫn được giữ.</string>
+    <string name="streak_start">Hoàn thành một bài quiz để bắt đầu.</string>
+    <string name="streak_week">7 ngày gần nhất</string>
+    <string name="streak_rule">Hoàn thành ít nhất một bài quiz mỗi ngày để nối dài streak.</string>
+    <string name="streak_error">Chưa tải được chuỗi học tập. Chạm để thử lại.</string>
+    <string name="streak_day_done">%s: đã hoàn thành quiz</string>
+    <string name="streak_day_missing">%s: chưa hoàn thành quiz</string>
+    <string name="streak_done_glyph" translatable="false">✓</string>
+    <string name="streak_missing_glyph" translatable="false">—</string>
+</resources>

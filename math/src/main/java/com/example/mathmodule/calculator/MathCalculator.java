@@ -275,6 +275,30 @@ public final class MathCalculator implements Application.ActivityLifecycleCallba
       int available = a.getResources().getDisplayMetrics().heightPixels - dp(a, 310);
       scroll.setLayoutParams(
           new LinearLayout.LayoutParams(-1, Math.min(dp(a, 376), Math.max(dp(a, 72), available))));
+      // Large text can stack dialog actions. Keep the keypad scrollable above both actions.
+      View decor = window.getDecorView();
+      decor.getViewTreeObserver().addOnGlobalLayoutListener(
+          new android.view.ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override public void onGlobalLayout() {
+              if (scroll.getHeight() <= 0) return;
+              decor.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+              int[] origin = new int[2];
+              decor.getLocationOnScreen(origin);
+              int bottom = origin[1] + decor.getHeight() - dp(a, 12);
+              int overflow = 0;
+              for (int action : new int[] {android.content.DialogInterface.BUTTON_NEGATIVE,
+                  android.content.DialogInterface.BUTTON_NEUTRAL}) {
+                Button button = dialog.getButton(action);
+                if (button != null) {
+                  int[] position = new int[2];
+                  button.getLocationOnScreen(position);
+                  overflow = Math.max(overflow, position[1] + button.getHeight() - bottom);
+                }
+              }
+              if (overflow > 0) scroll.setLayoutParams(new LinearLayout.LayoutParams(
+                  -1, Math.max(dp(a, 48), scroll.getHeight() - overflow)));
+            }
+          });
     }
   }
 
