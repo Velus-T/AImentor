@@ -1,5 +1,8 @@
 package com.example.asm_final.utils;
 
+import android.app.LocaleManager;
+import android.os.Build;
+import android.os.LocaleList;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -32,8 +35,7 @@ public final class LocaleHelper {
                 .putString(SELECTED_LANGUAGE, supportedLanguage)
                 .apply();
 
-        AppCompatDelegate.setApplicationLocales(
-                LocaleListCompat.forLanguageTags(supportedLanguage));
+        applyLanguage(context, supportedLanguage);
     }
 
     /*
@@ -41,6 +43,14 @@ public final class LocaleHelper {
      * Purpose: A dedicated method ensures the same update behavior is used consistently by every caller.
      */
     public static void applySavedLocale(Context context) {
+        if (Build.VERSION.SDK_INT >= 33) {
+            LocaleManager manager = context.getSystemService(LocaleManager.class);
+            if (manager != null && !manager.getApplicationLocales().isEmpty()) {
+                String language = normalizeLanguage(manager.getApplicationLocales().get(0).getLanguage());
+                preferences(context).edit().putString(SELECTED_LANGUAGE, language).apply();
+                return;
+            }
+        }
         String language = getLanguage(context);
         LocaleListCompat currentLocales = AppCompatDelegate.getApplicationLocales();
         String currentLanguage = currentLocales.isEmpty()
@@ -48,8 +58,7 @@ public final class LocaleHelper {
                 : currentLocales.get(0).getLanguage();
 
         if (!language.equals(currentLanguage)) {
-            AppCompatDelegate.setApplicationLocales(
-                    LocaleListCompat.forLanguageTags(language));
+            applyLanguage(context, language);
         }
     }
 
@@ -58,6 +67,12 @@ public final class LocaleHelper {
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
     public static String getLanguage(Context context) {
+        if (Build.VERSION.SDK_INT >= 33) {
+            LocaleManager manager = context.getSystemService(LocaleManager.class);
+            if (manager != null && !manager.getApplicationLocales().isEmpty()) {
+                return normalizeLanguage(manager.getApplicationLocales().get(0).getLanguage());
+            }
+        }
         String savedLanguage = preferences(context)
                 .getString(SELECTED_LANGUAGE, LANGUAGE_VIETNAMESE);
         return normalizeLanguage(savedLanguage);
@@ -69,6 +84,17 @@ public final class LocaleHelper {
      */
     public static boolean isEnglish(Context context) {
         return LANGUAGE_ENGLISH.equals(getLanguage(context));
+    }
+
+    private static void applyLanguage(Context context, String language) {
+        if (Build.VERSION.SDK_INT >= 33) {
+            LocaleManager manager = context.getSystemService(LocaleManager.class);
+            if (manager != null) {
+                manager.setApplicationLocales(LocaleList.forLanguageTags(language));
+                return;
+            }
+        }
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(language));
     }
 
     private static String normalizeLanguage(String language) {

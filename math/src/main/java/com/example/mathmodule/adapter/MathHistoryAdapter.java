@@ -1,152 +1,114 @@
 package com.example.mathmodule.adapter;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.webkit.WebView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.mathmodule.R;
 import com.example.mathmodule.databases.MathHistoryItem;
+import com.example.mentor.ui.*;
+import java.util.*;
 
-import java.util.List;
+/** Shared history rows with an expandable, locally rendered Math solution. */
+public final class MathHistoryAdapter extends RecyclerView.Adapter<MathHistoryAdapter.Holder> {
+  private List<MathHistoryItem> items;
+  private final Set<Integer> expanded = new HashSet<>();
 
-/*
- * Role: Adapter for Math, responsible for receiving model data and binding it to RecyclerView/ListView items.
- * Purpose: The Adapter separates list data from presentation logic, making the UI easier to update and reuse.
- */
-public class MathHistoryAdapter extends RecyclerView.Adapter<MathHistoryAdapter.HistoryViewHolder> {
+  public MathHistoryAdapter(List<MathHistoryItem> items) {
+    this.items = new ArrayList<>(items);
+  }
 
-    private List<MathHistoryItem> historyList;
+  public void updateData(List<MathHistoryItem> items) {
+    this.items = new ArrayList<>(items);
+    notifyDataSetChanged();
+  }
 
-    public MathHistoryAdapter(List<MathHistoryItem> historyList) {
-        this.historyList = historyList;
-    }
+  @NonNull
+  @Override
+  public Holder onCreateViewHolder(@NonNull ViewGroup parent, int type) {
+    return new Holder(
+        LayoutInflater.from(parent.getContext())
+            .inflate(com.example.mentor.ui.R.layout.mentor_history_row, parent, false));
+  }
 
-    /*
-     * Responsibility: Updates or synchronizes `update data` with the latest data or state.
-     * Purpose: Keeps the UI and data synchronized after user actions.
-     */
-    public void updateData(List<MathHistoryItem> newList) {
-        this.historyList = newList;
-        notifyDataSetChanged();
-    }
+  @Override
+  public void onBindViewHolder(@NonNull Holder holder, int position) {
+    MathHistoryItem item = items.get(position);
+    String group = HistoryLabels.group(holder.itemView.getContext(), item.getTimestamp());
+    holder.group.setText(group);
+    holder.group.setVisibility(
+        position == 0
+                || !group.equals(
+                    HistoryLabels.group(
+                        holder.itemView.getContext(), items.get(position - 1).getTimestamp()))
+            ? View.VISIBLE
+            : View.GONE);
+    holder.title.setText(item.getQuestion());
+    holder.time.setText(TimeLabels.dateTime(holder.itemView.getContext(), item.getTimestamp()));
+    holder.preview.setVisibility(View.GONE);
+    holder.options.setVisibility(View.GONE);
+    Runnable show =
+        () -> {
+          boolean visible = expanded.contains(item.getId());
+          holder.detail.setVisibility(visible ? View.VISIBLE : View.GONE);
+          holder.title.setMaxLines(visible ? Integer.MAX_VALUE : 2);
+          if (visible) MathTextRenderer.render(holder.answer, item.getAnswer(), 15);
+          holder.body.setContentDescription(
+              item.getQuestion()
+                  + ". "
+                  + holder
+                      .itemView
+                      .getContext()
+                      .getString(
+                          visible
+                              ? com.example.mentor.ui.R.string.mentor_history_hide_answer
+                              : com.example.mentor.ui.R.string.mentor_history_show_answer));
+        };
+    holder.body.setOnClickListener(
+        v -> {
+          if (!expanded.add(item.getId())) expanded.remove(item.getId());
+          show.run();
+        });
+    show.run();
+  }
 
-    @NonNull
-    @Override
-    public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history_row, parent, false);
-        return new HistoryViewHolder(view);
-    }
+  @Override
+  public int getItemCount() {
+    return items.size();
+  }
 
-    /*
-     * Responsibility: Handles the Android callback or event `onBindViewHolder` and updates the related state.
-     * Purpose: Keeping callbacks separate makes event flow clearer and follows the Android lifecycle cleanly.
-     */
-    @Override
-    public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
-        MathHistoryItem item = historyList.get(position);
+  static final class Holder extends RecyclerView.ViewHolder {
+    final TextView group, title, preview, time;
+    final View options, body;
+    final LinearLayout detail;
+    final WebView answer;
 
-        // 1. Tách chuỗi thời gian
-        String fullDateTime = item.getTimestamp();
-        String dateOnly = com.example.mentor.ui.TimeLabels.date(holder.itemView.getContext(),fullDateTime);
-        String timeOnly = com.example.mentor.ui.TimeLabels.time(holder.itemView.getContext(),fullDateTime);
-
-        // 2. Logic "Chia theo ngày"
-        boolean showHeader = false;
-        if (position == 0) {
-            showHeader = true;
-        } else {
-            MathHistoryItem previousItem = historyList.get(position - 1);
-            String previousDate = com.example.mentor.ui.TimeLabels.date(holder.itemView.getContext(),previousItem.getTimestamp());
-            if (!dateOnly.equals(previousDate)) {
-                showHeader = true;
-            }
-        }
-
-        if (showHeader) {
-            holder.txtDateHeader.setVisibility(View.VISIBLE);
-            holder.txtDateHeader.setText(dateOnly);
-        } else {
-            holder.txtDateHeader.setVisibility(View.GONE);
-        }
-
-        // 3. Đổ dữ liệu Câu hỏi và Thời gian
-        holder.txtQuestion.setText(item.getQuestion());
-        holder.txtTime.setText(timeOnly + " ▼");
-        holder.layoutAnswer.setVisibility(View.GONE);
-        holder.txtQuestion.setMaxLines(1);
-
-        // --- XỬ LÝ RENDER TOÁN HỌC VỚI WEBVIEW ---
-        holder.webviewAnswer.getSettings().setJavaScriptEnabled(true);
-        holder.webviewAnswer.setVerticalScrollBarEnabled(true);
-        // Keep long solutions scrollable without expanding a recycled row indefinitely.
-        android.util.DisplayMetrics metrics = holder.itemView.getResources().getDisplayMetrics();
-        ViewGroup.LayoutParams answerParams = holder.layoutAnswer.getLayoutParams();
-        answerParams.height = Math.min(Math.round(280 * metrics.density), Math.round(metrics.heightPixels * .45f));
-        holder.layoutAnswer.setLayoutParams(answerParams);
-        holder.webviewAnswer.setOnTouchListener((view, event) -> {
+    Holder(View root) {
+      super(root);
+      group = root.findViewById(com.example.mentor.ui.R.id.mentor_history_group);
+      title = root.findViewById(com.example.mentor.ui.R.id.mentor_history_row_title);
+      preview = root.findViewById(com.example.mentor.ui.R.id.mentor_history_row_preview);
+      time = root.findViewById(com.example.mentor.ui.R.id.mentor_history_row_time);
+      options = root.findViewById(com.example.mentor.ui.R.id.mentor_history_row_options);
+      body = root.findViewById(com.example.mentor.ui.R.id.mentor_history_row_body);
+      body.setFocusable(true);
+      detail = root.findViewById(com.example.mentor.ui.R.id.mentor_history_row_detail);
+      answer = new WebView(root.getContext());
+      android.util.DisplayMetrics metrics = root.getResources().getDisplayMetrics();
+      detail.addView(
+          answer,
+          new LinearLayout.LayoutParams(
+              -1,
+              Math.min(
+                  Math.round(280 * metrics.density), Math.round(metrics.heightPixels * .45f))));
+      answer.setOnTouchListener(
+          (v, event) -> {
             int action = event.getActionMasked();
-            boolean touching = action != android.view.MotionEvent.ACTION_UP && action != android.view.MotionEvent.ACTION_CANCEL;
-            view.getParent().requestDisallowInterceptTouchEvent(touching);
+            v.getParent()
+                .requestDisallowInterceptTouchEvent(
+                    action != MotionEvent.ACTION_UP && action != MotionEvent.ACTION_CANCEL);
             return false;
-        });
-        holder.webviewAnswer.setBackgroundColor(0); // Làm trong suốt nền
-
-        // Thay thế ký tự xuống dòng thành thẻ <br> của HTML
-        String answerText = item.getAnswer() != null ? android.text.TextUtils.htmlEncode(item.getAnswer()).replace("\n", "<br>") : "";
-
-        // Bọc nội dung bằng HTML và nhúng thư viện MathJax để render LaTeX
-        String htmlContent = "<!DOCTYPE html><html><head>" +
-                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
-                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML\"></script>" +
-                "<style>body { font-family: Arial, sans-serif; font-size: 15px; color: " + String.format(java.util.Locale.ROOT,"#%06X",androidx.core.content.ContextCompat.getColor(holder.itemView.getContext(),R.color.math_text_primary)&0xFFFFFF) + "; margin: 0; padding: 0; line-height: 1.5; word-wrap: break-word; }</style>" +
-                "</head><body>" + answerText + "</body></html>";
-
-        holder.webviewAnswer.loadDataWithBaseURL(null, htmlContent, "text/html", "UTF-8", null);
-
-        // 4. Sự kiện click để trượt mở Lời giải
-        holder.itemView.setOnClickListener(v -> {
-            if (holder.layoutAnswer.getVisibility() == View.GONE) {
-                holder.layoutAnswer.setVisibility(View.VISIBLE);
-                holder.txtTime.setText(timeOnly + " ▲");
-                holder.txtQuestion.setMaxLines(Integer.MAX_VALUE);
-            } else {
-                holder.layoutAnswer.setVisibility(View.GONE);
-                holder.txtTime.setText(timeOnly + " ▼");
-                holder.txtQuestion.setMaxLines(1);
-            }
-        });
+          });
     }
-
-    /*
-     * Responsibility: Reads or loads data for `get item count` from the appropriate data source.
-     * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
-     */
-    @Override
-    public int getItemCount() {
-        return historyList != null ? historyList.size() : 0;
-    }
-
-    public static class HistoryViewHolder extends RecyclerView.ViewHolder {
-        TextView txtDateHeader, txtQuestion, txtTime;
-        WebView webviewAnswer; // Đổi sang WebView
-        LinearLayout layoutAnswer;
-
-        /*
-         * Responsibility: Performs the `history view holder` responsibility of `MathHistoryAdapter` and returns or updates the result for the caller.
-         * Purpose: A focused method improves readability, reuse, and step-by-step explanation.
-         */
-        public HistoryViewHolder(@NonNull View itemView) {
-            super(itemView);
-            txtDateHeader = itemView.findViewById(R.id.txt_date_group_header);
-            txtQuestion = itemView.findViewById(R.id.txt_item_question);
-            txtTime = itemView.findViewById(R.id.txt_item_time);
-            webviewAnswer = itemView.findViewById(R.id.webview_item_answer); // Ánh xạ WebView
-            layoutAnswer = itemView.findViewById(R.id.layout_item_answer);
-        }
-    }
+  }
 }

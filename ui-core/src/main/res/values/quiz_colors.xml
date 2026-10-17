@@ -3,4 +3,9 @@
     <color name="mentor_quiz_text">#18243B</color>
     <color name="mentor_quiz_secondary">#52617A</color>
     <color name="mentor_quiz_background">#EEF2F8</color>
+    <color name="mentor_quiz_accent">#244FC1</color>
+    <color name="mentor_quiz_on_accent">#FFFFFF</color>
+    <color name="mentor_quiz_border">#8190A8</color>
+    <color name="mentor_quiz_success">#1C6A40</color>
+    <color name="mentor_quiz_error">#A92B37</color>
 </resources>

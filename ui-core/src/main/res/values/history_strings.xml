@@ -1,0 +1,25 @@
+<resources>
+    <string name="mentor_history_title">Lịch sử học tập</string>
+    <string name="mentor_history_search">Tìm trong lịch sử</string>
+    <string name="mentor_history_clear">Xóa từ khóa</string>
+    <string name="mentor_history_all">Tất cả</string>
+    <string name="mentor_history_today">Hôm nay</string>
+    <string name="mentor_history_yesterday">Hôm qua</string>
+    <string name="mentor_history_seven">7 ngày gần đây</string>
+    <string name="mentor_history_month">Tháng này</string>
+    <string name="mentor_history_last_month">Tháng trước</string>
+    <string name="mentor_history_previous_seven">7 ngày trước</string>
+    <string name="mentor_history_previous_thirty">30 ngày trước</string>
+    <string name="mentor_history_empty">Chưa có lịch sử. Bắt đầu đặt câu hỏi để học và xem lại tại đây.</string>
+    <string name="mentor_history_no_match">Không tìm thấy mục phù hợp. Thử từ khóa hoặc khoảng thời gian khác.</string>
+    <string name="mentor_history_open_assistant">Mở trợ lý học tập</string>
+    <string name="mentor_history_new_chat">Cuộc trò chuyện mới</string>
+    <string name="mentor_history_options">Tùy chọn</string>
+    <string name="mentor_history_open">Mở lại</string>
+    <string name="mentor_history_delete">Xóa</string>
+    <string name="mentor_history_delete_all">Xóa tất cả hội thoại</string>
+    <string name="mentor_history_period">Khoảng thời gian</string>
+    <string name="mentor_history_show_answer">Chạm để xem lời giải</string>
+    <string name="mentor_history_hide_answer">Chạm để thu gọn lời giải</string>
+    <string name="mentor_history_clear_glyph" translatable="false">×</string>
+</resources>

@@ -13,42 +13,98 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 import com.example.asm_final.R;
 
-/** Applies one inset policy to the app shell and every feature module without cross-module dependencies. */
+/**
+ * Applies one inset policy to the app shell and every feature module without cross-module
+ * dependencies.
+ */
 public final class SystemSafeArea implements Application.ActivityLifecycleCallbacks {
-    public static void install(Application app) { app.registerActivityLifecycleCallbacks(new SystemSafeArea()); }
+  public static void install(Application app) {
+    app.registerActivityLifecycleCallbacks(new SystemSafeArea());
+  }
 
-    @Override public void onActivityResumed(Activity activity) {
-        View content = activity.findViewById(android.R.id.content);
-        if (content == null || Boolean.TRUE.equals(content.getTag(R.id.safe_area_applied))) return;
-        content.setTag(R.id.safe_area_applied, true);
-        WindowCompat.setDecorFitsSystemWindows(activity.getWindow(), false);
-        activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        final int left = content.getPaddingLeft(), top = content.getPaddingTop();
-        final int right = content.getPaddingRight(), bottom = content.getPaddingBottom();
-        ViewCompat.setOnApplyWindowInsetsListener(content, (view, insets) -> {
-            Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
-            Insets keyboard = insets.getInsets(WindowInsetsCompat.Type.ime());
-            view.setPadding(left + bars.left, top + bars.top, right + bars.right,
-                    bottom + Math.max(bars.bottom, keyboard.bottom));
-            return WindowInsetsCompat.CONSUMED;
+  @Override
+  public void onActivityResumed(Activity activity) {
+    View content = activity.findViewById(android.R.id.content);
+    if (content == null || Boolean.TRUE.equals(content.getTag(R.id.safe_area_applied))) return;
+    content.setTag(R.id.safe_area_applied, true);
+    WindowCompat.setDecorFitsSystemWindows(activity.getWindow(), false);
+    activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+    final int left = content.getPaddingLeft(), top = content.getPaddingTop();
+    final int right = content.getPaddingRight(), bottom = content.getPaddingBottom();
+    final java.util.Map<View, Integer> hiddenNavigation = new java.util.IdentityHashMap<>();
+    final boolean[] hadKeyboard = {false};
+    ViewCompat.setOnApplyWindowInsetsListener(
+        content,
+        (view, insets) -> {
+          Insets bars =
+              insets.getInsets(
+                  WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+          Insets keyboard = insets.getInsets(WindowInsetsCompat.Type.ime());
+          updateKeyboardNavigation(view, keyboard.bottom > 0, hiddenNavigation);
+          if (hadKeyboard[0] && keyboard.bottom == 0) {
+            View focused = activity.getCurrentFocus();
+            if (focused != null
+                && focused.getId() == com.example.mentor.ui.R.id.mentor_history_search)
+              focused.clearFocus();
+          }
+          hadKeyboard[0] = keyboard.bottom > 0;
+          view.setPadding(
+              left + bars.left,
+              top + bars.top,
+              right + bars.right,
+              bottom + Math.max(bars.bottom, keyboard.bottom));
+          return WindowInsetsCompat.CONSUMED;
         });
-        boolean light = (activity.getResources().getConfiguration().uiMode
-                & Configuration.UI_MODE_NIGHT_MASK) != Configuration.UI_MODE_NIGHT_YES;
-        android.util.TypedValue background = new android.util.TypedValue();
-        if (activity.getTheme().resolveAttribute(android.R.attr.windowBackground, background, true)
-                && background.type >= android.util.TypedValue.TYPE_FIRST_COLOR_INT
-                && background.type <= android.util.TypedValue.TYPE_LAST_COLOR_INT) {
-            content.setBackgroundColor(background.data);
-        }
-        WindowInsetsControllerCompat controller = WindowCompat.getInsetsController(activity.getWindow(), activity.getWindow().getDecorView());
-        controller.setAppearanceLightStatusBars(light);
-        controller.setAppearanceLightNavigationBars(light);
-        ViewCompat.requestApplyInsets(content);
+    boolean light =
+        (activity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+            != Configuration.UI_MODE_NIGHT_YES;
+    android.util.TypedValue background = new android.util.TypedValue();
+    if (activity.getTheme().resolveAttribute(android.R.attr.windowBackground, background, true)
+        && background.type >= android.util.TypedValue.TYPE_FIRST_COLOR_INT
+        && background.type <= android.util.TypedValue.TYPE_LAST_COLOR_INT) {
+      content.setBackgroundColor(background.data);
     }
-    @Override public void onActivityCreated(Activity a, Bundle b) { }
-    @Override public void onActivityStarted(Activity a) { }
-    @Override public void onActivityPaused(Activity a) { }
-    @Override public void onActivityStopped(Activity a) { }
-    @Override public void onActivitySaveInstanceState(Activity a, Bundle b) { }
-    @Override public void onActivityDestroyed(Activity a) { }
+    WindowInsetsControllerCompat controller =
+        WindowCompat.getInsetsController(activity.getWindow(), activity.getWindow().getDecorView());
+    controller.setAppearanceLightStatusBars(light);
+    controller.setAppearanceLightNavigationBars(light);
+    ViewCompat.requestApplyInsets(content);
+  }
+
+  private static void updateKeyboardNavigation(
+      View root, boolean keyboard, java.util.Map<View, Integer> hidden) {
+    if (!keyboard) {
+      for (java.util.Map.Entry<View, Integer> entry : hidden.entrySet())
+        entry.getKey().setVisibility(entry.getValue());
+      hidden.clear();
+      return;
+    }
+    if (root instanceof com.google.android.material.bottomnavigation.BottomNavigationView) {
+      if (!hidden.containsKey(root)) hidden.put(root, root.getVisibility());
+      if (root.getVisibility() != View.GONE) root.setVisibility(View.GONE);
+    }
+    if (root instanceof android.view.ViewGroup) {
+      android.view.ViewGroup group = (android.view.ViewGroup) root;
+      for (int i = 0; i < group.getChildCount(); i++)
+        updateKeyboardNavigation(group.getChildAt(i), true, hidden);
+    }
+  }
+
+  @Override
+  public void onActivityCreated(Activity a, Bundle b) {}
+
+  @Override
+  public void onActivityStarted(Activity a) {}
+
+  @Override
+  public void onActivityPaused(Activity a) {}
+
+  @Override
+  public void onActivityStopped(Activity a) {}
+
+  @Override
+  public void onActivitySaveInstanceState(Activity a, Bundle b) {}
+
+  @Override
+  public void onActivityDestroyed(Activity a) {}
 }

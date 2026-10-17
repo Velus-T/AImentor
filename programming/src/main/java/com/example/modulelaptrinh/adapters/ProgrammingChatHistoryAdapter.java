@@ -1,112 +1,97 @@
 package com.example.modulelaptrinh.adapters;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
+import android.view.*;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.modulelaptrinh.R;
+import com.example.mentor.ui.*;
 import com.example.modulelaptrinh.database.SessionItem;
+import java.util.*;
 
-import java.util.List;
+/** Actual session titles grouped by date, with discoverable Open/Delete actions. */
+public final class ProgrammingChatHistoryAdapter
+    extends RecyclerView.Adapter<ProgrammingChatHistoryAdapter.Holder> {
+  public interface OnDeleteClickListener {
+    void onDeleteClick(int position, SessionItem session);
 
-/** Bind SessionItem lên RecyclerView History và phát callback Open/Delete. */
-public class ProgrammingChatHistoryAdapter extends RecyclerView.Adapter<ProgrammingChatHistoryAdapter.HistoryViewHolder> {
-    // Danh sách `sessionList` lưu các phần tử đang được màn hình/class quản lý trong bộ nhớ.
-    private List<SessionItem> sessionList;
-    // Thuộc tính `listener` lưu đối tượng `OnDeleteClickListener` mà class cần dùng xuyên suốt nhiều hàm.
-    private OnDeleteClickListener listener;
+    void onItemClick(int position, SessionItem session);
+  }
 
-    public interface OnDeleteClickListener {
-        void onDeleteClick(int position, SessionItem session);
-        void onItemClick(int position, SessionItem session);
-    }
+  private List<SessionItem> items;
+  private final OnDeleteClickListener listener;
 
-    // Constructor `ProgrammingChatHistoryAdapter`: khởi tạo đối tượng và nhận các dependency/dữ liệu ban đầu cần thiết.
-    public ProgrammingChatHistoryAdapter(List<SessionItem> sessionList, OnDeleteClickListener listener) {
-        // Gán giá trị tham số/đầu vào vào thuộc tính `sessionList` của đối tượng hiện tại.
-        this.sessionList = sessionList;
-        // Gán giá trị tham số/đầu vào vào thuộc tính `listener` của đối tượng hiện tại.
-        this.listener = listener;
-    }
+  public ProgrammingChatHistoryAdapter(List<SessionItem> items, OnDeleteClickListener listener) {
+    this.items = items == null ? new ArrayList<>() : new ArrayList<>(items);
+    this.listener = listener;
+  }
 
-    // Hàm `updateData()`: Cập nhật dữ liệu/trạng thái hiện tại theo giá trị mới.
-    public void updateData(List<SessionItem> newList) {
-        // Gán giá trị tham số/đầu vào vào thuộc tính `sessionList` của đối tượng hiện tại.
-        this.sessionList = newList;
-        // Thông báo Adapter rằng dữ liệu đã thay đổi để RecyclerView vẽ lại danh sách.
-        notifyDataSetChanged();
-    }
+  public void updateData(List<SessionItem> items) {
+    this.items = new ArrayList<>(items);
+    notifyDataSetChanged();
+  }
 
-    @NonNull
-    @Override
-    // Hàm `onCreateViewHolder()`: Tạo ViewHolder mới từ layout item của RecyclerView.
-    public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate layout XML thành cây View để Fragment/Adapter có thể thao tác.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_history, parent, false);
-        // Trả kết quả của hàm về cho nơi đã gọi hàm này.
-        return new HistoryViewHolder(view);
-    }
+  @NonNull
+  @Override
+  public Holder onCreateViewHolder(@NonNull ViewGroup parent, int type) {
+    return new Holder(
+        LayoutInflater.from(parent.getContext())
+            .inflate(com.example.mentor.ui.R.layout.mentor_history_row, parent, false));
+  }
 
-    @Override
-    // Hàm `onBindViewHolder()`: Đưa dữ liệu của một item vào ViewHolder để RecyclerView hiển thị.
-    public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
-        // Tính/đọc và lưu giá trị `session` (session) để sử dụng ở các bước phía sau.
-        SessionItem session = sessionList.get(position);
-
-        // Cập nhật nội dung hiển thị của TextView/EditText trên giao diện.
-        holder.tvChatQuestion.setText(session.getName());
-        // Cập nhật nội dung hiển thị của TextView/EditText trên giao diện.
-        holder.tvChatTime.setText(com.example.mentor.ui.TimeLabels.dateTime(holder.itemView.getContext(),session.getTimestamp()));
-        // Thay đổi trạng thái hiển thị/ẩn của View trên giao diện.
-        holder.tvChatAnswer.setVisibility(View.GONE);
-
-        // Đăng ký sự kiện click; đoạn lambda/callback bên trong sẽ chạy khi người dùng bấm vào View.
-        holder.ivDeleteSession.setOnClickListener(v -> {
-            // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
-            if (listener != null) {
-                // Gọi `onDeleteClick()` trên `listener` để thực hiện thao tác tương ứng.
-                listener.onDeleteClick(position, session);
-            }
+  @Override
+  public void onBindViewHolder(@NonNull Holder holder, int position) {
+    SessionItem item = items.get(position);
+    holder.title.setText(item.getName());
+    holder.preview.setVisibility(View.GONE);
+    holder.time.setText(TimeLabels.dateTime(holder.itemView.getContext(), item.getTimestamp()));
+    String group = HistoryLabels.group(holder.itemView.getContext(), item.getTimestamp());
+    holder.group.setText(group);
+    holder.group.setVisibility(
+        position == 0
+                || !group.equals(
+                    HistoryLabels.group(
+                        holder.itemView.getContext(), items.get(position - 1).getTimestamp()))
+            ? View.VISIBLE
+            : View.GONE);
+    holder.body.setOnClickListener(
+        v -> {
+          if (listener != null) listener.onItemClick(position, item);
         });
-
-        // Đăng ký sự kiện click; đoạn lambda/callback bên trong sẽ chạy khi người dùng bấm vào View.
-        holder.itemView.setOnClickListener(v -> {
-            // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
-            if (listener != null) {
-                // Gọi `onItemClick()` trên `listener` để thực hiện thao tác tương ứng.
-                listener.onItemClick(position, session);
-            }
+    holder.options.setOnClickListener(
+        v -> {
+          PopupMenu menu = new PopupMenu(v.getContext(), v);
+          menu.getMenu().add(0, 1, 0, com.example.mentor.ui.R.string.mentor_history_open);
+          menu.getMenu().add(0, 2, 1, com.example.mentor.ui.R.string.mentor_history_delete);
+          menu.setOnMenuItemClickListener(
+              action -> {
+                if (listener != null) {
+                  if (action.getItemId() == 1) listener.onItemClick(position, item);
+                  else listener.onDeleteClick(position, item);
+                }
+                return true;
+              });
+          menu.show();
         });
-    }
+  }
 
-    @Override
-    // Hàm `getItemCount()`: Trả về số lượng item hiện có để RecyclerView biết cần hiển thị bao nhiêu dòng.
-    public int getItemCount() {
-        // Trả kết quả của hàm về cho nơi đã gọi hàm này.
-        return sessionList != null ? sessionList.size() : 0;
-    }
+  @Override
+  public int getItemCount() {
+    return items.size();
+  }
 
-    public static class HistoryViewHolder extends RecyclerView.ViewHolder {
-        TextView tvChatQuestion, tvChatAnswer, tvChatTime;
-        ImageView ivDeleteSession;
+  static final class Holder extends RecyclerView.ViewHolder {
+    final TextView title, preview, time, group;
+    final View options, body;
 
-        // Constructor `HistoryViewHolder`: khởi tạo đối tượng và nhận các dependency/dữ liệu ban đầu cần thiết.
-        public HistoryViewHolder(@NonNull View itemView) {
-            // Gọi hàm `super()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-            super(itemView);
-            // Ánh xạ View trong XML sang biến Java để có thể đọc/ghi dữ liệu hoặc gắn sự kiện.
-            tvChatQuestion = itemView.findViewById(R.id.tv_chat_question);
-            // Ánh xạ View trong XML sang biến Java để có thể đọc/ghi dữ liệu hoặc gắn sự kiện.
-            tvChatAnswer = itemView.findViewById(R.id.tv_chat_answer);
-            // Ánh xạ View trong XML sang biến Java để có thể đọc/ghi dữ liệu hoặc gắn sự kiện.
-            tvChatTime = itemView.findViewById(R.id.tv_chat_time);
-            // Ánh xạ View trong XML sang biến Java để có thể đọc/ghi dữ liệu hoặc gắn sự kiện.
-            ivDeleteSession = itemView.findViewById(R.id.iv_delete_session);
-        }
+    Holder(View root) {
+      super(root);
+      title = root.findViewById(com.example.mentor.ui.R.id.mentor_history_row_title);
+      preview = root.findViewById(com.example.mentor.ui.R.id.mentor_history_row_preview);
+      time = root.findViewById(com.example.mentor.ui.R.id.mentor_history_row_time);
+      group = root.findViewById(com.example.mentor.ui.R.id.mentor_history_group);
+      options = root.findViewById(com.example.mentor.ui.R.id.mentor_history_row_options);
+      body = root.findViewById(com.example.mentor.ui.R.id.mentor_history_row_body);
+      body.setFocusable(true);
     }
+  }
 }

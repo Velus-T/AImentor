@@ -41,4 +41,19 @@
     <string name="mentor_quiz_middle">Trung học cơ sở</string>
     <string name="mentor_quiz_high">Trung học phổ thông</string>
     <string name="mentor_quiz_university">Đại học</string>
+    <string name="mentor_quiz_local_shortage">Nguồn ôn tập mẫu chỉ có %1$d câu, chưa đủ bộ %2$d câu. Chọn đề đã lưu để ôn ngoại tuyến, hoặc tạo đề AI khi có kết nối và đã cấu hình API.</string>
+    <string name="mentor_quiz_bank_search">Tìm chủ đề, phạm vi hoặc cấp học</string>
+    <string name="mentor_quiz_bank_all_counts">Tất cả số câu</string>
+    <string name="mentor_quiz_bank_no_match">Không có đề phù hợp. Thử từ khóa hoặc số câu khác.</string>
+    <string name="mentor_quiz_back">Quay lại</string>
+    <string name="mentor_quiz_interrupted">Việc tạo đề đã bị gián đoạn khi đổi màn hình. Cấu hình vẫn được giữ; bạn có thể thử tạo lại hoặc mở đề đã lưu.</string>
+    <string name="mentor_quiz_matching_hint">Nhập các cặp, ví dụ A-2, B-1</string>
+    <string name="mentor_quiz_scope_math">Toán học</string>
+    <string name="mentor_quiz_scope_programming">Lập trình</string>
+    <string name="mentor_quiz_scope_physics">Vật lý</string>
+    <string name="mentor_quiz_scope_chemistry">Hóa học</string>
+    <string name="mentor_quiz_scope_biology">Sinh học</string>
+    <string name="mentor_quiz_scope_history_vietnam">Lịch sử Việt Nam</string>
+    <string name="mentor_quiz_scope_history_world">Lịch sử thế giới</string>
+    <string name="mentor_quiz_scope_history_mixed">Lịch sử tổng hợp</string>
 </resources>

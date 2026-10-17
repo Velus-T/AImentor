@@ -104,7 +104,20 @@ separate module schema versions. Existing module files are imported transactiona
 and retained unchanged. Failed verification rolls back the import. These migrations
 are local storage changes; cloud synchronization and new backend services are not added.
 
-## User research and reliability improvements
+## Shared quizzes and offline history
+
+All four subjects share quiz setup (5/10/15 questions), question presentation,
+results and EXP policy. Generated quizzes are stored in the account-scoped local
+bank for offline review. History screens share search, date filters and grouped
+rows while retaining each module's actual conversation/question model.
+KaTeX is bundled for offline math rendering. These changes include local quiz,
+grading and persistence logic; they do not add a server backend.
+
+See [QUIZ_AND_HISTORY_REPORT.md](QUIZ_AND_HISTORY_REPORT.md) for migration details,
+known limitations and backend handoff, and [WORK_IN_PROGRESS.md](WORK_IN_PROGRESS.md)
+for the latest verification status. The expanded unit suite contains 84 tests.
+
+## Review-driven interface changes
 
 See [UX_RESEARCH.md](UX_RESEARCH.md) for the dated review sample, sources, implemented
 changes and limits. Home prioritizes choosing or reopening a subject; detailed statistics

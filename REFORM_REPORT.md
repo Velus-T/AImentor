@@ -124,3 +124,9 @@ New regression coverage includes simulated INSERT/UPDATE failures, retry, accoun
 editor recreation, first-use/recent-subject navigation, honest AI-unavailable state and
 portrait/landscape calculator interaction. Full visual/AI quality and physical-device
 usability remain separate from automated functional checks.
+
+## Shared quiz/history follow-up — 2026-10-17
+
+See [QUIZ_AND_HISTORY_REPORT.md](QUIZ_AND_HISTORY_REPORT.md) for the detailed Vietnamese handoff. All four modules now use common quiz setup, presentation and EXP policy, with 5/10/15 question choices and an account-scoped offline bank. History UI/search/date filtering is shared without changing individual saved questions into fabricated conversations. Bundled KaTeX renders formulas offline. Android 13+ locale changes use context-accessible LocaleManager, including before an Activity exists.
+
+The expanded unit suite has 84 passing cases. Targeted compact-screen tests passed for locale/theme recreation, landscape calculator and actual soft-keyboard interaction. Final suite/publication status is recorded in WORK_IN_PROGRESS.md. Server authentication, secure AI proxy, synchronization, server-side grading and submission idempotency remain backend work. API keys remain empty and live Gemini quality has not been tested.

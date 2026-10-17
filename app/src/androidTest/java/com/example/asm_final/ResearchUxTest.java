@@ -34,11 +34,19 @@ public class ResearchUxTest {
   private Activity foreground;
 
   private Activity resumed() {
-    Collection<Activity> activities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
-    if (foreground != null && activities.contains(foreground) && !foreground.isFinishing() && !foreground.isChangingConfigurations()) return foreground;
-    if (foreground != null) for (Activity activity : activities) {
-      if (activity.getClass() == foreground.getClass() && !activity.isFinishing()) { foreground = activity; return activity; }
-    }
+    Collection<Activity> activities =
+        ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
+    if (foreground != null
+        && activities.contains(foreground)
+        && !foreground.isFinishing()
+        && !foreground.isChangingConfigurations()) return foreground;
+    if (foreground != null)
+      for (Activity activity : activities) {
+        if (activity.getClass() == foreground.getClass() && !activity.isFinishing()) {
+          foreground = activity;
+          return activity;
+        }
+      }
     for (Activity activity : activities) if (activity.hasWindowFocus()) return activity;
     return activities.iterator().next();
   }
@@ -49,10 +57,11 @@ public class ResearchUxTest {
   }
 
   private void start(Class<?> type) {
-    foreground = ins.startActivitySync(
-        new Intent(context, type)
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            .putExtra("USERNAME", username));
+    foreground =
+        ins.startActivitySync(
+            new Intent(context, type)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .putExtra("USERNAME", username));
     waitFor(a -> a == foreground && a.hasWindowFocus());
   }
 
@@ -107,6 +116,7 @@ public class ResearchUxTest {
               a.finish();
           ThemeHelper.setDarkMode(context, originalNight);
         });
+    if (userId > 0) {
     try (com.example.asm_final.activities.database.DatabaseHelper helper =
         new com.example.asm_final.activities.database.DatabaseHelper(context)) {
       android.database.sqlite.SQLiteDatabase db = helper.getWritableDatabase();
@@ -118,6 +128,7 @@ public class ResearchUxTest {
           "programming_notes", "user_id=?", new String[] {Integer.toString(userId + 100000000)});
       db.delete("math_history", "user_id=?", new String[] {Integer.toString(userId)});
       db.delete("users", "id=?", new String[] {Integer.toString(userId)});
+    }
     }
     com.example.mentor.data.ActiveUser.set(context, originalUser);
     SharedPreferences.Editor editor =
@@ -189,7 +200,8 @@ public class ResearchUxTest {
           resumed().findViewById(R.id.btnRegister).performClick();
           assertNotNull(fieldContainer(email).getError());
           assertTrue(email.isFocused());
-          assertEquals("", ((TextView)resumed().findViewById(R.id.tvRegisterMessage)).getText().toString());
+          assertEquals(
+              "", ((TextView) resumed().findViewById(R.id.tvRegisterMessage)).getText().toString());
           assertEquals(
               "draft_user",
               ((EditText) resumed().findViewById(R.id.edtRegisterUsername)).getText().toString());
@@ -257,21 +269,22 @@ public class ResearchUxTest {
     start(com.example.mathmodule.MathDashboardActivity.class);
     main(() -> com.example.mathmodule.calculator.MathCalculator.show(resumed()));
     for (String key : new String[] {"6", "×", "7", "="})
-      onView(withText(key)).perform(scrollTo(), click());
+      onView(withText(key)).inRoot(androidx.test.espresso.matcher.RootMatchers.isDialog()).perform(scrollTo(), click());
     onView(withTagValue(is((Object) "mentor_calculator_keypad"))).perform(swipeUp());
-    onView(withText("42")).check(matches(isDisplayed()));
+    onView(withText("42")).inRoot(androidx.test.espresso.matcher.RootMatchers.isDialog()).check(matches(isDisplayed()));
     capture("ux-calculator-pinned-result");
-    onView(withText(com.example.mathmodule.R.string.math_calculator_collapse)).perform(click());
+    onView(withText(com.example.mathmodule.R.string.math_calculator_collapse)).inRoot(androidx.test.espresso.matcher.RootMatchers.isDialog()).perform(click());
   }
 
   private Activity startNote(int noteId, String title, String content) {
-    foreground = ins.startActivitySync(
-        new Intent(context, com.example.modulelaptrinh.NoteEditorActivity.class)
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            .putExtra(com.example.modulelaptrinh.MainActivity.EXTRA_USER_ID, userId)
-            .putExtra("NOTE_ID", noteId)
-            .putExtra("NOTE_TITLE", title)
-            .putExtra("NOTE_CONTENT", content));
+    foreground =
+        ins.startActivitySync(
+            new Intent(context, com.example.modulelaptrinh.NoteEditorActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .putExtra(com.example.modulelaptrinh.MainActivity.EXTRA_USER_ID, userId)
+                .putExtra("NOTE_ID", noteId)
+                .putExtra("NOTE_TITLE", title)
+                .putExtra("NOTE_CONTENT", content));
     waitFor(a -> a == foreground && a.hasWindowFocus());
     return foreground;
   }
@@ -334,19 +347,29 @@ public class ResearchUxTest {
     };
     for (int index = 0; index < types.length; index++) {
       final int i = index;
-      foreground = ins.startActivitySync(
-          new Intent(context, types[i])
-              .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-              .putExtra(com.example.modulelaptrinh.MainActivity.EXTRA_USER_ID, userId));
+      foreground =
+          ins.startActivitySync(
+              new Intent(context, types[i])
+                  .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                  .putExtra(com.example.modulelaptrinh.MainActivity.EXTRA_USER_ID, userId));
       waitFor(a -> a == foreground && a.hasWindowFocus());
       final int[] messageCount = {0};
-      main(() -> messageCount[0] = ((androidx.recyclerview.widget.RecyclerView)resumed().findViewById(lists[i])).getAdapter().getItemCount());
+      main(
+          () ->
+              messageCount[0] =
+                  ((androidx.recyclerview.widget.RecyclerView) resumed().findViewById(lists[i]))
+                      .getAdapter()
+                      .getItemCount());
       onView(withId(inputs[i])).perform(click(), replaceText("Keep this question"));
-      if (Boolean.parseBoolean(InstrumentationRegistry.getArguments().getString("mentorRequireIme", "false"))) {
-        waitFor(a -> {
-          androidx.core.view.WindowInsetsCompat insets = androidx.core.view.ViewCompat.getRootWindowInsets(a.getWindow().getDecorView());
-          return insets != null && insets.isVisible(androidx.core.view.WindowInsetsCompat.Type.ime());
-        });
+      if (Boolean.parseBoolean(
+          InstrumentationRegistry.getArguments().getString("mentorRequireIme", "false"))) {
+        waitFor(
+            a -> {
+              androidx.core.view.WindowInsetsCompat insets =
+                  androidx.core.view.ViewCompat.getRootWindowInsets(a.getWindow().getDecorView());
+              return insets != null
+                  && insets.isVisible(androidx.core.view.WindowInsetsCompat.Type.ime());
+            });
       }
       onView(withId(sends[i])).perform(click());
       main(
@@ -427,7 +450,9 @@ public class ResearchUxTest {
     capture("ux-note-write-failed");
     main(() -> ((AppCompatActivity) editing).getOnBackPressedDispatcher().onBackPressed());
     capture("ux-note-back-recovery");
-    onView(withText(com.example.modulelaptrinh.R.string.note_keep_editing)).inRoot(androidx.test.espresso.matcher.RootMatchers.isDialog()).perform(click());
+    onView(withText(com.example.modulelaptrinh.R.string.note_keep_editing))
+        .inRoot(androidx.test.espresso.matcher.RootMatchers.isDialog())
+        .perform(click());
     main(() -> assertFalse(editing.isFinishing()));
     try (com.example.modulelaptrinh.database.ProgrammingDbHelper helper =
         new com.example.modulelaptrinh.database.ProgrammingDbHelper(context)) {
@@ -480,6 +505,7 @@ public class ResearchUxTest {
   @Test
   public void calculatorRemainsUsableInLandscapeWithPinnedResult() {
     start(com.example.mathmodule.MathDashboardActivity.class);
+    final Activity portrait = foreground;
     main(
         () ->
             resumed()
@@ -487,15 +513,17 @@ public class ResearchUxTest {
                     android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE));
     waitFor(
         a ->
-            a instanceof com.example.mathmodule.MathDashboardActivity
+            a != portrait
+                && a instanceof com.example.mathmodule.MathDashboardActivity
                 && a.getResources().getConfiguration().orientation
                     == android.content.res.Configuration.ORIENTATION_LANDSCAPE
-              && a.hasWindowFocus() && !a.isChangingConfigurations());
+                && a.hasWindowFocus()
+                && !a.isChangingConfigurations());
     main(() -> com.example.mathmodule.calculator.MathCalculator.show(resumed()));
     for (String key : new String[] {"6", "×", "7", "="})
-      onView(withText(key)).perform(scrollTo(), click());
-    onView(withText("42")).check(matches(isDisplayed()));
+      onView(withText(key)).inRoot(androidx.test.espresso.matcher.RootMatchers.isDialog()).perform(scrollTo(), click());
+    onView(withText("42")).inRoot(androidx.test.espresso.matcher.RootMatchers.isDialog()).check(matches(isDisplayed()));
     capture("ux-calculator-landscape");
-    onView(withText(com.example.mathmodule.R.string.math_calculator_collapse)).perform(click());
+    onView(withText(com.example.mathmodule.R.string.math_calculator_collapse)).inRoot(androidx.test.espresso.matcher.RootMatchers.isDialog()).perform(click());
   }
 }

@@ -1,0 +1,12 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+    <TextView android:id="@+id/mentor_history_group" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="18dp" android:paddingBottom="8dp" android:textColor="@color/mentor_quiz_secondary" android:textStyle="bold" android:textSize="13sp" android:visibility="gone" />
+    <LinearLayout android:id="@+id/mentor_history_row_body" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="64dp" android:background="@drawable/mentor_history_row_background" android:foreground="?android:attr/selectableItemBackground" android:orientation="horizontal" android:gravity="center_vertical">
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+            <TextView android:id="@+id/mentor_history_row_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/mentor_quiz_text" android:textSize="16sp" android:maxLines="2" android:ellipsize="end" />
+            <TextView android:id="@+id/mentor_history_row_preview" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:textColor="@color/mentor_quiz_secondary" android:textSize="13sp" android:maxLines="2" android:ellipsize="end" />
+            <TextView android:id="@+id/mentor_history_row_time" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:textColor="@color/mentor_quiz_secondary" android:textSize="12sp" />
+        </LinearLayout>
+        <ImageButton android:id="@+id/mentor_history_row_options" android:layout_width="48dp" android:layout_height="48dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:src="@drawable/mentor_ic_more_vertical" android:contentDescription="@string/mentor_history_options" android:tint="@color/mentor_quiz_secondary" />
+    </LinearLayout>
+    <LinearLayout android:id="@+id/mentor_history_row_detail" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:visibility="gone" />
+</LinearLayout>

@@ -41,4 +41,19 @@
     <string name="mentor_quiz_middle">Middle school</string>
     <string name="mentor_quiz_high">High school</string>
     <string name="mentor_quiz_university">University</string>
+    <string name="mentor_quiz_local_shortage">The built-in sample has only %1$d questions, fewer than the requested %2$d. Practice a saved quiz offline, or create an AI quiz with a connection and configured API.</string>
+    <string name="mentor_quiz_bank_search">Search topics, scopes or education levels</string>
+    <string name="mentor_quiz_bank_all_counts">All question counts</string>
+    <string name="mentor_quiz_bank_no_match">No matching quiz. Try another search or question count.</string>
+    <string name="mentor_quiz_back">Back</string>
+    <string name="mentor_quiz_interrupted">Quiz creation was interrupted when the screen changed. Your settings are kept; retry or open a saved quiz.</string>
+    <string name="mentor_quiz_matching_hint">Enter pairs, for example A-2, B-1</string>
+    <string name="mentor_quiz_scope_math">Mathematics</string>
+    <string name="mentor_quiz_scope_programming">Programming</string>
+    <string name="mentor_quiz_scope_physics">Physics</string>
+    <string name="mentor_quiz_scope_chemistry">Chemistry</string>
+    <string name="mentor_quiz_scope_biology">Biology</string>
+    <string name="mentor_quiz_scope_history_vietnam">Vietnamese history</string>
+    <string name="mentor_quiz_scope_history_world">World history</string>
+    <string name="mentor_quiz_scope_history_mixed">Mixed history</string>
 </resources>

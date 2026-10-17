@@ -9,4 +9,7 @@ android {
     }
 }
 
-dependencies { implementation(project(":data-core")) }
+dependencies {
+    implementation(project(":data-core"))
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
+}

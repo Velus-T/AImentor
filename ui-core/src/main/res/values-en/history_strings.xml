@@ -1,0 +1,24 @@
+<resources>
+    <string name="mentor_history_title">Learning history</string>
+    <string name="mentor_history_search">Search history</string>
+    <string name="mentor_history_clear">Clear search</string>
+    <string name="mentor_history_all">All</string>
+    <string name="mentor_history_today">Today</string>
+    <string name="mentor_history_yesterday">Yesterday</string>
+    <string name="mentor_history_seven">Last 7 days</string>
+    <string name="mentor_history_month">This month</string>
+    <string name="mentor_history_last_month">Last month</string>
+    <string name="mentor_history_previous_seven">Previous 7 days</string>
+    <string name="mentor_history_previous_thirty">Previous 30 days</string>
+    <string name="mentor_history_empty">No history yet. Start asking questions to learn and revisit them here.</string>
+    <string name="mentor_history_no_match">No matching items. Try another search or date range.</string>
+    <string name="mentor_history_open_assistant">Open learning assistant</string>
+    <string name="mentor_history_new_chat">New conversation</string>
+    <string name="mentor_history_options">Options</string>
+    <string name="mentor_history_open">Reopen</string>
+    <string name="mentor_history_delete">Delete</string>
+    <string name="mentor_history_delete_all">Delete all conversations</string>
+    <string name="mentor_history_period">Date range</string>
+    <string name="mentor_history_show_answer">Tap to view the solution</string>
+    <string name="mentor_history_hide_answer">Tap to collapse the solution</string>
+</resources>
