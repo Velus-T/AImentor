@@ -27,4 +27,4 @@ API key vẫn trống; chưa gọi Gemini thật. Science mẫu cục bộ chưa
 Chi tiết chức năng và danh sách backend: QUIZ_AND_HISTORY_REPORT.md. Nghiên cứu UX và nguồn tham khảo: UX_RESEARCH.md. Bản APK bàn giao: ../AIMentor_QA/AImentor-debug.apk (đã cập nhật từ bản build đã kiểm tra).
 
 ## Git
-Remote được fetch lại ngày 17/10/2026, origin/master vẫn a0e190a. Nhánh làm việc codex/quiz-bank-unification; bản sửa đã kiểm tra đầy đủ, chuẩn bị đẩy fast-forward lên master; không force push.
+Remote được fetch lại ngày 17/10/2026, origin/master vẫn a0e190a. Nhánh làm việc codex/quiz-bank-unification; bản sửa 6ba21e7 đã đẩy fast-forward lên origin/master; không force push.
