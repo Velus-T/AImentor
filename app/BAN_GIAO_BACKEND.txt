@@ -1,0 +1,317 @@
+﻿BÀN GIAO BACKEND — ỨNG DỤNG AIMENTOR
+Cập nhật: 17/10/2026
+Mã nguồn tham chiếu: https://github.com/Velus-T/AImentor
+Mốc chức năng trước khi viết tài liệu: commit 2fd1e13.
+Vị trí tài liệu: app/BAN_GIAO_BACKEND.txt
+
+1. MỤC ĐÍCH VÀ PHẠM VI
+
+Tài liệu dành cho người tiếp nhận backend của toàn bộ AIMentor, gồm Toán,
+Khoa học (Vật lý, Hóa học, Sinh học), Lịch sử và Lập trình.
+
+Ứng dụng hiện có giao diện và nhiều chức năng chạy cục bộ trên Android.
+Không được hiểu rằng đã có hệ thống máy chủ chỉ vì giao diện đăng nhập,
+ngân hàng đề, XP hoặc streak đang hoạt động.
+
+Các tên API, bảng phía máy chủ và quy trình máy chủ trong tài liệu là đề xuất
+bàn giao, chưa phải các endpoint đã triển khai. Người làm backend cần thống
+nhất hợp đồng dữ liệu với phía Android trước khi tích hợp.
+
+2. HIỆN TRẠNG ĐÃ CÓ
+
+- app: đăng nhập, đăng ký, trang chủ, danh sách môn, hồ sơ, cài đặt.
+- ui-core: giao diện quiz, kết quả, xem câu sai và các thành phần dùng chung.
+- data-core: cơ sở dữ liệu dùng chung, ngân hàng đề, quy tắc XP/cấp độ,
+  tài khoản đang sử dụng, lịch ngày học và xử lý thời gian.
+- math, science, history, programming: chức năng riêng của từng môn và các
+  bộ chuyển đổi dữ liệu sang giao diện dùng chung.
+- AppServices: nơi cung cấp các repository cho màn hình của app.
+- Dữ liệu chính hiện nằm trong SQLite AImentor.db trên thiết bị.
+- API key tập trung ở api.properties tại thư mục gốc; bản trên Git để trống.
+- Chưa có đồng bộ dữ liệu học tập nhiều thiết bị hoặc giải đấu nhiều người.
+
+Các điểm cần giữ khi nối backend:
+- Bốn môn dùng chung cách tạo/làm quiz, bố cục kết quả và quy tắc XP.
+- Số câu chọn được là 5, 10 hoặc 15; mặc định 5.
+- Không có đếm ngược, giới hạn thời gian hoặc tự nộp quiz.
+- Chỉ cho nộp bài khi đã trả lời đủ các câu.
+- Máy tính bong bóng chỉ thuộc môn Toán.
+- Công cụ mạch điện thuộc phần Vật lý; giữ đúng nhiệm vụ của công cụ môn học.
+- Giao diện hỗ trợ tiếng Việt/Anh và sáng/tối. Đổi ngôn ngữ giao diện không
+  tự dịch nội dung đề đã lưu.
+
+3. THỨ TỰ TRIỂN KHAI ĐỀ NGHỊ
+
+Ưu tiên 1 — nền tảng để dùng thật:
+  a) Xác thực, phiên đăng nhập, quyền sở hữu dữ liệu.
+  b) Máy chủ trung gian gọi Gemini và kiểm tra câu hỏi AI.
+  c) Ngân hàng đề, chấm bài, lưu lượt làm và xác nhận XP.
+  d) Chống gửi trùng khi mạng yếu hoặc tiến trình bị đóng.
+
+Ưu tiên 2 — trải nghiệm liên tục:
+  a) Đồng bộ offline, nhiều thiết bị và dữ liệu cũ.
+  b) Streak chỉ tính quiz và tiến độ học tập.
+  c) Lịch sử chat, ghi chú, đánh dấu và tệp ảnh.
+
+Ưu tiên 3 — thi đua và vận hành:
+  a) Giải đấu theo XP tuần, ghép nhóm và thăng/xuống hạng.
+  b) Kiểm duyệt nội dung, báo lỗi câu hỏi, công cụ quản trị.
+  c) Sao lưu, phục hồi, giám sát và kiểm tra tải.
+
+4. TÀI KHOẢN, XÁC THỰC VÀ PHÂN QUYỀN
+
+Cần triển khai:
+- Đăng ký, đăng nhập, làm mới phiên, đăng xuất và thu hồi phiên.
+- Quên/đổi mật khẩu, thay đổi thông tin hồ sơ, xóa tài khoản.
+- Băm mật khẩu trên máy chủ bằng thư viện phù hợp; không dùng dữ liệu mật
+  khẩu hoặc ID tài khoản cục bộ làm bằng chứng xác thực máy chủ.
+- Máy chủ xác định người dùng từ phiên đăng nhập đã xác thực. Không tin
+  user_id, role, điểm hoặc quyền do ứng dụng tự gửi lên.
+- Mỗi truy vấn/ghi dữ liệu phải kiểm tra chủ sở hữu; tài khoản A không được
+  đọc, sửa, xóa hoặc nhập dữ liệu của tài khoản B.
+- Phân biệt rõ quyền học viên và quyền quản trị/kiểm duyệt nếu triển khai.
+  Danh sách quyền này là thiết kế cần chốt, không phải xác nhận các role đã
+  được backend hiện tại triển khai đầy đủ.
+- Tài khoản mẫu chỉ dùng cho thử nghiệm; không lấy làm tài khoản quản trị
+  của môi trường triển khai thật.
+
+Điểm nối Android:
+  app/src/main/java/com/example/asm_final/accounts/
+  app/src/main/java/com/example/asm_final/AppServices.java
+
+5. GEMINI VÀ CHẤT LƯỢNG NỘI DUNG
+
+Hiện Android có các client theo môn. Khi làm backend:
+- Chuyển khóa bí mật sang cấu hình môi trường/kho bí mật của máy chủ.
+- Android gọi dịch vụ AIMentor; không nhận khóa nhà cung cấp từ máy chủ.
+- Giữ cấu hình model và prompt riêng cho đúng môn/chức năng.
+- Có giới hạn yêu cầu, thời gian chờ, hủy yêu cầu, xử lý lỗi và kiểm soát chi phí.
+- Khi dịch vụ lỗi hoặc chưa cấu hình, trả trạng thái rõ ràng; không giả lập câu
+  trả lời thành công và không làm mất bản nháp của người dùng.
+- Không ghi khóa, mật khẩu hoặc nội dung cá nhân không cần thiết vào log.
+
+Đối với đề AI:
+- Kiểm tra đủ đúng 5/10/15 câu theo yêu cầu trước khi công bố đề.
+- Kiểm tra môn, phạm vi, cấp học, chủ đề, độ khó và ngôn ngữ.
+- Câu hỏi và đáp án không rỗng; lựa chọn/đáp án phải khớp loại câu.
+- Phân biệt chỉ số đáp án bắt đầu từ 0 với số thứ tự bắt đầu từ 1.
+- Không tự đổi đáp án sai cấu trúc thành đáp án A.
+- Giữ đúng loại chọn đáp án, điền, đúng/sai và ghép cặp theo dữ liệu môn.
+- Câu điền không được mất dấu âm, dấu thập phân hoặc ngữ nghĩa toán học.
+- Câu ghép phải đủ cặp, không trùng, không thiếu; thứ tự cặp có thể thay đổi.
+- Có phiên bản đề, trạng thái kiểm duyệt và luồng báo lỗi câu hỏi.
+- Đề AI chỉ được lưu thành công khi toàn bộ bộ đề hợp lệ và lưu hoàn chỉnh.
+
+Lưu ý Khoa học: kho câu mẫu cục bộ chưa đủ 10/15 câu cho mọi nhóm. Không
+lặp câu hoặc báo đủ giả. Cần bổ sung nội dung đã kiểm tra hoặc trả thiếu dữ liệu.
+
+6. NGÂN HÀNG ĐỀ VÀ ÔN OFFLINE
+
+Mỗi lần tạo đề Gemini thành công cần lưu và phân loại để ôn lại khi mất mạng.
+Thông tin tối thiểu:
+- ID bộ đề, chủ sở hữu, môn, phạm vi/phân môn, cấp học và chủ đề.
+- Nguồn đề, ngôn ngữ, thời điểm tạo, phiên bản và trạng thái nội dung.
+- Danh sách câu theo thứ tự, loại câu, lựa chọn/giá trị lựa chọn, đáp án,
+  giải thích, độ khó và thông tin công thức nếu có.
+
+Cần có:
+- API tạo/lấy danh sách/lọc/tải bộ đề, phân trang và tìm kiếm.
+- Phân biệt đề riêng của người dùng với nội dung được phép công khai.
+- Bộ đề đã tải vẫn dùng được offline khi không có Gemini.
+- Mã băm hiện có chỉ chống trùng bộ đề cùng nội dung/metadata; chưa phải
+  phát hiện mọi câu trùng ý nghĩa.
+- Nội dung chỉnh sửa có phiên bản; lượt làm phải tham chiếu đúng phiên bản
+  để việc chấm và xem lại không thay đổi âm thầm.
+- Không tải đáp án bài thi cạnh tranh chưa được phép xem chỉ để client tự chấm.
+  Quiz luyện tập offline cần thỏa thuận cơ chế cấp dữ liệu và xác nhận lại điểm.
+
+7. LƯỢT LÀM QUIZ, XP VÀ CẤP ĐỘ
+
+Quy tắc hiện tại cần thống nhất trên máy chủ:
+- Câu đúng mức EASY: 5 XP; MEDIUM: 10 XP; HARD: 20 XP.
+- Câu sai không có XP; bài trả lời đủ nhưng sai hết vẫn được tính ngày streak.
+- Cấp độ cá nhân tối đa 20. Không xóa XP cũ khi đồng bộ/migration.
+- Ngưỡng XP tích lũy để đạt cấp L:
+    n = L - 1; ngưỡng = 120*n + 25*n*(n-1)/2; L từ 1 đến 20.
+- Nguồn đối chiếu: data-core/.../QuizPolicy.java.
+- Xem kết quả, lọc câu sai, mở lại hoặc xoay màn hình không tạo lượt làm mới.
+
+Backend phải:
+- Tạo mã lượt làm ổn định trước khi nộp; dùng làm khóa chống xử lý trùng.
+- Nhận câu trả lời và tham chiếu phiên bản đề, tự xác thực/chấm điểm.
+- Không tin tổng điểm hoặc XP do Android khai báo.
+- Ghi lượt làm, cập nhật XP và ghi nhận ngày streak trong cùng giao dịch.
+- Gửi lại cùng một lượt phải trả kết quả cũ, không cộng XP/streak/điểm tuần lần nữa.
+- Hai thiết bị gửi cùng lúc vẫn chỉ được xử lý một lần.
+- Kết quả trả về cần có điểm bài, XP bài, tổng XP đã xác nhận và cấp độ.
+- Khi lưu thất bại, không trả thành công; phía Android giữ đáp án để thử lại.
+
+8. STREAK — CHỈ TÍNH QUIZ
+
+Đây là yêu cầu đã chốt của chủ ứng dụng:
+- Chỉ ghi nhận khi hoàn thành và lưu quiz thành công.
+- Chat AI, nhận lời giải, mở app, tạo đề hoặc mở bài nhưng chưa nộp KHÔNG tính.
+- Học bất kỳ một trong bốn môn đều nối cùng một chuỗi của tài khoản đó.
+- Một ngày tối đa một lần, dù làm nhiều quiz hoặc nhiều môn.
+- Quiz ôn offline được tính; cần cơ chế đồng bộ/xác minh khi có mạng trở lại.
+- Chưa học hôm nay nhưng đã học hôm qua: chuỗi vẫn chờ nối tiếp đến hết hôm nay.
+- Bỏ lỡ trọn một ngày: chuỗi hiện tại về 0, kỷ lục vẫn giữ.
+- Xóa lịch sử chat hoặc quiz không được làm mất ngày streak đã ghi nhận hợp lệ.
+- Xóa tài khoản phải xử lý dữ liệu streak theo quy trình xóa dữ liệu tài khoản.
+
+Hiện cục bộ dùng các bảng mentor_learning_days và mentor_streak_imports.
+Dữ liệu quiz cũ được nhập một lần theo tài khoản; chat không được nhập.
+Lượt cũ không có đầy đủ từng đáp án nên migration chỉ nhận biết được lượt
+quiz đã lưu, có số câu lớn hơn 0; cần giữ rõ nguồn gốc và giới hạn này.
+
+Backend cần chốt múi giờ tài khoản, quy tắc đổi múi giờ và xử lý quiz offline
+qua ngày. Không tự bỏ quyền ghi nhận quiz offline hợp lệ, cũng không tin tuyệt
+đối giờ điện thoại để tránh chỉnh đồng hồ tạo streak. Chính sách đối soát này
+chưa được triển khai trên server và cần thống nhất với phía Android.
+
+9. GIẢI ĐẤU THEO XP TUẦN, KHÔNG XẾP THEO LEVEL
+
+Yêu cầu đã chốt: thi đua theo cơ chế nhóm hạng/tuần kiểu Duolingo.
+Không dùng level hoặc XP cả đời để xếp thứ tự thi đua.
+
+Hiện chưa có leaderboard theo level trong nguồn đã rà soát. App chỉ hiển thị
+XP quiz tuần trên thiết bị và trạng thái giải đấu chưa mở. Chưa có ghép nhóm,
+thứ hạng thật hoặc thăng/xuống hạng trên máy chủ.
+
+Cần làm:
+- Mùa thi đua theo tuần, nhóm người học trong cùng hạng.
+- Ghép nhóm xét hoạt động học và múi giờ; không lấy level làm thứ tự xếp hạng.
+- Xếp thứ tự bằng XP quiz đã xác nhận trong mùa hiện tại.
+- Quy định xử lý bằng điểm, số người mỗi nhóm và số suất thăng/xuống hạng.
+- Trả về vùng thăng hạng, giữ hạng, xuống hạng và vị trí của người đang xem.
+- Chốt mùa, chuyển hạng và mở mùa mới bằng quy trình chạy lại không gây lặp.
+- Reset XP mùa mới nhưng giữ XP cả đời và streak.
+- Cho phép không tham gia/ẩn hồ sơ và xử lý điểm bất thường.
+- Các hạng và số suất phải cấu hình được; không coi thông số ví dụ là quy tắc
+  Duolingo hiện hành hoặc là phần đã hoạt động trong AIMentor.
+
+Bản xem trước cục bộ đang tính từ thứ Hai 00:00 đến thứ Hai kế tiếp, không
+bao gồm mốc kết thúc, theo múi giờ thiết bị. Backend cần trả mốc mùa cố định
+và giờ máy chủ; không đổi mùa khi người dùng đổi múi giờ điện thoại.
+XP xem trước được đọc từ lượt làm đã lưu, có thể đổi khi lượt làm bị xóa;
+điểm thi đua chính thức cần có sổ ghi nhận riêng trên máy chủ.
+
+10. ĐỒNG BỘ CHAT, GHI CHÚ VÀ TIẾN ĐỘ
+
+- Lập trình/Lịch sử có hội thoại; Toán/Khoa học có mô hình lưu câu hỏi riêng.
+  Không ép tạo hội thoại giả hoặc đổi mô hình khiến mất lịch sử cũ.
+- Đồng bộ nội dung, thời gian, chủ sở hữu, thứ tự tin nhắn, ảnh và dấu đã xóa.
+- Có phân trang, tìm kiếm, nhóm ngày và mở đúng nội dung đã chọn.
+- Không báo lưu/đánh dấu thành công khi ghi máy chủ thất bại.
+- Giữ bản nháp khi lỗi; hỗ trợ thử lại với cùng mã thao tác.
+- Ghi chú cần version hoặc cơ chế kiểm soát xung đột; không âm thầm ghi đè
+  bản sửa mới hơn từ thiết bị khác.
+- Ngôn ngữ và sáng/tối hiện là cài đặt thiết bị. Nếu đồng bộ tùy chọn thì phải
+  tách khỏi nội dung đề/chat và tránh làm mất bài đang làm.
+
+11. HÀNG ĐỢI OFFLINE VÀ MIGRATION
+
+Đề nghị dùng mã thao tác ổn định, trạng thái chờ/đang gửi/đã xác nhận/lỗi,
+phiên bản bản ghi và con trỏ đồng bộ do máy chủ cấp.
+
+Cần xử lý:
+- Retry khi mất mạng, tải lại khi có mạng, đồng bộ hai chiều không tạo bản sao.
+- Dấu xóa để dữ liệu đã xóa không xuất hiện lại từ thiết bị còn offline.
+- Tách dữ liệu theo tài khoản khi đăng xuất/chuyển tài khoản.
+- Không gửi hàng đợi của A bằng phiên đăng nhập của B.
+- Nhập dữ liệu cũ không cộng lại XP đã được tính; giữ dấu đã nhập/mã nguồn gốc.
+- Không tự gán bộ đề Toán owner 0 cho người đang đăng nhập.
+- Đối chiếu schema từng module, sao lưu trước migration và kiểm tra khôi phục.
+- Một phần nội dung cục bộ được mã hóa; không giả định mọi cột text đều là
+  văn bản thường hoặc tải nguyên file SQLite lên làm hợp đồng API.
+
+12. HỢP ĐỒNG API ĐỀ XUẤT — CHƯA TRIỂN KHAI
+
+Các nhóm tài nguyên để thống nhất trước khi lập trình:
+- /auth: đăng ký, đăng nhập, làm mới/thu hồi phiên, quên mật khẩu.
+- /me: hồ sơ, tùy chọn, xuất/xóa dữ liệu tài khoản.
+- /ai: chat và tạo quiz theo môn, trả trạng thái lỗi rõ ràng.
+- /quiz-sets: ngân hàng đề, phiên bản câu hỏi và tải đề offline.
+- /quiz-attempts: nộp bài chống trùng, kết quả và XP đã xác nhận.
+- /progress, /streak: tiến độ theo môn, tổng XP và lịch ngày quiz hợp lệ.
+- /leagues: trạng thái tham gia, mùa/nhóm hiện tại và standings.
+- /conversations, /messages, /notes, /bookmarks: nội dung theo chủ sở hữu.
+- /sync: thay đổi tăng dần, xác nhận thao tác, xung đột và dấu xóa.
+- /uploads, /question-reports: ảnh đính kèm và báo lỗi nội dung.
+
+Phản hồi lỗi cần mã ổn định cho client, thông báo phù hợp ngôn ngữ và mã
+truy vết. Cần phân biệt chưa đăng nhập, không có quyền, dữ liệu không hợp lệ,
+xung đột phiên bản, giới hạn yêu cầu và dịch vụ tạm lỗi. Không trả thông báo
+thành công kèm dữ liệu giả khi thực tế chưa lưu.
+
+Thông tin cần có trong phản hồi giải đấu:
+  status, season_id, starts_at, ends_at, server_now,
+  league, cohort_id, promotion_slots, relegation_slots,
+  standings, my_rank, verified_weekly_xp.
+Mỗi dòng: định danh thành viên, tên hiển thị, XP đã xác nhận, thứ hạng,
+cờ người đang xem và vùng thăng/giữ/xuống hạng.
+
+Thông tin cần có trong phản hồi streak:
+  ngày hiện tại theo múi giờ đã chốt, chuỗi hiện tại, kỷ lục,
+  hôm nay đã hoàn thành quiz hay chưa, danh sách ngày hợp lệ và phiên bản dữ liệu.
+
+13. ĐIỂM NỐI TRONG MÃ NGUỒN
+
+- app/.../AppServices.java: cung cấp phụ thuộc/repository cho màn hình.
+- app/.../accounts/: các hợp đồng tài khoản; hiện dùng LocalAccountRepository.
+- app/.../dashboard/: DashboardRepository, LearningStreakRepository,
+  WeeklyQuizRepository và các triển khai đọc dữ liệu cục bộ.
+- data-core/.../QuizBank.java, QuizCard.java, QuizContentValidator.java:
+  ngân hàng đề và cấu trúc/kiểm tra câu hỏi dùng chung.
+- data-core/.../QuizPolicy.java, StreakPolicy.java, WeeklyQuizPolicy.java:
+  quy tắc tính toán hiện tại.
+- data-core/.../LearningDays.java: sổ ngày quiz cục bộ.
+- ui-core/.../QuizFormView.java: làm bài, nộp, kết quả và lọc câu sai.
+- Các helper/repository của math, science, history, programming: nơi lưu
+  lượt làm, tiến độ và nội dung theo môn.
+
+Giữ màn hình phụ thuộc hợp đồng nhỏ; đưa gọi mạng, ánh xạ dữ liệu, chấm bài
+và đồng bộ vào lớp thích hợp. Tránh nhét toàn bộ backend vào Activity/Fragment
+hoặc tạo bốn cách tính điểm khác nhau cho bốn môn.
+
+14. TIÊU CHÍ NGHIỆM THU BACKEND
+
+[ ] A không đọc/sửa/xóa dữ liệu của B; phiên hết hạn được xử lý đúng.
+[ ] Đề AI đúng số lượng, cấu trúc và môn; lỗi AI không làm mất bản nháp.
+[ ] Nộp một lượt nhiều lần hoặc từ hai thiết bị chỉ cộng XP một lần.
+[ ] Đóng app giữa lúc gửi và nhận phản hồi vẫn đối soát được kết quả cũ.
+[ ] Quiz chưa trả lời đủ không được nộp; không còn giới hạn thời gian.
+[ ] Quiz hoàn thành, dù sai hết, tính streak; chat hoặc mở app không tính.
+[ ] Quiz offline đồng bộ đúng tài khoản, không mất dữ liệu hoặc cộng trùng.
+[ ] Qua nửa đêm, bỏ một ngày và đổi múi giờ tuân theo chính sách đã chốt.
+[ ] Xóa lịch sử không xóa streak đã xác nhận; xóa tài khoản xử lý đầy đủ dữ liệu.
+[ ] Xếp hạng dùng XP tuần đã xác nhận; không dùng level/XP cả đời.
+[ ] Chốt mùa và thăng/xuống hạng chạy lặp vẫn cho cùng một kết quả.
+[ ] Sửa ghi chú trên hai thiết bị có xử lý xung đột và thông báo phù hợp.
+[ ] Không đưa key thật vào Git/APK/log; ảnh/tệp được kiểm tra quyền và giới hạn.
+[ ] Sao lưu/phục hồi và migration được thử với dữ liệu cũ có sẵn.
+[ ] Đổi ngôn ngữ/sáng tối không làm mất bài hoặc ghi nhận XP lần nữa.
+
+15. KIỂM CHỨNG HIỆN TẠI VÀ GIỚI HẠN
+
+Mốc 2fd1e13 đã kiểm tra build debug/release, 110 unit test và 58 ca chức năng
+trên giả lập; 8 ca gọi API thật chủ động bỏ qua trong lượt kiểm tra offline.
+Lint không có lỗi, còn 479 cảnh báo. Cấu hình kiểm tra nhỏ gồm 320dp, chữ 130%,
+điều hướng ba nút; các ca có cấu hình ngôn ngữ/theme bao phủ Anh/tối.
+
+Đây là bằng chứng cho bản Android cục bộ ở mốc trên, KHÔNG phải bằng chứng
+backend đã triển khai hoặc đã kiểm thử. Chưa xác nhận trên điện thoại thật,
+máy tính bảng, nhiều thiết bị và môi trường máy chủ chịu tải.
+
+API cũ đã từng được thử riêng và ghi ở LIVE_API_TEST_2026-10-17.md; không
+suy ra các khóa hoặc dịch vụ đó luôn còn hoạt động. Không chép khóa vào file này.
+
+Tài liệu liên quan tại thư mục gốc:
+- STREAK_AND_LEAGUES_2026-10-17.md: streak, XP tuần và giải đấu.
+- QUIZ_AND_HISTORY_REPORT.md: quiz, lịch sử và bàn giao trước đó.
+- LOGIC_AUDIT_2026-10-17.md: các lỗi logic đã rà soát/sửa.
+- WORK_IN_PROGRESS.md: tiến độ và kiểm chứng theo từng mốc.
+- LIVE_API_TEST_2026-10-17.md: kiểm tra API thật trước đây.
+
+Lưu ý đọc theo mốc cập nhật mới nhất: tài liệu cũ có thể còn mô tả timer hoặc
+số lượng kiểm thử trước các thay đổi ngày 17/10/2026.
