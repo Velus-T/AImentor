@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mentor_quiz_question">Question %1$d</string>
+    <string name="mentor_quiz_easy">Easy</string>
+    <string name="mentor_quiz_medium">Medium</string>
+    <string name="mentor_quiz_hard">Hard</string>
+    <string name="mentor_quiz_reward">%1$s · Correct +%2$d EXP</string>
+    <string name="mentor_quiz_answer">Your answer</string>
+    <string name="mentor_quiz_correct">Correct · +%1$d EXP</string>
+    <string name="mentor_quiz_wrong">Incorrect · Answer: %1$s</string>
+    <string name="mentor_quiz_submit">Submit and view explanations</string>
+    <string name="mentor_quiz_answer_all">Answer the remaining questions before submitting.</string>
+    <string name="mentor_quiz_saving">Saving results…</string>
+    <string name="mentor_quiz_save_error">Results could not be saved. Your answers are kept; try saving again.</string>
+    <string name="mentor_quiz_retry_save">Retry saving</string>
+    <string name="mentor_quiz_saved">Results saved</string>
+    <string name="mentor_quiz_result">Result: %1$d/%2$d · %3$d%%\n+%4$d EXP · Total %5$d EXP · Level %6$d</string>
+    <string name="mentor_quiz_create">Create practice quiz</string>
+    <string name="mentor_quiz_creating">Preparing questions…</string>
+    <string name="mentor_quiz_create_error">Could not create a quiz. Check your connection and AI configuration, then retry.</string>
+    <string name="mentor_quiz_retry_create">Try creating again</string>
+    <string name="mentor_quiz_topic">Topic</string>
+    <string name="mentor_quiz_scope">Knowledge scope</string>
+    <string name="mentor_quiz_level">Education level</string>
+    <string name="mentor_quiz_count">Questions</string>
+    <string name="mentor_quiz_rules">Correct: easy +5, medium +10, hard +20 EXP. EXP is saved on submission.</string>
+    <string name="mentor_quiz_exit">Leave this quiz?</string>
+    <string name="mentor_quiz_exit_message">Unsubmitted work will not earn EXP.</string>
+    <string name="mentor_quiz_continue">Keep learning</string>
+    <string name="mentor_quiz_leave">Leave quiz</string>
+    <string name="mentor_quiz_done">Done</string>
+    <string name="mentor_quiz_bank">Practice saved quizzes · Offline</string>
+    <string name="mentor_quiz_bank_empty">No saved quizzes yet. Successfully create an AI quiz to practice it offline.</string>
+    <string name="mentor_quiz_bank_count">%1$d questions</string>
+    <string name="mentor_quiz_bank_source">Practicing a quiz saved on this device.</string>
+    <string name="mentor_quiz_bank_error">Could not read the saved quiz. Please retry.</string>
+    <string name="mentor_quiz_title">Practice quiz</string>
+    <string name="mentor_quiz_new_ai">New AI quiz · Saved for offline practice</string>
+    <string name="mentor_quiz_local_source">Built-in general practice · Your topic filter is not applied</string>
+    <string name="mentor_quiz_bank_save_error">Quiz created but could not be saved to the bank. Retry to make it available offline.</string>
+    <string name="mentor_quiz_middle">Middle school</string>
+    <string name="mentor_quiz_high">High school</string>
+    <string name="mentor_quiz_university">University</string>
+</resources>

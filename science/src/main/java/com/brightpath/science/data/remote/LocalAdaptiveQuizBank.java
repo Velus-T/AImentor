@@ -41,7 +41,7 @@ public List<QuizQuestion> generate(QuizRequest request) {
 
         List<QuizQuestion> result = new ArrayList<>();
         for (QuizQuestion question : preferred) {
-            result.add(shuffleOptions(applyDifficulty(question, request.getChallenge()), random));
+            result.add(shuffleOptions(applyDifficulty(question, request.getChallenge()), random).asLocal());
             if (result.size() >= request.getNumberOfQuestions()) break;
         }
         return result;

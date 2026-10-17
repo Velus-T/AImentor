@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.historymodule.HistoryChatActivity;
+import com.example.historymodule.HistoryDashboardActivity;
+import com.example.historymodule.model.HistoryLevelCalculator;
 import com.example.historymodule.R;
 import com.example.historymodule.adapter.HistoryHistoryAdapter;
 import com.example.historymodule.databases.HistoryHistoryItem;
@@ -76,6 +78,11 @@ public final class HistorySolveFragment extends Fragment {
         view.findViewById(R.id.btn_input_card)
                 .setOnClickListener(v -> openChat(false, true));
 
+        view.findViewById(R.id.history_topic_vietnam).setOnClickListener(v -> openTopic(R.string.history_draft_vietnam));
+        view.findViewById(R.id.history_topic_world).setOnClickListener(v -> openTopic(R.string.history_draft_world));
+        view.findViewById(R.id.history_progress_card).setOnClickListener(v -> selectTab(R.id.nav_quiz));
+        view.findViewById(R.id.history_open_notes).setOnClickListener(v -> selectTab(R.id.nav_events));
+        view.findViewById(R.id.history_view_all).setOnClickListener(v -> selectTab(R.id.nav_history));
         loadRecentConversations();
         return view;
     }
@@ -133,7 +140,26 @@ public final class HistorySolveFragment extends Fragment {
      * Responsibility: Reads or loads data for `load recent conversations` from the appropriate data source.
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
+    private void selectTab(int id) {
+        ((HistoryDashboardActivity) requireActivity()).selectTab(id);
+    }
+
+    private void openTopic(int draftRes) {
+        startActivity(new Intent(requireContext(), HistoryChatActivity.class)
+                .putExtra(HistoryChatActivity.EXTRA_CONVERSATION_ID, java.util.UUID.randomUUID().toString())
+                .putExtra(HistoryChatActivity.EXTRA_DRAFT, getString(draftRes))
+                .putExtra(HistoryChatActivity.EXTRA_FOCUS_INPUT, true));
+    }
+
     private void loadRecentConversations() {
+        int exp = dbHelper.getTotalQuizExp(userId);
+        View root = getView();
+        if (root != null) {
+            ((TextView) root.findViewById(R.id.history_home_progress)).setText(
+                    getString(R.string.history_home_progress_format, HistoryLevelCalculator.getLevel(exp), exp));
+            ((android.widget.ProgressBar) root.findViewById(R.id.history_home_progress_bar))
+                    .setProgress(HistoryLevelCalculator.getProgressPercent(exp));
+        }
         recentList.clear();
         recentList.addAll(dbHelper.loadConversationSummaries(userId, 0L, 0L, 5));
         adapter.notifyDataSetChanged();

@@ -57,9 +57,14 @@ public class ProgrammingQuizGenerator {
     );
 
     // Client `geminiClient` dùng để gửi request và nhận phản hồi từ Gemini API.
+    private android.content.Context bankContext;
     private final GeminiApiClient geminiClient;
 
     // Constructor `ProgrammingQuizGenerator`: khởi tạo đối tượng và nhận các dependency/dữ liệu ban đầu cần thiết.
+    public ProgrammingQuizGenerator(android.content.Context context) {
+        this(); bankContext = context.getApplicationContext();
+    }
+
     public ProgrammingQuizGenerator() {
         // Gán giá trị tham số/đầu vào vào thuộc tính `geminiClient` của đối tượng hiện tại.
         this.geminiClient = new GeminiApiClient(GeminiApiClient.Usage.QUIZ);
@@ -104,8 +109,7 @@ public class ProgrammingQuizGenerator {
         List<QuizQuestion> questions = parseQuizResponse(result.text);
         // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
         if (questions.size() != request.getNumberOfQuestions()) {
-            Log.w(TAG, "AI returned " + questions.size() + " questions instead of "
-                    + request.getNumberOfQuestions());
+            throw new Exception("AI returned an unexpected question count.");
         }
         // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
         if (questions.isEmpty()) {
@@ -113,6 +117,9 @@ public class ProgrammingQuizGenerator {
         }
 
         // Trả kết quả của hàm về cho nơi đã gọi hàm này.
+        if (bankContext != null) try (com.example.mentor.data.QuizBank bank = new com.example.mentor.data.QuizBank(bankContext)) {
+            bank.save(userId, "programming", request.getSubject(), request.getLevel(), request.getTopic(), "GEMINI", QuizCards.from(questions));
+        }
         return new QuizResult(request, questions, 0, 0);
     }
 

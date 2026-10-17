@@ -67,7 +67,24 @@ public final class HistoryHistoryAdapter
         HistoryHistoryItem item = historyList.get(position);
         holder.title.setText(item.getTitle());
         holder.content.setText(item.getContent());
-        holder.time.setText(formatTimestamp(item.getTimestamp()));
+        holder.time.setText(com.example.mentor.ui.TimeLabels.dateTime(holder.itemView.getContext(), item.getTimestamp()));
+        String group = groupLabel(item.getTimestamp(), holder.itemView.getContext());
+        boolean showGroup = listener != null && (position == 0 || !group.equals(
+                groupLabel(historyList.get(position - 1).getTimestamp(), holder.itemView.getContext())));
+        holder.group.setText(group);
+        holder.group.setVisibility(showGroup ? View.VISIBLE : View.GONE);
+        holder.options.setVisibility(listener == null ? View.GONE : View.VISIBLE);
+        holder.options.setOnClickListener(v -> {
+            android.widget.PopupMenu menu = new android.widget.PopupMenu(v.getContext(), v);
+            menu.getMenu().add(0, 1, 0, R.string.history_open_conversation);
+            menu.getMenu().add(0, 2, 1, R.string.history_delete_conversation);
+            menu.setOnMenuItemClickListener(action -> {
+                if (action.getItemId() == 1) listener.onClick(item);
+                else listener.onLongClick(item);
+                return true;
+            });
+            menu.show();
+        });
         holder.itemView.setClickable(listener != null);
         holder.itemView.setFocusable(listener != null);
         holder.itemView.setOnClickListener(listener == null ? null : v -> listener.onClick(item));
@@ -81,6 +98,19 @@ public final class HistoryHistoryAdapter
      * Responsibility: Converts or normalizes data in `format timestamp` into the required format.
      * Purpose: A centralized conversion point keeps formatting consistent and makes invalid data easier to handle.
      */
+    private String groupLabel(String raw, android.content.Context context) {
+        long time = com.example.mentor.data.Timestamps.parse(raw);
+        java.util.Calendar start = java.util.Calendar.getInstance();
+        start.set(java.util.Calendar.HOUR_OF_DAY, 0);
+        start.set(java.util.Calendar.MINUTE, 0);
+        start.set(java.util.Calendar.SECOND, 0);
+        start.set(java.util.Calendar.MILLISECOND, 0);
+        if (time >= start.getTimeInMillis()) return context.getString(R.string.history_group_today);
+        start.add(java.util.Calendar.DAY_OF_YEAR, -1);
+        if (time >= start.getTimeInMillis()) return context.getString(R.string.history_group_yesterday);
+        return com.example.mentor.ui.TimeLabels.date(context, raw);
+    }
+
     private String formatTimestamp(String value) {
         if (value == null || value.trim().isEmpty()) return "";
         try {
@@ -101,12 +131,16 @@ public final class HistoryHistoryAdapter
     }
 
     static final class ViewHolder extends RecyclerView.ViewHolder {
+        final TextView group;
+        final View options;
         final TextView title;
         final TextView content;
         final TextView time;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
+            group = itemView.findViewById(R.id.history_group);
+            options = itemView.findViewById(R.id.history_options);
             title = itemView.findViewById(R.id.history_title);
             content = itemView.findViewById(R.id.history_content);
             time = itemView.findViewById(R.id.history_time);

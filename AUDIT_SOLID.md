@@ -87,3 +87,11 @@ one-time import, subsequent edits and rollback on conflicting rows. UI tests cov
 Math-only calculator, circuit switch/topology changes, four language/theme combinations,
 login draft and unsaved profile name restoration. Large legacy datasets and arbitrary
 unsupported historical schemas still need dedicated fixtures before broader guarantees.
+
+## UX and review-driven reliability
+
+SubjectNavigator owns subject entry routing; FormFeedback owns inline field-error behavior;
+AiAvailabilityNotice is shared by the three online-only chat UIs. The Programming note
+editor uses the actual write outcome and separates persistence from exit/discard decisions.
+Regression cases exercise both failed writes and cross-account IDs. These changes do not
+introduce cloud services, telemetry, new permission roles or pretend AI availability.

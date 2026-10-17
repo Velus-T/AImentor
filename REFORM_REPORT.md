@@ -111,3 +111,16 @@ CalculatorInteractionDebugTest covers repeated square, root after entering a val
 root of the previous result, drag clamping, edge persistence and absence of an accidental
 Hide dialog while dragging. These extend the instrumentation suite from 13 to 15 cases.
 API credentials remain empty; live AI calls are outside this debug session.
+
+## User-research follow-up
+
+The UX review in [UX_RESEARCH.md](UX_RESEARCH.md) distinguishes external research,
+individual app reviews, implementation decisions and evidence from this app. Home now
+prioritizes learning, forms target recoverable field errors, and the calculator display
+remains visible while its keypad scrolls. The Programming editor verifies write outcomes;
+unconfigured online-only chat preserves user input. Existing specialized tools remain.
+
+New regression coverage includes simulated INSERT/UPDATE failures, retry, account isolation,
+editor recreation, first-use/recent-subject navigation, honest AI-unavailable state and
+portrait/landscape calculator interaction. Full visual/AI quality and physical-device
+usability remain separate from automated functional checks.

@@ -57,6 +57,8 @@ public final class HistoryDashboardActivity extends AppCompatActivity {
      * Responsibility: Displays or binds data from `show page` to the appropriate UI or navigation destination.
      * Purpose: Separating presentation logic prevents data processing from being mixed with UI rendering.
      */
+    public void selectTab(int id) { navigation.setSelectedItemId(id); }
+
     private void showPage(Fragment fragment, String title) {
         titleView.setText(title);
         getSupportFragmentManager().beginTransaction()

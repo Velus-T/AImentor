@@ -24,7 +24,7 @@ import java.util.List;
 public class SqliteDbHelper extends ModuleDatabaseHelper {
 
     private static final String DATABASE_NAME = "MathMentor.db";
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
 
     public static final String TABLE_HISTORY = "math_history";
     public static final String COLUMN_ID = "id";
@@ -114,6 +114,7 @@ public class SqliteDbHelper extends ModuleDatabaseHelper {
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_QUIZ_SETS + " ("
                 + COLUMN_SET_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "owner_id INTEGER NOT NULL DEFAULT 0, "
                 + COLUMN_SET_TITLE + " TEXT NOT NULL DEFAULT 'Bộ đề Toán', "
                 + COLUMN_SET_CATEGORY + " TEXT NOT NULL DEFAULT 'Khác', "
                 + COLUMN_SET_DIFFICULTY + " TEXT NOT NULL DEFAULT 'Trung bình', "
@@ -159,6 +160,7 @@ public class SqliteDbHelper extends ModuleDatabaseHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         createLegacyTablesIfMissing(db);
+        if(!columnExists(db,TABLE_QUIZ_SETS,"owner_id"))db.execSQL("ALTER TABLE "+TABLE_QUIZ_SETS+" ADD COLUMN owner_id INTEGER NOT NULL DEFAULT 0");
 
         if (!columnExists(db, TABLE_USER, COLUMN_USER_ID)) {
             db.execSQL("ALTER TABLE " + TABLE_USER + " ADD COLUMN "
@@ -448,7 +450,7 @@ public class SqliteDbHelper extends ModuleDatabaseHelper {
         try (Cursor cursor = getReadableDatabase().query(
                 TABLE_QUIZ_SETS,
                 quizSetColumns(),
-                COLUMN_SET_CATEGORY + " IN (?,?,?)",
+                COLUMN_SET_CATEGORY + " IN (?,?,?) AND (owner_id=0 OR owner_id=" + currentUserId() + ")",
                 com.example.mathmodule.util.MathCategory.aliases(category), null, null,
                 COLUMN_SET_ID + " DESC")) {
             readQuizSets(cursor, list);
@@ -464,7 +466,7 @@ public class SqliteDbHelper extends ModuleDatabaseHelper {
         List<QuizSet> list = new ArrayList<>();
         try (Cursor cursor = getReadableDatabase().query(
                 TABLE_QUIZ_SETS, quizSetColumns(),
-                null, null, null, null, COLUMN_SET_ID + " DESC")) {
+                "owner_id=0 OR owner_id=?", new String[]{String.valueOf(currentUserId())}, null, null, COLUMN_SET_ID + " DESC")) {
             readQuizSets(cursor, list);
         }
         return list;
@@ -505,7 +507,7 @@ public class SqliteDbHelper extends ModuleDatabaseHelper {
         };
         try (Cursor cursor = getReadableDatabase().query(
                 TABLE_QUESTIONS, columns,
-                COLUMN_Q_SET_ID + "=?", new String[]{String.valueOf(setId)},
+                COLUMN_Q_SET_ID + "=? AND set_id IN (SELECT id FROM math_quiz_sets WHERE owner_id=0 OR owner_id=?)", new String[]{String.valueOf(setId),String.valueOf(currentUserId())},
                 null, null, COLUMN_Q_ID + " ASC")) {
             while (cursor.moveToNext()) {
                 list.add(new QuizQuestion(
@@ -540,6 +542,7 @@ public class SqliteDbHelper extends ModuleDatabaseHelper {
         long setId = -1;
         try {
             ContentValues setValues = new ContentValues();
+            setValues.put("owner_id", "AI Generated".equals(category) || category.startsWith("BANK:") ? currentUserId() : 0);
             setValues.put(COLUMN_SET_TITLE, safe(title));
             setValues.put(COLUMN_SET_CATEGORY, safe(category));
             setValues.put(COLUMN_SET_DIFFICULTY, safe(difficulty));

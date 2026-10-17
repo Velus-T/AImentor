@@ -15,22 +15,22 @@ public class ProgrammingLevelCalculatorTest {
         // Gọi hàm `assertEquals()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
         assertEquals(1, ProgrammingLevelCalculator.getLevel(-20));
         // Gọi hàm `assertEquals()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-        assertEquals(1, ProgrammingLevelCalculator.getLevel(99));
+        assertEquals(1, ProgrammingLevelCalculator.getLevel(119));
         // Gọi hàm `assertEquals()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-        assertEquals(2, ProgrammingLevelCalculator.getLevel(100));
+        assertEquals(2, ProgrammingLevelCalculator.getLevel(120));
         // Gọi hàm `assertEquals()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-        assertEquals(3, ProgrammingLevelCalculator.getLevel(220));
+        assertEquals(3, ProgrammingLevelCalculator.getLevel(265));
     }
 
     @Test
     // Hàm `calculatesProgrammingProgressInsideLevel()`: Tính toán giá trị kết quả dựa trên dữ liệu đầu vào.
     public void calculatesProgrammingProgressInsideLevel() {
         // Gọi hàm `assertEquals()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-        assertEquals(50, ProgrammingLevelCalculator.getExpInsideCurrentLevel(150));
+        assertEquals(30, ProgrammingLevelCalculator.getExpInsideCurrentLevel(150));
         // Gọi hàm `assertEquals()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-        assertEquals(42, ProgrammingLevelCalculator.getProgressPercent(150));
+        assertEquals(21, ProgrammingLevelCalculator.getProgressPercent(150));
         // Gọi hàm `assertEquals()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-        assertEquals(120, ProgrammingLevelCalculator.getExpToNextLevel(2));
+        assertEquals(145, ProgrammingLevelCalculator.getExpToNextLevel(2));
     }
 
     @Test

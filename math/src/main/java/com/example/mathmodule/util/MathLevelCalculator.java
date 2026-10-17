@@ -13,28 +13,19 @@ public final class MathLevelCalculator {
      * Responsibility: Reads or loads data for `get level` from the appropriate data source.
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
-    public static int getLevel(int totalExp) {
-        int exp = Math.max(0, totalExp); int level = 1;
-        while (level < MAX_LEVEL && exp >= getTotalExpForLevel(level + 1)) level++;
-        return level;
-    }
+    public static int getLevel(int totalExp) { return com.example.mentor.data.QuizPolicy.level(totalExp); }
     /*
      * Responsibility: Reads or loads data for `get total exp for level` from the appropriate data source.
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
-    public static int getTotalExpForLevel(int level) {
-        int safe = Math.max(1, Math.min(level, MAX_LEVEL)); int n = safe - 1;
-        return BASE * n + STEP * n * (n - 1) / 2;
-    }
-    public static int getExpToNextLevel(int level) {
-        if (level >= MAX_LEVEL) return 0; return BASE + STEP * (Math.max(1, level) - 1);
-    }
+    public static int getTotalExpForLevel(int level) { return com.example.mentor.data.QuizPolicy.threshold(level); }
+    public static int getExpToNextLevel(int level) { return com.example.mentor.data.QuizPolicy.required(level); }
     /*
      * Responsibility: Reads or loads data for `get inside level` from the appropriate data source.
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
-    public static int getInsideLevel(int exp) { int l=getLevel(exp); return Math.max(0, exp-getTotalExpForLevel(l)); }
-    public static int getRemaining(int exp) { int l=getLevel(exp); return l>=MAX_LEVEL?0:Math.max(0,getExpToNextLevel(l)-getInsideLevel(exp)); }
+    public static int getInsideLevel(int exp) { return com.example.mentor.data.QuizPolicy.inside(exp); }
+    public static int getRemaining(int exp) { return com.example.mentor.data.QuizPolicy.remaining(exp); }
     public static int getTitleResId(int level) {
         if(level<=4)return com.example.mathmodule.R.string.math_level_1;
         if(level<=8)return com.example.mathmodule.R.string.math_level_2;

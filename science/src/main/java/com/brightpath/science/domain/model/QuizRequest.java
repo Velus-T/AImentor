@@ -36,7 +36,7 @@ private QuizRequest(ScienceSubject subject, EducationLevel level,
         this.subject = subject == null ? ScienceSubject.PHYSICS : subject;
         this.level = level == null ? EducationLevel.MIDDLE_SCHOOL : level;
         this.topic = topic == null || topic.trim().isEmpty() ? "General science" : topic.trim();
-        this.numberOfQuestions = Math.max(3, Math.min(5, numberOfQuestions));
+        this.numberOfQuestions = Math.max(5, Math.min(15, numberOfQuestions));
         this.userId = Math.max(0, userId);
         this.challenge = challenge == null ? QuizChallenge.ON_LEVEL : challenge;
         this.recentPerformance = recentPerformance == null

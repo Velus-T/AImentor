@@ -18,7 +18,7 @@
     <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/surface_light" />
 
     
-    <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_note_content" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:hint="@string/note_hint_content" android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary" android:textSize="17sp" android:fontFamily="sans-serif" android:background="@null" android:paddingHorizontal="20dp" android:paddingVertical="12dp" android:gravity="top" android:scrollbars="vertical" />
+    <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_note_content" android:inputType="textCapSentences|textMultiLine" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:hint="@string/note_hint_content" android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary" android:textSize="17sp" android:fontFamily="sans-serif" android:background="@null" android:paddingHorizontal="20dp" android:paddingVertical="12dp" android:gravity="top" android:scrollbars="vertical" />
 
     <TextView android:id="@+id/note_save_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingHorizontal="20dp" android:paddingVertical="8dp" android:textColor="@color/text_primary" android:textSize="14sp" android:accessibilityLiveRegion="polite" />
 </LinearLayout>

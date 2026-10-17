@@ -51,7 +51,7 @@ public ResilientScienceService(GeminiScienceService remoteService, LocalScienceS
  */
 @Override
             public void onError(String message, Throwable error) {
-                if (isCredentialOrPermissionError(error, message)) {
+                if (error instanceof com.example.mentor.data.QuizBank.SaveException || isCredentialOrPermissionError(error, message)) {
                     callback.onError(message, error);
                     return;
                 }
@@ -88,7 +88,7 @@ public ResilientScienceService(GeminiScienceService remoteService, LocalScienceS
  */
 @Override
             public void onError(String message, Throwable error) {
-                if (isCredentialOrPermissionError(error, message)) {
+                if (error instanceof com.example.mentor.data.QuizBank.SaveException || isCredentialOrPermissionError(error, message)) {
                     callback.onError(message, error);
                     return;
                 }

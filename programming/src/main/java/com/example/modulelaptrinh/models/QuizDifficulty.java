@@ -30,7 +30,7 @@ public enum QuizDifficulty {
     // Hàm `getExpReward()`: Trả về giá trị ExpReward hiện đang được đối tượng lưu giữ.
     public int getExpReward() {
         // Trả kết quả của hàm về cho nơi đã gọi hàm này.
-        return expReward;
+        return com.example.mentor.data.QuizPolicy.reward(name());
     }
 
     // Hàm `fromApiValue()`: Thực hiện chức năng `fromApiValue` của class này.

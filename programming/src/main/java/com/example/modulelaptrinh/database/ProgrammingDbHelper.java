@@ -808,117 +808,34 @@ public class ProgrammingDbHelper extends ModuleDatabaseHelper {
      */
     public long saveQuizResult(int userId, String subject, String level, String topic,
                                int totalQuestions, int correctAnswers, int expEarned) {
-        // Mở SQLite ở chế độ ghi; SQLiteOpenHelper sẽ tạo/mở database nếu cần.
-        SQLiteDatabase db = this.getWritableDatabase();
-        // Tạo ContentValues để đóng gói dữ liệu theo dạng tên-cột → giá-trị trước khi INSERT/UPDATE.
-        ContentValues values = new ContentValues();
-        // Gán dữ liệu cho COLUMN_QUIZ_USER_ID trong ContentValues.
-        values.put(COLUMN_QUIZ_USER_ID, userId);
-        // Gán dữ liệu cho COLUMN_QUIZ_SUBJECT trong ContentValues.
-        values.put(COLUMN_QUIZ_SUBJECT, subject != null ? subject : "Lập trình");
-        // Gán dữ liệu cho COLUMN_QUIZ_LEVEL trong ContentValues.
-        values.put(COLUMN_QUIZ_LEVEL, level != null ? level : "Cơ bản");
-        // Gán dữ liệu cho COLUMN_QUIZ_TOPIC trong ContentValues.
-        values.put(COLUMN_QUIZ_TOPIC, topic != null ? topic : "Kiến thức lập trình");
-        // Gán dữ liệu cho COLUMN_QUIZ_TOTAL trong ContentValues.
-        values.put(COLUMN_QUIZ_TOTAL, Math.max(0, totalQuestions));
-        // Gán dữ liệu cho COLUMN_QUIZ_CORRECT trong ContentValues.
-        values.put(COLUMN_QUIZ_CORRECT, Math.max(0, correctAnswers));
-        // Gán dữ liệu cho COLUMN_QUIZ_EXP_EARNED trong ContentValues.
-        values.put(COLUMN_QUIZ_EXP_EARNED, Math.max(0, expEarned));
-        // Gán dữ liệu cho COLUMN_QUIZ_TIMESTAMP trong ContentValues.
-        values.put(COLUMN_QUIZ_TIMESTAMP, System.currentTimeMillis());
-
-        // Lưu một attempt: tổng câu, số đúng, EXP kiếm được.
-        long id = db.insert(TABLE_QUIZ_ATTEMPTS, null, values);
-        // Đóng handle database của thao tác hiện tại sau khi xử lý xong.
-        db.close();
-
-        // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
-        if (id != -1) {
-            // Gọi hàm `updateUserExp()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-            updateUserExp(userId, subject, expEarned);
-        }
-
-        // Trả kết quả của hàm về cho nơi đã gọi hàm này.
-        return id;
-    }
-
-    /**
-     * Có progress theo (user_id, subject) thì UPDATE; chưa có thì INSERT.
-     * Khóa ghép giúp nhiều subject của cùng user tồn tại song song mà không ghi đè EXP.
-     */
-    private void updateUserExp(int userId, String subject, int expEarned) {
-        // Mở SQLite ở chế độ ghi; SQLiteOpenHelper sẽ tạo/mở database nếu cần.
-        SQLiteDatabase db = this.getWritableDatabase();
-        // Tính/đọc và lưu giá trị `safeSubject` (safe subject) để sử dụng ở các bước phía sau.
-        String safeSubject = subject != null ? subject : "Lập trình";
-
-        // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
-        if (expEarned <= 0) {
-            // Đóng handle database của thao tác hiện tại sau khi xử lý xong.
-            db.close();
-            // Dừng hàm tại đây vì không cần tiếp tục các bước phía sau.
-            return;
-        }
-
-        // Tính/đọc và lưu con trỏ đọc kết quả truy vấn SQLite để sử dụng ở các bước phía sau.
-        Cursor cursor = null;
-        // Bắt đầu khối có thể phát sinh ngoại lệ để xử lý an toàn.
+        SQLiteDatabase db=getWritableDatabase();
+        String safeSubject=subject==null?"Lập trình":subject;
+        int safeExp=Math.max(0,expEarned);
+        db.beginTransaction();
         try {
-            // Dùng API query của SQLite để SELECT dữ liệu và nhận về Cursor.
-            cursor = db.query(
-                    TABLE_USER_PROGRESS,
-                    new String[]{COLUMN_PROGRESS_TOTAL_EXP},
-                    COLUMN_PROGRESS_USER_ID + "=? AND " + COLUMN_PROGRESS_SUBJECT + "=?",
-                    new String[]{String.valueOf(userId), safeSubject},
-                    null, null, null
-            );
-
-            // Tạo ContentValues để đóng gói dữ liệu theo dạng tên-cột → giá-trị trước khi INSERT/UPDATE.
-            ContentValues values = new ContentValues();
-            // Gán dữ liệu cho COLUMN_PROGRESS_UPDATED_AT trong ContentValues.
-            values.put(COLUMN_PROGRESS_UPDATED_AT, System.currentTimeMillis());
-
-            // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
-            if (cursor != null && cursor.moveToFirst()) {
-                // Đọc giá trị của cột hiện tại từ Cursor.
-                int currentExp = cursor.getInt(0);
-                // Gán dữ liệu cho COLUMN_PROGRESS_TOTAL_EXP trong ContentValues.
-                values.put(COLUMN_PROGRESS_TOTAL_EXP, currentExp + expEarned);
-                // UPDATE thay vì INSERT
-                db.update(TABLE_USER_PROGRESS, values,
-                        COLUMN_PROGRESS_USER_ID + "=? AND " + COLUMN_PROGRESS_SUBJECT + "=?",
-                        new String[]{String.valueOf(userId), safeSubject});
-                // Gọi `d()` trên `Log` để thực hiện thao tác tương ứng.
-                Log.d(TAG, "Updated EXP for user " + userId + ": " + currentExp + " + " + expEarned + " = " + (currentExp + expEarned));
-            // Xử lý trường hợp còn lại khi điều kiện phía trên không thỏa.
-            } else {
-                // Gán dữ liệu cho COLUMN_PROGRESS_USER_ID trong ContentValues.
-                values.put(COLUMN_PROGRESS_USER_ID, userId);
-                // Gán dữ liệu cho COLUMN_PROGRESS_SUBJECT trong ContentValues.
-                values.put(COLUMN_PROGRESS_SUBJECT, safeSubject);
-                // Gán dữ liệu cho COLUMN_PROGRESS_TOTAL_EXP trong ContentValues.
-                values.put(COLUMN_PROGRESS_TOTAL_EXP, expEarned);
-                // INSERT record EXP đầu tiên của subject này.
-                db.insertWithOnConflict(TABLE_USER_PROGRESS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
-                // Gọi `d()` trên `Log` để thực hiện thao tác tương ứng.
-                Log.d(TAG, "Inserted new EXP for user " + userId + ": " + expEarned);
+            ContentValues attempt=new ContentValues();
+            attempt.put(COLUMN_QUIZ_USER_ID,userId);attempt.put(COLUMN_QUIZ_SUBJECT,safeSubject);
+            attempt.put(COLUMN_QUIZ_LEVEL,level==null?"Cơ bản":level);attempt.put(COLUMN_QUIZ_TOPIC,topic==null?"Kiến thức lập trình":topic);
+            attempt.put(COLUMN_QUIZ_TOTAL,Math.max(0,totalQuestions));attempt.put(COLUMN_QUIZ_CORRECT,Math.max(0,Math.min(totalQuestions,correctAnswers)));
+            attempt.put(COLUMN_QUIZ_EXP_EARNED,safeExp);attempt.put(COLUMN_QUIZ_TIMESTAMP,System.currentTimeMillis());
+            long id=db.insertOrThrow(TABLE_QUIZ_ATTEMPTS,null,attempt);
+            if(safeExp>0) {
+                int current=0;
+                try(Cursor c=db.query(TABLE_USER_PROGRESS,new String[]{COLUMN_PROGRESS_TOTAL_EXP},
+                        COLUMN_PROGRESS_USER_ID+"=? AND "+COLUMN_PROGRESS_SUBJECT+"=?",new String[]{String.valueOf(userId),safeSubject},null,null,null)) {
+                    if(c.moveToFirst())current=c.getInt(0);
+                }
+                ContentValues progress=new ContentValues();progress.put(COLUMN_PROGRESS_TOTAL_EXP,current+safeExp);
+                progress.put(COLUMN_PROGRESS_UPDATED_AT,System.currentTimeMillis());
+                int updated=db.update(TABLE_USER_PROGRESS,progress,COLUMN_PROGRESS_USER_ID+"=? AND "+COLUMN_PROGRESS_SUBJECT+"=?",new String[]{String.valueOf(userId),safeSubject});
+                if(updated==0) {
+                    progress.put(COLUMN_PROGRESS_USER_ID,userId);progress.put(COLUMN_PROGRESS_SUBJECT,safeSubject);
+                    db.insertOrThrow(TABLE_USER_PROGRESS,null,progress);
+                }
             }
-        // Bắt ngoại lệ phát sinh để ứng dụng không bị dừng đột ngột và có thể xử lý lỗi.
-        } catch (Exception e) {
-            // Gọi `e()` trên `Log` để thực hiện thao tác tương ứng.
-            Log.e(TAG, "Lỗi update EXP: " + e.getMessage());
-        // Khối finally luôn chạy để giải phóng/hoàn tất tài nguyên cần thiết.
-        } finally {
-            // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
-            if (cursor != null) {
-                // Đóng Cursor sau khi đọc xong để giải phóng tài nguyên truy vấn.
-                cursor.close();
-            }
-            // Đóng handle database của thao tác hiện tại sau khi xử lý xong.
-            db.close();
-        }
+            db.setTransactionSuccessful();return id;
+        } catch(android.database.SQLException error) { return -1; }
+        finally { db.endTransaction(); }
     }
 
     /** Lấy total_exp của user theo subject. */

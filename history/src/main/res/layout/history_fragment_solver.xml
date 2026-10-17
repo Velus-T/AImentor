@@ -17,6 +17,20 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:text="@string/history_home_choose" android:textColor="@color/history_text_primary" android:textSize="16sp" android:textStyle="bold" />
+        <com.example.mentor.ui.AdaptiveCardRow android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton android:id="@+id/history_topic_vietnam" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:minHeight="48dp" android:text="@string/history_home_vietnam" android:textAllCaps="false" android:layout_marginEnd="6dp" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/history_topic_world" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:minHeight="48dp" android:text="@string/history_home_world" android:textAllCaps="false" android:layout_marginStart="6dp" />
+        </com.example.mentor.ui.AdaptiveCardRow>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/history_home_draft_hint" android:textSize="13sp" android:textColor="@color/history_text_secondary" />
+        <LinearLayout android:id="@+id/history_progress_card" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:orientation="vertical" android:padding="16dp" android:background="@color/history_surface" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackground" android:contentDescription="@string/history_home_progress_action">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/history_home_progress_action" android:textColor="@color/history_text_primary" android:textStyle="bold" android:textSize="16sp" />
+            <TextView android:id="@+id/history_home_progress" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:textColor="@color/history_text_secondary" />
+            <ProgressBar android:id="@+id/history_home_progress_bar" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:max="100" />
+        </LinearLayout>
+        <com.google.android.material.button.MaterialButton android:id="@+id/history_open_notes" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="48dp" android:text="@string/history_home_notes" android:textAllCaps="false" />
+
         <com.example.mentor.ui.AdaptiveCardRow android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="18dp" android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView android:id="@+id/btn_camera_card" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginEnd="6dp" android:layout_weight="1" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackground" app:cardCornerRadius="20dp" app:cardElevation="1dp" android:stateListAnimator="@animator/mentor_card_press">
@@ -35,6 +49,8 @@
         </com.example.mentor.ui.AdaptiveCardRow>
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:text="@string/history_solver_recent_title" android:textColor="@color/history_title" android:textSize="16sp" android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton android:id="@+id/history_view_all" style="@style/Widget.MaterialComponents.Button.TextButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="48dp" android:text="@string/history_home_view_all" android:textAllCaps="false" />
 
         <TextView android:id="@+id/tvRecentEmpty" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:gravity="center" android:text="@string/history_solver_recent_empty" android:textColor="@color/history_text_hint" android:visibility="gone" />
 

@@ -13,7 +13,7 @@
     <string name="history_solver_recent_empty">No conversations yet.</string>
 
     <!-- Conversations Fragment -->
-    <string name="history_conv_instruction">Tap to reopen the full chat. Long press to delete conversation.</string>
+    <string name="history_conv_instruction">Tap to continue learning. Use the menu beside a conversation for more options.</string>
     <string name="history_conv_empty">No conversations in this period.</string>
 
     <!-- Notes Fragment -->
@@ -135,4 +135,21 @@
     <string name="history_level_4">Researcher</string>
     <string name="history_level_5">History Expert</string>
     <string name="history_level_6">History Master</string>
+    <string name="history_home_choose">What would you like to explore?</string>
+    <string name="history_home_vietnam">Vietnamese history</string>
+    <string name="history_home_world">World history</string>
+    <string name="history_home_draft_hint">Choose a topic to draft a question. Edit it before sending.</string>
+    <string name="history_draft_vietnam">I want to explore Vietnamese history. Help me choose a period to start with.</string>
+    <string name="history_draft_world">I want to explore world history. Help me choose a period to start with.</string>
+    <string name="history_home_progress_action">Practice and view progress</string>
+    <string name="history_home_progress_format">Level %1$d · %2$d EXP from quizzes</string>
+    <string name="history_home_notes">Open history notebook</string>
+    <string name="history_home_view_all">View all conversations</string>
+    <string name="history_search_hint">Search titles or latest messages</string>
+    <string name="history_search_empty">No matching conversations.</string>
+    <string name="history_conversation_menu">Conversation options</string>
+    <string name="history_open_conversation">Open conversation</string>
+    <string name="history_delete_conversation">Delete conversation</string>
+    <string name="history_group_today">Today</string>
+    <string name="history_group_yesterday">Yesterday</string>
 </resources>

@@ -43,7 +43,7 @@ public class ProgrammingQuizRequestTest {
         // Gọi hàm `assertEquals()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
         assertEquals("Kiến thức lập trình", minimum.getTopic());
         // Gọi hàm `assertEquals()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
-        assertEquals(3, minimum.getNumberOfQuestions());
+        assertEquals(5, minimum.getNumberOfQuestions());
         // Gọi hàm `assertEquals()` để thực hiện bước xử lý tiếp theo trong luồng hiện tại.
         assertEquals(15, maximum.getNumberOfQuestions());
     }

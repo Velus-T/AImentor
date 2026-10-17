@@ -47,7 +47,7 @@
     <string name="login_btn_show">📋 View user list</string>
     <string name="login_msg_empty">⚠️ Please fill in all fields!</string>
     <string name="login_msg_success">✅ Login successful!</string>
-    <string name="login_msg_fail">❌ Invalid username or password!</string>
+    <string name="login_msg_fail">The username or password is incorrect. Please check and try again.</string>
     <string name="login_db_empty">⚠️ Database empty!</string>
     <string name="reg_title">Create your account</string>
     <string name="reg_hint_user">Username</string>
@@ -56,14 +56,14 @@
     <string name="reg_btn">Register</string>
     <string name="reg_go_to_login">Already have an account? Sign in</string>
     <string name="reg_msg_empty">⚠️ Please fill in all fields!</string>
-    <string name="reg_msg_mismatch">❌ Passwords do not match!</string>
+    <string name="reg_msg_mismatch">The passwords do not match. Re-enter the confirmation.</string>
     <string name="reg_msg_short">❌ Password must be &gt;= 4 characters!</string>
     <string name="reg_msg_success">✅ Registration successful!</string>
-    <string name="reg_msg_exists">❌ Username already exists!</string>
+    <string name="reg_msg_exists">This username is already in use. Choose another.</string>
     <string name="reg_hint_email">Email (gmail.com)</string>
     <string name="reg_hint_phone">Phone Number</string>
-    <string name="reg_msg_invalid_email">❌ Email must end with @gmail.com!</string>
-    <string name="reg_msg_weak_pass">❌ Password must be 8+ chars, with digit &amp; uppercase!</string>
+    <string name="reg_msg_invalid_email">Use an address ending in @gmail.com.</string>
+    <string name="reg_msg_weak_pass">Use at least 8 characters, including an uppercase letter and a digit.</string>
     <string name="home_welcome_back">Welcome back!</string>
     <string name="home_default_user">User</string>
     <string name="home_overall_level">Overall level</string>

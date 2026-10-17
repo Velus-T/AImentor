@@ -13,7 +13,7 @@
     <string name="history_solver_recent_empty">Chưa có cuộc trò chuyện nào.</string>
 
     <!-- Conversations Fragment -->
-    <string name="history_conv_instruction">Chạm để mở lại đầy đủ đoạn chat. Nhấn giữ để xóa cuộc trò chuyện.</string>
+    <string name="history_conv_instruction">Chạm để học tiếp. Mở menu bên cạnh hội thoại để xem các tùy chọn.</string>
     <string name="history_conv_empty">Chưa có hội thoại trong khoảng thời gian này.</string>
 
     <!-- Notes Fragment -->
@@ -135,4 +135,21 @@
     <string name="history_level_4">Nhà nghiên cứu</string>
     <string name="history_level_5">Chuyên gia Lịch sử</string>
     <string name="history_level_6">Bậc thầy Lịch sử</string>
+    <string name="history_home_choose">Bạn muốn tìm hiểu phần nào?</string>
+    <string name="history_home_vietnam">Lịch sử Việt Nam</string>
+    <string name="history_home_world">Lịch sử thế giới</string>
+    <string name="history_home_draft_hint">Chọn chủ đề để soạn câu hỏi. Bạn có thể sửa trước khi gửi.</string>
+    <string name="history_draft_vietnam">Tôi muốn tìm hiểu lịch sử Việt Nam. Hãy giúp tôi chọn một giai đoạn để bắt đầu.</string>
+    <string name="history_draft_world">Tôi muốn tìm hiểu lịch sử thế giới. Hãy giúp tôi chọn một giai đoạn để bắt đầu.</string>
+    <string name="history_home_progress_action">Ôn tập và xem tiến độ</string>
+    <string name="history_home_progress_format">Cấp %1$d · %2$d EXP từ trắc nghiệm</string>
+    <string name="history_home_notes">Mở sổ tay Lịch sử</string>
+    <string name="history_home_view_all">Xem tất cả hội thoại</string>
+    <string name="history_search_hint">Tìm tên hoặc nội dung gần nhất</string>
+    <string name="history_search_empty">Không tìm thấy hội thoại phù hợp.</string>
+    <string name="history_conversation_menu">Tùy chọn hội thoại</string>
+    <string name="history_open_conversation">Mở hội thoại</string>
+    <string name="history_delete_conversation">Xóa hội thoại</string>
+    <string name="history_group_today">Hôm nay</string>
+    <string name="history_group_yesterday">Hôm qua</string>
 </resources>

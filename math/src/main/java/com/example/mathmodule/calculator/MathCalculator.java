@@ -274,8 +274,7 @@ public final class MathCalculator implements Application.ActivityLifecycleCallba
       window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
       int available = a.getResources().getDisplayMetrics().heightPixels - dp(a, 310);
       scroll.setLayoutParams(
-          new LinearLayout.LayoutParams(
-              -1, Math.min(dp(a, 376), Math.max(dp(a, 72), available))));
+          new LinearLayout.LayoutParams(-1, Math.min(dp(a, 376), Math.max(dp(a, 72), available))));
     }
   }
 

@@ -44,6 +44,7 @@ import java.util.concurrent.Executors;
  * Purpose: The Activity connects the UI with supporting classes while keeping responsibilities separated instead of concentrating all logic in one place.
  */
 public final class HistoryChatActivity extends AppCompatActivity {
+    public static final String EXTRA_DRAFT = "history_draft";
     public static final String EXTRA_OPEN_CAMERA = "history_open_camera";
     public static final String EXTRA_FOCUS_INPUT = "history_focus_input";
     public static final String EXTRA_CONVERSATION_ID = "history_conversation_id";
@@ -101,7 +102,11 @@ public final class HistoryChatActivity extends AppCompatActivity {
         setupRecyclerView();
         setupActions();
         restoreConversation();
-        handleLaunchMode();
+        if (savedInstanceState == null) {
+            String draft = getIntent().getStringExtra(EXTRA_DRAFT);
+            if (draft != null) messageEditText.setText(draft);
+            handleLaunchMode();
+        }
     }
 
     /*

@@ -1,58 +1,59 @@
-# Tiến độ tạm dừng — 16/10/2026
+# Tiến độ tạm dừng — 17/10/2026
 
-Người dùng yêu cầu tạm dừng và lưu tiến độ. Không tiếp tục công việc cho đến khi người dùng yêu cầu.
+Người dùng vừa yêu cầu **tạm dừng**. Không tiếp tục sửa code, push hoặc tạo tác vụ cloud cho đến khi người dùng yêu cầu tiếp tục.
 
-## Mốc đã công bố
-- GitHub master: a0e190a — sửa thao tác bình phương/căn và kiểm tra kéo máy tính.
-- Lượt cải tiến UX hiện tại được lưu cục bộ; chưa đẩy các thay đổi dang dở lên GitHub.
+## Trạng thái
+- Bản WIP cục bộ; chưa hoàn tất và chưa đẩy lượt thay đổi mới lên GitHub.
+- Chưa khởi chạy tác vụ cloud. Phiên này chạy local, không tiếp tục khi máy tắt.
+- Remote công bố gần nhất đã biết: a0e190a. Local có mốc 0403548 và checkpoint WIP mới.
+- API key vẫn trống; model names là cấu hình, không phải secret. Không thực hiện cuộc gọi Gemini thật.
 
-## Yêu cầu đang thực hiện
-Nghiên cứu hành vi người dùng qua internet và áp dụng vào AIMentor. Sau đó xem đánh giá khen/chê các app học tập, học các điểm tốt và sửa hoặc tránh các vấn đề bị chê. Giữ đầy đủ chức năng, nhất quán Việt/Anh và sáng/tối; kiểm tra kỹ. Không thêm backend mới.
+## Yêu cầu cần giữ
+1. Hoàn tất nghiên cứu UX và áp dụng đánh giá khen/chê app học tập; xem UX_RESEARCH.md.
+2. Lịch sử chat theo cách ChatGPT: gọn, tìm kiếm, nhóm thời gian, mở lại, menu rõ ràng, đồng nhất bốn môn. Không gộp câu hỏi đơn thành hội thoại giả.
+3. Môn Lịch sử bổ sung những gì hữu ích còn thiếu so với Khoa học; giữ đặc trưng môn, không chép công cụ khoa học.
+4. Bốn môn chung cách tạo quiz, bố cục làm bài/kết quả và tính EXP; tham khảo Science. Lựa chọn số câu **5, 10, 15**, mặc định 5.
+5. Mỗi đề Gemini tạo thành công phải lưu/phân loại vào bank theo môn/phạm vi/cấp học/chủ đề/độ khó, gồm đáp án/lời giải; có thể chọn ôn lại không cần mạng.
+6. Giữ mọi chức năng, công thức Toán, timer, câu đúng/sai/điền/ghép của Science, máy tính bong bóng chỉ ở Toán; theme/ngôn ngữ/responsive/system insets phải kiểm tra kỹ.
 
-## Đã thay đổi
-1. Trang chủ có hành động chọn môn ở phía trên; người có hoạt động gần đây được mở lại đúng môn theo dữ liệu thực, không hứa tiếp tục chính xác bài đang dở.
-2. Thống kê chi tiết có nút mở/thu gọn; giữ toàn bộ thống kê cũ và phục hồi trạng thái mở sau đổi theme. Có hướng dẫn khi chưa có hoạt động/EXP.
-3. SubjectNavigator dùng chung lối vào module từ Trang chủ và Danh mục.
-4. FormFeedback báo lỗi tại ô cần sửa, chuyển focus đúng ô, xóa lỗi của ô khi sửa; không báo lỗi trước khi gửi. Đăng ký giải thích yêu cầu Gmail ngay trước khi nhập.
-5. Máy tính giữ phần kết quả ngoài vùng cuộn bàn phím để không mất dấu phép tính trên màn hình ngắn.
-6. AiAvailabilityNotice dùng chung cho chat Toán/Lịch sử/Lập trình: thông báo khi chưa cấu hình AI và chặn gửi trước khi xóa câu hỏi/ảnh. Khoa học vẫn có nguồn tham khảo cục bộ nên không chặn luồng đó.
-7. NoteEditorActivity Lập trình được rút gọn; lưu/Back chỉ báo thành công khi database thực sự ghi được. Khi thất bại, giữ nội dung, cho tiếp tục sửa hoặc chủ động bỏ thay đổi. Vẫn giữ autosave khi Back. updateNote trả boolean. Nút Lưu có vùng chạm tối thiểu 48dp.
-8. Toán không tự mở lại trình chọn ảnh khi activity được tạo lại.
+## Đã sửa trong checkpoint hiện tại
+- UX Home, inline auth errors, AI-unconfigured draft protection, pinned calculator display, note write failure recovery (xem UX_RESEARCH.md).
+- History home: chủ đề Việt Nam/thế giới tạo bản nháp không tự gửi; lối vào EXP/quiz, ghi chú, xem toàn bộ chat.
+- History conversations: tìm tiêu đề/nội dung gần nhất, nhóm ngày, menu mở/xóa, chat mới; màu theo theme; bỏ giới hạn 100 khi tìm. Chưa chuẩn hóa ba lịch sử chat khác.
+- QuizPolicy trong data-core: reward 5/10/20, curve level 120 +25 mỗi cấp, max20. Giữ nguyên EXP đã lưu; level Programming được tính lại theo curve mới.
+- QuizCard, QuizBank (cùng AImentor.db, 2 bảng mentor_quiz_bank_sets/questions, version module riêng); transaction, SHA256 dedup, account ownership, metadata, difficulty index.
+- QuizSetupView/QuizFormView/QuizQuestionCard dùng chung ui-core; tạo đề, lựa chọn đáp án, nộp, lời giải, retry save, state Bundle; render công thức qua KaTeX như nguồn cũ.
+- History/Science/Programming player dùng shared page. Math creation dùng shared setup trên trang catalog cũ, player shared form, vẫn có timer và toàn bộ lời giải.
+- Generators History/Programming/Science nhận context và lưu bank trước callback success; Math cũng lưu bank sau legacy full set.
+- UI mở bank để ôn lại; vẫn dùng persistence/EXP riêng hiện có của mỗi module.
+- Programming attempt và EXP ghi trong cùng transaction.
+- Math schema version9 thêm owner_id cho quiz sets; đề AI/BANK mới thuộc người tạo, đề cũ owner0 bảo toàn vì không có thông tin chủ sở hữu đáng tin cậy.
+- Science built-in fallback có cờ local, nhãn ôn tổng hợp, không gắn nhãn AI mới; không lưu built-in thành đề Gemini. Matching pairs được đưa vào prompt hiển thị; chấm text không bỏ dấu âm/dấu thập phân.
 
-## Đã kiểm tra
-- Vòng UX đầu: assembleDebug/AndroidTest, app/math lint đều qua.
-- ResearchUxTest (5 ca) + CalculatorInteractionDebugTest (2 ca): OK 7 tests. Bao gồm form, người mới/quay lại, đúng tài khoản, thống kê sau đổi theme, kết quả máy tính sau cuộn.
-- Vòng sửa theo đánh giá người dùng: assembleDebug/AndroidTest và lint app/programming/math/history đều qua. Log: review-improvements-verification.log.
-- Chưa chạy kiểm tra trên máy giả lập cho các thay đổi mới nhất về AI notice và bảo vệ ghi chú. Chưa chạy toàn bộ suite trên bản UX hiện tại.
-- API vẫn trống; không thực hiện yêu cầu AI có phí.
+## Kiểm tra thực tế
+- shared-quiz-check-verification.log: assembleDebug, assembleDebugAndroidTest, testDebugUnitTest, lintDebug toàn project PASS trước lượt đổi số câu cuối.
+- quiz-counts-verification.log: assembleDebug, assembleDebugAndroidTest, testDebugUnitTest PASS sau 5/10/15.
+- SharedQuizBankTest máy giả lập compact: 6 ca, 5 đạt, 1 lỗi Espresso RootViewWithoutFocus ở historyCanPracticeSavedQuestionsWithoutCallingAI. Chưa xác định đây là lỗi đồng bộ test hay giao diện thật. Science offline, bank persist/dedup/owner isolation, rollback, form retry/no-double-award, Programming transaction đã đạt.
+- Suite cũ 26 ca trước quiz: normal26 đạt; compact còn flaky calculator landscape. Không coi đó là xác nhận cho quiz mới.
+- Chưa chạy Gemini thật, chưa xác minh độ đúng nội dung do AI tạo (API trống).
+- Logs *-verification.log bị ignore và chỉ lưu local; test source đã lưu trong Git.
 
-## Nguồn nghiên cứu
-- https://www.nngroup.com/articles/progressive-disclosure/
-- https://www.nngroup.com/articles/error-message-guidelines/
-- https://www.nngroup.com/articles/recognition-and-recall/
-- https://www.nngroup.com/articles/empty-state-interface-design/
-- https://www.nngroup.com/articles/mobile-ux/
-- https://developer.android.com/guide/topics/ui/accessibility/views/apps-views
-- Khan Academy: https://play.google.com/store/apps/details?id=org.khanacademy.android&hl=en_US
-  Annie Vasilyev (30/08/2025): khen cấu trúc môn học, luyện tập; Victoria Caylor (09/07/2026): khen phản hồi mượt nhưng lớp scratch-pad che ô nhập; Kit M (23/05/2024): khen giải thích khái niệm, nhận xét giao diện chưa luôn dễ dùng.
-- Photomath: https://play.google.com/store/apps/details?id=com.microblink.photomath&hl=en_US
-  Các đánh giá hiển thị từ 2020 khen giải thích từng bước, nhập bằng ảnh; một phụ huynh muốn ẩn đáp án để tự học. Ghi rõ tuổi của các đánh giá, không mô tả như đánh giá mới.
-- Quizlet: https://play.google.com/store/apps/details?id=com.quizlet.quizletandroid&hl=en_US
-  Jessica Powell (05/08/2026): phản ánh mất công soạn vì không lưu; Hannah Soules (24/07/2026): phản ánh hạn chế bản miễn phí; Laura Steinmetz (01/06/2026): phản ánh paywall và vuốt khó.
-- https://www.trustpilot.com/review/www.quizlet.com
-  Jim (trải nghiệm 02/10/2026): khen thao tác đơn giản và tổ chức bộ thẻ/thư mục. Trang có mẫu đánh giá tự chọn, không đại diện toàn bộ người dùng.
-Các quan sát trên là mẫu định tính và giả thuyết thiết kế, chưa phải dữ liệu đo từ người dùng AIMentor. Không dùng số sao/tỷ lệ để khẳng định tác động của thay đổi.
+## Việc cần làm ngay khi tiếp tục
+1. Kiểm tra kỹ diff WIP, định dạng các class mới; bỏ code/resources cũ không còn dùng sau khi xác minh không mất chức năng.
+2. Science request đã nâng giới hạn đến15 nhưng LocalAdaptiveQuizBank hiện mỗi môn/cấp chỉ khoảng7 câu. Không lặp câu/giả đủ10/15: cần nguồn đề bank phù hợp hoặc thông báo thiếu câu rõ ràng; quyết định mở rộng bank mẫu phải đúng kiến thức/cấp học. AI và đề cached15 đã có cấu trúc hỗ trợ, chưa kiểm thử end-to-end15.
+3. Bổ sung test offline Math + Programming qua UI thật và test 5/10/15, metadata/ownership, theme vi/en, rotation/process restoration, math formulas, input/IME. Test fixtures phải xóa sau chạy.
+4. Ổn định lifecycle/window focus trong SharedQuizBankTest; kiểm tra error root History. Các test hiện chờ startActivitySync/idle nhưng chưa chờ windowfocus.
+5. Rà callback/đổi màn hình/đổi tài khoản lúc generate; bankContext application, user snapshot. Kiểm tra lỗi ghi bank riêng (Science SaveException tránh fallback che lỗi).
+6. Hoàn thiện bank picker: hiện là danh sách có metadata, chưa có tìm kiếm/bộ lọc tương tác. Không bỏ sót bộ đề cũ khi nâng cấp.
+7. Rà shared form submit failure/rotation/idempotency; hiện guard double tap và Bundle, chưa token idempotency xuyên crash đúng giữa commit và saved-state. Kiểm tra script Math owner migration và alias filters, seed shared owner0.
+8. Hoàn tất chat histories Math/Programming/Science (Math epoch filter sai; Science nút search/filter cũ điều hướng nhầm, allItems chưa clear/onResume refresh; còn ở code cũ).
+9. Full debug/release/unit/lint/instrumentation, kiểm tra app-specific crash và screenshot. Không cài APK khi instrumentation đang chạy.
+10. Cập nhật reports và APK ../AIMentor_QA/AImentor-debug.apk sau khi đã pass. APK QA hiện vẫn bản a0e190a.
+11. Chỉ push khi người dùng tiếp tục và work đã review. Không đánh dấu bản này là hoàn tất.
 
-## Việc tiếp theo khi được yêu cầu tiếp tục
-1. Bổ sung kiểm tra giữ câu hỏi khi AI trống cho cả 3 môn, không tạo tin nhắn giả/không mất ảnh.
-2. Kiểm tra ghi chú: thêm/sửa/Back, lỗi INSERT/UPDATE, không ghi đè tài khoản khác, giữ nội dung sau đổi theme/rotate, không đóng editor khi ghi thất bại. Có thể dùng trigger SQLite trong fixture riêng để mô phỏng thất bại, luôn tháo trigger sau test.
-3. Kiểm tra và phục hồi preferences của ResearchUxTest (calculator prefs hiện chưa được snapshot/restore); bảo đảm cleanup math_history chạy được trên cài mới.
-4. Rà chuyển màn hình/keyboard/portrait-landscape; kết quả máy tính cố định và bàn phím cuộn phải luôn thao tác được. Điều chỉnh các test cũ nếu keypad giờ cần scrollTo.
-5. Định dạng các lớp mới/sửa bằng formatter Java có tại C:/Users/ACER/AppData/Local/Temp/aimentor-google-java-format-1.24.0.jar; giữ kiểu newline của file theo Git để tránh diff lớn.
-6. Viết báo cáo nghiên cứu UX với nguồn, ngày đánh giá, điểm khen/chê, quyết định đã áp dụng/giới hạn và kế hoạch kiểm chứng với người dùng thật. Không tuyên bố đã thêm spaced repetition, cloud sync hoặc nâng độ chính xác AI.
-7. Chạy debug/release, 74 unit tests và toàn bộ instrumentation (hiện 20 ca nếu thêm ResearchUxTest vào 15 ca cũ), lint; thử nhỏ/1.3 font/ba nút và Việt/Anh/sáng/tối. Lưu ảnh và đọc log crash.
-8. Sau khi đạt, cập nhật báo cáo, đối chiếu remote, commit hoàn thiện và push theo yêu cầu trước đó; cập nhật APK ở ../AIMentor_QA/AImentor-debug.apk. Hiện APK đó vẫn là bản a0e190a đã công bố.
-
-## Môi trường
-Repo AI_Mentor_GitHub, branch master. JDK C:/Users/ACER/.jdks/jbr-21.0.11. SDK C:/Users/ACER/AppData/Local/Android/Sdk. AVD Medium_Phone_2, emulator-5556. Python C:/Users/ACER/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe.
-Không sửa sources/ của project mirror. Không có subagent hay goal đang hoạt động.
+## Môi trường local / cloud
+- JDK21: C:/Users/ACER/.jdks/jbr-21.0.11
+- Android SDK: C:/Users/ACER/AppData/Local/Android/Sdk; compileSdk36.
+- Local dùng gradlew.bat. Cloud Linux dùng bash ./gradlew, cần JDK21 + SDK và Android build dependencies. Không copy local.properties lên Git.
+- Kiểm thử emulator/ADB local không tự chuyển sang cloud. Cloud chưa được khởi chạy.
+- Nếu người dùng yêu cầu cloud, cần checkpoint được push có chủ đích, tạo môi trường Cloud cho Velus-T/AImentor và yêu cầu đọc file này; không hứa cloud đang chạy khi chưa có xác nhận.

@@ -2,6 +2,7 @@ package com.example.asm_final;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.*;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static org.junit.Assert.*;
@@ -59,12 +60,13 @@ public class CalculatorInteractionDebugTest {
   public void repeatedSquareAndRootOperateOnCurrentValue() {
     main(() -> com.example.mathmodule.calculator.MathCalculator.show(activity));
     for (String key : new String[] {"2", "x²", "x²", "x²", "="})
-      onView(withText(key)).perform(click());
+      onView(withText(key)).perform(scrollTo(), click());
     onView(withText("256")).check(matches(isDisplayed()));
-    for (String key : new String[] {"C", "9", "√", "="}) onView(withText(key)).perform(click());
+    for (String key : new String[] {"C", "9", "√", "="})
+      onView(withText(key)).perform(scrollTo(), click());
     assertEquals("3", prefs.getString("expression", ""));
-    onView(withText("√")).perform(click());
-    onView(withText("=")).perform(click());
+    onView(withText("√")).perform(scrollTo(), click());
+    onView(withText("=")).perform(scrollTo(), click());
     onView(withText("1.73205080757")).check(matches(isDisplayed()));
   }
 

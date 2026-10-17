@@ -10,8 +10,8 @@
     <string name="math_banner_title">Solve Math with Smart AI</string>
     <string name="math_banner_desc">Scan or enter your problem, AI will help you solve and explain step by step.</string>
 
-    <string name="math_action_scan">Scan Problem</string>
-    <string name="math_action_scan_desc">Use camera to scan problems</string>
+    <string name="math_action_scan">Choose problem image</string>
+    <string name="math_action_scan_desc">Upload a problem image from your device</string>
     <string name="math_action_type">Enter Problem</string>
     <string name="math_action_type_desc">Type manually or paste content</string>
 

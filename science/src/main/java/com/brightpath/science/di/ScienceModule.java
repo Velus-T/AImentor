@@ -119,7 +119,7 @@ private ScienceModule(Context context) {
 
         // 3) Remote AI + local fallback -----------------------------------------------------
         GeminiApiClient aiClient = new GeminiApiClient();
-        GeminiScienceService geminiService = new GeminiScienceService(promptFactory, aiClient);
+        GeminiScienceService geminiService = new GeminiScienceService(appContext, promptFactory, aiClient);
         LocalScienceService localService = new LocalScienceService();
         ResilientScienceService resilientService = new ResilientScienceService(
                 geminiService,

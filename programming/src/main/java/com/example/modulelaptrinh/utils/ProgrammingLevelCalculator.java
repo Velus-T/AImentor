@@ -11,66 +11,19 @@ public final class ProgrammingLevelCalculator {
     private ProgrammingLevelCalculator() { }
 
     // Hàm `getLevel()`: Trả về giá trị Level hiện đang được đối tượng lưu giữ.
-    public static int getLevel(int totalExp) {
-        // Tính/đọc và lưu giá trị `safeExp` (safe exp) để sử dụng ở các bước phía sau.
-        int safeExp = Math.max(0, totalExp);
-        // Tính/đọc và lưu mức độ khó để sử dụng ở các bước phía sau.
-        int level = 1;
-        // Tiếp tục lặp khi điều kiện vẫn còn đúng.
-        while (level < MAX_LEVEL && safeExp >= getTotalExpForLevel(level + 1)) {
-            // Tăng `level` thêm 1 để chuyển/cập nhật sang trạng thái tiếp theo.
-            level++;
-        }
-        // Trả kết quả của hàm về cho nơi đã gọi hàm này.
-        return level;
-    }
+    public static int getLevel(int totalExp) { return com.example.mentor.data.QuizPolicy.level(totalExp); }
 
     // Hàm `getTotalExpForLevel()`: Trả về giá trị TotalExpForLevel hiện đang được đối tượng lưu giữ.
-    public static int getTotalExpForLevel(int level) {
-        // Tính/đọc và lưu giá trị `safeLevel` (safe level) để sử dụng ở các bước phía sau.
-        int safeLevel = Math.max(1, Math.min(level, MAX_LEVEL));
-        // Tính/đọc và lưu giá trị `completedLevels` (completed levels) để sử dụng ở các bước phía sau.
-        int completedLevels = safeLevel - 1;
-        // Trả kết quả của hàm về cho nơi đã gọi hàm này.
-        return BASE_EXP_TO_NEXT_LEVEL * completedLevels
-                + EXP_STEP_PER_LEVEL * completedLevels * (completedLevels - 1) / 2;
-    }
+    public static int getTotalExpForLevel(int level) { return com.example.mentor.data.QuizPolicy.threshold(level); }
 
     // Hàm `getExpToNextLevel()`: Trả về giá trị ExpToNextLevel hiện đang được đối tượng lưu giữ.
-    public static int getExpToNextLevel(int currentLevel) {
-        // Tính/đọc và lưu giá trị `safeLevel` (safe level) để sử dụng ở các bước phía sau.
-        int safeLevel = Math.max(1, Math.min(currentLevel, MAX_LEVEL));
-        // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
-        if (safeLevel >= MAX_LEVEL) return 0;
-        // Trả kết quả của hàm về cho nơi đã gọi hàm này.
-        return BASE_EXP_TO_NEXT_LEVEL + EXP_STEP_PER_LEVEL * (safeLevel - 1);
-    }
+    public static int getExpToNextLevel(int currentLevel) { return com.example.mentor.data.QuizPolicy.required(currentLevel); }
 
     // Hàm `getExpInsideCurrentLevel()`: Trả về giá trị ExpInsideCurrentLevel hiện đang được đối tượng lưu giữ.
-    public static int getExpInsideCurrentLevel(int totalExp) {
-        // Tính/đọc và lưu giá trị `safeExp` (safe exp) để sử dụng ở các bước phía sau.
-        int safeExp = Math.max(0, totalExp);
-        // Tính/đọc và lưu mức độ khó để sử dụng ở các bước phía sau.
-        int level = getLevel(safeExp);
-        // Trả kết quả của hàm về cho nơi đã gọi hàm này.
-        return Math.max(0, safeExp - getTotalExpForLevel(level));
-    }
+    public static int getExpInsideCurrentLevel(int totalExp) { return com.example.mentor.data.QuizPolicy.inside(totalExp); }
 
     // Hàm `getProgressPercent()`: Trả về giá trị ProgressPercent hiện đang được đối tượng lưu giữ.
-    public static int getProgressPercent(int totalExp) {
-        // Tính/đọc và lưu mức độ khó để sử dụng ở các bước phía sau.
-        int level = getLevel(totalExp);
-        // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
-        if (level >= MAX_LEVEL) return 100;
-        // Tính/đọc và lưu giá trị `required` (required) để sử dụng ở các bước phía sau.
-        int required = getExpToNextLevel(level);
-        // Kiểm tra điều kiện trước khi thực hiện nhánh xử lý tương ứng.
-        if (required <= 0) return 100;
-        // Tính/đọc và lưu giá trị `currentExp` (current exp) để sử dụng ở các bước phía sau.
-        int currentExp = totalExp - getTotalExpForLevel(level);
-        // Trả kết quả của hàm về cho nơi đã gọi hàm này.
-        return Math.min(100, Math.round(currentExp * 100f / required));
-    }
+    public static int getProgressPercent(int totalExp) { return com.example.mentor.data.QuizPolicy.progress(totalExp); }
 
     // Hàm `getTitleResId()`: Trả về giá trị TitleResId hiện đang được đối tượng lưu giữ.
     public static int getTitleResId(int level) {

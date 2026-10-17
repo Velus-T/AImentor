@@ -56,6 +56,7 @@ public class MathQuizFragment extends Fragment {
     private SqliteDbHelper dbHelper;
     private MathGeminiApiClient aiClient;
     private final ExecutorService aiExecutor = Executors.newSingleThreadExecutor();
+    private com.example.mentor.ui.QuizSetupView quizSetup;
     private TextView txtUserExp;
     private ProgressBar progressUserExp;
 
@@ -83,8 +84,28 @@ public class MathQuizFragment extends Fragment {
 
         setupFilters(view);
         updateUserExpUI();
-        view.findViewById(R.id.btn_ai_generate_entry)
-                .setOnClickListener(v -> showAiConfigDialog());
+        quizSetup = view.findViewById(R.id.math_quiz_setup);
+        quizSetup.configure(new String[]{getString(R.string.math_quiz_banner_title)},
+                new String[]{getString(com.example.mentor.ui.R.string.mentor_quiz_middle), getString(com.example.mentor.ui.R.string.mentor_quiz_high), getString(com.example.mentor.ui.R.string.mentor_quiz_university)},com.example.mentor.data.QuizPolicy.questionCounts());
+        if(savedInstanceState!=null)quizSetup.restore(savedInstanceState.getBundle("quizSetup"));
+        quizSetup.create.setOnClickListener(v -> generateQuizWithAI(quizSetup.topic().isEmpty()?"Toán học tổng hợp":quizSetup.topic(),
+                quizSetup.count(),MathEducationLevel.values()[quizSetup.level.getSelectedItemPosition()]));
+        quizSetup.attachBank(com.example.mentor.data.ActiveUser.get(requireContext()),"math",(set,cards)->{
+            String category="BANK:"+set.id;
+            List<QuizSet> existing=dbHelper.getQuizSetsByCategory(category);
+            long id;
+            if(!existing.isEmpty())id=existing.get(0).getId();
+            else {
+                List<QuizQuestion> questions=new ArrayList<>();
+                for(com.example.mentor.data.QuizCard q:cards) {
+                    if(q.options.size()!=4)throw new IllegalStateException("Invalid Math options");
+                    questions.add(new QuizQuestion(0,0,q.prompt,q.options.get(0),q.options.get(1),q.options.get(2),q.options.get(3),q.answer,q.explanation,MathQuizDifficulty.fromApiValue(q.difficulty)));
+                }
+                id=dbHelper.insertFullQuizSet(set.topic,category,"Mixed",set.level,questions);
+            }
+            if(id<=0)throw new IllegalStateException("Cannot prepare saved quiz");
+            startActivity(new Intent(requireContext(),QuizPlayActivity.class).putExtra("QUIZ_SET_ID",(int)id).putExtra("QUIZ_SET_TITLE",set.topic));
+        });
         return view;
     }
 
@@ -92,6 +113,12 @@ public class MathQuizFragment extends Fragment {
      * Responsibility: Handles the Android callback or event `onResume` and updates the related state.
      * Purpose: Keeping callbacks separate makes event flow clearer and follows the Android lifecycle cleanly.
      */
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle out) {
+        super.onSaveInstanceState(out);
+        if(quizSetup!=null)out.putBundle("quizSetup",quizSetup.state());
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -177,38 +204,6 @@ public class MathQuizFragment extends Fragment {
      * Responsibility: Displays or binds data from `show ai config dialog` to the appropriate UI or navigation destination.
      * Purpose: Separating presentation logic prevents data processing from being mixed with UI rendering.
      */
-    private void showAiConfigDialog() {
-        View dialogView = getLayoutInflater()
-                .inflate(R.layout.dialog_ai_quiz_config, null, false);
-        AlertDialog dialog = new AlertDialog.Builder(requireContext())
-                .setView(dialogView)
-                .create();
-
-        EditText edtTopic = dialogView.findViewById(R.id.edt_quiz_topic);
-        Spinner spinnerCount = dialogView.findViewById(R.id.spinner_question_count);
-        Spinner spinnerEducation = dialogView.findViewById(R.id.spinner_education_level);
-        Button btnGenerate = dialogView.findViewById(R.id.btn_generate_ai_quiz);
-
-        btnGenerate.setOnClickListener(v -> {
-            String topic = edtTopic.getText().toString().trim();
-            if (topic.isEmpty()) {
-                edtTopic.setError(getString(R.string.math_quiz_config_error_topic));
-                edtTopic.requestFocus();
-                return;
-            }
-            int count;
-            try {
-                count = Integer.parseInt(spinnerCount.getSelectedItem().toString().split(" ")[0]);
-            } catch (Exception ignored) {
-                count = 5;
-            }
-            MathEducationLevel educationLevel = MathEducationLevel.fromDisplayName(
-                    spinnerEducation.getSelectedItem().toString());
-            dialog.dismiss();
-            generateQuizWithAI(topic, count, educationLevel);
-        });
-        dialog.show();
-    }
 
     /*
      * Responsibility: Generates data or content for `generate quiz with ai` based on the input and module rules.
@@ -216,10 +211,7 @@ public class MathQuizFragment extends Fragment {
      */
     private void generateQuizWithAI(String topic, int count,
                                     MathEducationLevel educationLevel) {
-        ProgressDialog progressDialog = new ProgressDialog(requireContext());
-        progressDialog.setMessage(getString(R.string.math_quiz_ai_progress, educationLevel.getDisplayName()));
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        quizSetup.loading(true);
 
         String prompt = "Bạn là chuyên gia giáo dục toán học. Hãy tạo " + count
                 + " câu hỏi trắc nghiệm về chủ đề: " + topic + ". "
@@ -241,6 +233,8 @@ public class MathQuizFragment extends Fragment {
                 + "Dùng LaTeX bọc bằng $ hoặc $$. correct_answer chỉ được là A, B, C hoặc D. "
                 + "Mỗi lời giải phải rõ ràng và kiểm tra lại đáp án trước khi trả về.";
 
+        final android.content.Context bankContext = requireContext().getApplicationContext();
+        final int bankOwner = com.example.mentor.data.ActiveUser.get(bankContext);
         aiExecutor.execute(() -> {
             try {
                 MathGeminiApiClient.Result result = aiClient.generateText(
@@ -276,6 +270,7 @@ public class MathQuizFragment extends Fragment {
                     ));
                 }
 
+                if(questions.size()!=count)throw new JSONException("Unexpected question count");
                 String title = quizJson.optString(
                         "set_title",
                         "Đề " + topic + " (AI tạo)"
@@ -289,7 +284,7 @@ public class MathQuizFragment extends Fragment {
                         educationLevel.getDisplayName()
                 ).trim();
                 MathEducationLevel safeLevel =
-                        MathEducationLevel.fromDisplayName(returnedLevel);
+                        educationLevel;
 
                 long setId = dbHelper.insertFullQuizSet(
                         title,
@@ -302,9 +297,14 @@ public class MathQuizFragment extends Fragment {
                     throw new IllegalStateException("Không thể lưu bộ đề");
                 }
 
+                try (com.example.mentor.data.QuizBank bank = new com.example.mentor.data.QuizBank(bankContext)) {
+                    bank.save(bankOwner, "math", "math", educationLevel.name(), topic, "GEMINI", com.example.mathmodule.util.QuizCards.from(questions));
+                }
                 runOnUiThread(() -> {
-                    progressDialog.dismiss();
+                    quizSetup.loading(false);
                     loadQuizSets("AI");
+                    quizSetup.status.setText(com.example.mentor.ui.R.string.mentor_quiz_new_ai);
+                    startActivity(new Intent(requireContext(),QuizPlayActivity.class).putExtra("QUIZ_SET_ID",(int)setId).putExtra("QUIZ_SET_TITLE",title));
                     Toast.makeText(
                             requireContext(),
                             getString(R.string.math_quiz_ai_success, questions.size(), safeLevel.getDisplayName()),
@@ -322,8 +322,7 @@ public class MathQuizFragment extends Fragment {
                     );
                 }
                 runOnUiThread(() -> {
-                    progressDialog.dismiss();
-                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show();
+                    quizSetup.error();
                 });
             }
         });

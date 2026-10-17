@@ -63,10 +63,7 @@ public final class HistoryQuizQuestion {
      * Responsibility: Reads or loads data for `get exp reward` from the appropriate data source.
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
-    public int getExpReward() {
-        if ("EASY".equals(difficulty)) return 5;
-        if ("HARD".equals(difficulty)) return 20;
-        return 10;
+    public int getExpReward() { return com.example.mentor.data.QuizPolicy.reward(difficulty);
     }
 
     /*

@@ -77,11 +77,11 @@ public final class HistoryQuizFragment extends Fragment {
         emptyView = view.findViewById(R.id.tvHistoryQuizEmpty);
 
         view.findViewById(R.id.item_quiz_topic_vn)
-                .setOnClickListener(v -> chooseEducationLevel(getString(R.string.history_quiz_topic_vn)));
+                .setOnClickListener(v -> chooseEducationLevel(getString(R.string.history_quiz_topic_vn), "Lịch sử Việt Nam"));
         view.findViewById(R.id.item_quiz_topic_foreign)
-                .setOnClickListener(v -> chooseEducationLevel(getString(R.string.history_quiz_topic_foreign)));
+                .setOnClickListener(v -> chooseEducationLevel(getString(R.string.history_quiz_topic_foreign), "Lịch sử nước ngoài"));
         view.findViewById(R.id.item_quiz_topic_mixed)
-                .setOnClickListener(v -> chooseEducationLevel(getString(R.string.history_quiz_topic_mixed)));
+                .setOnClickListener(v -> chooseEducationLevel(getString(R.string.history_quiz_topic_mixed), "Tổng hợp"));
 
         RecyclerView recycler = view.findViewById(R.id.recycler_ai_quizzes);
         adapter = new HistoryHistoryAdapter(attempts);
@@ -107,24 +107,18 @@ public final class HistoryQuizFragment extends Fragment {
      * Responsibility: Performs the `choose education level` responsibility of `HistoryQuizFragment` and returns or updates the result for the caller.
      * Purpose: A focused method improves readability, reuse, and step-by-step explanation.
      */
-    private void chooseEducationLevel(String topic) {
-        String[] levels = getEducationLevels();
-        String[] rawLevels = getRawEducationLevels();
-        new AlertDialog.Builder(requireContext())
-                .setTitle(R.string.history_quiz_edu_title)
-                .setItems(levels, (dialog, which) ->
-                        openQuiz(topic, rawLevels[which]))
-                .setNegativeButton(android.R.string.cancel, null)
-                .show();
+    private void chooseEducationLevel(String topic, String scope) {
+        openQuiz(topic, scope, getRawEducationLevels()[0]);
     }
 
     /*
      * Responsibility: Displays or binds data from `open quiz` to the appropriate UI or navigation destination.
      * Purpose: Separating presentation logic prevents data processing from being mixed with UI rendering.
      */
-    private void openQuiz(String topic, String educationLevel) {
+    private void openQuiz(String topic, String scope, String educationLevel) {
         Intent intent = new Intent(requireContext(), HistoryQuizActivity.class);
         intent.putExtra(HistoryQuizActivity.EXTRA_TOPIC, topic);
+        intent.putExtra(HistoryQuizActivity.EXTRA_SCOPE, scope);
         intent.putExtra(HistoryQuizActivity.EXTRA_EDUCATION_LEVEL, educationLevel);
         startActivity(intent);
     }

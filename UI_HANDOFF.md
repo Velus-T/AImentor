@@ -56,3 +56,14 @@ controls remain within the system safe area. Other physical devices remain to be
 - Non-destructive card press feedback and short transitions share a common style.
 - Vietnamese/English and day/night preferences apply across the shell and subjects.
 - API configuration is empty in Git; local reference answers explicitly identify their source.
+
+## Research-based interaction rules
+- Primary learning action appears before progress statistics. Reopening a subject is labeled
+  honestly; it does not claim to restore an unfinished exercise.
+- Detailed statistics use one explicit show/hide control and preserve their expansion state.
+- Field errors appear after submission at the relevant field, without a duplicate summary.
+  Scroll/focus includes the input container so its message can be visible with the keyboard.
+- The calculator result remains outside its keypad scroll area, including in landscape.
+- Missing AI configuration is a persistent informational state, not a failed chat message.
+- Note-save errors preserve the editor/draft and offer retry or explicit discard on exit.
+- Research findings are documented in UX_RESEARCH.md; no analytics collection was added.

@@ -10,8 +10,8 @@
     <string name="math_banner_title">Giải bài tập Toán với AI thông minh</string>
     <string name="math_banner_desc">Chụp bài hoặc nhập đề bài, AI sẽ giúp bạn giải và giải thích chi tiết từng bước.</string>
 
-    <string name="math_action_scan">Chụp đề bài</string>
-    <string name="math_action_scan_desc">Dùng camera để chụp bài tập</string>
+    <string name="math_action_scan">Chọn ảnh đề bài</string>
+    <string name="math_action_scan_desc">Tải ảnh bài tập từ thiết bị</string>
     <string name="math_action_type">Nhập đề bài</string>
     <string name="math_action_type_desc">Nhập đề bài bằng tay hoặc dán</string>
 

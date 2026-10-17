@@ -35,7 +35,7 @@ public class HistoryQuizPromptTest {
         assertTrue(minimumPrompt.contains("Phạm vi: Tổng hợp"));
         assertTrue(minimumPrompt.contains("Cấp học: Trung học cơ sở"));
         assertTrue(minimumPrompt.contains("Tạo đúng 5 câu"));
-        assertTrue(maximumPrompt.contains("Tạo đúng 10 câu"));
+        assertTrue(maximumPrompt.contains("Tạo đúng 15 câu"));
         assertTrue(maximumPrompt.contains("Chỉ dùng lịch sử khu vực và thế giới ngoài Việt Nam"));
         assertTrue(maximumPrompt.contains("đánh giá nguồn"));
     }

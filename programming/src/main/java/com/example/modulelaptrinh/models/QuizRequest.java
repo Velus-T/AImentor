@@ -36,8 +36,8 @@ public class QuizRequest {
         this.level = level == null ? "Cơ bản" : level;
         // Gán giá trị tham số/đầu vào vào thuộc tính `topic` của đối tượng hiện tại.
         this.topic = topic == null || topic.trim().isEmpty() ? "Kiến thức lập trình" : topic.trim();
-        // Đồng bộ với QuizSelectionFragment: cho phép 3 đến 15 câu.
-        this.numberOfQuestions = Math.max(3, Math.min(15, numberOfQuestions));
+        // Đồng bộ với QuizSelectionFragment: cho phép 5 đến 15 câu.
+        this.numberOfQuestions = Math.max(5, Math.min(15, numberOfQuestions));
         // Gán giá trị tham số/đầu vào vào thuộc tính `userId` của đối tượng hiện tại.
         this.userId = Math.max(0, userId);
         // Gán giá trị tham số/đầu vào vào thuộc tính `variationSeed` của đối tượng hiện tại.

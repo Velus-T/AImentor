@@ -28,6 +28,7 @@ public final class HistoryAiService {
     private static final int CONTINUATION_OUTPUT_TOKENS = 3000;
     private static final int MAX_CONTINUATIONS = 2;
 
+    private android.content.Context bankContext;
     private final HistoryGeminiApiClient client;
     private final HistoryPromptFactory promptFactory;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -39,6 +40,10 @@ public final class HistoryAiService {
      */
     public HistoryAiService() {
         this(new HistoryGeminiApiClient(), new HistoryPromptFactory());
+    }
+
+    public HistoryAiService(android.content.Context context) {
+        this(); bankContext = context.getApplicationContext();
     }
 
     public HistoryAiService(HistoryGeminiApiClient client,
@@ -91,9 +96,15 @@ public final class HistoryAiService {
                              String educationLevel,
                              int questionCount,
                              Callback<List<HistoryQuizQuestion>> callback) {
+        generateQuiz(topic, topic, educationLevel, questionCount, callback);
+    }
+
+    public void generateQuiz(String scope, String topic, String educationLevel, int questionCount,
+                             Callback<List<HistoryQuizQuestion>> callback) {
+        final int owner = bankContext == null ? 0 : com.example.historymodule.util.HistoryUserSession.getUserId(bankContext);
         executor.execute(() -> {
             try {
-                String prompt = promptFactory.buildQuizPrompt(topic, educationLevel, questionCount);
+                String prompt = promptFactory.buildQuizPrompt(scope, educationLevel, questionCount) + "\nChủ đề tập trung: " + topic;
                 HistoryGeminiApiClient.Result current = client.generateText(
                         prompt,
                         null,
@@ -122,6 +133,10 @@ public final class HistoryAiService {
                 List<HistoryQuizQuestion> questions = parseQuiz(complete.toString(), questionCount);
                 if (questions.size() < Math.max(5, questionCount)) {
                     throw new IllegalStateException("AI trả về chưa đủ số câu Quiz.");
+                }
+                if (bankContext != null) try (com.example.mentor.data.QuizBank bank = new com.example.mentor.data.QuizBank(bankContext)) {
+                    bank.save(owner, "history", scope, educationLevel, topic, "GEMINI",
+                            com.example.historymodule.util.QuizCards.from(questions));
                 }
                 mainHandler.post(() -> callback.onSuccess(questions));
             } catch (Exception error) {

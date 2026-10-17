@@ -15,54 +15,31 @@ public final class HistoryLevelCalculator {
      * Responsibility: Reads or loads data for `get level` from the appropriate data source.
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
-    public static int getLevel(int totalExp) {
-        int exp = Math.max(0, totalExp);
-        for (int level = MAX_LEVEL; level >= 1; level--) {
-            if (exp >= getTotalExpForLevel(level)) return level;
-        }
-        return 1;
-    }
+    public static int getLevel(int totalExp) { return com.example.mentor.data.QuizPolicy.level(totalExp); }
 
     /*
      * Responsibility: Reads or loads data for `get total exp for level` from the appropriate data source.
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
-    public static int getTotalExpForLevel(int level) {
-        int safeLevel = Math.max(1, Math.min(MAX_LEVEL, level));
-        int completedLevels = safeLevel - 1;
-        return completedLevels * 120 + 25 * completedLevels * (completedLevels - 1) / 2;
-    }
+    public static int getTotalExpForLevel(int level) { return com.example.mentor.data.QuizPolicy.threshold(level); }
 
     /*
      * Responsibility: Reads or loads data for `get exp to next level` from the appropriate data source.
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
-    public static int getExpToNextLevel(int level) {
-        int safeLevel = Math.max(1, Math.min(MAX_LEVEL, level));
-        if (safeLevel >= MAX_LEVEL) return 0;
-        return 120 + 25 * (safeLevel - 1);
-    }
+    public static int getExpToNextLevel(int level) { return com.example.mentor.data.QuizPolicy.required(level); }
 
     /*
      * Responsibility: Reads or loads data for `get exp inside current level` from the appropriate data source.
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
-    public static int getExpInsideCurrentLevel(int totalExp) {
-        int level = getLevel(totalExp);
-        return Math.max(0, totalExp - getTotalExpForLevel(level));
-    }
+    public static int getExpInsideCurrentLevel(int totalExp) { return com.example.mentor.data.QuizPolicy.inside(totalExp); }
 
     /*
      * Responsibility: Reads or loads data for `get progress percent` from the appropriate data source.
      * Purpose: Centralizing read operations makes null handling, error handling, and data sources clearer.
      */
-    public static int getProgressPercent(int totalExp) {
-        int level = getLevel(totalExp);
-        if (level >= MAX_LEVEL) return 100;
-        int required = getExpToNextLevel(level);
-        return required <= 0 ? 100 : Math.min(100,
-                Math.round(getExpInsideCurrentLevel(totalExp) * 100f / required));
-    }
+    public static int getProgressPercent(int totalExp) { return com.example.mentor.data.QuizPolicy.progress(totalExp); }
 
     /*
      * Responsibility: Reads or loads data for `get title res id` from the appropriate data source.

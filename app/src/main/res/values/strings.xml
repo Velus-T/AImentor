@@ -47,7 +47,7 @@
     <string name="login_btn_show">📋 Xem danh sách user</string>
     <string name="login_msg_empty">⚠️ Vui lòng nhập đầy đủ!</string>
     <string name="login_msg_success">✅ Đăng nhập thành công!</string>
-    <string name="login_msg_fail">❌ Sai tên hoặc mật khẩu!</string>
+    <string name="login_msg_fail">Tên đăng nhập hoặc mật khẩu chưa đúng. Vui lòng kiểm tra lại.</string>
     <string name="login_db_empty">⚠️ Database trống!</string>
     <string name="reg_title">Tạo tài khoản</string>
     <string name="reg_hint_user">Tên đăng nhập</string>
@@ -56,14 +56,14 @@
     <string name="reg_btn">Đăng ký</string>
     <string name="reg_go_to_login">Đã có tài khoản? Đăng nhập</string>
     <string name="reg_msg_empty">⚠️ Vui lòng nhập đầy đủ!</string>
-    <string name="reg_msg_mismatch">❌ Mật khẩu xác nhận không khớp!</string>
+    <string name="reg_msg_mismatch">Mật khẩu nhập lại chưa khớp.</string>
     <string name="reg_msg_short">❌ Mật khẩu phải &gt;= 4 ký tự!</string>
     <string name="reg_msg_success">✅ Đăng ký thành công!</string>
-    <string name="reg_msg_exists">❌ Tên đăng nhập đã tồn tại!</string>
+    <string name="reg_msg_exists">Tên đăng nhập này đã được dùng. Hãy chọn tên khác.</string>
     <string name="reg_hint_email">Email (gmail.com)</string>
     <string name="reg_hint_phone">Số điện thoại</string>
-    <string name="reg_msg_invalid_email">❌ Email phải có đuôi @gmail.com!</string>
-    <string name="reg_msg_weak_pass">❌ MK phải &gt;= 8 ký tự, có số và chữ hoa!</string>
+    <string name="reg_msg_invalid_email">Dùng địa chỉ có đuôi @gmail.com.</string>
+    <string name="reg_msg_weak_pass">Mật khẩu cần ít nhất 8 ký tự, có chữ hoa và chữ số.</string>
     <string name="home_welcome_back">Chào mừng trở lại!</string>
     <string name="home_default_user">Người dùng</string>
     <string name="home_overall_level">Cấp tổng hợp</string>

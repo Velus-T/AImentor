@@ -37,6 +37,7 @@ public final class HistoryHistoryFragment extends Fragment {
     private TextView emptyView;
     private int selectedTabIndex;
     private int userId;
+    private String query = "";
 
     /*
      * Responsibility: Handles the Android callback or event `onCreateView` and updates the related state.
@@ -51,6 +52,24 @@ public final class HistoryHistoryFragment extends Fragment {
         userId = HistoryUserSession.getUserId(requireContext());
         dbHelper = new SqliteDbHelper(requireContext());
         emptyView = view.findViewById(R.id.tvHistoryEmpty);
+        if (savedInstanceState != null) {
+            query = savedInstanceState.getString("query", "");
+            selectedTabIndex = savedInstanceState.getInt("period", 0);
+        }
+        view.findViewById(R.id.history_new_conversation).setOnClickListener(v ->
+                startActivity(new Intent(requireContext(), HistoryChatActivity.class)
+                        .putExtra(HistoryChatActivity.EXTRA_CONVERSATION_ID, java.util.UUID.randomUUID().toString())
+                        .putExtra(HistoryChatActivity.EXTRA_FOCUS_INPUT, true)));
+        android.widget.EditText search = view.findViewById(R.id.history_search);
+        search.setText(query);
+        search.addTextChangedListener(new android.text.TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                query = s.toString();
+                if (adapter != null) loadConversations();
+            }
+            @Override public void afterTextChanged(android.text.Editable s) {}
+        });
 
         RecyclerView recycler = view.findViewById(R.id.recycler_chat_history);
         adapter = new HistoryHistoryAdapter(conversations, new HistoryHistoryAdapter.Listener() {
@@ -83,6 +102,7 @@ public final class HistoryHistoryFragment extends Fragment {
         tabs.addTab(tabs.newTab().setText(R.string.history_filter_today));
         tabs.addTab(tabs.newTab().setText(R.string.history_filter_7days));
         tabs.addTab(tabs.newTab().setText(R.string.history_filter_last_month));
+        tabs.selectTab(tabs.getTabAt(selectedTabIndex));
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override public void onTabSelected(TabLayout.Tab tab) {
                 selectedTabIndex = tab.getPosition();
@@ -130,7 +150,12 @@ public final class HistoryHistoryFragment extends Fragment {
     private void loadConversations() {
         long[] range = resolveRange(selectedTabIndex);
         conversations.clear();
-        conversations.addAll(dbHelper.loadConversationSummaries(userId, range[0], range[1], 100));
+        String needle = query.trim().toLowerCase(java.util.Locale.ROOT);
+        for (HistoryHistoryItem item : dbHelper.loadConversationSummaries(userId, range[0], range[1], 0)) {
+            if (needle.isEmpty() || (item.getTitle() + " " + item.getContent())
+                    .toLowerCase(java.util.Locale.ROOT).contains(needle)) conversations.add(item);
+        }
+        emptyView.setText(needle.isEmpty() ? R.string.history_conv_empty : R.string.history_search_empty);
         adapter.notifyDataSetChanged();
         emptyView.setVisibility(conversations.isEmpty() ? View.VISIBLE : View.GONE);
     }
@@ -170,6 +195,13 @@ public final class HistoryHistoryFragment extends Fragment {
      * Responsibility: Handles the Android callback or event `onDestroyView` and updates the related state.
      * Purpose: Keeping callbacks separate makes event flow clearer and follows the Android lifecycle cleanly.
      */
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle out) {
+        super.onSaveInstanceState(out);
+        out.putString("query", query);
+        out.putInt("period", selectedTabIndex);
+    }
+
     @Override
     public void onDestroyView() {
         if (dbHelper != null) dbHelper.close();

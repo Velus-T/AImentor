@@ -2,6 +2,7 @@ package com.example.asm_final;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static org.junit.Assert.*;
@@ -137,10 +138,10 @@ public class ModuleToolsTest {
                 .findViewById(com.example.mathmodule.R.id.button_math_calculator)
                 .performClick();
           });
-      onView(withText("7")).perform(click());
-      onView(withText("×")).perform(click());
-      onView(withText("8")).perform(click());
-      onView(withText("=")).perform(click());
+      onView(withText("7")).perform(scrollTo(), click());
+      onView(withText("×")).perform(scrollTo(), click());
+      onView(withText("8")).perform(scrollTo(), click());
+      onView(withText("=")).perform(scrollTo(), click());
       onView(withText("56")).check(matches(isDisplayed()));
       capture("calculator");
       onView(withText(com.example.mathmodule.R.string.math_calculator_hide)).perform(click());

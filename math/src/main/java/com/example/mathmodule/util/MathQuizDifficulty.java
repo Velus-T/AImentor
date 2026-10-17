@@ -29,7 +29,7 @@ public enum MathQuizDifficulty {
     }
 
     public int getExpReward() {
-        return expReward;
+        return com.example.mentor.data.QuizPolicy.reward(name());
     }
 
     /*

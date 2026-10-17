@@ -103,3 +103,15 @@ All account and subject helpers now use `AImentor.db`, with namespaced tables an
 separate module schema versions. Existing module files are imported transactionally
 and retained unchanged. Failed verification rolls back the import. These migrations
 are local storage changes; cloud synchronization and new backend services are not added.
+
+## User research and reliability improvements
+
+See [UX_RESEARCH.md](UX_RESEARCH.md) for the dated review sample, sources, implemented
+changes and limits. Home prioritizes choosing or reopening a subject; detailed statistics
+remain available behind a visible toggle. Authentication forms explain errors next to the
+relevant field. The Math calculator keeps its display outside the scrolling keypad.
+
+When online AI is unconfigured, Math/History/Programming preserve the typed question
+instead of pretending to send it. Science retains its local reference mode. Programming
+notes only exit after a successful write or explicit discard; failed writes preserve the
+draft. Math's image action is labeled as choosing an image to match the current gallery picker.

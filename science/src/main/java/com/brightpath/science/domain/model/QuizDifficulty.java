@@ -33,7 +33,7 @@ public int getDisplayNameResId() {
  * Purpose: Provides read access through a focused method so callers do not need to know the underlying storage/implementation details.
  */
 public int getExpReward() {
-        return expReward;
+        return com.example.mentor.data.QuizPolicy.reward(name());
     }
 
         /*

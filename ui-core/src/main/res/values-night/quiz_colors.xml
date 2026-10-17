@@ -1,0 +1,6 @@
+<resources>
+    <color name="mentor_quiz_surface">#202B3E</color>
+    <color name="mentor_quiz_text">#F1F5FC</color>
+    <color name="mentor_quiz_secondary">#BAC7DE</color>
+    <color name="mentor_quiz_background">#111A2B</color>
+</resources>

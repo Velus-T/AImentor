@@ -11,6 +11,8 @@
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
 
 
+            <com.example.mentor.ui.QuizSetupView android:id="@+id/math_quiz_setup" android:layout_width="match_parent" android:layout_height="wrap_content" />
+
             <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" app:cardCornerRadius="20dp" app:cardElevation="1dp" app:cardBackgroundColor="@color/math_quiz_banner">
                 <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="20dp">
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
@@ -27,7 +29,7 @@
                     </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-            <Button android:id="@+id/btn_ai_generate_entry" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/math_quiz_ai_button" android:textAllCaps="false" android:backgroundTint="@color/math_quiz_primary" android:textColor="@color/math_active_text" app:cornerRadius="12dp" android:minHeight="56dp" />
+            <Button android:visibility="gone" android:id="@+id/btn_ai_generate_entry" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/math_quiz_ai_button" android:textAllCaps="false" android:backgroundTint="@color/math_quiz_primary" android:textColor="@color/math_active_text" app:cornerRadius="12dp" android:minHeight="56dp" />
 
 
             <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:scrollbars="none">

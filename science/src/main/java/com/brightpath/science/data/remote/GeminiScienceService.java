@@ -26,6 +26,7 @@ public final class GeminiScienceService implements ScienceAnswerService, Science
     private static final int ANSWER_OUTPUT_TOKENS = 6000;
     private static final int CONTINUATION_OUTPUT_TOKENS = 3000;
     private static final int MAX_CONTINUATIONS = 2;
+    private android.content.Context bankContext;
     private final SciencePromptFactory promptFactory;
     private final GeminiApiClient aiClient;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -35,6 +36,10 @@ public final class GeminiScienceService implements ScienceAnswerService, Science
  * Responsibility: Initializes GeminiScienceService and receives or prepares the dependencies/state required by this AI/network or fallback service.
  * Purpose: Keeps object creation explicit so the component is ready before its main operations are used.
  */
+public GeminiScienceService(android.content.Context context, SciencePromptFactory promptFactory, GeminiApiClient aiClient) {
+        this(promptFactory, aiClient); bankContext = context.getApplicationContext();
+    }
+
 public GeminiScienceService(SciencePromptFactory promptFactory,
                                 GeminiApiClient aiClient) {
         this.promptFactory = promptFactory;
@@ -213,10 +218,14 @@ private void appendWithoutRepeating(StringBuilder destination, String continuati
             try {
                 GeminiApiClient.Result result = aiClient.generateText(
                         promptFactory.buildQuizPrompt(request), null, null,
-                        0.9, 3500);
+                        0.9, 8192);
                 
                 List<QuizQuestion> questions = parseQuiz(result.text, request.getNumberOfQuestions());
                 if (questions.size() < request.getNumberOfQuestions()) throw new IllegalStateException("AI returned too few quiz questions.");
+                if (bankContext != null) try (com.example.mentor.data.QuizBank bank = new com.example.mentor.data.QuizBank(bankContext)) {
+                    bank.save(request.getUserId(), "science", request.getSubject().getCode(), request.getLevel().name(),
+                            request.getTopic(), "GEMINI", com.brightpath.science.util.QuizCards.from(questions));
+                } catch (RuntimeException storageError) { throw new com.example.mentor.data.QuizBank.SaveException(storageError); }
                 mainHandler.post(() -> callback.onSuccess(questions));
             } catch (Exception error) {
                 mainHandler.post(() -> callback.onError(userMessage(error, "Unable to generate an AI quiz."), error));

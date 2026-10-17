@@ -7,6 +7,13 @@ import java.util.List;
 public final class QuizQuestion {
     public enum Type { MULTIPLE_CHOICE, TRUE_FALSE, FILL_BLANK, MATCHING }
 
+    private boolean local;
+    public boolean isLocal() { return local; }
+    public QuizQuestion asLocal() {
+        QuizQuestion copy = new QuizQuestion(type,prompt,options,correctAnswer,explanation,difficulty);
+        copy.local = true;
+        return copy;
+    }
     private final Type type;
     private final String prompt;
     private final List<String> options;
